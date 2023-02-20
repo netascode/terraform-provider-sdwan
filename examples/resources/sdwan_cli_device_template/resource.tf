@@ -1,5 +1,5 @@
 resource "sdwan_cli_device_template" "test" {
-  name              = "TF_TEST_ALL"
+  name              = "cli_template_1"
   description       = "Terraform integration test"
   device_type       = "vedge-ISR-4331"
   cli_type          = "device"
