@@ -18,25 +18,12 @@ import (
 	"github.com/netascode/go-sdwan"
 )
 
-// Ensure SdwamProvider satisfies various provider interfaces.
-var _ provider.Provider = &SdwanProvider{}
-var _ provider.ProviderWithMetadata = &SdwanProvider{}
-
-func New() provider.Provider {
-	return &SdwanProvider{}
-}
-
-type SdwanProvider struct{}
-
-type providerAddress struct {
-	ip           string
-	prefixLength string
-	gateway      string
-}
-
-// providerData can be used to store data from the Terraform configuration.
-type providerData struct {
-	client *sdwan.Client
+// SdwanProvider defines the provider implementation.
+type SdwanProvider struct {
+	// version is set to the provider version on release, "dev" when the
+	// provider is built and ran locally, and "test" when running acceptance
+	// testing.
+	version string
 }
 
 // SdwanProviderModel describes the provider data model.
@@ -51,6 +38,7 @@ type SdwanProviderModel struct {
 // Metadata returns the provider type name.
 func (p *SdwanProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
 	resp.TypeName = "sdwan"
+	resp.Version = p.version
 }
 
 func (p *SdwanProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
@@ -244,5 +232,13 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		{{- end}}
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,
+	}
+}
+
+func New(version string) func() provider.Provider {
+	return func() provider.Provider {
+		return &SdwanProvider{
+			version: version,
+		}
 	}
 }

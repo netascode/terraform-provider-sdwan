@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/netascode/terraform-provider-sdwan/internal/provider"
@@ -26,8 +27,23 @@ import (
 // Update documentation categories.
 //go:generate go run gen/doc_category.go
 
+var (
+	// these will be set by the goreleaser configuration
+	// to appropriate values for the compiled binary
+	version string = "dev"
+
+	// goreleaser can also pass the specific commit if you want
+	// commit  string = ""
+)
+
 func main() {
-	providerserver.Serve(context.Background(), provider.New, providerserver.ServeOpts{
+	opts := providerserver.ServeOpts{
 		Address: "registry.terraform.io/netascode/sdwan",
-	})
+	}
+
+	err := providerserver.Serve(context.Background(), provider.New(version), opts)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
