@@ -78,7 +78,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"graceful-restart."+"vipObjectType", "object")
 
 	if !data.GracefulRestartVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipVariableName", data.GracefulRestartVariable.ValueString())
 	} else if data.GracefulRestart.IsNull() {
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "ignore")
@@ -89,7 +89,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"overlay-as."+"vipObjectType", "object")
 
 	if !data.OverlayAsVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipVariableName", data.OverlayAsVariable.ValueString())
 	} else if data.OverlayAs.IsNull() {
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "ignore")
@@ -100,7 +100,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"send-path-limit."+"vipObjectType", "object")
 
 	if !data.SendPathLimitVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipVariableName", data.SendPathLimitVariable.ValueString())
 	} else if data.SendPathLimit.IsNull() {
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "ignore")
@@ -111,7 +111,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ecmp-limit."+"vipObjectType", "object")
 
 	if !data.EcmpLimitVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipVariableName", data.EcmpLimitVariable.ValueString())
 	} else if data.EcmpLimit.IsNull() {
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "ignore")
@@ -122,7 +122,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"shutdown."+"vipObjectType", "object")
 
 	if !data.ShutdownVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipVariableName", data.ShutdownVariable.ValueString())
 	} else if data.Shutdown.IsNull() {
 		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "ignore")
@@ -133,7 +133,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipObjectType", "object")
 
 	if !data.OmpAdminDistanceIpv4Variable.IsNull() {
-		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipVariableName", data.OmpAdminDistanceIpv4Variable.ValueString())
 	} else if data.OmpAdminDistanceIpv4.IsNull() {
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "ignore")
@@ -144,7 +144,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipObjectType", "object")
 
 	if !data.OmpAdminDistanceIpv6Variable.IsNull() {
-		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipVariableName", data.OmpAdminDistanceIpv6Variable.ValueString())
 	} else if data.OmpAdminDistanceIpv6.IsNull() {
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "ignore")
@@ -155,7 +155,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipObjectType", "object")
 
 	if !data.AdvertisementIntervalVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipVariableName", data.AdvertisementIntervalVariable.ValueString())
 	} else if data.AdvertisementInterval.IsNull() {
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "ignore")
@@ -166,7 +166,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipObjectType", "object")
 
 	if !data.GracefulRestartTimerVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipVariableName", data.GracefulRestartTimerVariable.ValueString())
 	} else if data.GracefulRestartTimer.IsNull() {
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "ignore")
@@ -177,7 +177,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipObjectType", "object")
 
 	if !data.EorTimerVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipVariableName", data.EorTimerVariable.ValueString())
 	} else if data.EorTimer.IsNull() {
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "ignore")
@@ -188,7 +188,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"timers.holdtime."+"vipObjectType", "object")
 
 	if !data.HoldtimeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipVariableName", data.HoldtimeVariable.ValueString())
 	} else if data.Holdtime.IsNull() {
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "ignore")
@@ -199,7 +199,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipObjectType", "object")
 
 	if !data.IgnoreRegionPathLengthVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipVariableName", data.IgnoreRegionPathLengthVariable.ValueString())
 	} else if data.IgnoreRegionPathLength.IsNull() {
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "ignore")
@@ -210,7 +210,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 
 	if !data.TransportGatewayVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipVariableName", data.TransportGatewayVariable.ValueString())
 	} else if data.TransportGateway.IsNull() {
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "ignore")
@@ -235,7 +235,7 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
 
 			if !item.AdvertiseExternalOspfVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "route."+"vipVariableName", item.AdvertiseExternalOspfVariable.ValueString())
 			} else if item.AdvertiseExternalOspf.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "ignore")
@@ -290,7 +290,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "graceful-restart.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.GracefulRestart = types.BoolNull()
 
 			v := res.Get(path + "graceful-restart.vipVariableName")
@@ -309,7 +309,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.GracefulRestartVariable = types.StringNull()
 	}
 	if value := res.Get(path + "overlay-as.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OverlayAs = types.Int64Null()
 
 			v := res.Get(path + "overlay-as.vipVariableName")
@@ -328,7 +328,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.OverlayAsVariable = types.StringNull()
 	}
 	if value := res.Get(path + "send-path-limit.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SendPathLimit = types.Int64Null()
 
 			v := res.Get(path + "send-path-limit.vipVariableName")
@@ -347,7 +347,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.SendPathLimitVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ecmp-limit.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.EcmpLimit = types.Int64Null()
 
 			v := res.Get(path + "ecmp-limit.vipVariableName")
@@ -366,7 +366,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.EcmpLimitVariable = types.StringNull()
 	}
 	if value := res.Get(path + "shutdown.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Shutdown = types.BoolNull()
 
 			v := res.Get(path + "shutdown.vipVariableName")
@@ -385,7 +385,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.ShutdownVariable = types.StringNull()
 	}
 	if value := res.Get(path + "omp-admin-distance-ipv4.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OmpAdminDistanceIpv4 = types.Int64Null()
 
 			v := res.Get(path + "omp-admin-distance-ipv4.vipVariableName")
@@ -404,7 +404,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.OmpAdminDistanceIpv4Variable = types.StringNull()
 	}
 	if value := res.Get(path + "omp-admin-distance-ipv6.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OmpAdminDistanceIpv6 = types.Int64Null()
 
 			v := res.Get(path + "omp-admin-distance-ipv6.vipVariableName")
@@ -423,7 +423,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.OmpAdminDistanceIpv6Variable = types.StringNull()
 	}
 	if value := res.Get(path + "timers.advertisement-interval.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AdvertisementInterval = types.Int64Null()
 
 			v := res.Get(path + "timers.advertisement-interval.vipVariableName")
@@ -442,7 +442,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.AdvertisementIntervalVariable = types.StringNull()
 	}
 	if value := res.Get(path + "timers.graceful-restart-timer.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.GracefulRestartTimer = types.Int64Null()
 
 			v := res.Get(path + "timers.graceful-restart-timer.vipVariableName")
@@ -461,7 +461,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.GracefulRestartTimerVariable = types.StringNull()
 	}
 	if value := res.Get(path + "timers.eor-timer.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.EorTimer = types.Int64Null()
 
 			v := res.Get(path + "timers.eor-timer.vipVariableName")
@@ -480,7 +480,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.EorTimerVariable = types.StringNull()
 	}
 	if value := res.Get(path + "timers.holdtime.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Holdtime = types.Int64Null()
 
 			v := res.Get(path + "timers.holdtime.vipVariableName")
@@ -499,7 +499,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.HoldtimeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ignore-region-path-length.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.IgnoreRegionPathLength = types.BoolNull()
 
 			v := res.Get(path + "ignore-region-path-length.vipVariableName")
@@ -518,7 +518,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.IgnoreRegionPathLengthVariable = types.StringNull()
 	}
 	if value := res.Get(path + "transport-gateway.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TransportGateway = types.StringNull()
 
 			v := res.Get(path + "transport-gateway.vipVariableName")
@@ -541,7 +541,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv4Routes{}
 			if cValue := v.Get("protocol.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Protocol = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -557,7 +557,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("route.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AdvertiseExternalOspf = types.StringNull()
 
 					cv := v.Get("route.vipVariableName")
@@ -584,7 +584,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv6Routes{}
 			if cValue := v.Get("protocol.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Protocol = types.StringNull()
 
 				} else if cValue.String() == "ignore" {

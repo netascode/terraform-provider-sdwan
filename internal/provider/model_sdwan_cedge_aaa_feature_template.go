@@ -158,7 +158,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"authentication.dot1x.default.authentication_group."+"vipObjectType", "object")
 
 	if !data.Dot1xAuthenticationVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"authentication.dot1x.default.authentication_group."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"authentication.dot1x.default.authentication_group."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"authentication.dot1x.default.authentication_group."+"vipVariableName", data.Dot1xAuthenticationVariable.ValueString())
 	} else if data.Dot1xAuthentication.IsNull() {
 		body, _ = sjson.Set(body, path+"authentication.dot1x.default.authentication_group."+"vipType", "ignore")
@@ -169,7 +169,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"accounting.dot1x.default.start-stop.accounting_group."+"vipObjectType", "object")
 
 	if !data.Dot1xAccountingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"accounting.dot1x.default.start-stop.accounting_group."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"accounting.dot1x.default.start-stop.accounting_group."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"accounting.dot1x.default.start-stop.accounting_group."+"vipVariableName", data.Dot1xAccountingVariable.ValueString())
 	} else if data.Dot1xAccounting.IsNull() {
 		body, _ = sjson.Set(body, path+"accounting.dot1x.default.start-stop.accounting_group."+"vipType", "ignore")
@@ -194,7 +194,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 
 			if !item.NameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "name."+"vipVariableName", item.NameVariable.ValueString())
 			} else if item.Name.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
@@ -219,7 +219,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "privilege."+"vipObjectType", "object")
 
 			if !item.PrivilegeLevelVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "privilege."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "privilege."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "privilege."+"vipVariableName", item.PrivilegeLevelVariable.ValueString())
 			} else if item.PrivilegeLevel.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "privilege."+"vipType", "ignore")
@@ -244,7 +244,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipObjectType", "object")
 
 					if !childItem.KeyTypeVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipVariableName", childItem.KeyTypeVariable.ValueString())
 					} else if childItem.KeyType.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "ignore")
@@ -282,7 +282,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 
 			if !item.SourceInterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipVariableName", item.SourceInterfaceVariable.ValueString())
 			} else if item.SourceInterface.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "ignore")
@@ -307,7 +307,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipObjectType", "object")
 
 					if !childItem.AuthenticationPortVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipVariableName", childItem.AuthenticationPortVariable.ValueString())
 					} else if childItem.AuthenticationPort.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipType", "ignore")
@@ -318,7 +318,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipObjectType", "object")
 
 					if !childItem.AccountingPortVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipVariableName", childItem.AccountingPortVariable.ValueString())
 					} else if childItem.AccountingPort.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipType", "ignore")
@@ -329,7 +329,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipObjectType", "object")
 
 					if !childItem.TimeoutVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipVariableName", childItem.TimeoutVariable.ValueString())
 					} else if childItem.Timeout.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "ignore")
@@ -340,7 +340,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipObjectType", "object")
 
 					if !childItem.RetransmitVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipVariableName", childItem.RetransmitVariable.ValueString())
 					} else if childItem.Retransmit.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipType", "ignore")
@@ -358,7 +358,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipObjectType", "object")
 
 					if !childItem.SecretKeyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipVariableName", childItem.SecretKeyVariable.ValueString())
 					} else if childItem.SecretKey.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "ignore")
@@ -376,7 +376,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipObjectType", "object")
 
 					if !childItem.KeyTypeVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipVariableName", childItem.KeyTypeVariable.ValueString())
 					} else if childItem.KeyType.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "ignore")
@@ -400,7 +400,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "object")
 
 			if !item.ClientIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "ip."+"vipVariableName", item.ClientIpVariable.ValueString())
 			} else if item.ClientIp.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "ignore")
@@ -418,7 +418,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipObjectType", "object")
 
 					if !childItem.VpnIdVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipVariableName", childItem.VpnIdVariable.ValueString())
 					} else if childItem.VpnId.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipType", "ignore")
@@ -429,7 +429,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipObjectType", "object")
 
 					if !childItem.ServerKeyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipVariableName", childItem.ServerKeyVariable.ValueString())
 					} else if childItem.ServerKey.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipType", "ignore")
@@ -446,7 +446,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"radius-dynamic-author.rda-server-key."+"vipObjectType", "object")
 
 	if !data.RadiusDynamicAuthorServerKeyVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"radius-dynamic-author.rda-server-key."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.rda-server-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.rda-server-key."+"vipVariableName", data.RadiusDynamicAuthorServerKeyVariable.ValueString())
 	} else if data.RadiusDynamicAuthorServerKey.IsNull() {
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.rda-server-key."+"vipType", "ignore")
@@ -457,7 +457,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"radius-dynamic-author.domain-stripping."+"vipObjectType", "object")
 
 	if !data.RadiusDynamicAuthorDomainStrippingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"radius-dynamic-author.domain-stripping."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.domain-stripping."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.domain-stripping."+"vipVariableName", data.RadiusDynamicAuthorDomainStrippingVariable.ValueString())
 	} else if data.RadiusDynamicAuthorDomainStripping.IsNull() {
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.domain-stripping."+"vipType", "ignore")
@@ -468,7 +468,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"radius-dynamic-author.auth-type."+"vipObjectType", "object")
 
 	if !data.RadiusDynamicAuthorAuthenticationTypeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"radius-dynamic-author.auth-type."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.auth-type."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.auth-type."+"vipVariableName", data.RadiusDynamicAuthorAuthenticationTypeVariable.ValueString())
 	} else if data.RadiusDynamicAuthorAuthenticationType.IsNull() {
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.auth-type."+"vipType", "ignore")
@@ -479,7 +479,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"radius-dynamic-author.port."+"vipObjectType", "object")
 
 	if !data.RadiusDynamicAuthorPortVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"radius-dynamic-author.port."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.port."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.port."+"vipVariableName", data.RadiusDynamicAuthorPortVariable.ValueString())
 	} else if data.RadiusDynamicAuthorPort.IsNull() {
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.port."+"vipType", "ignore")
@@ -490,7 +490,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"radius-trustsec.cts-auth-list."+"vipObjectType", "object")
 
 	if !data.RadiusDynamicAuthorCtsAuthorizationListVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"radius-trustsec.cts-auth-list."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"radius-trustsec.cts-auth-list."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"radius-trustsec.cts-auth-list."+"vipVariableName", data.RadiusDynamicAuthorCtsAuthorizationListVariable.ValueString())
 	} else if data.RadiusDynamicAuthorCtsAuthorizationList.IsNull() {
 		body, _ = sjson.Set(body, path+"radius-trustsec.cts-auth-list."+"vipType", "ignore")
@@ -529,7 +529,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 
 			if !item.SourceInterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipVariableName", item.SourceInterfaceVariable.ValueString())
 			} else if item.SourceInterface.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "ignore")
@@ -554,7 +554,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipObjectType", "object")
 
 					if !childItem.PortVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipVariableName", childItem.PortVariable.ValueString())
 					} else if childItem.Port.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipType", "ignore")
@@ -565,7 +565,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipObjectType", "object")
 
 					if !childItem.TimeoutVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipVariableName", childItem.TimeoutVariable.ValueString())
 					} else if childItem.Timeout.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "ignore")
@@ -583,7 +583,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipObjectType", "object")
 
 					if !childItem.SecretKeyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipVariableName", childItem.SecretKeyVariable.ValueString())
 					} else if childItem.SecretKey.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "ignore")
@@ -635,7 +635,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipObjectType", "object")
 
 			if !item.StartStopVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipVariableName", item.StartStopVariable.ValueString())
 			} else if item.StartStop.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipType", "ignore")
@@ -658,7 +658,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"authorization.authorization-console."+"vipObjectType", "object")
 
 	if !data.AuthorizationConsoleVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"authorization.authorization-console."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"authorization.authorization-console."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"authorization.authorization-console."+"vipVariableName", data.AuthorizationConsoleVariable.ValueString())
 	} else if data.AuthorizationConsole.IsNull() {
 		body, _ = sjson.Set(body, path+"authorization.authorization-console."+"vipType", "ignore")
@@ -669,7 +669,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipObjectType", "object")
 
 	if !data.AuthorizationConfigCommandsVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipVariableName", data.AuthorizationConfigCommandsVariable.ValueString())
 	} else if data.AuthorizationConfigCommands.IsNull() {
 		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipType", "ignore")
@@ -751,7 +751,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "authentication.dot1x.default.authentication_group.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Dot1xAuthentication = types.BoolNull()
 
 			v := res.Get(path + "authentication.dot1x.default.authentication_group.vipVariableName")
@@ -770,7 +770,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.Dot1xAuthenticationVariable = types.StringNull()
 	}
 	if value := res.Get(path + "accounting.dot1x.default.start-stop.accounting_group.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Dot1xAccounting = types.BoolNull()
 
 			v := res.Get(path + "accounting.dot1x.default.start-stop.accounting_group.vipVariableName")
@@ -789,7 +789,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.Dot1xAccountingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "server-auth-order.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ServerGroupsPriorityOrder = types.StringNull()
 
 		} else if value.String() == "ignore" {
@@ -809,7 +809,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAUsers{}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
 
 					cv := v.Get("name.vipVariableName")
@@ -828,7 +828,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.NameVariable = types.StringNull()
 			}
 			if cValue := v.Get("password.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Password = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -844,7 +844,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("secret.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Secret = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -860,7 +860,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("privilege.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.PrivilegeLevel = types.StringNull()
 
 					cv := v.Get("privilege.vipVariableName")
@@ -883,7 +883,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAAUsersSshPubkeys{}
 					if ccValue := cv.Get("key-string.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.KeyString = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -899,7 +899,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("key-type.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.KeyType = types.StringNull()
 
 							ccv := cv.Get("key-type.vipVariableName")
@@ -930,7 +930,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusServerGroups{}
 			if cValue := v.Get("group-name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.GroupName = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -946,7 +946,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("vpn.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()
 
 				} else if cValue.String() == "ignore" {
@@ -962,7 +962,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("source-interface.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SourceInterface = types.StringNull()
 
 					cv := v.Get("source-interface.vipVariableName")
@@ -985,7 +985,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusServerGroupsServers{}
 					if ccValue := cv.Get("address.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Address = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1001,7 +1001,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("auth-port.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.AuthenticationPort = types.Int64Null()
 
 							ccv := cv.Get("auth-port.vipVariableName")
@@ -1020,7 +1020,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.AuthenticationPortVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("acct-port.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.AccountingPort = types.Int64Null()
 
 							ccv := cv.Get("acct-port.vipVariableName")
@@ -1039,7 +1039,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.AccountingPortVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("timeout.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Timeout = types.Int64Null()
 
 							ccv := cv.Get("timeout.vipVariableName")
@@ -1058,7 +1058,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.TimeoutVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("retransmit.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Retransmit = types.Int64Null()
 
 							ccv := cv.Get("retransmit.vipVariableName")
@@ -1077,7 +1077,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.RetransmitVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("key.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Key = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1093,7 +1093,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("secret-key.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.SecretKey = types.StringNull()
 
 							ccv := cv.Get("secret-key.vipVariableName")
@@ -1112,7 +1112,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.SecretKeyVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("key-enum.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.EncryptionType = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1128,7 +1128,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("key-type.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.KeyType = types.StringNull()
 
 							ccv := cv.Get("key-type.vipVariableName")
@@ -1159,7 +1159,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusClients{}
 			if cValue := v.Get("ip.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.ClientIp = types.StringNull()
 
 					cv := v.Get("ip.vipVariableName")
@@ -1182,7 +1182,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusClientsVonConfigurations{}
 					if ccValue := cv.Get("name.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.VpnId = types.StringNull()
 
 							ccv := cv.Get("name.vipVariableName")
@@ -1201,7 +1201,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.VpnIdVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("server-key.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.ServerKey = types.StringNull()
 
 							ccv := cv.Get("server-key.vipVariableName")
@@ -1228,7 +1228,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 	if value := res.Get(path + "radius-dynamic-author.rda-server-key.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusDynamicAuthorServerKey = types.StringNull()
 
 			v := res.Get(path + "radius-dynamic-author.rda-server-key.vipVariableName")
@@ -1247,7 +1247,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusDynamicAuthorServerKeyVariable = types.StringNull()
 	}
 	if value := res.Get(path + "radius-dynamic-author.domain-stripping.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusDynamicAuthorDomainStripping = types.StringNull()
 
 			v := res.Get(path + "radius-dynamic-author.domain-stripping.vipVariableName")
@@ -1266,7 +1266,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusDynamicAuthorDomainStrippingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "radius-dynamic-author.auth-type.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusDynamicAuthorAuthenticationType = types.StringNull()
 
 			v := res.Get(path + "radius-dynamic-author.auth-type.vipVariableName")
@@ -1285,7 +1285,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusDynamicAuthorAuthenticationTypeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "radius-dynamic-author.port.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusDynamicAuthorPort = types.Int64Null()
 
 			v := res.Get(path + "radius-dynamic-author.port.vipVariableName")
@@ -1304,7 +1304,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusDynamicAuthorPortVariable = types.StringNull()
 	}
 	if value := res.Get(path + "radius-trustsec.cts-auth-list.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusDynamicAuthorCtsAuthorizationList = types.StringNull()
 
 			v := res.Get(path + "radius-trustsec.cts-auth-list.vipVariableName")
@@ -1323,7 +1323,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusDynamicAuthorCtsAuthorizationListVariable = types.StringNull()
 	}
 	if value := res.Get(path + "radius-trustsec.radius-trustsec-group.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RadiusTrustsecGroup = types.StringNull()
 
 		} else if value.String() == "ignore" {
@@ -1343,7 +1343,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAATacacsServerGroups{}
 			if cValue := v.Get("group-name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.GroupName = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1359,7 +1359,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("vpn.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()
 
 				} else if cValue.String() == "ignore" {
@@ -1375,7 +1375,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("source-interface.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SourceInterface = types.StringNull()
 
 					cv := v.Get("source-interface.vipVariableName")
@@ -1398,7 +1398,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAATacacsServerGroupsServers{}
 					if ccValue := cv.Get("address.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Address = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1414,7 +1414,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("port.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Port = types.Int64Null()
 
 							ccv := cv.Get("port.vipVariableName")
@@ -1433,7 +1433,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.PortVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("timeout.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Timeout = types.Int64Null()
 
 							ccv := cv.Get("timeout.vipVariableName")
@@ -1452,7 +1452,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.TimeoutVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("key.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.Key = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1468,7 +1468,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 					}
 					if ccValue := cv.Get("secret-key.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.SecretKey = types.StringNull()
 
 							ccv := cv.Get("secret-key.vipVariableName")
@@ -1487,7 +1487,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.SecretKeyVariable = types.StringNull()
 					}
 					if ccValue := cv.Get("key-enum.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.EncryptionType = types.StringNull()
 
 						} else if ccValue.String() == "ignore" {
@@ -1515,7 +1515,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAccountingRules{}
 			if cValue := v.Get("rule-id.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1531,7 +1531,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("method.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Method = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1547,7 +1547,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("level.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.PrivilegeLevel = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1563,7 +1563,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("start-stop.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.StartStop = types.BoolNull()
 
 					cv := v.Get("start-stop.vipVariableName")
@@ -1582,7 +1582,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.StartStopVariable = types.StringNull()
 			}
 			if cValue := v.Get("group.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Group = types.ListNull(types.StringType)
 
 				} else if cValue.String() == "ignore" {
@@ -1602,7 +1602,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 	if value := res.Get(path + "authorization.authorization-console.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AuthorizationConsole = types.BoolNull()
 
 			v := res.Get(path + "authorization.authorization-console.vipVariableName")
@@ -1621,7 +1621,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.AuthorizationConsoleVariable = types.StringNull()
 	}
 	if value := res.Get(path + "authorization.authorization-config-commands.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AuthorizationConfigCommands = types.BoolNull()
 
 			v := res.Get(path + "authorization.authorization-config-commands.vipVariableName")
@@ -1644,7 +1644,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAuthorizationRules{}
 			if cValue := v.Get("rule-id.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1660,7 +1660,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("method.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Method = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1676,7 +1676,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("level.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.PrivilegeLevel = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -1692,7 +1692,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("group.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Group = types.ListNull(types.StringType)
 
 				} else if cValue.String() == "ignore" {
@@ -1708,7 +1708,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("if-authenticated.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Authenticated = types.BoolNull()
 
 				} else if cValue.String() == "ignore" {

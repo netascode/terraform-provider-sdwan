@@ -86,7 +86,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipObjectType", "object")
 
 	if !data.Nat64UdpTimeoutVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipVariableName", data.Nat64UdpTimeoutVariable.ValueString())
 	} else if data.Nat64UdpTimeout.IsNull() {
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "ignore")
@@ -97,7 +97,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipObjectType", "object")
 
 	if !data.Nat64TcpTimeoutVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipVariableName", data.Nat64TcpTimeoutVariable.ValueString())
 	} else if data.Nat64TcpTimeout.IsNull() {
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "ignore")
@@ -108,7 +108,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipObjectType", "object")
 
 	if !data.HttpAuthenticationVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipVariableName", data.HttpAuthenticationVariable.ValueString())
 	} else if data.HttpAuthentication.IsNull() {
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "ignore")
@@ -119,7 +119,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ssh.version."+"vipObjectType", "object")
 
 	if !data.SshVersionVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipVariableName", data.SshVersionVariable.ValueString())
 	} else if data.SshVersion.IsNull() {
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "ignore")
@@ -130,7 +130,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipObjectType", "object")
 
 	if !data.HttpServerVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipVariableName", data.HttpServerVariable.ValueString())
 	} else if data.HttpServer.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "ignore")
@@ -141,7 +141,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipObjectType", "object")
 
 	if !data.HttpsServerVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipVariableName", data.HttpsServerVariable.ValueString())
 	} else if data.HttpsServer.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "ignore")
@@ -152,7 +152,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipObjectType", "object")
 
 	if !data.SourceInterfaceVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipVariableName", data.SourceInterfaceVariable.ValueString())
 	} else if data.SourceInterface.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "ignore")
@@ -163,7 +163,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipObjectType", "object")
 
 	if !data.IpSourceRoutingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipVariableName", data.IpSourceRoutingVariable.ValueString())
 	} else if data.IpSourceRouting.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "ignore")
@@ -174,7 +174,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipObjectType", "object")
 
 	if !data.ArpProxyVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipVariableName", data.ArpProxyVariable.ValueString())
 	} else if data.ArpProxy.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "ignore")
@@ -185,7 +185,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipObjectType", "object")
 
 	if !data.FtpPassiveVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipVariableName", data.FtpPassiveVariable.ValueString())
 	} else if data.FtpPassive.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "ignore")
@@ -196,7 +196,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipObjectType", "object")
 
 	if !data.RshRcpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipVariableName", data.RshRcpVariable.ValueString())
 	} else if data.RshRcp.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "ignore")
@@ -207,7 +207,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipObjectType", "object")
 
 	if !data.BootpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipVariableName", data.BootpVariable.ValueString())
 	} else if data.Bootp.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "ignore")
@@ -218,7 +218,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipObjectType", "object")
 
 	if !data.DomainLookupVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipVariableName", data.DomainLookupVariable.ValueString())
 	} else if data.DomainLookup.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "ignore")
@@ -229,7 +229,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipObjectType", "object")
 
 	if !data.TcpKeepalivesOutVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipVariableName", data.TcpKeepalivesOutVariable.ValueString())
 	} else if data.TcpKeepalivesOut.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "ignore")
@@ -240,7 +240,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipObjectType", "object")
 
 	if !data.TcpKeepalivesInVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipVariableName", data.TcpKeepalivesInVariable.ValueString())
 	} else if data.TcpKeepalivesIn.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "ignore")
@@ -251,7 +251,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipObjectType", "object")
 
 	if !data.TcpSmallServersVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipVariableName", data.TcpSmallServersVariable.ValueString())
 	} else if data.TcpSmallServers.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "ignore")
@@ -262,7 +262,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipObjectType", "object")
 
 	if !data.UdpSmallServersVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipVariableName", data.UdpSmallServersVariable.ValueString())
 	} else if data.UdpSmallServers.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "ignore")
@@ -273,7 +273,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipObjectType", "object")
 
 	if !data.LldpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipVariableName", data.LldpVariable.ValueString())
 	} else if data.Lldp.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "ignore")
@@ -284,7 +284,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipObjectType", "object")
 
 	if !data.CdpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipVariableName", data.CdpVariable.ValueString())
 	} else if data.Cdp.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "ignore")
@@ -295,7 +295,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipObjectType", "object")
 
 	if !data.SnmpIfindexPersistVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipVariableName", data.SnmpIfindexPersistVariable.ValueString())
 	} else if data.SnmpIfindexPersist.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "ignore")
@@ -306,7 +306,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipObjectType", "object")
 
 	if !data.ConsoleLoggingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipVariableName", data.ConsoleLoggingVariable.ValueString())
 	} else if data.ConsoleLogging.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "ignore")
@@ -317,7 +317,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipObjectType", "object")
 
 	if !data.VtyLoggingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipVariableName", data.VtyLoggingVariable.ValueString())
 	} else if data.VtyLogging.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "ignore")
@@ -328,7 +328,7 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipObjectType", "object")
 
 	if !data.LineVtyVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipVariableName", data.LineVtyVariable.ValueString())
 	} else if data.LineVty.IsNull() {
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "ignore")
@@ -363,7 +363,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "nat64-global.nat64-timeout.udp-timeout.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Nat64UdpTimeout = types.Int64Null()
 
 			v := res.Get(path + "nat64-global.nat64-timeout.udp-timeout.vipVariableName")
@@ -382,7 +382,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.Nat64UdpTimeoutVariable = types.StringNull()
 	}
 	if value := res.Get(path + "nat64-global.nat64-timeout.tcp-timeout.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Nat64TcpTimeout = types.Int64Null()
 
 			v := res.Get(path + "nat64-global.nat64-timeout.tcp-timeout.vipVariableName")
@@ -401,7 +401,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.Nat64TcpTimeoutVariable = types.StringNull()
 	}
 	if value := res.Get(path + "http-global.http-authentication.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.HttpAuthentication = types.StringNull()
 
 			v := res.Get(path + "http-global.http-authentication.vipVariableName")
@@ -420,7 +420,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.HttpAuthenticationVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ssh.version.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SshVersion = types.Int64Null()
 
 			v := res.Get(path + "ssh.version.vipVariableName")
@@ -439,7 +439,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.SshVersionVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.http-server.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.HttpServer = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.http-server.vipVariableName")
@@ -458,7 +458,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.HttpServerVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.https-server.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.HttpsServer = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.https-server.vipVariableName")
@@ -477,7 +477,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.HttpsServerVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.source-intrf.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SourceInterface = types.StringNull()
 
 			v := res.Get(path + "services-global.services-ip.source-intrf.vipVariableName")
@@ -496,7 +496,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.SourceInterfaceVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.source-route.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.IpSourceRouting = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.source-route.vipVariableName")
@@ -515,7 +515,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.IpSourceRoutingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.arp-proxy.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ArpProxy = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.arp-proxy.vipVariableName")
@@ -534,7 +534,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.ArpProxyVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.ftp-passive.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.FtpPassive = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.ftp-passive.vipVariableName")
@@ -553,7 +553,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.FtpPassiveVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.rcmd.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RshRcp = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.rcmd.vipVariableName")
@@ -572,7 +572,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.RshRcpVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.bootp.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Bootp = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.bootp.vipVariableName")
@@ -591,7 +591,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.BootpVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.domain-lookup.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.DomainLookup = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.domain-lookup.vipVariableName")
@@ -610,7 +610,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.DomainLookupVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.tcp-keepalives-out.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TcpKeepalivesOut = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.tcp-keepalives-out.vipVariableName")
@@ -629,7 +629,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.TcpKeepalivesOutVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.tcp-keepalives-in.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TcpKeepalivesIn = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.tcp-keepalives-in.vipVariableName")
@@ -648,7 +648,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.TcpKeepalivesInVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.tcp-small-servers.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TcpSmallServers = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.tcp-small-servers.vipVariableName")
@@ -667,7 +667,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.TcpSmallServersVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.udp-small-servers.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.UdpSmallServers = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.udp-small-servers.vipVariableName")
@@ -686,7 +686,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.UdpSmallServersVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.lldp.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Lldp = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.lldp.vipVariableName")
@@ -705,7 +705,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.LldpVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.cdp.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Cdp = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.cdp.vipVariableName")
@@ -724,7 +724,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.CdpVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.snmp-ifindex-persist.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SnmpIfindexPersist = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.snmp-ifindex-persist.vipVariableName")
@@ -743,7 +743,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.SnmpIfindexPersistVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.console-logging.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ConsoleLogging = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.console-logging.vipVariableName")
@@ -762,7 +762,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.ConsoleLoggingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-other.vty-logging.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.VtyLogging = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-other.vty-logging.vipVariableName")
@@ -781,7 +781,7 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.VtyLoggingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "services-global.services-ip.line-vty.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.LineVty = types.BoolNull()
 
 			v := res.Get(path + "services-global.services-ip.line-vty.vipVariableName")

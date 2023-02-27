@@ -165,7 +165,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"clock.timezone."+"vipObjectType", "object")
 
 	if !data.TimezoneVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"clock.timezone."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"clock.timezone."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"clock.timezone."+"vipVariableName", data.TimezoneVariable.ValueString())
 	} else if data.Timezone.IsNull() {
 		body, _ = sjson.Set(body, path+"clock.timezone."+"vipType", "ignore")
@@ -176,7 +176,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"host-name."+"vipObjectType", "object")
 
 	if !data.HostnameVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"host-name."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"host-name."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"host-name."+"vipVariableName", data.HostnameVariable.ValueString())
 	} else if data.Hostname.IsNull() {
 		body, _ = sjson.Set(body, path+"host-name."+"vipType", "ignore")
@@ -187,7 +187,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"description."+"vipObjectType", "object")
 
 	if !data.SystemDescriptionVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"description."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"description."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"description."+"vipVariableName", data.SystemDescriptionVariable.ValueString())
 	} else if data.SystemDescription.IsNull() {
 		body, _ = sjson.Set(body, path+"description."+"vipType", "ignore")
@@ -198,7 +198,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"location."+"vipObjectType", "object")
 
 	if !data.LocationVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"location."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"location."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"location."+"vipVariableName", data.LocationVariable.ValueString())
 	} else if data.Location.IsNull() {
 		body, _ = sjson.Set(body, path+"location."+"vipType", "ignore")
@@ -209,7 +209,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"gps-location.latitude."+"vipObjectType", "object")
 
 	if !data.LatitudeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"gps-location.latitude."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"gps-location.latitude."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"gps-location.latitude."+"vipVariableName", data.LatitudeVariable.ValueString())
 	} else if data.Latitude.IsNull() {
 		body, _ = sjson.Set(body, path+"gps-location.latitude."+"vipType", "ignore")
@@ -220,7 +220,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"gps-location.longitude."+"vipObjectType", "object")
 
 	if !data.LongitudeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"gps-location.longitude."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"gps-location.longitude."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"gps-location.longitude."+"vipVariableName", data.LongitudeVariable.ValueString())
 	} else if data.Longitude.IsNull() {
 		body, _ = sjson.Set(body, path+"gps-location.longitude."+"vipType", "ignore")
@@ -238,7 +238,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"gps-location.geo-fencing.range."+"vipObjectType", "object")
 
 	if !data.GeoFencingRangeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"gps-location.geo-fencing.range."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"gps-location.geo-fencing.range."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"gps-location.geo-fencing.range."+"vipVariableName", data.GeoFencingRangeVariable.ValueString())
 	} else if data.GeoFencingRange.IsNull() {
 		body, _ = sjson.Set(body, path+"gps-location.geo-fencing.range."+"vipType", "ignore")
@@ -263,7 +263,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "number."+"vipObjectType", "object")
 
 			if !item.NumberVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "number."+"vipVariableName", item.NumberVariable.ValueString())
 			} else if item.Number.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "ignore")
@@ -277,7 +277,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"device-groups."+"vipObjectType", "list")
 
 	if !data.DeviceGroupsVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"device-groups."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"device-groups."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"device-groups."+"vipVariableName", data.DeviceGroupsVariable.ValueString())
 	} else if data.DeviceGroups.IsNull() {
 		body, _ = sjson.Set(body, path+"device-groups."+"vipType", "ignore")
@@ -290,7 +290,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"controller-group-list."+"vipObjectType", "list")
 
 	if !data.ControllerGroupListVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"controller-group-list."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"controller-group-list."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"controller-group-list."+"vipVariableName", data.ControllerGroupListVariable.ValueString())
 	} else if data.ControllerGroupList.IsNull() {
 		body, _ = sjson.Set(body, path+"controller-group-list."+"vipType", "ignore")
@@ -303,7 +303,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"system-ip."+"vipObjectType", "object")
 
 	if !data.SystemIpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"system-ip."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"system-ip."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"system-ip."+"vipVariableName", data.SystemIpVariable.ValueString())
 	} else if data.SystemIp.IsNull() {
 		body, _ = sjson.Set(body, path+"system-ip."+"vipType", "ignore")
@@ -314,7 +314,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"overlay-id."+"vipObjectType", "object")
 
 	if !data.OverlayIdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"overlay-id."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"overlay-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"overlay-id."+"vipVariableName", data.OverlayIdVariable.ValueString())
 	} else if data.OverlayId.IsNull() {
 		body, _ = sjson.Set(body, path+"overlay-id."+"vipType", "ignore")
@@ -325,7 +325,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"site-id."+"vipObjectType", "object")
 
 	if !data.SiteIdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"site-id."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"site-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"site-id."+"vipVariableName", data.SiteIdVariable.ValueString())
 	} else if data.SiteId.IsNull() {
 		body, _ = sjson.Set(body, path+"site-id."+"vipType", "ignore")
@@ -336,7 +336,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"port-offset."+"vipObjectType", "object")
 
 	if !data.PortOffsetVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"port-offset."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"port-offset."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"port-offset."+"vipVariableName", data.PortOffsetVariable.ValueString())
 	} else if data.PortOffset.IsNull() {
 		body, _ = sjson.Set(body, path+"port-offset."+"vipType", "ignore")
@@ -347,7 +347,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"port-hop."+"vipObjectType", "object")
 
 	if !data.PortHoppingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"port-hop."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"port-hop."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"port-hop."+"vipVariableName", data.PortHoppingVariable.ValueString())
 	} else if data.PortHopping.IsNull() {
 		body, _ = sjson.Set(body, path+"port-hop."+"vipType", "ignore")
@@ -358,7 +358,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"control-session-pps."+"vipObjectType", "object")
 
 	if !data.ControlSessionPpsVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"control-session-pps."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"control-session-pps."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"control-session-pps."+"vipVariableName", data.ControlSessionPpsVariable.ValueString())
 	} else if data.ControlSessionPps.IsNull() {
 		body, _ = sjson.Set(body, path+"control-session-pps."+"vipType", "ignore")
@@ -369,7 +369,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"track-transport."+"vipObjectType", "object")
 
 	if !data.TrackTransportVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"track-transport."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"track-transport."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"track-transport."+"vipVariableName", data.TrackTransportVariable.ValueString())
 	} else if data.TrackTransport.IsNull() {
 		body, _ = sjson.Set(body, path+"track-transport."+"vipType", "ignore")
@@ -380,7 +380,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"track-interface-tag."+"vipObjectType", "object")
 
 	if !data.TrackInterfaceTagVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"track-interface-tag."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"track-interface-tag."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"track-interface-tag."+"vipVariableName", data.TrackInterfaceTagVariable.ValueString())
 	} else if data.TrackInterfaceTag.IsNull() {
 		body, _ = sjson.Set(body, path+"track-interface-tag."+"vipType", "ignore")
@@ -391,7 +391,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"console-baud-rate."+"vipObjectType", "object")
 
 	if !data.ConsoleBaudRateVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"console-baud-rate."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"console-baud-rate."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"console-baud-rate."+"vipVariableName", data.ConsoleBaudRateVariable.ValueString())
 	} else if data.ConsoleBaudRate.IsNull() {
 		body, _ = sjson.Set(body, path+"console-baud-rate."+"vipType", "ignore")
@@ -402,7 +402,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"max-omp-sessions."+"vipObjectType", "object")
 
 	if !data.MaxOmpSessionsVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"max-omp-sessions."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"max-omp-sessions."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"max-omp-sessions."+"vipVariableName", data.MaxOmpSessionsVariable.ValueString())
 	} else if data.MaxOmpSessions.IsNull() {
 		body, _ = sjson.Set(body, path+"max-omp-sessions."+"vipType", "ignore")
@@ -413,7 +413,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"multi-tenant."+"vipObjectType", "node-only")
 
 	if !data.MultiTenantVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"multi-tenant."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"multi-tenant."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"multi-tenant."+"vipVariableName", data.MultiTenantVariable.ValueString())
 	} else if data.MultiTenant.IsNull() {
 		body, _ = sjson.Set(body, path+"multi-tenant."+"vipType", "ignore")
@@ -424,7 +424,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"track-default-gateway."+"vipObjectType", "object")
 
 	if !data.TrackDefaultGatewayVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"track-default-gateway."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"track-default-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"track-default-gateway."+"vipVariableName", data.TrackDefaultGatewayVariable.ValueString())
 	} else if data.TrackDefaultGateway.IsNull() {
 		body, _ = sjson.Set(body, path+"track-default-gateway."+"vipType", "ignore")
@@ -435,7 +435,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"admin-tech-on-failure."+"vipObjectType", "object")
 
 	if !data.AdminTechOnFailureVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"admin-tech-on-failure."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"admin-tech-on-failure."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"admin-tech-on-failure."+"vipVariableName", data.AdminTechOnFailureVariable.ValueString())
 	} else if data.AdminTechOnFailure.IsNull() {
 		body, _ = sjson.Set(body, path+"admin-tech-on-failure."+"vipType", "ignore")
@@ -446,7 +446,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"idle-timeout."+"vipObjectType", "object")
 
 	if !data.IdleTimeoutVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"idle-timeout."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"idle-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"idle-timeout."+"vipVariableName", data.IdleTimeoutVariable.ValueString())
 	} else if data.IdleTimeout.IsNull() {
 		body, _ = sjson.Set(body, path+"idle-timeout."+"vipType", "ignore")
@@ -464,7 +464,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 
 			if !item.NameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "name."+"vipVariableName", item.NameVariable.ValueString())
 			} else if item.Name.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
@@ -475,7 +475,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip."+"vipObjectType", "object")
 
 			if !item.EndpointIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-ip."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-ip."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip."+"vipVariableName", item.EndpointIpVariable.ValueString())
 			} else if item.EndpointIp.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip."+"vipType", "ignore")
@@ -486,7 +486,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipObjectType", "object")
 
 			if !item.TransportEndpointIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipVariableName", item.TransportEndpointIpVariable.ValueString())
 			} else if item.TransportEndpointIp.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipType", "ignore")
@@ -497,7 +497,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipObjectType", "object")
 
 			if !item.TransportEndpointProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipVariableName", item.TransportEndpointProtocolVariable.ValueString())
 			} else if item.TransportEndpointProtocol.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipType", "ignore")
@@ -508,7 +508,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipObjectType", "object")
 
 			if !item.TransportEndpointPortVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipVariableName", item.TransportEndpointPortVariable.ValueString())
 			} else if item.TransportEndpointPort.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipType", "ignore")
@@ -519,7 +519,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-dns-name."+"vipObjectType", "object")
 
 			if !item.EndpointDnsNameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-dns-name."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-dns-name."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-dns-name."+"vipVariableName", item.EndpointDnsNameVariable.ValueString())
 			} else if item.EndpointDnsName.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-dns-name."+"vipType", "ignore")
@@ -530,7 +530,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-api-url."+"vipObjectType", "object")
 
 			if !item.EndpointApiUrlVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "endpoint-api-url."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "endpoint-api-url."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "endpoint-api-url."+"vipVariableName", item.EndpointApiUrlVariable.ValueString())
 			} else if item.EndpointApiUrl.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "endpoint-api-url."+"vipType", "ignore")
@@ -541,7 +541,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "elements."+"vipObjectType", "list")
 
 			if !item.ElementsVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "elements."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "elements."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "elements."+"vipVariableName", item.ElementsVariable.ValueString())
 			} else if item.Elements.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "elements."+"vipType", "ignore")
@@ -554,7 +554,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "boolean."+"vipObjectType", "object")
 
 			if !item.BooleanVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipVariableName", item.BooleanVariable.ValueString())
 			} else if item.Boolean.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "ignore")
@@ -565,7 +565,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "threshold."+"vipObjectType", "object")
 
 			if !item.ThresholdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "threshold."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "threshold."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "threshold."+"vipVariableName", item.ThresholdVariable.ValueString())
 			} else if item.Threshold.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "threshold."+"vipType", "ignore")
@@ -576,7 +576,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "interval."+"vipObjectType", "object")
 
 			if !item.IntervalVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interval."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "interval."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "interval."+"vipVariableName", item.IntervalVariable.ValueString())
 			} else if item.Interval.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "interval."+"vipType", "ignore")
@@ -587,7 +587,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 
 			if !item.MultiplierVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipVariableName", item.MultiplierVariable.ValueString())
 			} else if item.Multiplier.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "ignore")
@@ -598,7 +598,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "type."+"vipObjectType", "object")
 
 			if !item.TypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "type."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "type."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "type."+"vipVariableName", item.TypeVariable.ValueString())
 			} else if item.Type.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "type."+"vipType", "ignore")
@@ -619,7 +619,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "object-number."+"vipObjectType", "object")
 
 			if !item.ObjectNumberVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "object-number."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "object-number."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "object-number."+"vipVariableName", item.ObjectNumberVariable.ValueString())
 			} else if item.ObjectNumber.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "object-number."+"vipType", "ignore")
@@ -630,7 +630,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "object")
 
 			if !item.InterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
 			} else if item.Interface.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
@@ -641,7 +641,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "sig."+"vipObjectType", "object")
 
 			if !item.SigVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "sig."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "sig."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "sig."+"vipVariableName", item.SigVariable.ValueString())
 			} else if item.Sig.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "sig."+"vipType", "ignore")
@@ -652,7 +652,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "object")
 
 			if !item.IpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "ip."+"vipVariableName", item.IpVariable.ValueString())
 			} else if item.Ip.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "ignore")
@@ -663,7 +663,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "mask."+"vipObjectType", "object")
 
 			if !item.MaskVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "mask."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "mask."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "mask."+"vipVariableName", item.MaskVariable.ValueString())
 			} else if item.Mask.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "mask."+"vipType", "ignore")
@@ -688,7 +688,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "number."+"vipObjectType", "object")
 
 					if !childItem.TrackIdVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "number."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "number."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "number."+"vipVariableName", childItem.TrackIdVariable.ValueString())
 					} else if childItem.TrackId.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "number."+"vipType", "ignore")
@@ -702,7 +702,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "boolean."+"vipObjectType", "object")
 
 			if !item.BooleanVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipVariableName", item.BooleanVariable.ValueString())
 			} else if item.Boolean.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "boolean."+"vipType", "ignore")
@@ -716,7 +716,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"on-demand.enable."+"vipObjectType", "object")
 
 	if !data.OnDemandTunnelVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"on-demand.enable."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"on-demand.enable."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"on-demand.enable."+"vipVariableName", data.OnDemandTunnelVariable.ValueString())
 	} else if data.OnDemandTunnel.IsNull() {
 		body, _ = sjson.Set(body, path+"on-demand.enable."+"vipType", "ignore")
@@ -727,7 +727,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"on-demand.idle-timeout."+"vipObjectType", "object")
 
 	if !data.OnDemandTunnelIdleTimeoutVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"on-demand.idle-timeout."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"on-demand.idle-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"on-demand.idle-timeout."+"vipVariableName", data.OnDemandTunnelIdleTimeoutVariable.ValueString())
 	} else if data.OnDemandTunnelIdleTimeout.IsNull() {
 		body, _ = sjson.Set(body, path+"on-demand.idle-timeout."+"vipType", "ignore")
@@ -738,7 +738,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"region-id."+"vipObjectType", "object")
 
 	if !data.RegionIdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"region-id."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"region-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"region-id."+"vipVariableName", data.RegionIdVariable.ValueString())
 	} else if data.RegionId.IsNull() {
 		body, _ = sjson.Set(body, path+"region-id."+"vipType", "ignore")
@@ -749,7 +749,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"secondary-region."+"vipObjectType", "object")
 
 	if !data.SecondaryRegionIdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"secondary-region."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"secondary-region."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"secondary-region."+"vipVariableName", data.SecondaryRegionIdVariable.ValueString())
 	} else if data.SecondaryRegionId.IsNull() {
 		body, _ = sjson.Set(body, path+"secondary-region."+"vipType", "ignore")
@@ -760,7 +760,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"role."+"vipObjectType", "object")
 
 	if !data.RoleVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"role."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"role."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"role."+"vipVariableName", data.RoleVariable.ValueString())
 	} else if data.Role.IsNull() {
 		body, _ = sjson.Set(body, path+"role."+"vipType", "ignore")
@@ -771,7 +771,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"affinity-group.affinity-group-number."+"vipObjectType", "object")
 
 	if !data.AffinityGroupNumberVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"affinity-group.affinity-group-number."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"affinity-group.affinity-group-number."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"affinity-group.affinity-group-number."+"vipVariableName", data.AffinityGroupNumberVariable.ValueString())
 	} else if data.AffinityGroupNumber.IsNull() {
 		body, _ = sjson.Set(body, path+"affinity-group.affinity-group-number."+"vipType", "ignore")
@@ -782,7 +782,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"affinity-group.preference."+"vipObjectType", "list")
 
 	if !data.AffinityGroupPreferenceVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"affinity-group.preference."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"affinity-group.preference."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"affinity-group.preference."+"vipVariableName", data.AffinityGroupPreferenceVariable.ValueString())
 	} else if data.AffinityGroupPreference.IsNull() {
 		body, _ = sjson.Set(body, path+"affinity-group.preference."+"vipType", "ignore")
@@ -795,7 +795,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 
 	if !data.TransportGatewayVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipVariableName", data.TransportGatewayVariable.ValueString())
 	} else if data.TransportGateway.IsNull() {
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "ignore")
@@ -844,7 +844,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "clock.timezone.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Timezone = types.StringNull()
 
 			v := res.Get(path + "clock.timezone.vipVariableName")
@@ -863,7 +863,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.TimezoneVariable = types.StringNull()
 	}
 	if value := res.Get(path + "host-name.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Hostname = types.StringNull()
 
 			v := res.Get(path + "host-name.vipVariableName")
@@ -882,7 +882,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.HostnameVariable = types.StringNull()
 	}
 	if value := res.Get(path + "description.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SystemDescription = types.StringNull()
 
 			v := res.Get(path + "description.vipVariableName")
@@ -901,7 +901,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.SystemDescriptionVariable = types.StringNull()
 	}
 	if value := res.Get(path + "location.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Location = types.StringNull()
 
 			v := res.Get(path + "location.vipVariableName")
@@ -920,7 +920,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.LocationVariable = types.StringNull()
 	}
 	if value := res.Get(path + "gps-location.latitude.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Latitude = types.Float64Null()
 
 			v := res.Get(path + "gps-location.latitude.vipVariableName")
@@ -939,7 +939,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.LatitudeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "gps-location.longitude.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Longitude = types.Float64Null()
 
 			v := res.Get(path + "gps-location.longitude.vipVariableName")
@@ -958,7 +958,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.LongitudeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "gps-location.geo-fencing.enable.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.GeoFencing = types.BoolNull()
 
 		} else if value.String() == "ignore" {
@@ -974,7 +974,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 
 	}
 	if value := res.Get(path + "gps-location.geo-fencing.range.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.GeoFencingRange = types.Int64Null()
 
 			v := res.Get(path + "gps-location.geo-fencing.range.vipVariableName")
@@ -993,7 +993,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.GeoFencingRangeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "gps-location.geo-fencing.sms.enable.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.GeoFencingSms = types.BoolNull()
 
 		} else if value.String() == "ignore" {
@@ -1013,7 +1013,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemGeoFencingSmsPhoneNumbers{}
 			if cValue := v.Get("number.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Number = types.StringNull()
 
 					cv := v.Get("number.vipVariableName")
@@ -1036,7 +1036,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 	if value := res.Get(path + "device-groups.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.DeviceGroups = types.ListNull(types.StringType)
 
 			v := res.Get(path + "device-groups.vipVariableName")
@@ -1055,7 +1055,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.DeviceGroupsVariable = types.StringNull()
 	}
 	if value := res.Get(path + "controller-group-list.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ControllerGroupList = types.ListNull(types.StringType)
 
 			v := res.Get(path + "controller-group-list.vipVariableName")
@@ -1074,7 +1074,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.ControllerGroupListVariable = types.StringNull()
 	}
 	if value := res.Get(path + "system-ip.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SystemIp = types.StringNull()
 
 			v := res.Get(path + "system-ip.vipVariableName")
@@ -1093,7 +1093,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.SystemIpVariable = types.StringNull()
 	}
 	if value := res.Get(path + "overlay-id.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OverlayId = types.Int64Null()
 
 			v := res.Get(path + "overlay-id.vipVariableName")
@@ -1112,7 +1112,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.OverlayIdVariable = types.StringNull()
 	}
 	if value := res.Get(path + "site-id.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SiteId = types.Int64Null()
 
 			v := res.Get(path + "site-id.vipVariableName")
@@ -1131,7 +1131,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.SiteIdVariable = types.StringNull()
 	}
 	if value := res.Get(path + "port-offset.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.PortOffset = types.Int64Null()
 
 			v := res.Get(path + "port-offset.vipVariableName")
@@ -1150,7 +1150,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.PortOffsetVariable = types.StringNull()
 	}
 	if value := res.Get(path + "port-hop.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.PortHopping = types.BoolNull()
 
 			v := res.Get(path + "port-hop.vipVariableName")
@@ -1169,7 +1169,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.PortHoppingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "control-session-pps.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ControlSessionPps = types.Int64Null()
 
 			v := res.Get(path + "control-session-pps.vipVariableName")
@@ -1188,7 +1188,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.ControlSessionPpsVariable = types.StringNull()
 	}
 	if value := res.Get(path + "track-transport.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TrackTransport = types.BoolNull()
 
 			v := res.Get(path + "track-transport.vipVariableName")
@@ -1207,7 +1207,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.TrackTransportVariable = types.StringNull()
 	}
 	if value := res.Get(path + "track-interface-tag.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TrackInterfaceTag = types.Int64Null()
 
 			v := res.Get(path + "track-interface-tag.vipVariableName")
@@ -1226,7 +1226,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.TrackInterfaceTagVariable = types.StringNull()
 	}
 	if value := res.Get(path + "console-baud-rate.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ConsoleBaudRate = types.StringNull()
 
 			v := res.Get(path + "console-baud-rate.vipVariableName")
@@ -1245,7 +1245,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.ConsoleBaudRateVariable = types.StringNull()
 	}
 	if value := res.Get(path + "max-omp-sessions.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.MaxOmpSessions = types.Int64Null()
 
 			v := res.Get(path + "max-omp-sessions.vipVariableName")
@@ -1264,7 +1264,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.MaxOmpSessionsVariable = types.StringNull()
 	}
 	if value := res.Get(path + "multi-tenant.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.MultiTenant = types.BoolNull()
 
 			v := res.Get(path + "multi-tenant.vipVariableName")
@@ -1283,7 +1283,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.MultiTenantVariable = types.StringNull()
 	}
 	if value := res.Get(path + "track-default-gateway.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TrackDefaultGateway = types.BoolNull()
 
 			v := res.Get(path + "track-default-gateway.vipVariableName")
@@ -1302,7 +1302,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.TrackDefaultGatewayVariable = types.StringNull()
 	}
 	if value := res.Get(path + "admin-tech-on-failure.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AdminTechOnFailure = types.BoolNull()
 
 			v := res.Get(path + "admin-tech-on-failure.vipVariableName")
@@ -1321,7 +1321,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.AdminTechOnFailureVariable = types.StringNull()
 	}
 	if value := res.Get(path + "idle-timeout.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.IdleTimeout = types.Int64Null()
 
 			v := res.Get(path + "idle-timeout.vipVariableName")
@@ -1344,7 +1344,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemTrackers{}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
 
 					cv := v.Get("name.vipVariableName")
@@ -1363,7 +1363,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.NameVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-ip.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.EndpointIp = types.StringNull()
 
 					cv := v.Get("endpoint-ip.vipVariableName")
@@ -1382,7 +1382,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.EndpointIpVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-ip-transport-port.endpoint-ip.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.TransportEndpointIp = types.StringNull()
 
 					cv := v.Get("endpoint-ip-transport-port.endpoint-ip.vipVariableName")
@@ -1401,7 +1401,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.TransportEndpointIpVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-ip-transport-port.protocol.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.TransportEndpointProtocol = types.StringNull()
 
 					cv := v.Get("endpoint-ip-transport-port.protocol.vipVariableName")
@@ -1420,7 +1420,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.TransportEndpointProtocolVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-ip-transport-port.port.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.TransportEndpointPort = types.Int64Null()
 
 					cv := v.Get("endpoint-ip-transport-port.port.vipVariableName")
@@ -1439,7 +1439,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.TransportEndpointPortVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-dns-name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.EndpointDnsName = types.StringNull()
 
 					cv := v.Get("endpoint-dns-name.vipVariableName")
@@ -1458,7 +1458,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.EndpointDnsNameVariable = types.StringNull()
 			}
 			if cValue := v.Get("endpoint-api-url.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.EndpointApiUrl = types.StringNull()
 
 					cv := v.Get("endpoint-api-url.vipVariableName")
@@ -1477,7 +1477,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.EndpointApiUrlVariable = types.StringNull()
 			}
 			if cValue := v.Get("elements.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Elements = types.ListNull(types.StringType)
 
 					cv := v.Get("elements.vipVariableName")
@@ -1496,7 +1496,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.ElementsVariable = types.StringNull()
 			}
 			if cValue := v.Get("boolean.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Boolean = types.StringNull()
 
 					cv := v.Get("boolean.vipVariableName")
@@ -1515,7 +1515,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.BooleanVariable = types.StringNull()
 			}
 			if cValue := v.Get("threshold.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Threshold = types.Int64Null()
 
 					cv := v.Get("threshold.vipVariableName")
@@ -1534,7 +1534,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.ThresholdVariable = types.StringNull()
 			}
 			if cValue := v.Get("interval.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Interval = types.Int64Null()
 
 					cv := v.Get("interval.vipVariableName")
@@ -1553,7 +1553,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.IntervalVariable = types.StringNull()
 			}
 			if cValue := v.Get("multiplier.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Multiplier = types.Int64Null()
 
 					cv := v.Get("multiplier.vipVariableName")
@@ -1572,7 +1572,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.MultiplierVariable = types.StringNull()
 			}
 			if cValue := v.Get("type.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Type = types.StringNull()
 
 					cv := v.Get("type.vipVariableName")
@@ -1599,7 +1599,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemObjectTrackers{}
 			if cValue := v.Get("object-number.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.ObjectNumber = types.Int64Null()
 
 					cv := v.Get("object-number.vipVariableName")
@@ -1618,7 +1618,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.ObjectNumberVariable = types.StringNull()
 			}
 			if cValue := v.Get("interface.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Interface = types.StringNull()
 
 					cv := v.Get("interface.vipVariableName")
@@ -1637,7 +1637,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.InterfaceVariable = types.StringNull()
 			}
 			if cValue := v.Get("sig.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Sig = types.StringNull()
 
 					cv := v.Get("sig.vipVariableName")
@@ -1656,7 +1656,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.SigVariable = types.StringNull()
 			}
 			if cValue := v.Get("ip.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Ip = types.StringNull()
 
 					cv := v.Get("ip.vipVariableName")
@@ -1675,7 +1675,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.IpVariable = types.StringNull()
 			}
 			if cValue := v.Get("mask.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Mask = types.StringNull()
 
 					cv := v.Get("mask.vipVariableName")
@@ -1694,7 +1694,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.MaskVariable = types.StringNull()
 			}
 			if cValue := v.Get("vpn.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()
 
 				} else if cValue.String() == "ignore" {
@@ -1714,7 +1714,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoSystemObjectTrackersGroupTracksIds{}
 					if ccValue := cv.Get("number.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.TrackId = types.Int64Null()
 
 							ccv := cv.Get("number.vipVariableName")
@@ -1737,7 +1737,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				})
 			}
 			if cValue := v.Get("boolean.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Boolean = types.StringNull()
 
 					cv := v.Get("boolean.vipVariableName")
@@ -1760,7 +1760,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 	if value := res.Get(path + "on-demand.enable.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OnDemandTunnel = types.BoolNull()
 
 			v := res.Get(path + "on-demand.enable.vipVariableName")
@@ -1779,7 +1779,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.OnDemandTunnelVariable = types.StringNull()
 	}
 	if value := res.Get(path + "on-demand.idle-timeout.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.OnDemandTunnelIdleTimeout = types.Int64Null()
 
 			v := res.Get(path + "on-demand.idle-timeout.vipVariableName")
@@ -1798,7 +1798,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.OnDemandTunnelIdleTimeoutVariable = types.StringNull()
 	}
 	if value := res.Get(path + "region-id.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RegionId = types.Int64Null()
 
 			v := res.Get(path + "region-id.vipVariableName")
@@ -1817,7 +1817,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.RegionIdVariable = types.StringNull()
 	}
 	if value := res.Get(path + "secondary-region.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.SecondaryRegionId = types.Int64Null()
 
 			v := res.Get(path + "secondary-region.vipVariableName")
@@ -1836,7 +1836,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.SecondaryRegionIdVariable = types.StringNull()
 	}
 	if value := res.Get(path + "role.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Role = types.StringNull()
 
 			v := res.Get(path + "role.vipVariableName")
@@ -1855,7 +1855,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.RoleVariable = types.StringNull()
 	}
 	if value := res.Get(path + "affinity-group.affinity-group-number.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AffinityGroupNumber = types.Int64Null()
 
 			v := res.Get(path + "affinity-group.affinity-group-number.vipVariableName")
@@ -1874,7 +1874,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.AffinityGroupNumberVariable = types.StringNull()
 	}
 	if value := res.Get(path + "affinity-group.preference.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AffinityGroupPreference = types.ListNull(types.StringType)
 
 			v := res.Get(path + "affinity-group.preference.vipVariableName")
@@ -1893,7 +1893,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.AffinityGroupPreferenceVariable = types.StringNull()
 	}
 	if value := res.Get(path + "transport-gateway.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.TransportGateway = types.BoolNull()
 
 			v := res.Get(path + "transport-gateway.vipVariableName")
@@ -1912,7 +1912,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.TransportGatewayVariable = types.StringNull()
 	}
 	if value := res.Get(path + "enable-mrf-migration.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.EnableMrfMigration = types.StringNull()
 
 		} else if value.String() == "ignore" {
@@ -1928,7 +1928,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 
 	}
 	if value := res.Get(path + "migration-bgp-community.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.MigrationBgpCommunity = types.Int64Null()
 
 		} else if value.String() == "ignore" {

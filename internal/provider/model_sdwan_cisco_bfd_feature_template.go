@@ -60,7 +60,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipObjectType", "object")
 
 	if !data.MultiplierVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipVariableName", data.MultiplierVariable.ValueString())
 	} else if data.Multiplier.IsNull() {
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "ignore")
@@ -71,7 +71,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipObjectType", "object")
 
 	if !data.PollIntervalVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipVariableName", data.PollIntervalVariable.ValueString())
 	} else if data.PollInterval.IsNull() {
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "ignore")
@@ -82,7 +82,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"default-dscp."+"vipObjectType", "object")
 
 	if !data.DefaultDscpVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipVariableName", data.DefaultDscpVariable.ValueString())
 	} else if data.DefaultDscp.IsNull() {
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "ignore")
@@ -100,7 +100,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipObjectType", "object")
 
 			if !item.ColorVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "color."+"vipVariableName", item.ColorVariable.ValueString())
 			} else if item.Color.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "ignore")
@@ -111,7 +111,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
 
 			if !item.HelloIntervalVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipVariableName", item.HelloIntervalVariable.ValueString())
 			} else if item.HelloInterval.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "ignore")
@@ -122,7 +122,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 
 			if !item.MultiplierVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipVariableName", item.MultiplierVariable.ValueString())
 			} else if item.Multiplier.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "ignore")
@@ -133,7 +133,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
 
 			if !item.PmtuDiscoveryVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipVariableName", item.PmtuDiscoveryVariable.ValueString())
 			} else if item.PmtuDiscovery.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "ignore")
@@ -144,7 +144,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 
 			if !item.DscpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "dscp."+"vipVariableName", item.DscpVariable.ValueString())
 			} else if item.Dscp.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "ignore")
@@ -182,7 +182,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "app-route.multiplier.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Multiplier = types.Int64Null()
 
 			v := res.Get(path + "app-route.multiplier.vipVariableName")
@@ -201,7 +201,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		data.MultiplierVariable = types.StringNull()
 	}
 	if value := res.Get(path + "app-route.poll-interval.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.PollInterval = types.Int64Null()
 
 			v := res.Get(path + "app-route.poll-interval.vipVariableName")
@@ -220,7 +220,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		data.PollIntervalVariable = types.StringNull()
 	}
 	if value := res.Get(path + "default-dscp.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.DefaultDscp = types.Int64Null()
 
 			v := res.Get(path + "default-dscp.vipVariableName")
@@ -243,7 +243,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBFDColors{}
 			if cValue := v.Get("color.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Color = types.StringNull()
 
 					cv := v.Get("color.vipVariableName")
@@ -262,7 +262,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 				item.ColorVariable = types.StringNull()
 			}
 			if cValue := v.Get("hello-interval.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.HelloInterval = types.Int64Null()
 
 					cv := v.Get("hello-interval.vipVariableName")
@@ -281,7 +281,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 				item.HelloIntervalVariable = types.StringNull()
 			}
 			if cValue := v.Get("multiplier.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Multiplier = types.Int64Null()
 
 					cv := v.Get("multiplier.vipVariableName")
@@ -300,7 +300,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 				item.MultiplierVariable = types.StringNull()
 			}
 			if cValue := v.Get("pmtu-discovery.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.PmtuDiscovery = types.BoolNull()
 
 					cv := v.Get("pmtu-discovery.vipVariableName")
@@ -319,7 +319,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 				item.PmtuDiscoveryVariable = types.StringNull()
 			}
 			if cValue := v.Get("dscp.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Dscp = types.Int64Null()
 
 					cv := v.Get("dscp.vipVariableName")

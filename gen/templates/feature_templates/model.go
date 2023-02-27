@@ -109,7 +109,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 	{{if eq .Variable true}}
 	if !data.{{toGoName .TfName}}Variable.IsNull() {
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
@@ -122,7 +122,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 	{{if eq .Variable true}}
 	if !data.{{toGoName .TfName}}Variable.IsNull() {
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
@@ -135,7 +135,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 	{{if eq .Variable true}}
 	if !data.{{toGoName .TfName}}Variable.IsNull() {
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
@@ -159,7 +159,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
 			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
@@ -172,7 +172,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
 			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
@@ -185,7 +185,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
 			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
@@ -209,7 +209,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 					{{if eq .Variable true}}
 					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 					} else
 					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
@@ -222,7 +222,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 					{{if eq .Variable true}}
 					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 					} else
 					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
@@ -235,7 +235,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 					{{if eq .Variable true}}
 					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variable")
+						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
 						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 					} else
 					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
@@ -288,7 +288,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	{{- $cname := toGoName .TfName}}
 	{{- if eq .Type "String"}}
 	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.StringNull()
 			{{if .Variable}}
 			v := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -308,7 +308,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	}
 	{{- else if eq .Type "Int64"}}
 	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.Int64Null()
 			{{if .Variable}}
 			v := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -328,7 +328,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	}
 	{{- else if eq .Type "Float64"}}
 	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.Float64Null()
 			{{if .Variable}}
 			v := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -348,7 +348,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	}
 	{{- else if eq .Type "Bool"}}
 	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.BoolNull()
 			{{if .Variable}}
 			v := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -368,7 +368,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	}
 	{{- else if eq .Type "ListString"}}
 	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.ListNull(types.StringType)
 			{{if .Variable}}
 			v := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -394,7 +394,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 			{{- range .Attributes}}
 			{{- if eq .Type "String"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.StringNull()
 					{{if .Variable}}
 					cv := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -414,7 +414,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 			}
 			{{- else if eq .Type "Int64"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.Int64Null()
 					{{if .Variable}}
 					cv := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -434,7 +434,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 			}
 			{{- else if eq .Type "Float64"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.Float64Null()
 					{{if .Variable}}
 					cv := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -454,7 +454,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 			}
 			{{- else if eq .Type "Bool"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.BoolNull()
 					{{if .Variable}}
 					cv := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -474,7 +474,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 			}
 			{{- else if eq .Type "ListString"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.ListNull(types.StringType)
 					{{if .Variable}}
 					cv := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -500,7 +500,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					{{- range .Attributes}}
 					{{- if eq .Type "String"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.StringNull()
 							{{if .Variable}}
 							ccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -520,7 +520,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					}
 					{{- else if eq .Type "Int64"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.Int64Null()
 							{{if .Variable}}
 							ccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -540,7 +540,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					}
 					{{- else if eq .Type "Float64"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.Float64Null()
 							{{if .Variable}}
 							ccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -560,7 +560,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					}
 					{{- else if eq .Type "Bool"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.BoolNull()
 							{{if .Variable}}
 							ccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
@@ -580,7 +580,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					}
 					{{- else if eq .Type "ListString"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
-						if ccValue.String() == "variable" {
+						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
 							{{if .Variable}}
 							ccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")

@@ -43,7 +43,7 @@ func (data CiscoBanner) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"login."+"vipObjectType", "object")
 
 	if !data.LoginVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"login."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"login."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"login."+"vipVariableName", data.LoginVariable.ValueString())
 	} else if data.Login.IsNull() {
 		body, _ = sjson.Set(body, path+"login."+"vipType", "ignore")
@@ -54,7 +54,7 @@ func (data CiscoBanner) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"motd."+"vipObjectType", "object")
 
 	if !data.MotdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"motd."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"motd."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"motd."+"vipVariableName", data.MotdVariable.ValueString())
 	} else if data.Motd.IsNull() {
 		body, _ = sjson.Set(body, path+"motd."+"vipType", "ignore")
@@ -89,7 +89,7 @@ func (data *CiscoBanner) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "login.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Login = types.StringNull()
 
 			v := res.Get(path + "login.vipVariableName")
@@ -108,7 +108,7 @@ func (data *CiscoBanner) fromBody(ctx context.Context, res gjson.Result) {
 		data.LoginVariable = types.StringNull()
 	}
 	if value := res.Get(path + "motd.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.Motd = types.StringNull()
 
 			v := res.Get(path + "motd.vipVariableName")

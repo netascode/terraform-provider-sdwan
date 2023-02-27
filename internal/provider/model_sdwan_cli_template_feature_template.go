@@ -71,7 +71,7 @@ func (data *CLITemplate) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "config.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.CliConfig = types.StringNull()
 
 		} else if value.String() == "ignore" {

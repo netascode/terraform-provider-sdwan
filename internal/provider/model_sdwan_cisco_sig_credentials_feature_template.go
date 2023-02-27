@@ -61,7 +61,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.organization."+"vipObjectType", "object")
 
 	if !data.ZscalerOrganizationVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipVariableName", data.ZscalerOrganizationVariable.ValueString())
 	} else if data.ZscalerOrganization.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "ignore")
@@ -72,7 +72,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerBaseUriVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipVariableName", data.ZscalerPartnerBaseUriVariable.ValueString())
 	} else if data.ZscalerPartnerBaseUri.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "ignore")
@@ -83,7 +83,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.username."+"vipObjectType", "object")
 
 	if !data.ZscalerUsernameVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipVariableName", data.ZscalerUsernameVariable.ValueString())
 	} else if data.ZscalerUsername.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "ignore")
@@ -94,7 +94,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.password."+"vipObjectType", "object")
 
 	if !data.ZscalerPasswordVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipVariableName", data.ZscalerPasswordVariable.ValueString())
 	} else if data.ZscalerPassword.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "ignore")
@@ -105,7 +105,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipObjectType", "object")
 
 	if !data.ZscalerCloudNameVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipVariableName", data.ZscalerCloudNameVariable.ValueString())
 	} else if data.ZscalerCloudName.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "ignore")
@@ -116,7 +116,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerUsernameVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipVariableName", data.ZscalerPartnerUsernameVariable.ValueString())
 	} else if data.ZscalerPartnerUsername.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "ignore")
@@ -127,7 +127,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerPasswordVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipVariableName", data.ZscalerPartnerPasswordVariable.ValueString())
 	} else if data.ZscalerPartnerPassword.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "ignore")
@@ -138,7 +138,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerApiKeyVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipVariableName", data.ZscalerPartnerApiKeyVariable.ValueString())
 	} else if data.ZscalerPartnerApiKey.IsNull() {
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "ignore")
@@ -149,7 +149,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipObjectType", "object")
 
 	if !data.UmbrellaApiKeyVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipVariableName", data.UmbrellaApiKeyVariable.ValueString())
 	} else if data.UmbrellaApiKey.IsNull() {
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "ignore")
@@ -160,7 +160,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipObjectType", "object")
 
 	if !data.UmbrellaApiSecretVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipVariableName", data.UmbrellaApiSecretVariable.ValueString())
 	} else if data.UmbrellaApiSecret.IsNull() {
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "ignore")
@@ -171,7 +171,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipObjectType", "object")
 
 	if !data.UmbrellaOrganizationIdVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipVariableName", data.UmbrellaOrganizationIdVariable.ValueString())
 	} else if data.UmbrellaOrganizationId.IsNull() {
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "ignore")
@@ -206,7 +206,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 
 	path := "templateDefinition."
 	if value := res.Get(path + "zscaler.organization.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerOrganization = types.StringNull()
 
 			v := res.Get(path + "zscaler.organization.vipVariableName")
@@ -225,7 +225,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerOrganizationVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.partner-base-uri.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerPartnerBaseUri = types.StringNull()
 
 			v := res.Get(path + "zscaler.partner-base-uri.vipVariableName")
@@ -244,7 +244,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerPartnerBaseUriVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.username.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerUsername = types.StringNull()
 
 			v := res.Get(path + "zscaler.username.vipVariableName")
@@ -263,7 +263,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerUsernameVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.password.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerPassword = types.StringNull()
 
 			v := res.Get(path + "zscaler.password.vipVariableName")
@@ -282,7 +282,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerPasswordVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.cloud-gateway.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerCloudName = types.Int64Null()
 
 			v := res.Get(path + "zscaler.cloud-gateway.vipVariableName")
@@ -301,7 +301,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerCloudNameVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.partner-id.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerPartnerUsername = types.StringNull()
 
 			v := res.Get(path + "zscaler.partner-id.vipVariableName")
@@ -320,7 +320,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerPartnerUsernameVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.partner-secret.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerPartnerPassword = types.StringNull()
 
 			v := res.Get(path + "zscaler.partner-secret.vipVariableName")
@@ -339,7 +339,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerPartnerPasswordVariable = types.StringNull()
 	}
 	if value := res.Get(path + "zscaler.partner-key.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ZscalerPartnerApiKey = types.StringNull()
 
 			v := res.Get(path + "zscaler.partner-key.vipVariableName")
@@ -358,7 +358,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.ZscalerPartnerApiKeyVariable = types.StringNull()
 	}
 	if value := res.Get(path + "umbrella.api-key.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.UmbrellaApiKey = types.StringNull()
 
 			v := res.Get(path + "umbrella.api-key.vipVariableName")
@@ -377,7 +377,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.UmbrellaApiKeyVariable = types.StringNull()
 	}
 	if value := res.Get(path + "umbrella.api-secret.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.UmbrellaApiSecret = types.StringNull()
 
 			v := res.Get(path + "umbrella.api-secret.vipVariableName")
@@ -396,7 +396,7 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.UmbrellaApiSecretVariable = types.StringNull()
 	}
 	if value := res.Get(path + "umbrella.org-id.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.UmbrellaOrganizationId = types.StringNull()
 
 			v := res.Get(path + "umbrella.org-id.vipVariableName")

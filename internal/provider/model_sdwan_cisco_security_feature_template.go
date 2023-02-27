@@ -93,7 +93,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.rekey."+"vipObjectType", "object")
 
 	if !data.RekeyIntervalVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.rekey."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.rekey."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.rekey."+"vipVariableName", data.RekeyIntervalVariable.ValueString())
 	} else if data.RekeyInterval.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.rekey."+"vipType", "ignore")
@@ -104,7 +104,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.replay-window."+"vipObjectType", "object")
 
 	if !data.ReplayWindowVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.replay-window."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.replay-window."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.replay-window."+"vipVariableName", data.ReplayWindowVariable.ValueString())
 	} else if data.ReplayWindow.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.replay-window."+"vipType", "ignore")
@@ -115,7 +115,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.extended-ar-window."+"vipObjectType", "object")
 
 	if !data.ExtendedArWindowVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.extended-ar-window."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.extended-ar-window."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.extended-ar-window."+"vipVariableName", data.ExtendedArWindowVariable.ValueString())
 	} else if data.ExtendedArWindow.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.extended-ar-window."+"vipType", "ignore")
@@ -126,7 +126,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.authentication-type."+"vipObjectType", "list")
 
 	if !data.AuthenticationTypeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.authentication-type."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.authentication-type."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.authentication-type."+"vipVariableName", data.AuthenticationTypeVariable.ValueString())
 	} else if data.AuthenticationType.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.authentication-type."+"vipType", "ignore")
@@ -139,7 +139,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.integrity-type."+"vipObjectType", "list")
 
 	if !data.IntegrityTypeVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.integrity-type."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.integrity-type."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.integrity-type."+"vipVariableName", data.IntegrityTypeVariable.ValueString())
 	} else if data.IntegrityType.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.integrity-type."+"vipType", "ignore")
@@ -152,7 +152,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipObjectType", "object")
 
 	if !data.PairwiseKeyingVariable.IsNull() {
-		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipType", "variable")
+		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipVariableName", data.PairwiseKeyingVariable.ValueString())
 	} else if data.PairwiseKeying.IsNull() {
 		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipType", "ignore")
@@ -208,7 +208,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-id."+"vipObjectType", "object")
 
 			if !item.SendIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "send-id."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "send-id."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "send-id."+"vipVariableName", item.SendIdVariable.ValueString())
 			} else if item.SendId.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "send-id."+"vipType", "ignore")
@@ -219,7 +219,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipObjectType", "object")
 
 			if !item.ReceiveIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipVariableName", item.ReceiveIdVariable.ValueString())
 			} else if item.ReceiveId.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipType", "ignore")
@@ -237,7 +237,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "key-string."+"vipObjectType", "object")
 
 			if !item.KeyStringVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "key-string."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "key-string."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "key-string."+"vipVariableName", item.KeyStringVariable.ValueString())
 			} else if item.KeyString.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "key-string."+"vipType", "ignore")
@@ -248,7 +248,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipObjectType", "node-only")
 
 			if !item.SendLifetimeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipVariableName", item.SendLifetimeVariable.ValueString())
 			} else if item.SendLifetime.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipType", "ignore")
@@ -273,7 +273,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipObjectType", "object")
 
 			if !item.SendLifetimeDurationVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipVariableName", item.SendLifetimeDurationVariable.ValueString())
 			} else if item.SendLifetimeDuration.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipType", "ignore")
@@ -291,7 +291,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipObjectType", "node-only")
 
 			if !item.SendLifetimeInfiniteVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipVariableName", item.SendLifetimeInfiniteVariable.ValueString())
 			} else if item.SendLifetimeInfinite.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipType", "ignore")
@@ -302,7 +302,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipObjectType", "node-only")
 
 			if !item.AcceptLifetimeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipVariableName", item.AcceptLifetimeVariable.ValueString())
 			} else if item.AcceptLifetime.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipType", "ignore")
@@ -327,7 +327,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipObjectType", "object")
 
 			if !item.AcceptLifetimeDurationVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipVariableName", item.AcceptLifetimeDurationVariable.ValueString())
 			} else if item.AcceptLifetimeDuration.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipType", "ignore")
@@ -345,7 +345,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipObjectType", "node-only")
 
 			if !item.AcceptLifetimeInfiniteVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipVariableName", item.AcceptLifetimeInfiniteVariable.ValueString())
 			} else if item.AcceptLifetimeInfinite.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipType", "ignore")
@@ -356,7 +356,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipObjectType", "object")
 
 			if !item.IncludeTcpOptionsVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipVariableName", item.IncludeTcpOptionsVariable.ValueString())
 			} else if item.IncludeTcpOptions.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipType", "ignore")
@@ -367,7 +367,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipObjectType", "object")
 
 			if !item.AcceptAoMismatchVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipType", "variable")
+				itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipType", "variableName")
 				itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipVariableName", item.AcceptAoMismatchVariable.ValueString())
 			} else if item.AcceptAoMismatch.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipType", "ignore")
@@ -405,7 +405,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 	path := "templateDefinition."
 	if value := res.Get(path + "ipsec.rekey.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.RekeyInterval = types.Int64Null()
 
 			v := res.Get(path + "ipsec.rekey.vipVariableName")
@@ -424,7 +424,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.RekeyIntervalVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ipsec.replay-window.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ReplayWindow = types.StringNull()
 
 			v := res.Get(path + "ipsec.replay-window.vipVariableName")
@@ -443,7 +443,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.ReplayWindowVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ipsec.extended-ar-window.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.ExtendedArWindow = types.Int64Null()
 
 			v := res.Get(path + "ipsec.extended-ar-window.vipVariableName")
@@ -462,7 +462,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.ExtendedArWindowVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ipsec.authentication-type.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.AuthenticationType = types.ListNull(types.StringType)
 
 			v := res.Get(path + "ipsec.authentication-type.vipVariableName")
@@ -481,7 +481,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.AuthenticationTypeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ipsec.integrity-type.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.IntegrityType = types.ListNull(types.StringType)
 
 			v := res.Get(path + "ipsec.integrity-type.vipVariableName")
@@ -500,7 +500,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.IntegrityTypeVariable = types.StringNull()
 	}
 	if value := res.Get(path + "ipsec.pairwise-keying.vipType"); value.Exists() {
-		if value.String() == "variable" {
+		if value.String() == "variableName" {
 			data.PairwiseKeying = types.BoolNull()
 
 			v := res.Get(path + "ipsec.pairwise-keying.vipVariableName")
@@ -523,7 +523,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeychains{}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -539,7 +539,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("keyid.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.KeyId = types.Int64Null()
 
 				} else if cValue.String() == "ignore" {
@@ -563,7 +563,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeys{}
 			if cValue := v.Get("id.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.Id = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -579,7 +579,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("chain-name.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.ChainName = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -595,7 +595,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("send-id.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendId = types.Int64Null()
 
 					cv := v.Get("send-id.vipVariableName")
@@ -614,7 +614,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.SendIdVariable = types.StringNull()
 			}
 			if cValue := v.Get("recv-id.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.ReceiveId = types.Int64Null()
 
 					cv := v.Get("recv-id.vipVariableName")
@@ -633,7 +633,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.ReceiveIdVariable = types.StringNull()
 			}
 			if cValue := v.Get("cryptographic-algorithm-choice.tcp.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.CryptoAlgorithm = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -649,7 +649,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("key-string.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.KeyString = types.StringNull()
 
 					cv := v.Get("key-string.vipVariableName")
@@ -668,7 +668,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.KeyStringVariable = types.StringNull()
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.local.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetime = types.BoolNull()
 
 					cv := v.Get("send-lifetime.lifetime-group-v1.local.vipVariableName")
@@ -687,7 +687,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.SendLifetimeVariable = types.StringNull()
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.start-epoch.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetimeStartTime = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -703,7 +703,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.end-choice.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetimeEndTimeFormat = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -719,7 +719,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.duration.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetimeDuration = types.Int64Null()
 
 					cv := v.Get("send-lifetime.lifetime-group-v1.duration.vipVariableName")
@@ -738,7 +738,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.SendLifetimeDurationVariable = types.StringNull()
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.end-epoch.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetimeEndTime = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -754,7 +754,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("send-lifetime.lifetime-group-v1.infinite.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.SendLifetimeInfinite = types.BoolNull()
 
 					cv := v.Get("send-lifetime.lifetime-group-v1.infinite.vipVariableName")
@@ -773,7 +773,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.SendLifetimeInfiniteVariable = types.StringNull()
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.local.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetime = types.BoolNull()
 
 					cv := v.Get("accept-lifetime.lifetime-group-v1.local.vipVariableName")
@@ -792,7 +792,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.AcceptLifetimeVariable = types.StringNull()
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.start-epoch.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetimeStartTime = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -808,7 +808,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.end-choice.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetimeEndTimeFormat = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -824,7 +824,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.duration.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetimeDuration = types.Int64Null()
 
 					cv := v.Get("accept-lifetime.lifetime-group-v1.duration.vipVariableName")
@@ -843,7 +843,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.AcceptLifetimeDurationVariable = types.StringNull()
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.end-epoch.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetimeEndTime = types.StringNull()
 
 				} else if cValue.String() == "ignore" {
@@ -859,7 +859,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 
 			}
 			if cValue := v.Get("accept-lifetime.lifetime-group-v1.infinite.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptLifetimeInfinite = types.BoolNull()
 
 					cv := v.Get("accept-lifetime.lifetime-group-v1.infinite.vipVariableName")
@@ -878,7 +878,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.AcceptLifetimeInfiniteVariable = types.StringNull()
 			}
 			if cValue := v.Get("include-tcp-options.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.IncludeTcpOptions = types.BoolNull()
 
 					cv := v.Get("include-tcp-options.vipVariableName")
@@ -897,7 +897,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 				item.IncludeTcpOptionsVariable = types.StringNull()
 			}
 			if cValue := v.Get("accept-ao-mismatch.vipType"); cValue.Exists() {
-				if cValue.String() == "variable" {
+				if cValue.String() == "variableName" {
 					item.AcceptAoMismatch = types.BoolNull()
 
 					cv := v.Get("accept-ao-mismatch.vipVariableName")
