@@ -71,7 +71,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"interface_name": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Interface name: ge0/<0-..> or ge0/<0-..>.vlanid or irb<bridgeid:1-63> or loopback<string> or natpool-<1..31> when present").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.LengthBetween(1, 32),
 				},
@@ -181,14 +181,14 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction").AddStringEnumDescription("in", "out").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("in", "out"),
 							},
 						},
 						"acl_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of access list").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -216,7 +216,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("DHCPv6 Helper address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"address_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -271,7 +271,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"nat_type": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("NAT type").AddStringEnumDescription("interface", "pool", "loopback").AddDefaultValueDescription("interface").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.OneOf("interface", "pool", "loopback"),
 				},
@@ -304,7 +304,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"nat_pool_range_start": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Starting IP address of NAT pool range").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"nat_pool_range_start_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -312,7 +312,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"nat_pool_range_end": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Ending IP address of NAT pool range").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"nat_pool_range_end_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -339,7 +339,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"nat_pool_prefix_length": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Ending IP address of NAT Pool Prefix Length").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"nat_pool_prefix_length_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -407,7 +407,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"source_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP address to be translated").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -415,7 +415,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"translate_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Statically translated source IP address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -423,7 +423,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"static_nat_direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction of static NAT translation").AddStringEnumDescription("inside", "outside").AddDefaultValueDescription("inside").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("inside", "outside"),
 							},
@@ -453,7 +453,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"source_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP address to be translated").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -461,7 +461,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"translate_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Statically translated source IP address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -469,7 +469,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"static_nat_direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction of static NAT translation").AddStringEnumDescription("inside", "outside").AddDefaultValueDescription("inside").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("inside", "outside"),
 							},
@@ -480,7 +480,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"source_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source Port").AddIntegerRangeDescription(0, 65535).AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 65535),
 							},
@@ -491,7 +491,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"translate_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Translate Port").AddIntegerRangeDescription(0, 65535).AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 65535),
 							},
@@ -502,7 +502,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Protocol").AddStringEnumDescription("tcp", "udp").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("tcp", "udp"),
 							},
@@ -558,7 +558,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"encapsulation": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Encapsulation").AddStringEnumDescription("gre", "ipsec").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("gre", "ipsec"),
 							},
@@ -598,7 +598,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"per_tunnel_qos": schema.BoolAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Per-tunnel Qos").AddDefaultValueDescription("false").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"per_tunnel_qos_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -606,7 +606,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"per_tunnel_qos_aggregator": schema.BoolAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Per-tunnel QoS Aggregator").AddDefaultValueDescription("false").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"per_tunnel_qos_aggregator_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -614,7 +614,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"tunnel_qos_mode": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Set tunnel QoS mode").AddStringEnumDescription("hub", "spoke").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.OneOf("hub", "spoke"),
 				},
@@ -625,7 +625,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"tunnel_bandwidth": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Tunnels Bandwidth Percent").AddIntegerRangeDescription(1, 99).AddDefaultValueDescription("50").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(1, 99),
 				},
@@ -1096,7 +1096,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_bandwidth_downstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Adaptive QoS default downstream bandwidth").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1107,7 +1107,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_min_downstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Downstream min bandwidth limit").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1118,7 +1118,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_max_downstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Downstream max bandwidth limit").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1129,7 +1129,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_bandwidth_upstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Adaptive QoS default upstream bandwidth").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1140,7 +1140,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_min_upstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Upstream min bandwidth limit").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1151,7 +1151,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 			},
 			"qos_adaptive_max_upstream": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Upstream max bandwidth limit").AddIntegerRangeDescription(8, 100000000).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(8, 100000000),
 				},
@@ -1241,14 +1241,14 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction").AddStringEnumDescription("in", "out").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("in", "out"),
 							},
 						},
 						"acl_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of access list").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -1267,7 +1267,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"ip_address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("IP Address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"ip_address_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -1275,7 +1275,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"mac": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("MAC address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"mac_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -1291,7 +1291,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"group_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Group ID").AddIntegerRangeDescription(1, 255).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 255),
 							},
@@ -1349,7 +1349,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 								Attributes: map[string]schema.Attribute{
 									"ip_address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("VRRP Secondary IP address").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"ip_address_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -1364,7 +1364,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"tloc_preference_change_value": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set tloc preference change value").AddIntegerRangeDescription(1, 4294967295).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 4294967295),
 							},
@@ -1380,7 +1380,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 								Attributes: map[string]schema.Attribute{
 									"tracker_id": schema.Int64Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Tracker ID").AddIntegerRangeDescription(1, 1000).String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.Int64{
 											int64validator.Between(1, 1000),
 										},
@@ -1391,7 +1391,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 									},
 									"track_action": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Track Action").AddStringEnumDescription("decrement", "shutdown").AddDefaultValueDescription("decrement").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.OneOf("decrement", "shutdown"),
 										},
@@ -1402,7 +1402,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 									},
 									"decrement_value": schema.Int64Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Decrement Value for VRRP priority").AddIntegerRangeDescription(1, 255).String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.Int64{
 											int64validator.Between(1, 255),
 										},
@@ -1424,7 +1424,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 					Attributes: map[string]schema.Attribute{
 						"group_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Group ID").AddIntegerRangeDescription(1, 255).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 255),
 							},
@@ -1481,7 +1481,7 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 								Attributes: map[string]schema.Attribute{
 									"ipv6_link_local": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Use link-local IPv6 Address").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"ipv6_link_local_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,

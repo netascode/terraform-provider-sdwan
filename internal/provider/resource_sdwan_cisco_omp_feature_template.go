@@ -207,7 +207,7 @@ func (r *CiscoOMPFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set routes to advertise").AddStringEnumDescription("bgp", "ospf", "ospfv3", "connected", "static", "eigrp", "lisp", "isis").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("bgp", "ospf", "ospfv3", "connected", "static", "eigrp", "lisp", "isis"),
 							},
@@ -233,7 +233,7 @@ func (r *CiscoOMPFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set routes to advertise").AddStringEnumDescription("bgp", "ospf", "connected", "static", "eigrp", "lisp", "isis").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("bgp", "ospf", "connected", "static", "eigrp", "lisp", "isis"),
 							},

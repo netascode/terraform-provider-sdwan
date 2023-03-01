@@ -83,7 +83,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"hostname": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Set the hostname").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.LengthBetween(1, 32),
 				},
@@ -162,7 +162,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 					Attributes: map[string]schema.Attribute{
 						"number": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Mobile number, ex: +1231234414").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(7, 20),
 							},
@@ -194,7 +194,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"system_ip": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Set the system IP address").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"system_ip_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -213,7 +213,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"site_id": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Set the site identifier").AddIntegerRangeDescription(1, 4294967295).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(1, 4294967295),
 				},
@@ -273,7 +273,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"console_baud_rate": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Set the console baud rate").AddStringEnumDescription("1200", "2400", "4800", "9600", "19200", "38400", "57600", "115200").AddDefaultValueDescription("9600").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.OneOf("1200", "2400", "4800", "9600", "19200", "38400", "57600", "115200"),
 				},
@@ -295,7 +295,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"multi_tenant": schema.BoolAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Device is multi-tenant").AddDefaultValueDescription("false").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"multi_tenant_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -335,7 +335,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Tracker name").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 128),
 							},
@@ -346,7 +346,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"endpoint_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("IP address of endpoint").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"endpoint_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -354,7 +354,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"transport_endpoint_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("IP address of endpoint").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"transport_endpoint_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -362,7 +362,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"transport_endpoint_protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("transport protocol: TCP/UDP").AddStringEnumDescription("tcp", "udp").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("tcp", "udp"),
 							},
@@ -373,7 +373,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"transport_endpoint_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("TCP/UDP port pf endpoint").AddIntegerRangeDescription(1, 65535).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 65535),
 							},
@@ -384,7 +384,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"endpoint_dns_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("DNS name of endpoint").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 63),
 							},
@@ -395,7 +395,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"endpoint_api_url": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("API url of endpoint").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 512),
 							},
@@ -407,7 +407,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						"elements": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Tracker member names separated by space").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"elements_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -478,7 +478,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 					Attributes: map[string]schema.Attribute{
 						"object_number": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Object tracker ID").AddIntegerRangeDescription(1, 1000).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 1000),
 							},
@@ -489,7 +489,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"interface": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("interface name").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -500,7 +500,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"sig": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("service sig").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"sig_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -508,7 +508,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("IP address of route").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -524,7 +524,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("VPN").AddIntegerRangeDescription(0, 65527).AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 65527),
 							},
@@ -536,7 +536,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 								Attributes: map[string]schema.Attribute{
 									"track_id": schema.Int64Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Track id").AddIntegerRangeDescription(1, 1000).String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.Int64{
 											int64validator.Between(1, 1000),
 										},
@@ -550,7 +550,7 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"boolean": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Type of grouping to be performed for tracker group").AddStringEnumDescription("and", "or").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("and", "or"),
 							},

@@ -109,7 +109,7 @@ func (r *CiscoBFDFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"color": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set color that identifies the WAN transport tunnel").AddStringEnumDescription("default", "mpls", "metro-ethernet", "biz-internet", "public-internet", "lte", "3g", "red", "green", "blue", "gold", "silver", "bronze", "custom1", "custom2", "custom3", "private1", "private2", "private3", "private4", "private5", "private6").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("default", "mpls", "metro-ethernet", "biz-internet", "public-internet", "lte", "3g", "red", "green", "blue", "gold", "silver", "bronze", "custom1", "custom2", "custom3", "private1", "private2", "private3", "private4", "private5", "private6"),
 							},

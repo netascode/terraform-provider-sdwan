@@ -100,7 +100,7 @@ resource "sdwan_cisco_security_feature_template" "example" {
 <a id="nestedatt--keychains"></a>
 ### Nested Schema for `keychains`
 
-Required:
+Optional:
 
 - `key_id` (Number) Specify the Key ID
   - Range: `0`-`2147483647`
@@ -110,28 +110,6 @@ Required:
 <a id="nestedatt--keys"></a>
 ### Nested Schema for `keys`
 
-Required:
-
-- `accept_lifetime_duration` (Number) Configure Accept lifetime Duration
-  - Range: `1`-`2147483646`
-- `accept_lifetime_end_time` (String) Configure Key lifetime end time
-- `accept_lifetime_start_time` (String) Configure Key lifetime start time
-- `chain_name` (String) Select the chain name
-- `crypto_algorithm` (String) Crypto Algorithm
-  - Choices: `aes-128-cmac`, `hmac-sha-1`, `hmac-sha-256`
-- `id` (String) Select the Key ID
-- `key_string` (String) Specify the Key String
-- `receive_id` (Number) Specify the Receiver ID
-  - Range: `0`-`255`
-  - Default value: `0`
-- `send_id` (Number) Specify the Send ID
-  - Range: `0`-`255`
-  - Default value: `0`
-- `send_lifetime_duration` (Number) Configure Send lifetime Duration
-  - Range: `1`-`2147483646`
-- `send_lifetime_end_time` (String) Configure Key lifetime end time
-- `send_lifetime_start_time` (String) Configure Key lifetime start time
-
 Optional:
 
 - `accept_ao_mismatch` (Boolean) Configure Accept AO Mismatch
@@ -139,27 +117,46 @@ Optional:
 - `accept_ao_mismatch_variable` (String) Variable name
 - `accept_lifetime` (Boolean) Configure Accept Lifetime Local
   - Default value: `false`
+- `accept_lifetime_duration` (Number) Configure Accept lifetime Duration
+  - Range: `1`-`2147483646`
 - `accept_lifetime_duration_variable` (String) Variable name
+- `accept_lifetime_end_time` (String) Configure Key lifetime end time
 - `accept_lifetime_end_time_format` (String) Configure Key lifetime end time
   - Choices: `infinite`, `duration`, `end-epoch`
   - Default value: `infinite`
 - `accept_lifetime_infinite` (Boolean) Configure Key lifetime end time
 - `accept_lifetime_infinite_variable` (String) Variable name
+- `accept_lifetime_start_time` (String) Configure Key lifetime start time
 - `accept_lifetime_variable` (String) Variable name
+- `chain_name` (String) Select the chain name
+- `crypto_algorithm` (String) Crypto Algorithm
+  - Choices: `aes-128-cmac`, `hmac-sha-1`, `hmac-sha-256`
+- `id` (String) Select the Key ID
 - `include_tcp_options` (Boolean) Configure Include TCP Options
   - Default value: `false`
 - `include_tcp_options_variable` (String) Variable name
+- `key_string` (String) Specify the Key String
 - `key_string_variable` (String) Variable name
+- `receive_id` (Number) Specify the Receiver ID
+  - Range: `0`-`255`
+  - Default value: `0`
 - `receive_id_variable` (String) Variable name
+- `send_id` (Number) Specify the Send ID
+  - Range: `0`-`255`
+  - Default value: `0`
 - `send_id_variable` (String) Variable name
 - `send_lifetime` (Boolean) Configure Send lifetime Local
   - Default value: `false`
+- `send_lifetime_duration` (Number) Configure Send lifetime Duration
+  - Range: `1`-`2147483646`
 - `send_lifetime_duration_variable` (String) Variable name
+- `send_lifetime_end_time` (String) Configure Key lifetime end time
 - `send_lifetime_end_time_format` (String) Configure Key lifetime end time
   - Choices: `infinite`, `duration`, `end-epoch`
   - Default value: `infinite`
 - `send_lifetime_infinite` (Boolean) Configure Key lifetime end time
 - `send_lifetime_infinite_variable` (String) Variable name
+- `send_lifetime_start_time` (String) Configure Key lifetime start time
 - `send_lifetime_variable` (String) Variable name
 
 ## Import

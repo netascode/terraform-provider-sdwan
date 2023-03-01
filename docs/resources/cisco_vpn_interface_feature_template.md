@@ -238,35 +238,7 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `description` (String) The description of the feature template
 - `device_types` (List of String) List of supported device types
   - Choices: `vedge-C8000V`, `vedge-C8300-1N1S-4T2X`, `vedge-C8300-1N1S-6T`, `vedge-C8300-2N2S-6T`, `vedge-C8300-2N2S-4T2X`, `vedge-C8500-12X4QC`, `vedge-C8500-12X`, `vedge-C8500-20X6C`, `vedge-C8500L-8S4X`, `vedge-C8200-1N-4T`, `vedge-C8200L-1N-4T`
-- `interface_name` (String) Interface name: ge0/<0-..> or ge0/<0-..>.vlanid or irb<bridgeid:1-63> or loopback<string> or natpool-<1..31> when present
 - `name` (String) The name of the feature template
-- `nat_pool_prefix_length` (Number) Ending IP address of NAT Pool Prefix Length
-- `nat_pool_range_end` (String) Ending IP address of NAT pool range
-- `nat_pool_range_start` (String) Starting IP address of NAT pool range
-- `nat_type` (String) NAT type
-  - Choices: `interface`, `pool`, `loopback`
-  - Default value: `interface`
-- `per_tunnel_qos` (Boolean) Per-tunnel Qos
-  - Default value: `false`
-- `per_tunnel_qos_aggregator` (Boolean) Per-tunnel QoS Aggregator
-  - Default value: `false`
-- `qos_adaptive_bandwidth_downstream` (Number) Adaptive QoS default downstream bandwidth
-  - Range: `8`-`100000000`
-- `qos_adaptive_bandwidth_upstream` (Number) Adaptive QoS default upstream bandwidth
-  - Range: `8`-`100000000`
-- `qos_adaptive_max_downstream` (Number) Downstream max bandwidth limit
-  - Range: `8`-`100000000`
-- `qos_adaptive_max_upstream` (Number) Upstream max bandwidth limit
-  - Range: `8`-`100000000`
-- `qos_adaptive_min_downstream` (Number) Downstream min bandwidth limit
-  - Range: `8`-`100000000`
-- `qos_adaptive_min_upstream` (Number) Upstream min bandwidth limit
-  - Range: `8`-`100000000`
-- `tunnel_bandwidth` (Number) Tunnels Bandwidth Percent
-  - Range: `1`-`99`
-  - Default value: `50`
-- `tunnel_qos_mode` (String) Set tunnel QoS mode
-  - Choices: `hub`, `spoke`
 
 ### Optional
 
@@ -325,6 +297,7 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
   - Range: `1500`-`9216`
   - Default value: `1500`
 - `interface_mtu_variable` (String) Variable name
+- `interface_name` (String) Interface name: ge0/<0-..> or ge0/<0-..>.vlanid or irb<bridgeid:1-63> or loopback<string> or natpool-<1..31> when present
 - `interface_name_variable` (String) Variable name
 - `ip_directed_broadcast` (Boolean) IP Directed-Broadcast
   - Default value: `false`
@@ -369,11 +342,21 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `nat_overload` (Boolean) Enable port translation(PAT)
   - Default value: `true`
 - `nat_overload_variable` (String) Variable name
+- `nat_pool_prefix_length` (Number) Ending IP address of NAT Pool Prefix Length
 - `nat_pool_prefix_length_variable` (String) Variable name
+- `nat_pool_range_end` (String) Ending IP address of NAT pool range
 - `nat_pool_range_end_variable` (String) Variable name
+- `nat_pool_range_start` (String) Starting IP address of NAT pool range
 - `nat_pool_range_start_variable` (String) Variable name
+- `nat_type` (String) NAT type
+  - Choices: `interface`, `pool`, `loopback`
+  - Default value: `interface`
 - `nat_type_variable` (String) Variable name
 - `nat_variable` (String) Variable name
+- `per_tunnel_qos` (Boolean) Per-tunnel Qos
+  - Default value: `false`
+- `per_tunnel_qos_aggregator` (Boolean) Per-tunnel QoS Aggregator
+  - Default value: `false`
 - `per_tunnel_qos_aggregator_variable` (String) Variable name
 - `per_tunnel_qos_variable` (String) Variable name
 - `poe` (Boolean) Configure interface as Power-over-Ethernet source
@@ -383,11 +366,23 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
   - Default value: `true`
 - `qos_adaptive` (Boolean) Adaptive QoS
   - Default value: `false`
+- `qos_adaptive_bandwidth_downstream` (Number) Adaptive QoS default downstream bandwidth
+  - Range: `8`-`100000000`
 - `qos_adaptive_bandwidth_downstream_variable` (String) Variable name
+- `qos_adaptive_bandwidth_upstream` (Number) Adaptive QoS default upstream bandwidth
+  - Range: `8`-`100000000`
 - `qos_adaptive_bandwidth_upstream_variable` (String) Variable name
+- `qos_adaptive_max_downstream` (Number) Downstream max bandwidth limit
+  - Range: `8`-`100000000`
 - `qos_adaptive_max_downstream_variable` (String) Variable name
+- `qos_adaptive_max_upstream` (Number) Upstream max bandwidth limit
+  - Range: `8`-`100000000`
 - `qos_adaptive_max_upstream_variable` (String) Variable name
+- `qos_adaptive_min_downstream` (Number) Downstream min bandwidth limit
+  - Range: `8`-`100000000`
 - `qos_adaptive_min_downstream_variable` (String) Variable name
+- `qos_adaptive_min_upstream` (Number) Upstream min bandwidth limit
+  - Range: `8`-`100000000`
 - `qos_adaptive_min_upstream_variable` (String) Variable name
 - `qos_adaptive_period` (Number) Periodic timer for adaptive QoS in minutes
   - Range: `1`-`720`
@@ -437,6 +432,9 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tloc_extension_variable` (String) Variable name
 - `tracker` (List of String) Enable tracker for this interface
 - `tracker_variable` (String) Variable name
+- `tunnel_bandwidth` (Number) Tunnels Bandwidth Percent
+  - Range: `1`-`99`
+  - Default value: `50`
 - `tunnel_bandwidth_variable` (String) Variable name
 - `tunnel_interface_allow_all` (Boolean) Allow all traffic. Overrides all other allow-service options if allow-service all is set
   - Default value: `false`
@@ -543,6 +541,8 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
   - Range: `0`-`8`
   - Default value: `5`
 - `tunnel_interface_vmanage_connection_preference_variable` (String) Variable name
+- `tunnel_qos_mode` (String) Set tunnel QoS mode
+  - Choices: `hub`, `spoke`
 - `tunnel_qos_mode_variable` (String) Variable name
 - `udp_timeout` (Number) Set NAT UDP session timeout, in minutes
   - Range: `1`-`8947`
@@ -557,15 +557,12 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 <a id="nestedatt--access_lists"></a>
 ### Nested Schema for `access_lists`
 
-Required:
-
-- `acl_name` (String) Name of access list
-- `direction` (String) Direction
-  - Choices: `in`, `out`
-
 Optional:
 
+- `acl_name` (String) Name of access list
 - `acl_name_variable` (String) Variable name
+- `direction` (String) Direction
+  - Choices: `in`, `out`
 
 
 <a id="nestedatt--ipv4_secondary_addresses"></a>
@@ -580,15 +577,10 @@ Optional:
 <a id="nestedatt--ipv4_vrrps"></a>
 ### Nested Schema for `ipv4_vrrps`
 
-Required:
+Optional:
 
 - `group_id` (Number) Group ID
   - Range: `1`-`255`
-- `tloc_preference_change_value` (Number) Set tloc preference change value
-  - Range: `1`-`4294967295`
-
-Optional:
-
 - `group_id_variable` (String) Variable name
 - `ip_address` (String) Assign IP Address
 - `ip_address_variable` (String) Variable name
@@ -603,6 +595,8 @@ Optional:
 - `timer_variable` (String) Variable name
 - `tloc_preference_change` (Boolean) change TLOC preference
   - Default value: `false`
+- `tloc_preference_change_value` (Number) Set tloc preference change value
+  - Range: `1`-`4294967295`
 - `tloc_preference_change_value_variable` (String) Variable name
 - `track_omp` (Boolean) Track OMP status
   - Default value: `false`
@@ -613,32 +607,26 @@ Optional:
 <a id="nestedatt--ipv4_vrrps--ipv4_secondary_addresses"></a>
 ### Nested Schema for `ipv4_vrrps.ipv4_secondary_addresses`
 
-Required:
-
-- `ip_address` (String) VRRP Secondary IP address
-
 Optional:
 
+- `ip_address` (String) VRRP Secondary IP address
 - `ip_address_variable` (String) Variable name
 
 
 <a id="nestedatt--ipv4_vrrps--tracking_objects"></a>
 ### Nested Schema for `ipv4_vrrps.tracking_objects`
 
-Required:
+Optional:
 
 - `decrement_value` (Number) Decrement Value for VRRP priority
   - Range: `1`-`255`
+- `decrement_value_variable` (String) Variable name
 - `track_action` (String) Track Action
   - Choices: `decrement`, `shutdown`
   - Default value: `decrement`
+- `track_action_variable` (String) Variable name
 - `tracker_id` (Number) Tracker ID
   - Range: `1`-`1000`
-
-Optional:
-
-- `decrement_value_variable` (String) Variable name
-- `track_action_variable` (String) Variable name
 - `tracker_id_variable` (String) Variable name
 
 
@@ -646,26 +634,20 @@ Optional:
 <a id="nestedatt--ipv6_access_lists"></a>
 ### Nested Schema for `ipv6_access_lists`
 
-Required:
-
-- `acl_name` (String) Name of access list
-- `direction` (String) Direction
-  - Choices: `in`, `out`
-
 Optional:
 
+- `acl_name` (String) Name of access list
 - `acl_name_variable` (String) Variable name
+- `direction` (String) Direction
+  - Choices: `in`, `out`
 
 
 <a id="nestedatt--ipv6_dhcp_helpers"></a>
 ### Nested Schema for `ipv6_dhcp_helpers`
 
-Required:
-
-- `address` (String) DHCPv6 Helper address
-
 Optional:
 
+- `address` (String) DHCPv6 Helper address
 - `address_variable` (String) Variable name
 - `vpn_id` (Number) DHCPv6 Helper VPN
   - Range: `1`-`65536`
@@ -684,13 +666,10 @@ Optional:
 <a id="nestedatt--ipv6_vrrps"></a>
 ### Nested Schema for `ipv6_vrrps`
 
-Required:
+Optional:
 
 - `group_id` (Number) Group ID
   - Range: `1`-`255`
-
-Optional:
-
 - `group_id_variable` (String) Variable name
 - `ipv6_adresses` (Attributes List) IPv6 VRRP (see [below for nested schema](#nestedatt--ipv6_vrrps--ipv6_adresses))
 - `priority` (Number) Set priority
@@ -710,12 +689,9 @@ Optional:
 <a id="nestedatt--ipv6_vrrps--ipv6_adresses"></a>
 ### Nested Schema for `ipv6_vrrps.ipv6_adresses`
 
-Required:
-
-- `ipv6_link_local` (String) Use link-local IPv6 Address
-
 Optional:
 
+- `ipv6_link_local` (String) Use link-local IPv6 Address
 - `ipv6_link_local_variable` (String) Variable name
 - `prefix` (String) Assign Global IPv6 Prefix
 - `prefix_variable` (String) Variable name
@@ -725,14 +701,11 @@ Optional:
 <a id="nestedatt--static_arps"></a>
 ### Nested Schema for `static_arps`
 
-Required:
-
-- `ip_address` (String) IP Address
-- `mac` (String) MAC address
-
 Optional:
 
+- `ip_address` (String) IP Address
 - `ip_address_variable` (String) Variable name
+- `mac` (String) MAC address
 - `mac_variable` (String) Variable name
 
 
@@ -754,68 +727,59 @@ Optional:
 <a id="nestedatt--static_nat_entries"></a>
 ### Nested Schema for `static_nat_entries`
 
-Required:
-
-- `source_ip` (String) Source IP address to be translated
-- `static_nat_direction` (String) Direction of static NAT translation
-  - Choices: `inside`, `outside`
-  - Default value: `inside`
-- `translate_ip` (String) Statically translated source IP address
-
 Optional:
 
+- `source_ip` (String) Source IP address to be translated
 - `source_ip_variable` (String) Variable name
 - `source_vpn_id` (Number) Configure VPN ID
   - Range: `0`-`65530`
   - Default value: `0`
 - `source_vpn_id_variable` (String) Variable name
+- `static_nat_direction` (String) Direction of static NAT translation
+  - Choices: `inside`, `outside`
+  - Default value: `inside`
 - `static_nat_direction_variable` (String) Variable name
+- `translate_ip` (String) Statically translated source IP address
 - `translate_ip_variable` (String) Variable name
 
 
 <a id="nestedatt--static_port_forward_entries"></a>
 ### Nested Schema for `static_port_forward_entries`
 
-Required:
+Optional:
 
 - `protocol` (String) Protocol
   - Choices: `tcp`, `udp`
+- `protocol_variable` (String) Variable name
 - `source_ip` (String) Source IP address to be translated
+- `source_ip_variable` (String) Variable name
 - `source_port` (Number) Source Port
   - Range: `0`-`65535`
   - Default value: `0`
-- `static_nat_direction` (String) Direction of static NAT translation
-  - Choices: `inside`, `outside`
-  - Default value: `inside`
-- `translate_ip` (String) Statically translated source IP address
-- `translate_port` (Number) Translate Port
-  - Range: `0`-`65535`
-  - Default value: `0`
-
-Optional:
-
-- `protocol_variable` (String) Variable name
-- `source_ip_variable` (String) Variable name
 - `source_port_variable` (String) Variable name
 - `source_vpn_id` (Number) Configure VPN ID
   - Range: `0`-`65530`
   - Default value: `0`
 - `source_vpn_id_variable` (String) Variable name
+- `static_nat_direction` (String) Direction of static NAT translation
+  - Choices: `inside`, `outside`
+  - Default value: `inside`
 - `static_nat_direction_variable` (String) Variable name
+- `translate_ip` (String) Statically translated source IP address
 - `translate_ip_variable` (String) Variable name
+- `translate_port` (Number) Translate Port
+  - Range: `0`-`65535`
+  - Default value: `0`
 - `translate_port_variable` (String) Variable name
 
 
 <a id="nestedatt--tunnel_interface_encapsulations"></a>
 ### Nested Schema for `tunnel_interface_encapsulations`
 
-Required:
+Optional:
 
 - `encapsulation` (String) Encapsulation
   - Choices: `gre`, `ipsec`
-
-Optional:
-
 - `preference` (Number) Set preference for TLOC
   - Range: `0`-`4294967295`
 - `preference_variable` (String) Variable name

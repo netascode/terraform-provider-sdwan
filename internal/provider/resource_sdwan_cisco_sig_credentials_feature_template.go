@@ -70,7 +70,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_organization": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Organization Name").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_organization_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -78,7 +78,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_partner_base_uri": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Partner Base URI to be used in REST calls").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_partner_base_uri_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -86,7 +86,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_username": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Username of Zscaler partner account").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_username_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -94,7 +94,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_password": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Password of Zscaler partner account").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_password_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -102,7 +102,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_cloud_name": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Third Party Cloud Name").AddIntegerRangeDescription(0, 255).String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(0, 255),
 				},
@@ -113,7 +113,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_partner_username": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Partner User Name").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_partner_username_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -121,7 +121,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_partner_password": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Partner Password").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_partner_password_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -129,7 +129,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"zscaler_partner_api_key": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Partner API Key").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"zscaler_partner_api_key_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -137,7 +137,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"umbrella_api_key": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("API Key").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"umbrella_api_key_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -145,7 +145,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"umbrella_api_secret": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("API Secret").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"umbrella_api_secret_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -153,7 +153,7 @@ func (r *CiscoSIGCredentialsFeatureTemplateResource) Schema(ctx context.Context,
 			},
 			"umbrella_organization_id": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Ord ID").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"umbrella_organization_id_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,

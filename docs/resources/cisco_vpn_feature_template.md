@@ -237,13 +237,6 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
 - `device_types` (List of String) List of supported device types
   - Choices: `vedge-C8000V`, `vedge-C8300-1N1S-4T2X`, `vedge-C8300-1N1S-6T`, `vedge-C8300-2N2S-6T`, `vedge-C8300-2N2S-4T2X`, `vedge-C8500-12X4QC`, `vedge-C8500-12X`, `vedge-C8500-20X6C`, `vedge-C8500L-8S4X`, `vedge-C8200-1N-4T`, `vedge-C8200L-1N-4T`
 - `name` (String) The name of the feature template
-- `organization_name` (String) Org Name selected
-- `tenant_vpn_id` (Number) Tenant VPN
-  - Range: `0`-`65527`
-  - Default value: `0`
-- `vpn_id` (Number) List of VPN instances
-  - Range: `0`-`65527`
-  - Default value: `0`
 
 ### Optional
 
@@ -268,6 +261,7 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
 - `omp_admin_distance_ipv6_variable` (String) Variable name
 - `omp_advertise_ipv4_routes` (Attributes List) Advertise routes to OMP (see [below for nested schema](#nestedatt--omp_advertise_ipv4_routes))
 - `omp_advertise_ipv6_routes` (Attributes List) Advertise routes to OMP (see [below for nested schema](#nestedatt--omp_advertise_ipv6_routes))
+- `organization_name` (String) Org Name selected
 - `port_forward_rules` (Attributes List) Configure Port Forward entries (see [below for nested schema](#nestedatt--port_forward_rules))
 - `route_global_exports` (Attributes List) Enable route leaking to Global VPN from this Service VPN (see [below for nested schema](#nestedatt--route_global_exports))
 - `route_global_imports` (Attributes List) Enable route leaking from Global VPN to this Service VPN (see [below for nested schema](#nestedatt--route_global_imports))
@@ -275,6 +269,12 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
 - `services` (Attributes List) Configure services (see [below for nested schema](#nestedatt--services))
 - `static_nat_rules` (Attributes List) Configure static NAT entries (see [below for nested schema](#nestedatt--static_nat_rules))
 - `static_nat_subnet_rules` (Attributes List) Configure static NAT Subnet entries (see [below for nested schema](#nestedatt--static_nat_subnet_rules))
+- `tenant_vpn_id` (Number) Tenant VPN
+  - Range: `0`-`65527`
+  - Default value: `0`
+- `vpn_id` (Number) List of VPN instances
+  - Range: `0`-`65527`
+  - Default value: `0`
 - `vpn_name` (String) Name
 - `vpn_name_variable` (String) Variable name
 
@@ -286,26 +286,20 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
 <a id="nestedatt--dns_hosts"></a>
 ### Nested Schema for `dns_hosts`
 
-Required:
-
-- `hostname` (String) Hostname
-- `ip` (List of String) List of IP
-
 Optional:
 
+- `hostname` (String) Hostname
 - `hostname_variable` (String) Variable name
+- `ip` (List of String) List of IP
 - `ip_variable` (String) Variable name
 
 
 <a id="nestedatt--dns_ipv4_servers"></a>
 ### Nested Schema for `dns_ipv4_servers`
 
-Required:
-
-- `address` (String) DNS Address
-
 Optional:
 
+- `address` (String) DNS Address
 - `role` (String) Role
   - Choices: `primary`, `secondary`
   - Default value: `primary`
@@ -315,12 +309,9 @@ Optional:
 <a id="nestedatt--dns_ipv6_servers"></a>
 ### Nested Schema for `dns_ipv6_servers`
 
-Required:
-
-- `address` (String) DNS Address
-
 Optional:
 
+- `address` (String) DNS Address
 - `role` (String) Role
   - Choices: `primary`, `secondary`
   - Default value: `primary`
@@ -330,41 +321,31 @@ Optional:
 <a id="nestedatt--ipv4_static_gre_routes"></a>
 ### Nested Schema for `ipv4_static_gre_routes`
 
-Required:
-
-- `prefix` (String) Prefix
-- `vpn_id` (Number) Destination VPN to resolve the prefix
-  - Default value: `0`
-
 Optional:
 
 - `interface` (List of String) List of GRE Interfaces
 - `interface_variable` (String) Variable name
+- `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
+- `vpn_id` (Number) Destination VPN to resolve the prefix
+  - Default value: `0`
 
 
 <a id="nestedatt--ipv4_static_ipsec_routes"></a>
 ### Nested Schema for `ipv4_static_ipsec_routes`
 
-Required:
-
-- `prefix` (String) Prefix
-- `vpn_id` (Number) Destination VPN to resolve the prefix
-  - Default value: `0`
-
 Optional:
 
 - `interface` (List of String) List of IPSEC Interfaces (Separated by commas)
 - `interface_variable` (String) Variable name
+- `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
+- `vpn_id` (Number) Destination VPN to resolve the prefix
+  - Default value: `0`
 
 
 <a id="nestedatt--ipv4_static_routes"></a>
 ### Nested Schema for `ipv4_static_routes`
-
-Required:
-
-- `prefix` (String) Prefix
 
 Optional:
 
@@ -379,6 +360,7 @@ Optional:
 - `null0` (Boolean) null0
   - Default value: `false`
 - `null0_variable` (String) Variable name
+- `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `track_next_hops` (Attributes List) IP gateway address (see [below for nested schema](#nestedatt--ipv4_static_routes--track_next_hops))
 - `vpn_id` (Number) Destination VPN(!=0 or !=512) to resolve the prefix
@@ -388,12 +370,9 @@ Optional:
 <a id="nestedatt--ipv4_static_routes--next_hops"></a>
 ### Nested Schema for `ipv4_static_routes.next_hops`
 
-Required:
-
-- `address` (String) IP Address
-
 Optional:
 
+- `address` (String) IP Address
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
   - Range: `1`-`255`
@@ -404,18 +383,15 @@ Optional:
 <a id="nestedatt--ipv4_static_routes--track_next_hops"></a>
 ### Nested Schema for `ipv4_static_routes.track_next_hops`
 
-Required:
-
-- `address` (String) IP Address
-- `tracker` (String) Static route tracker
-
 Optional:
 
+- `address` (String) IP Address
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
   - Range: `1`-`255`
   - Default value: `1`
 - `distance_variable` (String) Variable name
+- `tracker` (String) Static route tracker
 - `tracker_variable` (String) Variable name
 
 
@@ -423,26 +399,19 @@ Optional:
 <a id="nestedatt--ipv4_static_service_routes"></a>
 ### Nested Schema for `ipv4_static_service_routes`
 
-Required:
+Optional:
 
 - `prefix` (String) Prefix
+- `prefix_variable` (String) Variable name
 - `service` (String) Service
   - Choices: `sig`
   - Default value: `sig`
 - `vpn_id` (Number) Destination VPN to resolve the prefix
   - Default value: `0`
 
-Optional:
-
-- `prefix_variable` (String) Variable name
-
 
 <a id="nestedatt--ipv6_static_routes"></a>
 ### Nested Schema for `ipv6_static_routes`
-
-Required:
-
-- `prefix` (String) Prefix
 
 Optional:
 
@@ -454,6 +423,7 @@ Optional:
 - `null0` (Boolean) null0
   - Default value: `false`
 - `null0_variable` (String) Variable name
+- `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN(!=0 or !=512) to resolve the prefix
   - Default value: `0`
@@ -462,12 +432,9 @@ Optional:
 <a id="nestedatt--ipv6_static_routes--next_hops"></a>
 ### Nested Schema for `ipv6_static_routes.next_hops`
 
-Required:
-
-- `address` (String) IP Address
-
 Optional:
 
+- `address` (String) IP Address
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
   - Range: `1`-`255`
@@ -479,9 +446,10 @@ Optional:
 <a id="nestedatt--nat64_pools"></a>
 ### Nested Schema for `nat64_pools`
 
-Required:
+Optional:
 
 - `end_address` (String) Ending IP address of NAT pool range
+- `end_address_variable` (String) Variable name
 - `leak_from_global` (Boolean) Enable Route Leaking from Global VPN to this Service VPN
   - Default value: `false`
 - `leak_from_global_protocol` (String) Select protocol for route leaking
@@ -489,40 +457,33 @@ Required:
 - `leak_to_global` (Boolean) Enable Route Leaking from this Service VPN to Global VPN
   - Default value: `false`
 - `name` (String) NAT64 Pool name
-- `start_address` (String) Starting IP address of NAT pool range
-
-Optional:
-
-- `end_address_variable` (String) Variable name
 - `overload` (Boolean) NAT 64 Overload Option
   - Default value: `false`
 - `overload_variable` (String) Variable name
+- `start_address` (String) Starting IP address of NAT pool range
 - `start_address_variable` (String) Variable name
 
 
 <a id="nestedatt--nat_pools"></a>
 ### Nested Schema for `nat_pools`
 
-Required:
+Optional:
 
 - `direction` (String) Direction of NAT translation
   - Choices: `inside`, `outside`
+- `direction_variable` (String) Variable name
 - `name` (Number) NAT Pool Name, natpool1..31
   - Range: `1`-`31`
-- `prefix_length` (Number) Ending IP address of NAT Pool Prefix Length
-  - Range: `1`-`32`
-- `range_end` (String) Ending IP address of NAT pool range
-- `range_start` (String) Starting IP address of NAT pool range
-
-Optional:
-
-- `direction_variable` (String) Variable name
 - `name_variable` (String) Variable name
 - `overload` (Boolean) Enable port translation(PAT)
   - Default value: `true`
 - `overload_variable` (String) Variable name
+- `prefix_length` (Number) Ending IP address of NAT Pool Prefix Length
+  - Range: `1`-`32`
 - `prefix_length_variable` (String) Variable name
+- `range_end` (String) Ending IP address of NAT pool range
 - `range_end_variable` (String) Variable name
+- `range_start` (String) Starting IP address of NAT pool range
 - `range_start_variable` (String) Variable name
 - `tracker_id` (Number) Add Object/Object Group Tracker
   - Range: `1`-`1000`
@@ -546,15 +507,12 @@ Optional:
 <a id="nestedatt--omp_advertise_ipv4_routes--prefixes"></a>
 ### Nested Schema for `omp_advertise_ipv4_routes.prefixes`
 
-Required:
-
-- `prefix_entry` (String) Prefix
-
 Optional:
 
 - `aggregate_only` (Boolean) Aggregate Only
   - Default value: `false`
 - `aggregate_only_variable` (String) Variable name
+- `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
 
@@ -576,15 +534,12 @@ Optional:
 <a id="nestedatt--omp_advertise_ipv6_routes--prefixes"></a>
 ### Nested Schema for `omp_advertise_ipv6_routes.prefixes`
 
-Required:
-
-- `prefix_entry` (String) Prefix
-
 Optional:
 
 - `aggregate_only` (Boolean) Aggregate Only
   - Default value: `false`
 - `aggregate_only_variable` (String) Variable name
+- `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
 
@@ -592,39 +547,33 @@ Optional:
 <a id="nestedatt--port_forward_rules"></a>
 ### Nested Schema for `port_forward_rules`
 
-Required:
-
-- `protocol` (String) Protocol
-  - Choices: `tcp`, `udp`
-- `source_ip` (String) Source IP address to be translated
-- `source_port` (Number) Source Port
-  - Default value: `0`
-- `translate_ip` (String) Statically translated source IP address
-- `translate_port` (Number) Translate Port
-  - Default value: `0`
-
 Optional:
 
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
+- `protocol` (String) Protocol
+  - Choices: `tcp`, `udp`
 - `protocol_variable` (String) Variable name
+- `source_ip` (String) Source IP address to be translated
 - `source_ip_variable` (String) Variable name
+- `source_port` (Number) Source Port
+  - Default value: `0`
 - `source_port_variable` (String) Variable name
+- `translate_ip` (String) Statically translated source IP address
 - `translate_ip_variable` (String) Variable name
+- `translate_port` (Number) Translate Port
+  - Default value: `0`
 - `translate_port_variable` (String) Variable name
 
 
 <a id="nestedatt--route_global_exports"></a>
 ### Nested Schema for `route_global_exports`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable route leaking from this Service VPN to Global VPN
   - Choices: `static`, `connected`, `bgp`, `eigrp`, `ospf`
 - `protocol_sub_type` (List of String) - Default value: `external`
-
-Optional:
-
 - `protocol_sub_type_variable` (String) Variable name
 - `protocol_variable` (String) Variable name
 - `redistributes` (Attributes List) Enable redistribution of replicated route protocol (see [below for nested schema](#nestedatt--route_global_exports--redistributes))
@@ -633,13 +582,10 @@ Optional:
 <a id="nestedatt--route_global_exports--redistributes"></a>
 ### Nested Schema for `route_global_exports.redistributes`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `ospf`
-
-Optional:
-
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
 
@@ -648,14 +594,11 @@ Optional:
 <a id="nestedatt--route_global_imports"></a>
 ### Nested Schema for `route_global_imports`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable route leaking from Global VPN to this Service VPN
   - Choices: `static`, `connected`, `bgp`, `ospf`
 - `protocol_sub_type` (List of String) - Default value: `external`
-
-Optional:
-
 - `protocol_sub_type_variable` (String) Variable name
 - `protocol_variable` (String) Variable name
 - `redistributes` (Attributes List) Enable redistribution of replicated route protocol (see [below for nested schema](#nestedatt--route_global_imports--redistributes))
@@ -664,13 +607,10 @@ Optional:
 <a id="nestedatt--route_global_imports--redistributes"></a>
 ### Nested Schema for `route_global_imports.redistributes`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `eigrp`, `ospf`
-
-Optional:
-
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
 
@@ -679,34 +619,28 @@ Optional:
 <a id="nestedatt--route_vpn_imports"></a>
 ### Nested Schema for `route_vpn_imports`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable route leaking to current VPN
   - Choices: `static`, `connected`, `bgp`, `ospf`, `eigrp`
 - `protocol_sub_type` (List of String) - Default value: `external`
-- `source_vpn_id` (Number) Select a Source VPN where route leaks from
-  - Range: `1`-`65530`
-  - Default value: `1`
-
-Optional:
-
 - `protocol_sub_type_variable` (String) Variable name
 - `protocol_variable` (String) Variable name
 - `redistributes` (Attributes List) Enable redistribution of replicated route protocol (see [below for nested schema](#nestedatt--route_vpn_imports--redistributes))
 - `route_policy` (String) Select a Route Policy to enable route leaking to current VPN
 - `route_policy_variable` (String) Variable name
+- `source_vpn_id` (Number) Select a Source VPN where route leaks from
+  - Range: `1`-`65530`
+  - Default value: `1`
 - `source_vpn_id_variable` (String) Variable name
 
 <a id="nestedatt--route_vpn_imports--redistributes"></a>
 ### Nested Schema for `route_vpn_imports.redistributes`
 
-Required:
+Optional:
 
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `eigrp`, `ospf`
-
-Optional:
-
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
 - `route_policy_variable` (String) Variable name
@@ -716,17 +650,14 @@ Optional:
 <a id="nestedatt--services"></a>
 ### Nested Schema for `services`
 
-Required:
-
-- `address` (List of String) List of IPv4 address
-- `interface` (String) Tracking Service
-- `service_types` (String) Service Type
-  - Choices: `FW`, `IDS`, `IDP`, `netsvc1`, `netsvc2`, `netsvc3`, `netsvc4`, `TE`, `appqoe`
-
 Optional:
 
+- `address` (List of String) List of IPv4 address
 - `address_variable` (String) Variable name
+- `interface` (String) Tracking Service
 - `interface_variable` (String) Variable name
+- `service_types` (String) Service Type
+  - Choices: `FW`, `IDS`, `IDP`, `netsvc1`, `netsvc2`, `netsvc3`, `netsvc4`, `TE`, `appqoe`
 - `track_enable` (Boolean) Tracking Service
   - Default value: `true`
 - `track_enable_variable` (String) Variable name
@@ -735,45 +666,39 @@ Optional:
 <a id="nestedatt--static_nat_rules"></a>
 ### Nested Schema for `static_nat_rules`
 
-Required:
-
-- `source_ip` (String) Source IP address to be translated
-- `static_nat_direction` (String) Direction of static NAT translation
-  - Choices: `inside`, `outside`
-- `translate_ip` (String) Statically translated source IP address
-
 Optional:
 
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
+- `source_ip` (String) Source IP address to be translated
 - `source_ip_variable` (String) Variable name
+- `static_nat_direction` (String) Direction of static NAT translation
+  - Choices: `inside`, `outside`
 - `static_nat_direction_variable` (String) Variable name
 - `tracker_id` (Number) Add Object/Object Group Tracker
   - Range: `1`-`1000`
 - `tracker_id_variable` (String) Variable name
+- `translate_ip` (String) Statically translated source IP address
 - `translate_ip_variable` (String) Variable name
 
 
 <a id="nestedatt--static_nat_subnet_rules"></a>
 ### Nested Schema for `static_nat_subnet_rules`
 
-Required:
+Optional:
 
 - `prefix_length` (Number) Network Prefix Length
   - Range: `1`-`32`
+- `prefix_length_variable` (String) Variable name
 - `source_ip_subnet` (String) Source IP Subnet to be translated
+- `source_ip_subnet_variable` (String) Variable name
 - `static_nat_direction` (String) Direction of static NAT translation
   - Choices: `inside`, `outside`
-- `translate_ip_subnet` (String) Statically translated source IP Subnet
-
-Optional:
-
-- `prefix_length_variable` (String) Variable name
-- `source_ip_subnet_variable` (String) Variable name
 - `static_nat_direction_variable` (String) Variable name
 - `tracker_id` (Number) Add Object/Object Group Tracker
   - Range: `1`-`1000`
 - `tracker_id_variable` (String) Variable name
+- `translate_ip_subnet` (String) Statically translated source IP Subnet
 - `translate_ip_subnet_variable` (String) Variable name
 
 ## Import

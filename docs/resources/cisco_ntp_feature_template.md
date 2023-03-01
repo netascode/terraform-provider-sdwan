@@ -75,30 +75,24 @@ resource "sdwan_cisco_ntp_feature_template" "example" {
 <a id="nestedatt--authentication_keys"></a>
 ### Nested Schema for `authentication_keys`
 
-Required:
+Optional:
 
 - `id` (Number) MD5 authentication key ID
   - Range: `1`-`65535`
-- `value` (String) Enter cleartext or AES-encrypted MD5 authentication key
-
-Optional:
-
 - `id_variable` (String) Variable name
+- `value` (String) Enter cleartext or AES-encrypted MD5 authentication key
 - `value_variable` (String) Variable name
 
 
 <a id="nestedatt--servers"></a>
 ### Nested Schema for `servers`
 
-Required:
-
-- `hostname_ip` (String) Set hostname or IP address of server
-
 Optional:
 
 - `authentication_key_id` (Number) Set authentication key for the server
   - Range: `1`-`65535`
 - `authentication_key_id_variable` (String) Variable name
+- `hostname_ip` (String) Set hostname or IP address of server
 - `hostname_ip_variable` (String) Variable name
 - `prefer` (Boolean) Prefer this NTP server
   - Default value: `false`

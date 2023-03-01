@@ -71,7 +71,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 			},
 			"vpn_id": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of VPN instances").AddIntegerRangeDescription(0, 65527).AddDefaultValueDescription("0").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(0, 65527),
 				},
@@ -89,14 +89,14 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 			},
 			"tenant_vpn_id": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Tenant VPN").AddIntegerRangeDescription(0, 65527).AddDefaultValueDescription("0").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.Int64{
 					int64validator.Between(0, 65527),
 				},
 			},
 			"organization_name": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Org Name selected").String,
-				Required:            true,
+				Optional:            true,
 			},
 			"omp_admin_distance_ipv4": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("omp-admin-distance-ipv4").AddIntegerRangeDescription(1, 255).String,
@@ -135,7 +135,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("DNS Address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"role": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Role").AddStringEnumDescription("primary", "secondary").AddDefaultValueDescription("primary").String,
@@ -158,7 +158,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("DNS Address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"role": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Role").AddStringEnumDescription("primary", "secondary").AddDefaultValueDescription("primary").String,
@@ -181,7 +181,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"hostname": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Hostname").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 128),
 							},
@@ -193,7 +193,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"ip": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("List of IP").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -209,7 +209,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"service_types": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Service Type").AddStringEnumDescription("FW", "IDS", "IDP", "netsvc1", "netsvc2", "netsvc3", "netsvc4", "TE", "appqoe").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("FW", "IDS", "IDP", "netsvc1", "netsvc2", "netsvc3", "netsvc4", "TE", "appqoe"),
 							},
@@ -217,7 +217,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"address": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("List of IPv4 address").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"address_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -225,7 +225,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"interface": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Tracking Service").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"interface_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -249,7 +249,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"prefix_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -257,11 +257,11 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Destination VPN to resolve the prefix").AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"service": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Service").AddStringEnumDescription("sig").AddDefaultValueDescription("sig").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("sig"),
 							},
@@ -276,7 +276,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"prefix_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -324,7 +324,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("IP Address").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"address_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -351,7 +351,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("IP Address").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"address_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -370,7 +370,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 									},
 									"tracker": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Static route tracker").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"tracker_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -389,7 +389,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"prefix_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -429,7 +429,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("IP Address").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"address_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -459,7 +459,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"prefix_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -467,7 +467,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Destination VPN to resolve the prefix").AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"interface": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("List of GRE Interfaces").String,
@@ -488,7 +488,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"prefix_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -496,7 +496,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Destination VPN to resolve the prefix").AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"interface": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("List of IPSEC Interfaces (Separated by commas)").String,
@@ -553,7 +553,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"prefix_entry": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"prefix_entry_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -616,7 +616,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"prefix_entry": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Prefix").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"prefix_entry_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -643,14 +643,14 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("NAT64 Pool name").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
 						},
 						"start_address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Starting IP address of NAT pool range").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"start_address_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -658,7 +658,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"end_address": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Ending IP address of NAT pool range").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"end_address_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -674,18 +674,18 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"leak_from_global": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Enable Route Leaking from Global VPN to this Service VPN").AddDefaultValueDescription("false").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"leak_from_global_protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select protocol for route leaking").AddStringEnumDescription("all", "static", "mobile", "connected", "rip", "odr").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("all", "static", "mobile", "connected", "rip", "odr"),
 							},
 						},
 						"leak_to_global": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Enable Route Leaking from this Service VPN to Global VPN").AddDefaultValueDescription("false").String,
-							Required:            true,
+							Optional:            true,
 						},
 					},
 				},
@@ -697,7 +697,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"name": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("NAT Pool Name, natpool1..31").AddIntegerRangeDescription(1, 31).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 31),
 							},
@@ -708,7 +708,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"prefix_length": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Ending IP address of NAT Pool Prefix Length").AddIntegerRangeDescription(1, 32).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 32),
 							},
@@ -719,7 +719,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"range_start": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Starting IP address of NAT pool range").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"range_start_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -727,7 +727,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"range_end": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Ending IP address of NAT pool range").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"range_end_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -743,7 +743,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction of NAT translation").AddStringEnumDescription("inside", "outside").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("inside", "outside"),
 							},
@@ -781,7 +781,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"source_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP address to be translated").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -789,7 +789,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"translate_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Statically translated source IP address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -797,7 +797,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"static_nat_direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction of static NAT translation").AddStringEnumDescription("inside", "outside").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("inside", "outside"),
 							},
@@ -827,7 +827,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"source_ip_subnet": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP Subnet to be translated").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_ip_subnet_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -835,7 +835,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"translate_ip_subnet": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Statically translated source IP Subnet").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_ip_subnet_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -843,7 +843,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"prefix_length": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Network Prefix Length").AddIntegerRangeDescription(1, 32).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 32),
 							},
@@ -854,7 +854,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"static_nat_direction": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Direction of static NAT translation").AddStringEnumDescription("inside", "outside").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("inside", "outside"),
 							},
@@ -892,7 +892,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"source_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source Port").AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_port_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -900,7 +900,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"translate_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Translate Port").AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_port_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -908,7 +908,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"source_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP address to be translated").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"source_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -916,7 +916,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"translate_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Statically translated source IP address").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"translate_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -924,7 +924,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Protocol").AddStringEnumDescription("tcp", "udp").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("tcp", "udp"),
 							},
@@ -943,7 +943,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable route leaking from Global VPN to this Service VPN").AddStringEnumDescription("static", "connected", "bgp", "ospf").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("static", "connected", "bgp", "ospf"),
 							},
@@ -955,7 +955,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"protocol_sub_type": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("").AddDefaultValueDescription("external").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"protocol_sub_type_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -972,7 +972,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"protocol": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable redistribution").AddStringEnumDescription("bgp", "eigrp", "ospf").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.OneOf("bgp", "eigrp", "ospf"),
 										},
@@ -998,7 +998,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"source_vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select a Source VPN where route leaks from").AddIntegerRangeDescription(1, 65530).AddDefaultValueDescription("1").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 65530),
 							},
@@ -1009,7 +1009,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable route leaking to current VPN").AddStringEnumDescription("static", "connected", "bgp", "ospf", "eigrp").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("static", "connected", "bgp", "ospf", "eigrp"),
 							},
@@ -1021,7 +1021,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"protocol_sub_type": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("").AddDefaultValueDescription("external").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"protocol_sub_type_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -1042,7 +1042,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"protocol": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable redistribution").AddStringEnumDescription("bgp", "eigrp", "ospf").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.OneOf("bgp", "eigrp", "ospf"),
 										},
@@ -1072,7 +1072,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable route leaking from this Service VPN to Global VPN").AddStringEnumDescription("static", "connected", "bgp", "eigrp", "ospf").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("static", "connected", "bgp", "eigrp", "ospf"),
 							},
@@ -1084,7 +1084,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"protocol_sub_type": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("").AddDefaultValueDescription("external").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"protocol_sub_type_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -1101,7 +1101,7 @@ func (r *CiscoVPNFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"protocol": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Select a Route Protocol to enable redistribution").AddStringEnumDescription("bgp", "ospf").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.OneOf("bgp", "ospf"),
 										},

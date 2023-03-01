@@ -87,7 +87,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 			},
 			"server_groups_priority_order": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("ServerGroups priority order").AddDefaultValueDescription("local").String,
-				Required:            true,
+				Optional:            true,
 				Validators: []validator.String{
 					stringvalidator.LengthBetween(1, 220),
 				},
@@ -99,7 +99,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the username").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 64),
 							},
@@ -110,14 +110,14 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"password": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the user password").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 32),
 							},
 						},
 						"secret": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the user scrypt password/hash").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 32),
 							},
@@ -140,7 +140,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"key_string": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the RSA key string").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.LengthBetween(1, 1024),
 										},
@@ -169,7 +169,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"group_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set Radius server Group Name").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -199,7 +199,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set IP address of Radius server").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"authentication_port": schema.Int64Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set Authentication port to use to connect to Radius server").AddIntegerRangeDescription(1, 65534).AddDefaultValueDescription("1812").String,
@@ -247,7 +247,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 									},
 									"key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the Radius server shared key").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.LengthBetween(1, 256),
 										},
@@ -294,7 +294,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"client_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Client IP").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"client_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -307,7 +307,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"vpn_id": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("VPN ID").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.LengthBetween(1, 32),
 										},
@@ -393,7 +393,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"group_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set TACACS server Group Name").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -423,7 +423,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set IP address of TACACS server").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"port": schema.Int64Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("TACACS Port").AddIntegerRangeDescription(1, 65535).AddDefaultValueDescription("49").String,
@@ -449,14 +449,14 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 									},
 									"key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the TACACS server shared key").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.LengthBetween(1, 256),
 										},
 									},
 									"secret_key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the TACACS server shared type 7 encrypted key").String,
-										Required:            true,
+										Optional:            true,
 										Validators: []validator.String{
 											stringvalidator.LengthBetween(1, 150),
 										},
@@ -485,14 +485,14 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Accounting Rule ID").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 32),
 							},
 						},
 						"method": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Accounting Method").AddStringEnumDescription("commands", "exec", "network", "system").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("commands", "exec", "network", "system"),
 							},
@@ -506,7 +506,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"start_stop": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Record start and stop without waiting").AddDefaultValueDescription("true").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"start_stop_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -515,7 +515,7 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"group": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Use Server-group").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 					},
 				},
@@ -543,21 +543,21 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Authorization Rule ID").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 32),
 							},
 						},
 						"method": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Method").AddStringEnumDescription("commands").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("commands"),
 							},
 						},
 						"privilege_level": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Privilege level when method is commands").AddStringEnumDescription("1", "15").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("1", "15"),
 							},
@@ -565,11 +565,11 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"group": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Use Server-group").String,
 							ElementType:         types.StringType,
-							Required:            true,
+							Optional:            true,
 						},
 						"authenticated": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Succeed if user has authenticated").AddDefaultValueDescription("false").String,
-							Required:            true,
+							Optional:            true,
 						},
 					},
 				},

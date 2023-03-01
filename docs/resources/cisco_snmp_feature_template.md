@@ -103,65 +103,51 @@ resource "sdwan_cisco_snmp_feature_template" "example" {
 <a id="nestedatt--communities"></a>
 ### Nested Schema for `communities`
 
-Required:
+Optional:
 
 - `authorization` (String) Configure access permissions
   - Choices: `read-only`
+- `authorization_variable` (String) Variable name
 - `name` (String) Set name of the SNMP community
 - `view` (String) Set name of the SNMP view
-
-Optional:
-
-- `authorization_variable` (String) Variable name
 - `view_variable` (String) Variable name
 
 
 <a id="nestedatt--groups"></a>
 ### Nested Schema for `groups`
 
-Required:
+Optional:
 
 - `name` (String) Name of the SNMP group
 - `security_level` (String) Configure security level
   - Choices: `no-auth-no-priv`, `auth-no-priv`, `auth-priv`
 - `view` (String) Name of the SNMP view
-
-Optional:
-
 - `view_variable` (String) Variable name
 
 
 <a id="nestedatt--trap_targets"></a>
 ### Nested Schema for `trap_targets`
 
-Required:
-
-- `community_name` (String) Set name of the SNMP community
-- `ip` (String) Set IPv4/IPv6 address of SNMP server
-- `source_interface` (String) Source interface for outgoing SNMP traps
-- `udp_port` (Number) Set UDP port number to connect to SNMP server
-  - Range: `1`-`65535`
-- `user` (String) Set name of the SNMP user
-- `vpn_id` (Number) Set VPN in which SNMP server is located
-  - Range: `0`-`65530`
-
 Optional:
 
+- `community_name` (String) Set name of the SNMP community
 - `community_name_variable` (String) Variable name
+- `ip` (String) Set IPv4/IPv6 address of SNMP server
 - `ip_variable` (String) Variable name
+- `source_interface` (String) Source interface for outgoing SNMP traps
 - `source_interface_variable` (String) Variable name
+- `udp_port` (Number) Set UDP port number to connect to SNMP server
+  - Range: `1`-`65535`
 - `udp_port_variable` (String) Variable name
+- `user` (String) Set name of the SNMP user
 - `user_variable` (String) Variable name
+- `vpn_id` (Number) Set VPN in which SNMP server is located
+  - Range: `0`-`65530`
 - `vpn_id_variable` (String) Variable name
 
 
 <a id="nestedatt--users"></a>
 ### Nested Schema for `users`
-
-Required:
-
-- `group` (String) Name of the SNMP group
-- `name` (String) Name of the SNMP user
 
 Optional:
 
@@ -170,7 +156,9 @@ Optional:
 - `authentication_protocol` (String) Configure authentication protocol
   - Choices: `md5`, `sha`
 - `authentication_protocol_variable` (String) Variable name
+- `group` (String) Name of the SNMP group
 - `group_variable` (String) Variable name
+- `name` (String) Name of the SNMP user
 - `privacy_password` (String) Specify privacy protocol password
 - `privacy_password_variable` (String) Variable name
 - `privacy_protocol` (String) Configure privacy protocol
@@ -181,26 +169,20 @@ Optional:
 <a id="nestedatt--views"></a>
 ### Nested Schema for `views`
 
-Required:
-
-- `name` (String) Set the name of the SNMP view
-
 Optional:
 
+- `name` (String) Set the name of the SNMP view
 - `object_identifiers` (Attributes List) Configure SNMP object identifier (see [below for nested schema](#nestedatt--views--object_identifiers))
 
 <a id="nestedatt--views--object_identifiers"></a>
 ### Nested Schema for `views.object_identifiers`
-
-Required:
-
-- `id` (String) Configure identifier of subtree of MIB objects
 
 Optional:
 
 - `exclude` (Boolean) Exclude the OID
   - Default value: `false`
 - `exclude_variable` (String) Variable name
+- `id` (String) Configure identifier of subtree of MIB objects
 - `id_variable` (String) Variable name
 
 ## Import

@@ -106,7 +106,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the name of the SNMP view").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -118,7 +118,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 								Attributes: map[string]schema.Attribute{
 									"id": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Configure identifier of subtree of MIB objects").String,
-										Required:            true,
+										Optional:            true,
 									},
 									"id_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -145,14 +145,14 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP community").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
 						},
 						"view": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP view").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"view_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -160,7 +160,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"authorization": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure access permissions").AddStringEnumDescription("read-only").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("read-only"),
 							},
@@ -179,21 +179,21 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of the SNMP group").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
 						},
 						"security_level": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure security level").AddStringEnumDescription("no-auth-no-priv", "auth-no-priv", "auth-priv").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("no-auth-no-priv", "auth-no-priv", "auth-priv"),
 							},
 						},
 						"view": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of the SNMP view").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -212,7 +212,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of the SNMP user").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -263,7 +263,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"group": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Name of the SNMP group").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -282,7 +282,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 					Attributes: map[string]schema.Attribute{
 						"vpn_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set VPN in which SNMP server is located").AddIntegerRangeDescription(0, 65530).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 65530),
 							},
@@ -293,7 +293,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set IPv4/IPv6 address of SNMP server").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -301,7 +301,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"udp_port": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set UDP port number to connect to SNMP server").AddIntegerRangeDescription(1, 65535).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 65535),
 							},
@@ -312,7 +312,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"community_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP community").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"community_name_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -320,7 +320,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"user": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP user").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -331,7 +331,7 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"source_interface": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source interface for outgoing SNMP traps").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},

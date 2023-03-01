@@ -122,8 +122,6 @@ resource "sdwan_cedge_aaa_feature_template" "example" {
 - `device_types` (List of String) List of supported device types
   - Choices: `vedge-C8000V`, `vedge-C8300-1N1S-4T2X`, `vedge-C8300-1N1S-6T`, `vedge-C8300-2N2S-6T`, `vedge-C8300-2N2S-4T2X`, `vedge-C8500-12X4QC`, `vedge-C8500-12X`, `vedge-C8500-20X6C`, `vedge-C8500L-8S4X`, `vedge-C8200-1N-4T`, `vedge-C8200L-1N-4T`
 - `name` (String) The name of the feature template
-- `server_groups_priority_order` (String) ServerGroups priority order
-  - Default value: `local`
 
 ### Optional
 
@@ -160,6 +158,8 @@ resource "sdwan_cedge_aaa_feature_template" "example" {
 - `radius_dynamic_author_server_key_variable` (String) Variable name
 - `radius_server_groups` (Attributes List) Configure the Radius serverGroup (see [below for nested schema](#nestedatt--radius_server_groups))
 - `radius_trustsec_group` (String) RADIUS trustsec group
+- `server_groups_priority_order` (String) ServerGroups priority order
+  - Default value: `local`
 - `tacacs_server_groups` (Attributes List) Configure the TACACS serverGroup (see [below for nested schema](#nestedatt--tacacs_server_groups))
 - `users` (Attributes List) Create local login account (see [below for nested schema](#nestedatt--users))
 
@@ -171,26 +171,23 @@ resource "sdwan_cedge_aaa_feature_template" "example" {
 <a id="nestedatt--accounting_rules"></a>
 ### Nested Schema for `accounting_rules`
 
-Required:
+Optional:
 
 - `group` (List of String) Use Server-group
 - `method` (String) Configure Accounting Method
   - Choices: `commands`, `exec`, `network`, `system`
 - `name` (String) Configure Accounting Rule ID
-- `start_stop` (Boolean) Record start and stop without waiting
-  - Default value: `true`
-
-Optional:
-
 - `privilege_level` (String) Privilege level when method is commands
   - Choices: `1`, `15`
+- `start_stop` (Boolean) Record start and stop without waiting
+  - Default value: `true`
 - `start_stop_variable` (String) Variable name
 
 
 <a id="nestedatt--authorization_rules"></a>
 ### Nested Schema for `authorization_rules`
 
-Required:
+Optional:
 
 - `authenticated` (Boolean) Succeed if user has authenticated
   - Default value: `false`
@@ -205,26 +202,20 @@ Required:
 <a id="nestedatt--radius_clients"></a>
 ### Nested Schema for `radius_clients`
 
-Required:
-
-- `client_ip` (String) Client IP
-
 Optional:
 
+- `client_ip` (String) Client IP
 - `client_ip_variable` (String) Variable name
 - `von_configurations` (Attributes List) VPN configuration (see [below for nested schema](#nestedatt--radius_clients--von_configurations))
 
 <a id="nestedatt--radius_clients--von_configurations"></a>
 ### Nested Schema for `radius_clients.von_configurations`
 
-Required:
-
-- `vpn_id` (String) VPN ID
-
 Optional:
 
 - `server_key` (String) Specify a RADIUS client server-key
 - `server_key_variable` (String) Variable name
+- `vpn_id` (String) VPN ID
 - `vpn_id_variable` (String) Variable name
 
 
@@ -232,12 +223,9 @@ Optional:
 <a id="nestedatt--radius_server_groups"></a>
 ### Nested Schema for `radius_server_groups`
 
-Required:
-
-- `group_name` (String) Set Radius server Group Name
-
 Optional:
 
+- `group_name` (String) Set Radius server Group Name
 - `servers` (Attributes List) Configure the Radius server (see [below for nested schema](#nestedatt--radius_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach Radius server
 - `source_interface_variable` (String) Variable name
@@ -248,23 +236,20 @@ Optional:
 <a id="nestedatt--radius_server_groups--servers"></a>
 ### Nested Schema for `radius_server_groups.servers`
 
-Required:
-
-- `address` (String) Set IP address of Radius server
-- `key` (String) Set the Radius server shared key
-
 Optional:
 
 - `accounting_port` (Number) Set Accounting port to use to connect to Radius server
   - Range: `1`-`65534`
   - Default value: `1813`
 - `accounting_port_variable` (String) Variable name
+- `address` (String) Set IP address of Radius server
 - `authentication_port` (Number) Set Authentication port to use to connect to Radius server
   - Range: `1`-`65534`
   - Default value: `1812`
 - `authentication_port_variable` (String) Variable name
 - `encryption_type` (String) Type of encyption. To be used for type 6
   - Choices: `6`, `7`
+- `key` (String) Set the Radius server shared key
 - `key_type` (String) key type
   - Choices: `key`, `pac`
   - Default value: `key`
@@ -285,12 +270,9 @@ Optional:
 <a id="nestedatt--tacacs_server_groups"></a>
 ### Nested Schema for `tacacs_server_groups`
 
-Required:
-
-- `group_name` (String) Set TACACS server Group Name
-
 Optional:
 
+- `group_name` (String) Set TACACS server Group Name
 - `servers` (Attributes List) Configure the TACACS server (see [below for nested schema](#nestedatt--tacacs_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach TACACS server
 - `source_interface_variable` (String) Variable name
@@ -301,20 +283,17 @@ Optional:
 <a id="nestedatt--tacacs_server_groups--servers"></a>
 ### Nested Schema for `tacacs_server_groups.servers`
 
-Required:
-
-- `address` (String) Set IP address of TACACS server
-- `key` (String) Set the TACACS server shared key
-- `secret_key` (String) Set the TACACS server shared type 7 encrypted key
-
 Optional:
 
+- `address` (String) Set IP address of TACACS server
 - `encryption_type` (String) Type of encyption. To be used for type 6
   - Choices: `6`, `7`
+- `key` (String) Set the TACACS server shared key
 - `port` (Number) TACACS Port
   - Range: `1`-`65535`
   - Default value: `49`
 - `port_variable` (String) Variable name
+- `secret_key` (String) Set the TACACS server shared type 7 encrypted key
 - `secret_key_variable` (String) Variable name
 - `timeout` (Number) Configure how long to wait for replies from the TACACS server
   - Range: `1`-`1000`
@@ -326,30 +305,24 @@ Optional:
 <a id="nestedatt--users"></a>
 ### Nested Schema for `users`
 
-Required:
-
-- `name` (String) Set the username
-- `password` (String) Set the user password
-- `secret` (String) Set the user scrypt password/hash
-
 Optional:
 
+- `name` (String) Set the username
 - `name_variable` (String) Variable name
+- `password` (String) Set the user password
 - `privilege_level` (String) Set Privilege Level for this user
   - Choices: `1`, `15`
   - Default value: `15`
 - `privilege_level_variable` (String) Variable name
+- `secret` (String) Set the user scrypt password/hash
 - `ssh_pubkeys` (Attributes List) List of RSA public-keys per user (see [below for nested schema](#nestedatt--users--ssh_pubkeys))
 
 <a id="nestedatt--users--ssh_pubkeys"></a>
 ### Nested Schema for `users.ssh_pubkeys`
 
-Required:
-
-- `key_string` (String) Set the RSA key string
-
 Optional:
 
+- `key_string` (String) Set the RSA key string
 - `key_type` (String) Only RSA is supported
 - `key_type_variable` (String) Variable name
 

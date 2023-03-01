@@ -90,10 +90,6 @@ resource "sdwan_cisco_logging_feature_template" "example" {
 <a id="nestedatt--ipv4_servers"></a>
 ### Nested Schema for `ipv4_servers`
 
-Required:
-
-- `hostname_ip` (String) Set hostname or IPv4 address of server
-
 Optional:
 
 - `custom_profile` (Boolean) Define custom profile
@@ -102,6 +98,7 @@ Optional:
 - `enable_tls` (Boolean) Enable TLS
   - Default value: `false`
 - `enable_tls_variable` (String) Variable name
+- `hostname_ip` (String) Set hostname or IPv4 address of server
 - `hostname_ip_variable` (String) Variable name
 - `logging_level` (String) Set logging level for messages logged to server
   - Choices: `information`, `debugging`, `notice`, `warn`, `error`, `critical`, `alert`, `emergency`
@@ -120,10 +117,6 @@ Optional:
 <a id="nestedatt--ipv6_servers"></a>
 ### Nested Schema for `ipv6_servers`
 
-Required:
-
-- `hostname_ip` (String) Set IPv6 hostname or IPv6 address of server
-
 Optional:
 
 - `custom_profile` (Boolean) Define custom profile
@@ -132,6 +125,7 @@ Optional:
 - `enable_tls` (Boolean) Enable TLS
   - Default value: `false`
 - `enable_tls_variable` (String) Variable name
+- `hostname_ip` (String) Set IPv6 hostname or IPv6 address of server
 - `hostname_ip_variable` (String) Variable name
 - `logging_level` (String) Set logging level for messages logged to server
   - Choices: `information`, `debugging`, `notification`, `warn`, `error`, `critical`, `alert`, `emergency`
@@ -150,10 +144,6 @@ Optional:
 <a id="nestedatt--tls_profiles"></a>
 ### Nested Schema for `tls_profiles`
 
-Required:
-
-- `name` (String) Specify the name of the TLS profile
-
 Optional:
 
 - `authentication_type` (String) Authentication Type
@@ -161,6 +151,7 @@ Optional:
 - `ciphersuite_list` (String) Syslog secure server ciphersuites
   - Choices: `aes-128-cbc-sha`, `aes-256-cbc-sha`, `dhe-aes-cbc-sha2`, `dhe-aes-gcm-sha2`, `ecdhe-ecdsa-aes-gcm-sha2`, `ecdhe-rsa-aes-cbc-sha2`, `ecdhe-rsa-aes-gcm-sha2`, `rsa-aes-cbc-sha2`, `rsa-aes-gcm-sha2`
 - `ciphersuite_list_variable` (String) Variable name
+- `name` (String) Specify the name of the TLS profile
 - `name_variable` (String) Variable name
 - `version` (String) TLS Version
   - Choices: `TLSv1.1`, `TLSv1.2`

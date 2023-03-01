@@ -88,11 +88,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 				{{- if eq .Type "ListString"}}
 				ElementType:         types.StringType,
 				{{- end}}
-				{{- if or (eq .Id true) (eq .Mandatory true)}}
-				Required:            true,
-				{{- else}}
 				Optional:            true,
-				{{- end}}
 				{{- if len .EnumValues}}
 				Validators: []validator.String{
 					stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),
@@ -137,11 +133,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 							{{- if eq .Type "ListString"}}
 							ElementType:         types.StringType,
 							{{- end}}
-							{{- if eq .Mandatory true}}
-							Required:            true,
-							{{- else}}
 							Optional:            true,
-							{{- end}}
 							{{- if len .EnumValues}}
 							Validators: []validator.String{
 								stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),
@@ -186,11 +178,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 										{{- if eq .Type "ListString"}}
 										ElementType:         types.StringType,
 										{{- end}}
-										{{- if eq .Mandatory true}}
-										Required:            true,
-										{{- else}}
 										Optional:            true,
-										{{- end}}
 										{{- if len .EnumValues}}
 										Validators: []validator.String{
 											stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),

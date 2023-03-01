@@ -135,14 +135,14 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the name of the Keychain").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(0, 236),
 							},
 						},
 						"key_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the Key ID").AddIntegerRangeDescription(0, 2147483647).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 2147483647),
 							},
@@ -157,15 +157,15 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select the Key ID").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"chain_name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Select the chain name").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"send_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the Send ID").AddIntegerRangeDescription(0, 255).AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 255),
 							},
@@ -176,7 +176,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"receive_id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the Receiver ID").AddIntegerRangeDescription(0, 255).AddDefaultValueDescription("0").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 255),
 							},
@@ -187,14 +187,14 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"crypto_algorithm": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Crypto Algorithm").AddStringEnumDescription("aes-128-cmac", "hmac-sha-1", "hmac-sha-256").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("aes-128-cmac", "hmac-sha-1", "hmac-sha-256"),
 							},
 						},
 						"key_string": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the Key String").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"key_string_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -210,7 +210,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"send_lifetime_start_time": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime start time").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"send_lifetime_end_time_format": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").AddStringEnumDescription("infinite", "duration", "end-epoch").AddDefaultValueDescription("infinite").String,
@@ -221,7 +221,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"send_lifetime_duration": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Send lifetime Duration").AddIntegerRangeDescription(1, 2147483646).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 2147483646),
 							},
@@ -232,7 +232,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"send_lifetime_end_time": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"send_lifetime_infinite": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").String,
@@ -252,7 +252,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"accept_lifetime_start_time": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime start time").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"accept_lifetime_end_time_format": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").AddStringEnumDescription("infinite", "duration", "end-epoch").AddDefaultValueDescription("infinite").String,
@@ -263,7 +263,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"accept_lifetime_duration": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Accept lifetime Duration").AddIntegerRangeDescription(1, 2147483646).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 2147483646),
 							},
@@ -274,7 +274,7 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"accept_lifetime_end_time": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"accept_lifetime_infinite": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Configure Key lifetime end time").String,

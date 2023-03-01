@@ -115,7 +115,7 @@ func (r *CiscoNTPFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"id": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("MD5 authentication key ID").AddIntegerRangeDescription(1, 65535).String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(1, 65535),
 							},
@@ -126,7 +126,7 @@ func (r *CiscoNTPFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"value": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Enter cleartext or AES-encrypted MD5 authentication key").String,
-							Required:            true,
+							Optional:            true,
 							Validators: []validator.String{
 								stringvalidator.LengthBetween(1, 32),
 							},
@@ -145,7 +145,7 @@ func (r *CiscoNTPFeatureTemplateResource) Schema(ctx context.Context, req resour
 					Attributes: map[string]schema.Attribute{
 						"hostname_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set hostname or IP address of server").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"hostname_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,

@@ -113,22 +113,19 @@ resource "sdwan_cisco_omp_feature_template" "example" {
 <a id="nestedatt--advertise_ipv4_routes"></a>
 ### Nested Schema for `advertise_ipv4_routes`
 
-Required:
-
-- `protocol` (String) Set routes to advertise
-  - Choices: `bgp`, `ospf`, `ospfv3`, `connected`, `static`, `eigrp`, `lisp`, `isis`
-
 Optional:
 
 - `advertise_external_ospf` (String) Advertise OSPF external routes
   - Choices: `external`
 - `advertise_external_ospf_variable` (String) Variable name
+- `protocol` (String) Set routes to advertise
+  - Choices: `bgp`, `ospf`, `ospfv3`, `connected`, `static`, `eigrp`, `lisp`, `isis`
 
 
 <a id="nestedatt--advertise_ipv6_routes"></a>
 ### Nested Schema for `advertise_ipv6_routes`
 
-Required:
+Optional:
 
 - `protocol` (String) Set routes to advertise
   - Choices: `bgp`, `ospf`, `connected`, `static`, `eigrp`, `lisp`, `isis`

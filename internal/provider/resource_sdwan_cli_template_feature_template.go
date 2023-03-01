@@ -68,7 +68,7 @@ func (r *CLITemplateFeatureTemplateResource) Schema(ctx context.Context, req res
 			},
 			"cli_config": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Cli config").String,
-				Required:            true,
+				Optional:            true,
 			},
 		},
 	}

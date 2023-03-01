@@ -68,13 +68,10 @@ resource "sdwan_cisco_bfd_feature_template" "example" {
 <a id="nestedatt--colors"></a>
 ### Nested Schema for `colors`
 
-Required:
+Optional:
 
 - `color` (String) Set color that identifies the WAN transport tunnel
   - Choices: `default`, `mpls`, `metro-ethernet`, `biz-internet`, `public-internet`, `lte`, `3g`, `red`, `green`, `blue`, `gold`, `silver`, `bronze`, `custom1`, `custom2`, `custom3`, `private1`, `private2`, `private3`, `private4`, `private5`, `private6`
-
-Optional:
-
 - `color_variable` (String) Variable name
 - `dscp` (Number) Set BFD Default DSCP value for tloc color
   - Range: `0`-`63`

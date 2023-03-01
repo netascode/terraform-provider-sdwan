@@ -106,7 +106,7 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify the name of the TLS profile").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"name_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -151,7 +151,7 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 					Attributes: map[string]schema.Attribute{
 						"hostname_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set hostname or IPv4 address of server").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"hostname_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -224,7 +224,7 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 					Attributes: map[string]schema.Attribute{
 						"hostname_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set IPv6 hostname or IPv6 address of server").String,
-							Required:            true,
+							Optional:            true,
 						},
 						"hostname_ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
