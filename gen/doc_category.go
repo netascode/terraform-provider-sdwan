@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	definitionsPath = "./gen/definitions/feature_templates/"
+	featureTemplateDefinitionsPath = "./gen/definitions/feature_templates/"
+	policyObjectDefinitionsPath    = "./gen/definitions/policy_objects/"
 )
 
 type YamlConfig struct {
@@ -39,12 +40,14 @@ func SnakeCase(s string) string {
 }
 
 func main() {
-	items, _ := ioutil.ReadDir(definitionsPath)
-	configs := make([]YamlConfig, len(items))
+	featureTemplateFiles, _ := ioutil.ReadDir(featureTemplateDefinitionsPath)
+	featureTemplateConfigs := make([]YamlConfig, len(featureTemplateFiles))
+	policyObjectFiles, _ := ioutil.ReadDir(policyObjectDefinitionsPath)
+	policyObjectConfigs := make([]YamlConfig, len(policyObjectFiles))
 
-	// Load configs
-	for i, filename := range items {
-		yamlFile, err := ioutil.ReadFile(filepath.Join(definitionsPath, filename.Name()))
+	// Load feature template configs
+	for i, filename := range featureTemplateFiles {
+		yamlFile, err := ioutil.ReadFile(filepath.Join(featureTemplateDefinitionsPath, filename.Name()))
 		if err != nil {
 			log.Fatalf("Error reading file: %v", err)
 		}
@@ -54,13 +57,13 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error parsing yaml: %v", err)
 		}
-		configs[i] = config
+		featureTemplateConfigs[i] = config
 	}
 
 	// Update feature template doc category
-	for i := range configs {
+	for i := range featureTemplateConfigs {
 		for _, path := range docPaths {
-			filename := path + SnakeCase(configs[i].Name) + "_feature_template.md"
+			filename := path + SnakeCase(featureTemplateConfigs[i].Name) + "_feature_template.md"
 			content, err := ioutil.ReadFile(filename)
 			if err != nil {
 				log.Fatalf("Error opening documentation: %v", err)
@@ -68,6 +71,37 @@ func main() {
 
 			s := string(content)
 			s = strings.ReplaceAll(s, `subcategory: ""`, `subcategory: "Feature Templates"`)
+
+			ioutil.WriteFile(filename, []byte(s), 0644)
+		}
+	}
+
+	// Load policy object configs
+	for i, filename := range policyObjectFiles {
+		yamlFile, err := ioutil.ReadFile(filepath.Join(policyObjectDefinitionsPath, filename.Name()))
+		if err != nil {
+			log.Fatalf("Error reading file: %v", err)
+		}
+
+		config := YamlConfig{}
+		err = yaml.Unmarshal(yamlFile, &config)
+		if err != nil {
+			log.Fatalf("Error parsing yaml: %v", err)
+		}
+		policyObjectConfigs[i] = config
+	}
+
+	// Update policy object doc category
+	for i := range policyObjectConfigs {
+		for _, path := range docPaths {
+			filename := path + SnakeCase(policyObjectConfigs[i].Name) + "_policy_object.md"
+			content, err := ioutil.ReadFile(filename)
+			if err != nil {
+				log.Fatalf("Error opening documentation: %v", err)
+			}
+
+			s := string(content)
+			s = strings.ReplaceAll(s, `subcategory: ""`, `subcategory: "Policy Objects"`)
 
 			ioutil.WriteFile(filename, []byte(s), 0644)
 		}

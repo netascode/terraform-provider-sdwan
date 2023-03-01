@@ -1,0 +1,13 @@
+---
+name: VPN List
+type: vpn
+attributes:
+  - model_name: entries
+    type: List
+    description: List of entries
+    attributes:
+      - model_name: vpn
+        tf_name: vpn_id
+        type: Int64
+        description: VPN ID
+        example: 1

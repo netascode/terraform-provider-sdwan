@@ -230,6 +230,7 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		NewCiscoVPNFeatureTemplateResource,
 		NewCiscoVPNInterfaceFeatureTemplateResource,
 		NewCLITemplateFeatureTemplateResource,
+		NewVPNListPolicyObjectResource,
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
 		NewAttachFeatureDeviceTemplateResource,
@@ -252,6 +253,7 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		NewCiscoVPNFeatureTemplateDataSource,
 		NewCiscoVPNInterfaceFeatureTemplateDataSource,
 		NewCLITemplateFeatureTemplateDataSource,
+		NewVPNListPolicyObjectDataSource,
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,
 	}

@@ -19,13 +19,14 @@ import (
 )
 
 const (
-	definitionsPath   = "./gen/definitions/feature_templates/"
-	modelsPath        = "./gen/models/feature_templates/"
-	providerTemplate  = "./gen/templates/provider.go"
-	providerLocation  = "./internal/provider/provider.go"
-	changelogTemplate = "./gen/templates/changelog.md.tmpl"
-	changelogLocation = "./templates/guides/changelog.md.tmpl"
-	changelogOriginal = "./CHANGELOG.md"
+	featureTemplateDefinitionsPath = "./gen/definitions/feature_templates/"
+	featureTemplateModelsPath      = "./gen/models/feature_templates/"
+	policyObjectDefinitionsPath    = "./gen/definitions/policy_objects/"
+	providerTemplate               = "./gen/templates/provider.go"
+	providerLocation               = "./internal/provider/provider.go"
+	changelogTemplate              = "./gen/templates/changelog.md.tmpl"
+	changelogLocation              = "./templates/guides/changelog.md.tmpl"
+	changelogOriginal              = "./CHANGELOG.md"
 )
 
 type t struct {
@@ -34,7 +35,7 @@ type t struct {
 	suffix string
 }
 
-var templates = []t{
+var featureTemplateTemplates = []t{
 	{
 		path:   "./gen/templates/feature_templates/model.go",
 		prefix: "./internal/provider/model_sdwan_",
@@ -77,9 +78,53 @@ var templates = []t{
 	},
 }
 
+var policyObjectTemplates = []t{
+	{
+		path:   "./gen/templates/policy_objects/model.go",
+		prefix: "./internal/provider/model_sdwan_",
+		suffix: "_policy_object.go",
+	},
+	{
+		path:   "./gen/templates/policy_objects/data_source.go",
+		prefix: "./internal/provider/data_source_sdwan_",
+		suffix: "_policy_object.go",
+	},
+	{
+		path:   "./gen/templates/policy_objects/data_source_test.go",
+		prefix: "./internal/provider/data_source_sdwan_",
+		suffix: "_policy_object_test.go",
+	},
+	{
+		path:   "./gen/templates/policy_objects/resource.go",
+		prefix: "./internal/provider/resource_sdwan_",
+		suffix: "_policy_object.go",
+	},
+	{
+		path:   "./gen/templates/policy_objects/resource_test.go",
+		prefix: "./internal/provider/resource_sdwan_",
+		suffix: "_policy_object_test.go",
+	},
+	{
+		path:   "./gen/templates/policy_objects/data-source.tf",
+		prefix: "./examples/data-sources/sdwan_",
+		suffix: "_policy_object/data-source.tf",
+	},
+	{
+		path:   "./gen/templates/policy_objects/resource.tf",
+		prefix: "./examples/resources/sdwan_",
+		suffix: "_policy_object/resource.tf",
+	},
+	{
+		path:   "./gen/templates/policy_objects/import.sh",
+		prefix: "./examples/resources/sdwan_",
+		suffix: "_policy_object/import.sh",
+	},
+}
+
 type YamlConfig struct {
 	Name           string                `yaml:"name"`
 	Model          string                `yaml:"model"`
+	Type           string                `yaml:"type"`
 	MinimumVersion string                `yaml:"minimum_version"`
 	DsDescription  string                `yaml:"ds_description"`
 	ResDescription string                `yaml:"res_description"`
@@ -171,8 +216,7 @@ var functions = template.FuncMap{
 	"sprintf":   fmt.Sprintf,
 }
 
-func parseAttribute(attr *YamlConfigAttribute, model gjson.Result) {
-
+func parseFeatureTemplateAttribute(attr *YamlConfigAttribute, model gjson.Result) {
 	var r gjson.Result
 	if model.Get("fields").Exists() {
 		r = model.Get("fields.#(key==\"" + attr.ModelName + "\")#")
@@ -297,16 +341,16 @@ func parseAttribute(attr *YamlConfigAttribute, model gjson.Result) {
 	if r.Get("objectType").String() == "tree" && len(attr.Attributes) > 0 {
 		attr.Type = "List"
 		for a := range attr.Attributes {
-			parseAttribute(&attr.Attributes[a], r)
+			parseFeatureTemplateAttribute(&attr.Attributes[a], r)
 		}
 	}
 }
 
-func augmentConfig(config *YamlConfig) {
+func augmentFeatureTemplateConfig(config *YamlConfig) {
 	if config.Model == "" {
 		config.Model = SnakeCase(config.Name)
 	}
-	modelPath := modelsPath + config.Model + ".json"
+	modelPath := featureTemplateModelsPath + config.Model + ".json"
 
 	modelBytes, err := os.ReadFile(modelPath)
 	if err != nil {
@@ -316,7 +360,7 @@ func augmentConfig(config *YamlConfig) {
 	model := gjson.ParseBytes(modelBytes)
 
 	for ia := range config.Attributes {
-		parseAttribute(&config.Attributes[ia], model)
+		parseFeatureTemplateAttribute(&config.Attributes[ia], model)
 	}
 
 	if config.DsDescription == "" {
@@ -324,6 +368,29 @@ func augmentConfig(config *YamlConfig) {
 	}
 	if config.ResDescription == "" {
 		config.ResDescription = fmt.Sprintf("This resource can manage a %s feature template.", config.Name)
+	}
+}
+
+func augmentPolicyObjectAttribute(attr *YamlConfigAttribute) {
+	if attr.TfName == "" {
+		attr.TfName = SnakeCase(attr.ModelName)
+	}
+	if attr.Type == "List" {
+		for a := range attr.Attributes {
+			augmentPolicyObjectAttribute(&attr.Attributes[a])
+		}
+	}
+}
+
+func augmentPolicyObjectConfig(config *YamlConfig) {
+	for ia := range config.Attributes {
+		augmentPolicyObjectAttribute(&config.Attributes[ia])
+	}
+	if config.DsDescription == "" {
+		config.DsDescription = fmt.Sprintf("This data source can read the %s policy object.", config.Name)
+	}
+	if config.ResDescription == "" {
+		config.ResDescription = fmt.Sprintf("This resource can manage a %s policy object.", config.Name)
 	}
 }
 
@@ -367,12 +434,15 @@ func renderTemplate(templatePath, outputPath string, config interface{}) {
 }
 
 func main() {
-	items, _ := ioutil.ReadDir(definitionsPath)
-	configs := make([]YamlConfig, len(items))
+	featureTemplateFiles, _ := ioutil.ReadDir(featureTemplateDefinitionsPath)
+	featureTemplateConfigs := make([]YamlConfig, len(featureTemplateFiles))
+	providerConfig := make(map[string][]string)
+	providerConfig["FeatureTemplates"] = make([]string, 0)
+	providerConfig["PolicyObjects"] = make([]string, 0)
 
-	// Load configs
-	for i, filename := range items {
-		yamlFile, err := os.ReadFile(filepath.Join(definitionsPath, filename.Name()))
+	// Load feature template configs
+	for i, filename := range featureTemplateFiles {
+		yamlFile, err := os.ReadFile(filepath.Join(featureTemplateDefinitionsPath, filename.Name()))
 		if err != nil {
 			log.Fatalf("Error reading file: %v", err)
 		}
@@ -382,21 +452,51 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error parsing yaml: %v", err)
 		}
-		configs[i] = config
+		featureTemplateConfigs[i] = config
 	}
 
-	for i := range configs {
-		// Augment config by model data
-		augmentConfig(&configs[i])
+	for i := range featureTemplateConfigs {
+		// Augment feature template config by model data
+		augmentFeatureTemplateConfig(&featureTemplateConfigs[i])
 
 		// Iterate over templates and render files
-		for _, t := range templates {
-			renderTemplate(t.path, t.prefix+SnakeCase(configs[i].Name)+t.suffix, configs[i])
+		for _, t := range featureTemplateTemplates {
+			renderTemplate(t.path, t.prefix+SnakeCase(featureTemplateConfigs[i].Name)+t.suffix, featureTemplateConfigs[i])
 		}
+		providerConfig["FeatureTemplates"] = append(providerConfig["FeatureTemplates"], featureTemplateConfigs[i].Name)
+	}
+
+	policyObjectFiles, _ := ioutil.ReadDir(policyObjectDefinitionsPath)
+	policyObjectConfigs := make([]YamlConfig, len(policyObjectFiles))
+
+	// Load policy object configs
+	for i, filename := range policyObjectFiles {
+		yamlFile, err := os.ReadFile(filepath.Join(policyObjectDefinitionsPath, filename.Name()))
+		if err != nil {
+			log.Fatalf("Error reading file: %v", err)
+		}
+
+		config := YamlConfig{}
+		err = yaml.Unmarshal(yamlFile, &config)
+		if err != nil {
+			log.Fatalf("Error parsing yaml: %v", err)
+		}
+		policyObjectConfigs[i] = config
+	}
+
+	for i := range policyObjectConfigs {
+		// Augment policy object config
+		augmentPolicyObjectConfig(&policyObjectConfigs[i])
+
+		// Iterate over templates and render files
+		for _, t := range policyObjectTemplates {
+			renderTemplate(t.path, t.prefix+SnakeCase(policyObjectConfigs[i].Name)+t.suffix, policyObjectConfigs[i])
+		}
+		providerConfig["PolicyObjects"] = append(providerConfig["PolicyObjects"], policyObjectConfigs[i].Name)
 	}
 
 	// render provider.go
-	renderTemplate(providerTemplate, providerLocation, configs)
+	renderTemplate(providerTemplate, providerLocation, providerConfig)
 
 	changelog, err := os.ReadFile(changelogOriginal)
 	if err != nil {

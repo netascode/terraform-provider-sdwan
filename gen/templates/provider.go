@@ -217,8 +217,11 @@ func (p *SdwanProvider) Configure(ctx context.Context, req provider.ConfigureReq
 
 func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
-		{{- range .}}
-		New{{camelCase .Name}}FeatureTemplateResource,
+		{{- range .FeatureTemplates}}
+		New{{camelCase .}}FeatureTemplateResource,
+		{{- end}}
+		{{- range .PolicyObjects}}
+		New{{camelCase .}}PolicyObjectResource,
 		{{- end}}
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
@@ -228,8 +231,11 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 
 func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		{{- range .}}
-		New{{camelCase .Name}}FeatureTemplateDataSource,
+		{{- range .FeatureTemplates}}
+		New{{camelCase .}}FeatureTemplateDataSource,
+		{{- end}}
+		{{- range .PolicyObjects}}
+		New{{camelCase .}}PolicyObjectDataSource,
 		{{- end}}
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,
