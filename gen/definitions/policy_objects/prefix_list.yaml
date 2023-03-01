@@ -1,0 +1,21 @@
+---
+name: Prefix List
+type: prefix
+attributes:
+  - model_name: entries
+    type: List
+    description: List of entries
+    attributes:
+      - model_name: ipPrefix
+        tf_name: prefix
+        type: String
+        description: IP prefix list entry e.g., `10.0.0.0/12`
+        example: 10.0.0.0/12
+      - model_name: le
+        type: Int64
+        description: Lesser equal
+        example: 32
+      - model_name: ge
+        type: Int64
+        description: Greater equal
+        example: 24

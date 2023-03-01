@@ -13,6 +13,7 @@ description: |-
 - Fix mandatory feature template attributes when using device-specific variables
 - Add `sdwan_attach_feature_device_template` resource
 - Add `sdwan_vpn_list_policy_object` resource and data source
+- Add `sdwan_prefix_list_policy_object` resource and data source
 
 ## 0.1.0
 
