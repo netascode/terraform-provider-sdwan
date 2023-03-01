@@ -22,8 +22,9 @@ type YamlConfig struct {
 var docPaths = []string{"./docs/data-sources/", "./docs/resources/"}
 
 var extraDocs = map[string]string{
-	"cli_device_template":     "Device Templates",
-	"feature_device_template": "Device Templates",
+	"cli_device_template":            "Device Templates",
+	"feature_device_template":        "Device Templates",
+	"attach_feature_device_template": "Device Templates",
 }
 
 func SnakeCase(s string) string {
@@ -77,14 +78,12 @@ func main() {
 		for _, path := range docPaths {
 			filename := path + doc + ".md"
 			content, err := ioutil.ReadFile(filename)
-			if err != nil {
-				log.Fatalf("Error opening documentation: %v", err)
+			if err == nil {
+				s := string(content)
+				s = strings.ReplaceAll(s, `subcategory: ""`, `subcategory: "`+cat+`"`)
+
+				ioutil.WriteFile(filename, []byte(s), 0644)
 			}
-
-			s := string(content)
-			s = strings.ReplaceAll(s, `subcategory: ""`, `subcategory: "`+cat+`"`)
-
-			ioutil.WriteFile(filename, []byte(s), 0644)
 		}
 	}
 }

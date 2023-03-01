@@ -232,6 +232,7 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		NewCLITemplateFeatureTemplateResource,
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
+		NewAttachFeatureDeviceTemplateResource,
 	}
 }
 
