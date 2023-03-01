@@ -9,29 +9,29 @@ import (
 )
 
 type FeatureDeviceTemplate struct {
-	Id               types.String      `tfsdk:"id"`
-	Name             types.String      `tfsdk:"name"`
-	Description      types.String      `tfsdk:"description"`
-	DeviceType       types.String      `tfsdk:"device_type"`
-	DeviceRole       types.String      `tfsdk:"device_role"`
-	PolicyId         types.String      `tfsdk:"policy_id"`
-	SecurityPolicyId types.String      `tfsdk:"security_policy_id"`
-	GeneralTemplates []GeneralTemplate `tfsdk:"general_templates"`
+	Id               types.String                           `tfsdk:"id"`
+	Name             types.String                           `tfsdk:"name"`
+	Description      types.String                           `tfsdk:"description"`
+	DeviceType       types.String                           `tfsdk:"device_type"`
+	DeviceRole       types.String                           `tfsdk:"device_role"`
+	PolicyId         types.String                           `tfsdk:"policy_id"`
+	SecurityPolicyId types.String                           `tfsdk:"security_policy_id"`
+	GeneralTemplates []FeatureDeviceTemplateGeneralTemplate `tfsdk:"general_templates"`
 }
 
-type GeneralTemplate struct {
-	Id           types.String  `tfsdk:"id"`
-	Type         types.String  `tfsdk:"type"`
-	SubTemplates []SubTemplate `tfsdk:"sub_templates"`
+type FeatureDeviceTemplateGeneralTemplate struct {
+	Id           types.String                       `tfsdk:"id"`
+	Type         types.String                       `tfsdk:"type"`
+	SubTemplates []FeatureDeviceTemplateSubTemplate `tfsdk:"sub_templates"`
 }
 
-type SubTemplate struct {
-	Id           types.String     `tfsdk:"id"`
-	Type         types.String     `tfsdk:"type"`
-	SubTemplates []SubSubTemplate `tfsdk:"sub_templates"`
+type FeatureDeviceTemplateSubTemplate struct {
+	Id           types.String                          `tfsdk:"id"`
+	Type         types.String                          `tfsdk:"type"`
+	SubTemplates []FeatureDeviceTemplateSubSubTemplate `tfsdk:"sub_templates"`
 }
 
-type SubSubTemplate struct {
+type FeatureDeviceTemplateSubSubTemplate struct {
 	Id   types.String `tfsdk:"id"`
 	Type types.String `tfsdk:"type"`
 }
@@ -52,19 +52,19 @@ func (data FeatureDeviceTemplate) toBody(ctx context.Context) string {
 		itemBody := ""
 		itemBody, _ = sjson.Set(itemBody, "templateId", item.Id.ValueString())
 		itemBody, _ = sjson.Set(itemBody, "templateType", item.Type.ValueString())
-		body, _ = sjson.SetRaw(body, "generalTemplates.-1", itemBody)
 		for _, sub := range item.SubTemplates {
 			subBody := ""
 			subBody, _ = sjson.Set(subBody, "templateId", sub.Id.ValueString())
 			subBody, _ = sjson.Set(subBody, "templateType", sub.Type.ValueString())
-			itemBody, _ = sjson.SetRaw(itemBody, "subTemplates.-1", subBody)
 			for _, subSub := range sub.SubTemplates {
 				subSubBody := ""
 				subSubBody, _ = sjson.Set(subSubBody, "templateId", subSub.Id.ValueString())
 				subSubBody, _ = sjson.Set(subSubBody, "templateType", subSub.Type.ValueString())
 				subBody, _ = sjson.SetRaw(subBody, "subTemplates.-1", subSubBody)
 			}
+			itemBody, _ = sjson.SetRaw(itemBody, "subTemplates.-1", subBody)
 		}
+		body, _ = sjson.SetRaw(body, "generalTemplates.-1", itemBody)
 	}
 	return body
 }
@@ -101,9 +101,9 @@ func (data *FeatureDeviceTemplate) fromBody(ctx context.Context, res gjson.Resul
 		data.SecurityPolicyId = types.StringNull()
 	}
 	if value := res.Get("generalTemplates"); value.Exists() {
-		data.GeneralTemplates = make([]GeneralTemplate, 0)
+		data.GeneralTemplates = make([]FeatureDeviceTemplateGeneralTemplate, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
-			item := GeneralTemplate{}
+			item := FeatureDeviceTemplateGeneralTemplate{}
 			if cValue := v.Get("templateId"); cValue.Exists() {
 				item.Id = types.StringValue(cValue.String())
 			} else {
@@ -115,9 +115,9 @@ func (data *FeatureDeviceTemplate) fromBody(ctx context.Context, res gjson.Resul
 				item.Type = types.StringNull()
 			}
 			if sValue := v.Get("subTemplates"); sValue.Exists() {
-				item.SubTemplates = make([]SubTemplate, 0)
+				item.SubTemplates = make([]FeatureDeviceTemplateSubTemplate, 0)
 				sValue.ForEach(func(k, v gjson.Result) bool {
-					sItem := SubTemplate{}
+					sItem := FeatureDeviceTemplateSubTemplate{}
 					if csValue := v.Get("templateId"); csValue.Exists() {
 						sItem.Id = types.StringValue(csValue.String())
 					} else {
@@ -129,9 +129,9 @@ func (data *FeatureDeviceTemplate) fromBody(ctx context.Context, res gjson.Resul
 						sItem.Type = types.StringNull()
 					}
 					if ssValue := v.Get("subTemplates"); ssValue.Exists() {
-						sItem.SubTemplates = make([]SubSubTemplate, 0)
+						sItem.SubTemplates = make([]FeatureDeviceTemplateSubSubTemplate, 0)
 						ssValue.ForEach(func(k, v gjson.Result) bool {
-							ssItem := SubSubTemplate{}
+							ssItem := FeatureDeviceTemplateSubSubTemplate{}
 							if cssValue := v.Get("templateId"); cssValue.Exists() {
 								ssItem.Id = types.StringValue(cssValue.String())
 							} else {
