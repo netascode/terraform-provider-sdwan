@@ -18,25 +18,25 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces
-var _ resource.Resource = &PrefixListPolicyObjectResource{}
-var _ resource.ResourceWithImportState = &PrefixListPolicyObjectResource{}
+var _ resource.Resource = &IPv4PrefixListPolicyObjectResource{}
+var _ resource.ResourceWithImportState = &IPv4PrefixListPolicyObjectResource{}
 
-func NewPrefixListPolicyObjectResource() resource.Resource {
-	return &PrefixListPolicyObjectResource{}
+func NewIPv4PrefixListPolicyObjectResource() resource.Resource {
+	return &IPv4PrefixListPolicyObjectResource{}
 }
 
-type PrefixListPolicyObjectResource struct {
+type IPv4PrefixListPolicyObjectResource struct {
 	client *sdwan.Client
 }
 
-func (r *PrefixListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_prefix_list_policy_object"
+func (r *IPv4PrefixListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_ipv4_prefix_list_policy_object"
 }
 
-func (r *PrefixListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *IPv4PrefixListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Prefix List policy object.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a IPv4 Prefix List policy object.").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -74,7 +74,7 @@ func (r *PrefixListPolicyObjectResource) Schema(ctx context.Context, req resourc
 	}
 }
 
-func (r *PrefixListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
+func (r *IPv4PrefixListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -82,8 +82,8 @@ func (r *PrefixListPolicyObjectResource) Configure(_ context.Context, req resour
 	r.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (r *PrefixListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var plan PrefixList
+func (r *IPv4PrefixListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var plan IPv4PrefixList
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -111,8 +111,8 @@ func (r *PrefixListPolicyObjectResource) Create(ctx context.Context, req resourc
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state PrefixList
+func (r *IPv4PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var state IPv4PrefixList
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -140,8 +140,8 @@ func (r *PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PrefixListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan PrefixList
+func (r *IPv4PrefixListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan IPv4PrefixList
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -165,8 +165,8 @@ func (r *PrefixListPolicyObjectResource) Update(ctx context.Context, req resourc
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PrefixListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var state PrefixList
+func (r *IPv4PrefixListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state IPv4PrefixList
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -188,6 +188,6 @@ func (r *PrefixListPolicyObjectResource) Delete(ctx context.Context, req resourc
 	resp.State.RemoveResource(ctx)
 }
 
-func (r *PrefixListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *IPv4PrefixListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }

@@ -14,26 +14,26 @@ import (
 
 // Ensure the implementation satisfies the expected interfaces.
 var (
-	_ datasource.DataSource              = &PrefixListPolicyObjectDataSource{}
-	_ datasource.DataSourceWithConfigure = &PrefixListPolicyObjectDataSource{}
+	_ datasource.DataSource              = &IPv4PrefixListPolicyObjectDataSource{}
+	_ datasource.DataSourceWithConfigure = &IPv4PrefixListPolicyObjectDataSource{}
 )
 
-func NewPrefixListPolicyObjectDataSource() datasource.DataSource {
-	return &PrefixListPolicyObjectDataSource{}
+func NewIPv4PrefixListPolicyObjectDataSource() datasource.DataSource {
+	return &IPv4PrefixListPolicyObjectDataSource{}
 }
 
-type PrefixListPolicyObjectDataSource struct {
+type IPv4PrefixListPolicyObjectDataSource struct {
 	client *sdwan.Client
 }
 
-func (d *PrefixListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_prefix_list_policy_object"
+func (d *IPv4PrefixListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_ipv4_prefix_list_policy_object"
 }
 
-func (d *PrefixListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *IPv4PrefixListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the Prefix List policy object.",
+		MarkdownDescription: "This data source can read the IPv4 Prefix List policy object.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -68,7 +68,7 @@ func (d *PrefixListPolicyObjectDataSource) Schema(ctx context.Context, req datas
 	}
 }
 
-func (d *PrefixListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
+func (d *IPv4PrefixListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -76,8 +76,8 @@ func (d *PrefixListPolicyObjectDataSource) Configure(_ context.Context, req data
 	d.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (d *PrefixListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var config PrefixList
+func (d *IPv4PrefixListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var config IPv4PrefixList
 
 	// Read config
 	diags := req.Config.Get(ctx, &config)

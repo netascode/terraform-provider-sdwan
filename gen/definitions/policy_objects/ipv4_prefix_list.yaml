@@ -1,5 +1,5 @@
 ---
-name: Prefix List
+name: IPv4 Prefix List
 type: prefix
 attributes:
   - model_name: entries

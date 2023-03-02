@@ -1,4 +1,4 @@
-resource "sdwan_prefix_list_policy_object" "example" {
+resource "sdwan_ipv4_prefix_list_policy_object" "example" {
   name = "Example"
   entries = [
     {

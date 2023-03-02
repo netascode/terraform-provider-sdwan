@@ -11,23 +11,23 @@ import (
 	"github.com/tidwall/sjson"
 )
 
-type PrefixList struct {
-	Id      types.String        `tfsdk:"id"`
-	Name    types.String        `tfsdk:"name"`
-	Entries []PrefixListEntries `tfsdk:"entries"`
+type IPv4PrefixList struct {
+	Id      types.String            `tfsdk:"id"`
+	Name    types.String            `tfsdk:"name"`
+	Entries []IPv4PrefixListEntries `tfsdk:"entries"`
 }
 
-type PrefixListEntries struct {
+type IPv4PrefixListEntries struct {
 	Prefix types.String `tfsdk:"prefix"`
 	Le     types.Int64  `tfsdk:"le"`
 	Ge     types.Int64  `tfsdk:"ge"`
 }
 
-func (data PrefixList) getType() string {
+func (data IPv4PrefixList) getType() string {
 	return "prefix"
 }
 
-func (data PrefixList) toBody(ctx context.Context) string {
+func (data IPv4PrefixList) toBody(ctx context.Context) string {
 	body, _ := sjson.Set("", "description", "Desc Not Required")
 	body, _ = sjson.Set(body, "name", data.Name.ValueString())
 	body, _ = sjson.Set(body, "type", "prefix")
@@ -44,16 +44,16 @@ func (data PrefixList) toBody(ctx context.Context) string {
 	return body
 }
 
-func (data *PrefixList) fromBody(ctx context.Context, res gjson.Result) {
+func (data *IPv4PrefixList) fromBody(ctx context.Context, res gjson.Result) {
 	if value := res.Get("name"); value.Exists() {
 		data.Name = types.StringValue(value.String())
 	} else {
 		data.Name = types.StringNull()
 	}
 	if value := res.Get("entries"); value.Exists() {
-		data.Entries = make([]PrefixListEntries, 0)
+		data.Entries = make([]IPv4PrefixListEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
-			item := PrefixListEntries{}
+			item := IPv4PrefixListEntries{}
 			if cValue := v.Get("ipPrefix"); cValue.Exists() {
 				item.Prefix = types.StringValue(cValue.String())
 			} else {
