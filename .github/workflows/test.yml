@@ -21,7 +21,7 @@ jobs:
     name: Consecutiveness
     runs-on: ubuntu-latest
     steps:
-      - uses: mktcode/consecutive-workflow-action@a189a0f58b742aa434150749185efecda973d62f
+      - uses: mktcode/consecutive-workflow-action@325c790e765731dcd19a003e8e484e5e0afb84e7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
