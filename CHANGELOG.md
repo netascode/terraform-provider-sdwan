@@ -1,3 +1,7 @@
+## 0.1.2 (unreleased)
+
+- Add `sdwan_application_list_policy_object` resource
+
 ## 0.1.1
 
 - Fix device template configuration of sub-templates
