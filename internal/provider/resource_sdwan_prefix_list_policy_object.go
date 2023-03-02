@@ -124,7 +124,10 @@ func (r *PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
 	res, err := r.client.Get("/template/policy/list/prefix/" + state.Id.ValueString())
-	if err != nil {
+	if res.Get("error.message").String() == "Failed to find specified resource" {
+		resp.State.RemoveResource(ctx)
+		return
+	} else if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to retrieve object (GET), got error: %s, %s", err, res.String()))
 		return
 	}
