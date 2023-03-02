@@ -9,6 +9,7 @@
 - Add `sdwan_mirror_policy_object` resource and data source
 - Add `sdwan_class_map_policy_object` resource and data source
 - Add `sdwan_extended_community_list_policy_object` resource and data source
+- Add `sdwan_data_ipv4_prefix_list_policy_object` resource and data source
 
 ## 0.1.0
 
