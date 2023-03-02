@@ -11,22 +11,22 @@ import (
 	"github.com/tidwall/sjson"
 )
 
-type MirrorList struct {
-	Id      types.String        `tfsdk:"id"`
-	Name    types.String        `tfsdk:"name"`
-	Entries []MirrorListEntries `tfsdk:"entries"`
+type Mirror struct {
+	Id      types.String    `tfsdk:"id"`
+	Name    types.String    `tfsdk:"name"`
+	Entries []MirrorEntries `tfsdk:"entries"`
 }
 
-type MirrorListEntries struct {
+type MirrorEntries struct {
 	RemoteDestinationIp types.String `tfsdk:"remote_destination_ip"`
 	SourceIp            types.String `tfsdk:"source_ip"`
 }
 
-func (data MirrorList) getType() string {
+func (data Mirror) getType() string {
 	return "mirror"
 }
 
-func (data MirrorList) toBody(ctx context.Context) string {
+func (data Mirror) toBody(ctx context.Context) string {
 	body, _ := sjson.Set("", "description", "Desc Not Required")
 	body, _ = sjson.Set(body, "name", data.Name.ValueString())
 	body, _ = sjson.Set(body, "type", "mirror")
@@ -42,16 +42,16 @@ func (data MirrorList) toBody(ctx context.Context) string {
 	return body
 }
 
-func (data *MirrorList) fromBody(ctx context.Context, res gjson.Result) {
+func (data *Mirror) fromBody(ctx context.Context, res gjson.Result) {
 	if value := res.Get("name"); value.Exists() {
 		data.Name = types.StringValue(value.String())
 	} else {
 		data.Name = types.StringNull()
 	}
 	if value := res.Get("entries"); value.Exists() {
-		data.Entries = make([]MirrorListEntries, 0)
+		data.Entries = make([]MirrorEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
-			item := MirrorListEntries{}
+			item := MirrorEntries{}
 			if cValue := v.Get("remoteDest"); cValue.Exists() {
 				item.RemoteDestinationIp = types.StringValue(cValue.String())
 			} else {

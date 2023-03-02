@@ -1,4 +1,4 @@
-resource "sdwan_policer_list_policy_object" "example" {
+resource "sdwan_policer_policy_object" "example" {
   name = "Example"
   entries = [
     {

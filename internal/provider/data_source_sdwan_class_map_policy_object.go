@@ -14,26 +14,26 @@ import (
 
 // Ensure the implementation satisfies the expected interfaces.
 var (
-	_ datasource.DataSource              = &MirrorListPolicyObjectDataSource{}
-	_ datasource.DataSourceWithConfigure = &MirrorListPolicyObjectDataSource{}
+	_ datasource.DataSource              = &ClassMapPolicyObjectDataSource{}
+	_ datasource.DataSourceWithConfigure = &ClassMapPolicyObjectDataSource{}
 )
 
-func NewMirrorListPolicyObjectDataSource() datasource.DataSource {
-	return &MirrorListPolicyObjectDataSource{}
+func NewClassMapPolicyObjectDataSource() datasource.DataSource {
+	return &ClassMapPolicyObjectDataSource{}
 }
 
-type MirrorListPolicyObjectDataSource struct {
+type ClassMapPolicyObjectDataSource struct {
 	client *sdwan.Client
 }
 
-func (d *MirrorListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_mirror_list_policy_object"
+func (d *ClassMapPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_class_map_policy_object"
 }
 
-func (d *MirrorListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *ClassMapPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the Mirror List policy object.",
+		MarkdownDescription: "This data source can read the Class Map policy object.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -49,12 +49,8 @@ func (d *MirrorListPolicyObjectDataSource) Schema(ctx context.Context, req datas
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"remote_destination_ip": schema.StringAttribute{
-							MarkdownDescription: "Remote destination IP",
-							Computed:            true,
-						},
-						"source_ip": schema.StringAttribute{
-							MarkdownDescription: "Source IP",
+						"queue": schema.Int64Attribute{
+							MarkdownDescription: "Queue",
 							Computed:            true,
 						},
 					},
@@ -64,7 +60,7 @@ func (d *MirrorListPolicyObjectDataSource) Schema(ctx context.Context, req datas
 	}
 }
 
-func (d *MirrorListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
+func (d *ClassMapPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -72,8 +68,8 @@ func (d *MirrorListPolicyObjectDataSource) Configure(_ context.Context, req data
 	d.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (d *MirrorListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var config MirrorList
+func (d *ClassMapPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var config ClassMap
 
 	// Read config
 	diags := req.Config.Get(ctx, &config)
@@ -84,7 +80,7 @@ func (d *MirrorListPolicyObjectDataSource) Read(ctx context.Context, req datasou
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", config.Id.String()))
 
-	res, err := d.client.Get("/template/policy/list/mirror/" + config.Id.ValueString())
+	res, err := d.client.Get("/template/policy/list/class/" + config.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to retrieve object, got error: %s", err))
 		return

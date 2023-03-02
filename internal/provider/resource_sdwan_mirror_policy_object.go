@@ -18,25 +18,25 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces
-var _ resource.Resource = &MirrorListPolicyObjectResource{}
-var _ resource.ResourceWithImportState = &MirrorListPolicyObjectResource{}
+var _ resource.Resource = &MirrorPolicyObjectResource{}
+var _ resource.ResourceWithImportState = &MirrorPolicyObjectResource{}
 
-func NewMirrorListPolicyObjectResource() resource.Resource {
-	return &MirrorListPolicyObjectResource{}
+func NewMirrorPolicyObjectResource() resource.Resource {
+	return &MirrorPolicyObjectResource{}
 }
 
-type MirrorListPolicyObjectResource struct {
+type MirrorPolicyObjectResource struct {
 	client *sdwan.Client
 }
 
-func (r *MirrorListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_mirror_list_policy_object"
+func (r *MirrorPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_mirror_policy_object"
 }
 
-func (r *MirrorListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *MirrorPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Mirror List policy object.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Mirror policy object.").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -70,7 +70,7 @@ func (r *MirrorListPolicyObjectResource) Schema(ctx context.Context, req resourc
 	}
 }
 
-func (r *MirrorListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
+func (r *MirrorPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -78,8 +78,8 @@ func (r *MirrorListPolicyObjectResource) Configure(_ context.Context, req resour
 	r.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (r *MirrorListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var plan MirrorList
+func (r *MirrorPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var plan Mirror
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -107,8 +107,8 @@ func (r *MirrorListPolicyObjectResource) Create(ctx context.Context, req resourc
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *MirrorListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state MirrorList
+func (r *MirrorPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var state Mirror
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -136,8 +136,8 @@ func (r *MirrorListPolicyObjectResource) Read(ctx context.Context, req resource.
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *MirrorListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan MirrorList
+func (r *MirrorPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan Mirror
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -161,8 +161,8 @@ func (r *MirrorListPolicyObjectResource) Update(ctx context.Context, req resourc
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *MirrorListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var state MirrorList
+func (r *MirrorPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state Mirror
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -184,6 +184,6 @@ func (r *MirrorListPolicyObjectResource) Delete(ctx context.Context, req resourc
 	resp.State.RemoveResource(ctx)
 }
 
-func (r *MirrorListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *MirrorPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }

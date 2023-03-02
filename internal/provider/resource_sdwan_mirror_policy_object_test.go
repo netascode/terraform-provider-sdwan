@@ -8,25 +8,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func TestAccSdwanMirrorListPolicyObject(t *testing.T) {
+func TestAccSdwanMirrorPolicyObject(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck:                 func() { testAccPreCheck(t) },
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccSdwanMirrorListPolicyObjectConfig_all(),
+				Config: testAccSdwanMirrorPolicyObjectConfig_all(),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdwan_mirror_list_policy_object.test", "entries.0.remote_destination_ip", "10.1.1.1"),
-					resource.TestCheckResourceAttr("sdwan_mirror_list_policy_object.test", "entries.0.source_ip", "10.2.1.1"),
+					resource.TestCheckResourceAttr("sdwan_mirror_policy_object.test", "entries.0.remote_destination_ip", "10.1.1.1"),
+					resource.TestCheckResourceAttr("sdwan_mirror_policy_object.test", "entries.0.source_ip", "10.2.1.1"),
 				),
 			},
 		},
 	})
 }
 
-func testAccSdwanMirrorListPolicyObjectConfig_all() string {
+func testAccSdwanMirrorPolicyObjectConfig_all() string {
 	return `
-	resource "sdwan_mirror_list_policy_object" "test" {
+	resource "sdwan_mirror_policy_object" "test" {
 		name = "TF_TEST_ALL"
 		entries = [{
 			remote_destination_ip = "10.1.1.1"

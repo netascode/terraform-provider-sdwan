@@ -14,26 +14,26 @@ import (
 
 // Ensure the implementation satisfies the expected interfaces.
 var (
-	_ datasource.DataSource              = &PolicerListPolicyObjectDataSource{}
-	_ datasource.DataSourceWithConfigure = &PolicerListPolicyObjectDataSource{}
+	_ datasource.DataSource              = &MirrorPolicyObjectDataSource{}
+	_ datasource.DataSourceWithConfigure = &MirrorPolicyObjectDataSource{}
 )
 
-func NewPolicerListPolicyObjectDataSource() datasource.DataSource {
-	return &PolicerListPolicyObjectDataSource{}
+func NewMirrorPolicyObjectDataSource() datasource.DataSource {
+	return &MirrorPolicyObjectDataSource{}
 }
 
-type PolicerListPolicyObjectDataSource struct {
+type MirrorPolicyObjectDataSource struct {
 	client *sdwan.Client
 }
 
-func (d *PolicerListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_policer_list_policy_object"
+func (d *MirrorPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_mirror_policy_object"
 }
 
-func (d *PolicerListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *MirrorPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the Policer List policy object.",
+		MarkdownDescription: "This data source can read the Mirror policy object.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -49,16 +49,12 @@ func (d *PolicerListPolicyObjectDataSource) Schema(ctx context.Context, req data
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"burst": schema.Int64Attribute{
-							MarkdownDescription: "Burst in bytes",
+						"remote_destination_ip": schema.StringAttribute{
+							MarkdownDescription: "Remote destination IP",
 							Computed:            true,
 						},
-						"exceed_action": schema.StringAttribute{
-							MarkdownDescription: "Exceed action",
-							Computed:            true,
-						},
-						"rate": schema.Int64Attribute{
-							MarkdownDescription: "Rate in bps",
+						"source_ip": schema.StringAttribute{
+							MarkdownDescription: "Source IP",
 							Computed:            true,
 						},
 					},
@@ -68,7 +64,7 @@ func (d *PolicerListPolicyObjectDataSource) Schema(ctx context.Context, req data
 	}
 }
 
-func (d *PolicerListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
+func (d *MirrorPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -76,8 +72,8 @@ func (d *PolicerListPolicyObjectDataSource) Configure(_ context.Context, req dat
 	d.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (d *PolicerListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var config PolicerList
+func (d *MirrorPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var config Mirror
 
 	// Read config
 	diags := req.Config.Get(ctx, &config)
@@ -88,7 +84,7 @@ func (d *PolicerListPolicyObjectDataSource) Read(ctx context.Context, req dataso
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", config.Id.String()))
 
-	res, err := d.client.Get("/template/policy/list/policer/" + config.Id.ValueString())
+	res, err := d.client.Get("/template/policy/list/mirror/" + config.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to retrieve object, got error: %s", err))
 		return

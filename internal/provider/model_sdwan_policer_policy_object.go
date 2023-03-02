@@ -11,23 +11,23 @@ import (
 	"github.com/tidwall/sjson"
 )
 
-type PolicerList struct {
-	Id      types.String         `tfsdk:"id"`
-	Name    types.String         `tfsdk:"name"`
-	Entries []PolicerListEntries `tfsdk:"entries"`
+type Policer struct {
+	Id      types.String     `tfsdk:"id"`
+	Name    types.String     `tfsdk:"name"`
+	Entries []PolicerEntries `tfsdk:"entries"`
 }
 
-type PolicerListEntries struct {
+type PolicerEntries struct {
 	Burst        types.Int64  `tfsdk:"burst"`
 	ExceedAction types.String `tfsdk:"exceed_action"`
 	Rate         types.Int64  `tfsdk:"rate"`
 }
 
-func (data PolicerList) getType() string {
+func (data Policer) getType() string {
 	return "policer"
 }
 
-func (data PolicerList) toBody(ctx context.Context) string {
+func (data Policer) toBody(ctx context.Context) string {
 	body, _ := sjson.Set("", "description", "Desc Not Required")
 	body, _ = sjson.Set(body, "name", data.Name.ValueString())
 	body, _ = sjson.Set(body, "type", "policer")
@@ -44,16 +44,16 @@ func (data PolicerList) toBody(ctx context.Context) string {
 	return body
 }
 
-func (data *PolicerList) fromBody(ctx context.Context, res gjson.Result) {
+func (data *Policer) fromBody(ctx context.Context, res gjson.Result) {
 	if value := res.Get("name"); value.Exists() {
 		data.Name = types.StringValue(value.String())
 	} else {
 		data.Name = types.StringNull()
 	}
 	if value := res.Get("entries"); value.Exists() {
-		data.Entries = make([]PolicerListEntries, 0)
+		data.Entries = make([]PolicerEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
-			item := PolicerListEntries{}
+			item := PolicerEntries{}
 			if cValue := v.Get("burst"); cValue.Exists() {
 				item.Burst = types.Int64Value(cValue.Int())
 			} else {

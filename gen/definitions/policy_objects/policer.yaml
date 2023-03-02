@@ -1,5 +1,5 @@
 ---
-name: Policer List
+name: Policer
 type: policer
 attributes:
   - model_name: entries

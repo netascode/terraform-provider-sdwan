@@ -1,4 +1,4 @@
-resource "sdwan_mirror_list_policy_object" "example" {
+resource "sdwan_mirror_policy_object" "example" {
   name = "Example"
   entries = [
     {

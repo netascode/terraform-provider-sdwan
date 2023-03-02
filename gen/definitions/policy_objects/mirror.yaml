@@ -1,5 +1,5 @@
 ---
-name: Mirror List
+name: Mirror
 type: mirror
 attributes:
   - model_name: entries

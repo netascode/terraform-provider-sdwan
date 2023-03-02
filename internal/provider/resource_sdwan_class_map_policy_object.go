@@ -7,7 +7,6 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -21,25 +20,25 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces
-var _ resource.Resource = &PolicerListPolicyObjectResource{}
-var _ resource.ResourceWithImportState = &PolicerListPolicyObjectResource{}
+var _ resource.Resource = &ClassMapPolicyObjectResource{}
+var _ resource.ResourceWithImportState = &ClassMapPolicyObjectResource{}
 
-func NewPolicerListPolicyObjectResource() resource.Resource {
-	return &PolicerListPolicyObjectResource{}
+func NewClassMapPolicyObjectResource() resource.Resource {
+	return &ClassMapPolicyObjectResource{}
 }
 
-type PolicerListPolicyObjectResource struct {
+type ClassMapPolicyObjectResource struct {
 	client *sdwan.Client
 }
 
-func (r *PolicerListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_policer_list_policy_object"
+func (r *ClassMapPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_class_map_policy_object"
 }
 
-func (r *PolicerListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *ClassMapPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Policer List policy object.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Class Map policy object.").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -58,25 +57,11 @@ func (r *PolicerListPolicyObjectResource) Schema(ctx context.Context, req resour
 				Optional:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"burst": schema.Int64Attribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Burst in bytes").AddIntegerRangeDescription(15000, 10000000).String,
+						"queue": schema.Int64Attribute{
+							MarkdownDescription: helpers.NewAttributeDescription("Queue").AddIntegerRangeDescription(0, 7).String,
 							Optional:            true,
 							Validators: []validator.Int64{
-								int64validator.Between(15000, 10000000),
-							},
-						},
-						"exceed_action": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Exceed action").AddStringEnumDescription("drop", "remark").String,
-							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.OneOf("drop", "remark"),
-							},
-						},
-						"rate": schema.Int64Attribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Rate in bps").AddIntegerRangeDescription(8, 100000000000).String,
-							Optional:            true,
-							Validators: []validator.Int64{
-								int64validator.Between(8, 100000000000),
+								int64validator.Between(0, 7),
 							},
 						},
 					},
@@ -86,7 +71,7 @@ func (r *PolicerListPolicyObjectResource) Schema(ctx context.Context, req resour
 	}
 }
 
-func (r *PolicerListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
+func (r *ClassMapPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -94,8 +79,8 @@ func (r *PolicerListPolicyObjectResource) Configure(_ context.Context, req resou
 	r.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (r *PolicerListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var plan PolicerList
+func (r *ClassMapPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var plan ClassMap
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -109,7 +94,7 @@ func (r *PolicerListPolicyObjectResource) Create(ctx context.Context, req resour
 	// Create object
 	body := plan.toBody(ctx)
 
-	res, err := r.client.Post("/template/policy/list/policer", body)
+	res, err := r.client.Post("/template/policy/list/class", body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (POST), got error: %s, %s", err, res.String()))
 		return
@@ -123,8 +108,8 @@ func (r *PolicerListPolicyObjectResource) Create(ctx context.Context, req resour
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PolicerListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state PolicerList
+func (r *ClassMapPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var state ClassMap
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -135,7 +120,7 @@ func (r *PolicerListPolicyObjectResource) Read(ctx context.Context, req resource
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
-	res, err := r.client.Get("/template/policy/list/policer/" + state.Id.ValueString())
+	res, err := r.client.Get("/template/policy/list/class/" + state.Id.ValueString())
 	if res.Get("error.message").String() == "Failed to find specified resource" {
 		resp.State.RemoveResource(ctx)
 		return
@@ -152,8 +137,8 @@ func (r *PolicerListPolicyObjectResource) Read(ctx context.Context, req resource
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PolicerListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan PolicerList
+func (r *ClassMapPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan ClassMap
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -165,7 +150,7 @@ func (r *PolicerListPolicyObjectResource) Update(ctx context.Context, req resour
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
-	res, err := r.client.Put("/template/policy/list/policer/"+plan.Id.ValueString(), body)
+	res, err := r.client.Put("/template/policy/list/class/"+plan.Id.ValueString(), body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return
@@ -177,8 +162,8 @@ func (r *PolicerListPolicyObjectResource) Update(ctx context.Context, req resour
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *PolicerListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var state PolicerList
+func (r *ClassMapPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state ClassMap
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -189,7 +174,7 @@ func (r *PolicerListPolicyObjectResource) Delete(ctx context.Context, req resour
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Delete", state.Name.ValueString()))
 
-	res, err := r.client.Delete("/template/policy/list/policer/" + state.Id.ValueString())
+	res, err := r.client.Delete("/template/policy/list/class/" + state.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to delete object (DELETE), got error: %s, %s", err, res.String()))
 		return
@@ -200,6 +185,6 @@ func (r *PolicerListPolicyObjectResource) Delete(ctx context.Context, req resour
 	resp.State.RemoveResource(ctx)
 }
 
-func (r *PolicerListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *ClassMapPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }
