@@ -15,6 +15,7 @@ description: |-
 - Add `sdwan_vpn_list_policy_object` resource and data source
 - Add `sdwan_prefix_list_policy_object` resource and data source
 - Add `sdwan_policer_list_policy_object` resource and data source
+- Add `sdwan_mirror_list_policy_object` resource and data source
 
 ## 0.1.0
 
