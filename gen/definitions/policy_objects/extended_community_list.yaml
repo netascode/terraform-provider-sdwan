@@ -1,0 +1,12 @@
+---
+name: Extended Community List
+type: extcommunity
+attributes:
+  - model_name: entries
+    type: List
+    description: List of entries
+    attributes:
+      - model_name: community
+        type: String
+        description: Extended community value, e.g. `community soo 10.0.0.1:30` or `community rt 100:10`
+        example: community rt 100:10
