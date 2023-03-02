@@ -1,4 +1,4 @@
-## 0.1.1 (unreleased)
+## 0.1.1
 
 - Fix device template configuration of sub-templates
 - Fix mandatory feature template attributes when using device-specific variables
