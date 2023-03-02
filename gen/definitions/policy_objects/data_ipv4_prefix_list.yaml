@@ -9,5 +9,5 @@ attributes:
       - model_name: ipPrefix
         tf_name: prefix
         type: String
-        description: IP prefix list entry e.g., `10.0.0.0/12`
+        description: IP prefix list entry, e.g. `10.0.0.0/12`
         example: 10.0.0.0/12

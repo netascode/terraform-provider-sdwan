@@ -14,26 +14,26 @@ import (
 
 // Ensure the implementation satisfies the expected interfaces.
 var (
-	_ datasource.DataSource              = &DataIPv4PrefixListPolicyObjectDataSource{}
-	_ datasource.DataSourceWithConfigure = &DataIPv4PrefixListPolicyObjectDataSource{}
+	_ datasource.DataSource              = &DataIPv6PrefixListPolicyObjectDataSource{}
+	_ datasource.DataSourceWithConfigure = &DataIPv6PrefixListPolicyObjectDataSource{}
 )
 
-func NewDataIPv4PrefixListPolicyObjectDataSource() datasource.DataSource {
-	return &DataIPv4PrefixListPolicyObjectDataSource{}
+func NewDataIPv6PrefixListPolicyObjectDataSource() datasource.DataSource {
+	return &DataIPv6PrefixListPolicyObjectDataSource{}
 }
 
-type DataIPv4PrefixListPolicyObjectDataSource struct {
+type DataIPv6PrefixListPolicyObjectDataSource struct {
 	client *sdwan.Client
 }
 
-func (d *DataIPv4PrefixListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_data_ipv4_prefix_list_policy_object"
+func (d *DataIPv6PrefixListPolicyObjectDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_data_ipv6_prefix_list_policy_object"
 }
 
-func (d *DataIPv4PrefixListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *DataIPv6PrefixListPolicyObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the Data IPv4 Prefix List policy object.",
+		MarkdownDescription: "This data source can read the Data IPv6 Prefix List policy object.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -50,7 +50,7 @@ func (d *DataIPv4PrefixListPolicyObjectDataSource) Schema(ctx context.Context, r
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
-							MarkdownDescription: "IP prefix list entry, e.g. `10.0.0.0/12`",
+							MarkdownDescription: "IP prefix list entry, e.g. `2001:0:0:1::/64`",
 							Computed:            true,
 						},
 					},
@@ -60,7 +60,7 @@ func (d *DataIPv4PrefixListPolicyObjectDataSource) Schema(ctx context.Context, r
 	}
 }
 
-func (d *DataIPv4PrefixListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
+func (d *DataIPv6PrefixListPolicyObjectDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, _ *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -68,8 +68,8 @@ func (d *DataIPv4PrefixListPolicyObjectDataSource) Configure(_ context.Context, 
 	d.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (d *DataIPv4PrefixListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var config DataIPv4PrefixList
+func (d *DataIPv6PrefixListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var config DataIPv6PrefixList
 
 	// Read config
 	diags := req.Config.Get(ctx, &config)
@@ -80,7 +80,7 @@ func (d *DataIPv4PrefixListPolicyObjectDataSource) Read(ctx context.Context, req
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", config.Id.String()))
 
-	res, err := d.client.Get("/template/policy/list/dataprefix/" + config.Id.ValueString())
+	res, err := d.client.Get("/template/policy/list/dataipv6prefix/" + config.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to retrieve object, got error: %s", err))
 		return

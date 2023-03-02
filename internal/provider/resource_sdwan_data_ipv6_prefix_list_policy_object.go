@@ -18,25 +18,25 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces
-var _ resource.Resource = &DataIPv4PrefixListPolicyObjectResource{}
-var _ resource.ResourceWithImportState = &DataIPv4PrefixListPolicyObjectResource{}
+var _ resource.Resource = &DataIPv6PrefixListPolicyObjectResource{}
+var _ resource.ResourceWithImportState = &DataIPv6PrefixListPolicyObjectResource{}
 
-func NewDataIPv4PrefixListPolicyObjectResource() resource.Resource {
-	return &DataIPv4PrefixListPolicyObjectResource{}
+func NewDataIPv6PrefixListPolicyObjectResource() resource.Resource {
+	return &DataIPv6PrefixListPolicyObjectResource{}
 }
 
-type DataIPv4PrefixListPolicyObjectResource struct {
+type DataIPv6PrefixListPolicyObjectResource struct {
 	client *sdwan.Client
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_data_ipv4_prefix_list_policy_object"
+func (r *DataIPv6PrefixListPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_data_ipv6_prefix_list_policy_object"
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *DataIPv6PrefixListPolicyObjectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Data IPv4 Prefix List policy object.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a Data IPv6 Prefix List policy object.").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
@@ -56,7 +56,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Schema(ctx context.Context, req
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("IP prefix list entry, e.g. `10.0.0.0/12`").String,
+							MarkdownDescription: helpers.NewAttributeDescription("IP prefix list entry, e.g. `2001:0:0:1::/64`").String,
 							Optional:            true,
 						},
 					},
@@ -66,7 +66,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Schema(ctx context.Context, req
 	}
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
+func (r *DataIPv6PrefixListPolicyObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -74,8 +74,8 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Configure(_ context.Context, re
 	r.client = req.ProviderData.(*sdwan.Client)
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var plan DataIPv4PrefixList
+func (r *DataIPv6PrefixListPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var plan DataIPv6PrefixList
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -89,7 +89,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Create(ctx context.Context, req
 	// Create object
 	body := plan.toBody(ctx)
 
-	res, err := r.client.Post("/template/policy/list/dataprefix", body)
+	res, err := r.client.Post("/template/policy/list/dataipv6prefix", body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (POST), got error: %s, %s", err, res.String()))
 		return
@@ -103,8 +103,8 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Create(ctx context.Context, req
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state DataIPv4PrefixList
+func (r *DataIPv6PrefixListPolicyObjectResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var state DataIPv6PrefixList
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -115,7 +115,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Read(ctx context.Context, req r
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
-	res, err := r.client.Get("/template/policy/list/dataprefix/" + state.Id.ValueString())
+	res, err := r.client.Get("/template/policy/list/dataipv6prefix/" + state.Id.ValueString())
 	if res.Get("error.message").String() == "Failed to find specified resource" {
 		resp.State.RemoveResource(ctx)
 		return
@@ -132,8 +132,8 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Read(ctx context.Context, req r
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan DataIPv4PrefixList
+func (r *DataIPv6PrefixListPolicyObjectResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan DataIPv6PrefixList
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
@@ -145,7 +145,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Update(ctx context.Context, req
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
-	res, err := r.client.Put("/template/policy/list/dataprefix/"+plan.Id.ValueString(), body)
+	res, err := r.client.Put("/template/policy/list/dataipv6prefix/"+plan.Id.ValueString(), body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return
@@ -157,8 +157,8 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Update(ctx context.Context, req
 	resp.Diagnostics.Append(diags...)
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var state DataIPv4PrefixList
+func (r *DataIPv6PrefixListPolicyObjectResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state DataIPv6PrefixList
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
@@ -169,7 +169,7 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Delete(ctx context.Context, req
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Delete", state.Name.ValueString()))
 
-	res, err := r.client.Delete("/template/policy/list/dataprefix/" + state.Id.ValueString())
+	res, err := r.client.Delete("/template/policy/list/dataipv6prefix/" + state.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to delete object (DELETE), got error: %s, %s", err, res.String()))
 		return
@@ -180,6 +180,6 @@ func (r *DataIPv4PrefixListPolicyObjectResource) Delete(ctx context.Context, req
 	resp.State.RemoveResource(ctx)
 }
 
-func (r *DataIPv4PrefixListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *DataIPv6PrefixListPolicyObjectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
 }
