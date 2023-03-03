@@ -69,34 +69,34 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 	{{- range .Attributes}}
 	{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
 	if !data.{{toGoName .TfName}}.IsNull() {
-		body, _ = sjson.Set(body, "{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}data.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
+		body, _ = sjson.Set(body, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}data.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
 	}
 	{{- else if eq .Type "List"}}
 	if len(data.{{toGoName .TfName}}) > 0 {
-		body, _ = sjson.Set(body, "{{.ModelName}}", []interface{}{})
+		body, _ = sjson.Set(body, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", []interface{}{})
 		for _, item := range data.{{toGoName .TfName}} {
 			itemBody := ""
 			{{- range .Attributes}}
 			{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
 			if !item.{{toGoName .TfName}}.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}item.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
+				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}item.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
 			}
 			{{- else if eq .Type "List"}}
 			if len(item.{{toGoName .TfName}}) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "{{.ModelName}}", []interface{}{})
+				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", []interface{}{})
 				for _, childItem := range item.{{toGoName .TfName}} {
 					itemChildBody := ""
 					{{- range .Attributes}}
 					if !childItem.{{toGoName .TfName}}.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}childItem.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
+						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}childItem.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
 					}
 					{{- end}}
-					itemBody, _ = sjson.SetRaw(itemBody, "{{.ModelName}}.-1", itemChildBody)
+					itemBody, _ = sjson.SetRaw(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.-1", itemChildBody)
 				}
 			}
 			{{- end}}
 			{{- end}}
-			body, _ = sjson.SetRaw(body, "{{.ModelName}}.-1", itemBody)
+			body, _ = sjson.SetRaw(body, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.-1", itemBody)
 		}
 	}
 	{{- end}}
@@ -113,67 +113,67 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	{{- range .Attributes}}
 	{{- $cname := toGoName .TfName}}
 	{{- if eq .Type "String"}}
-	if value := res.Get("{{.ModelName}}"); value.Exists() {
+	if value := res.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); value.Exists() {
 		data.{{toGoName .TfName}} = types.StringValue(value.String())
 	} else {
 		data.{{toGoName .TfName}} = types.StringNull()
 	}
 	{{- else if eq .Type "Int64"}}
-	if value := res.Get("{{.ModelName}}"); value.Exists() {
+	if value := res.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); value.Exists() {
 		data.{{toGoName .TfName}} = types.Int64Value(value.Int())
 	} else {
 		data.{{toGoName .TfName}} = types.Int64Null()
 	}
 	{{- else if eq .Type "Float64"}}
-	if value := res.Get("{{.ModelName}}"); value.Exists() {
+	if value := res.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); value.Exists() {
 		data.{{toGoName .TfName}} = types.Float64Value(value.Float())
 	} else {
 		data.{{toGoName .TfName}} = types.Float64Null()
 	}
 	{{- else if eq .Type "List"}}
-	if value := res.Get("{{.ModelName}}"); value.Exists() {
+	if value := res.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); value.Exists() {
 		data.{{toGoName .TfName}} = make([]{{$name}}{{toGoName .TfName}}, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := {{$name}}{{toGoName .TfName}}{}
 			{{- range .Attributes}}
 			{{- if eq .Type "String"}}
-			if cValue := v.Get("{{.ModelName}}"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); cValue.Exists() {
 				item.{{toGoName .TfName}} = types.StringValue(cValue.String())
 			} else {
 				item.{{toGoName .TfName}} = types.StringNull()
 			}
 			{{- else if eq .Type "Int64"}}
-			if cValue := v.Get("{{.ModelName}}"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); cValue.Exists() {
 				item.{{toGoName .TfName}} = types.Int64Value(cValue.Int())
 			} else {
 				item.{{toGoName .TfName}} = types.Int64Null()
 			}
 			{{- else if eq .Type "Float64"}}
-			if cValue := v.Get("{{.ModelName}}"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); cValue.Exists() {
 				item.{{toGoName .TfName}} = types.Float64Value(cValue.Float())
 			} else {
 				item.{{toGoName .TfName}} = types.Float64Null()
 			}
 			{{- else if eq .Type "List"}}
-			if cValue := v.Get("{{.ModelName}}"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); cValue.Exists() {
 				item.{{toGoName .TfName}} = make([]{{$name}}{{$cname}}{{toGoName .TfName}}, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := {{$name}}{{$cname}}{{toGoName .TfName}}{}
 					{{- range .Attributes}}
 					{{- if eq .Type "String"}}
-					if ccValue := cv.Get("{{.ModelName}}"); ccValue.Exists() {
+					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); ccValue.Exists() {
 						cItem.{{toGoName .TfName}} = types.StringValue(ccValue.String())
 					} else {
 						cItem.{{toGoName .TfName}} = types.StringNull()
 					}
 					{{- else if eq .Type "Int64"}}
-					if ccValue := cv.Get("{{.ModelName}}"); ccValue.Exists() {
+					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); ccValue.Exists() {
 						cItem.{{toGoName .TfName}} = types.Int64Value(ccValue.Int())
 					} else {
 						cItem.{{toGoName .TfName}} = types.Int64Null()
 					}
 					{{- else if eq .Type "Float64"}}
-					if ccValue := cv.Get("{{.ModelName}}"); ccValue.Exists() {
+					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); ccValue.Exists() {
 						cItem.{{toGoName .TfName}} = types.Float64Value(ccValue.Float())
 					} else {
 						cItem.{{toGoName .TfName}} = types.Float64Null()
