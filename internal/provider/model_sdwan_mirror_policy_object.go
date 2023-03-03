@@ -4,7 +4,6 @@ package provider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/tidwall/gjson"
@@ -34,8 +33,12 @@ func (data Mirror) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "remoteDest", fmt.Sprint(item.RemoteDestinationIp.ValueString()))
-			itemBody, _ = sjson.Set(itemBody, "source", fmt.Sprint(item.SourceIp.ValueString()))
+			if !item.RemoteDestinationIp.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "remoteDest", item.RemoteDestinationIp.ValueString())
+			}
+			if !item.SourceIp.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "source", item.SourceIp.ValueString())
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

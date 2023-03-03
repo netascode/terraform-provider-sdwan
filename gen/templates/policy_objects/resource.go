@@ -134,6 +134,53 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Schema(ctx context.Context, re
 								float64validator.Between({{.MinFloat}}, {{.MaxFloat}}),
 							},
 							{{- end}}
+							{{- if eq .Type "List"}}
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									{{- range  .Attributes}}
+									"{{.TfName}}": schema.{{.Type}}Attribute{
+										MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
+											{{- if len .EnumValues -}}
+											.AddStringEnumDescription({{range .EnumValues}}"{{.}}", {{end}})
+											{{- end -}}
+											{{- if or (ne .MinInt 0) (ne .MaxInt 0) -}}
+											.AddIntegerRangeDescription({{.MinInt}}, {{.MaxInt}})
+											{{- end -}}
+											{{- if or (ne .MinFloat 0.0) (ne .MaxFloat 0.0) -}}
+											.AddFloatRangeDescription({{.MinFloat}}, {{.MaxFloat}})
+											{{- end -}}
+											{{- if .DefaultValue -}}
+											.AddDefaultValueDescription("{{.DefaultValue}}")
+											{{- end -}}
+											.String,
+										Optional:            true,
+										{{- if len .EnumValues}}
+										Validators: []validator.String{
+											stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),
+										},
+										{{- else if or (len .StringPatterns) (ne .StringMinLength 0) (ne .StringMaxLength 0) }}
+										Validators: []validator.String{
+											{{- if or (ne .StringMinLength 0) (ne .StringMaxLength 0)}}
+											stringvalidator.LengthBetween({{.StringMinLength}}, {{.StringMaxLength}}),
+											{{- end}}
+											{{- range .StringPatterns}}
+											stringvalidator.RegexMatches(regexp.MustCompile(`{{.}}`), ""),
+											{{- end}}
+										},
+										{{- else if or (ne .MinInt 0) (ne .MaxInt 0)}}
+										Validators: []validator.Int64{
+											int64validator.Between({{.MinInt}}, {{.MaxInt}}),
+										},
+										{{- else if or (ne .MinFloat 0.0) (ne .MaxFloat 0.0)}}
+										Validators: []validator.Float64{
+											float64validator.Between({{.MinFloat}}, {{.MaxFloat}}),
+										},
+										{{- end}}
+									},
+									{{- end}}
+								},
+							},
+							{{- end}}
 						},
 						{{- end}}
 					},
@@ -168,7 +215,7 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Create(ctx context.Context, re
 	// Create object
 	body := plan.toBody(ctx)
 
-	res, err := r.client.Post("/template/policy/list/{{.Type}}", body)
+	res, err := r.client.Post("/template/policy/list/{{toLower .Type}}", body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (POST), got error: %s, %s", err, res.String()))
 		return
@@ -194,7 +241,7 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Read(ctx context.Context, req 
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
-	res, err := r.client.Get("/template/policy/list/{{.Type}}/" + state.Id.ValueString())
+	res, err := r.client.Get("/template/policy/list/{{toLower .Type}}/" + state.Id.ValueString())
 	if res.Get("error.message").String() == "Failed to find specified resource" {
 		resp.State.RemoveResource(ctx)
 		return
@@ -224,7 +271,7 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Update(ctx context.Context, re
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
-	res, err := r.client.Put("/template/policy/list/{{.Type}}/" + plan.Id.ValueString(), body)
+	res, err := r.client.Put("/template/policy/list/{{toLower .Type}}/" + plan.Id.ValueString(), body)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return
@@ -248,7 +295,7 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Delete(ctx context.Context, re
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Delete", state.Name.ValueString()))
 
-	res, err := r.client.Delete("/template/policy/list/{{.Type}}/" + state.Id.ValueString())
+	res, err := r.client.Delete("/template/policy/list/{{toLower .Type}}/" + state.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to delete object (DELETE), got error: %s, %s", err, res.String()))
 		return

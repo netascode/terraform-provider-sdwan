@@ -14,6 +14,7 @@ attribute:
   tf_name: str(required=False)
   type: enum('String', 'Int64', 'Bool', 'List', required=False)
   object_type: enum('object', 'tree', 'list', required=False)
+  model_type_string: bool(required=False)
   data_path: list(str(), required=False)
   keys: list(str(), required=False)
   id: bool(required=False)

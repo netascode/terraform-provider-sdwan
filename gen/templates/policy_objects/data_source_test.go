@@ -25,7 +25,16 @@ func TestAccDataSourceSdwan{{camelCase .Name}}PolicyObject(t *testing.T) {
 					{{- $list := .TfName }}
 					{{- range  .Attributes}}
 					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if eq .Type "List"}}
+					{{- $clist := .TfName }}
+					{{- range  .Attributes}}
+					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_policy_object.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
+					{{- end}}
+					{{- else}}
 					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_policy_object.test", "{{$list}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
 					{{- end}}
 					{{- end}}
 					{{- else}}
@@ -49,8 +58,18 @@ resource "sdwan_{{snakeCase $name}}_policy_object" "test" {
   {{.TfName}} = [{
     {{- range  .Attributes}}
     {{- if ne .ExcludeTest true}}
+	{{- if eq .Type "List"}}
+	{{.TfName}} = [{
+		{{- range  .Attributes}}
+		{{- if ne .ExcludeTest true}}
+		{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
+		{{- end}}
+		{{- end}}
+	}]
+	{{- else}}
     {{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
     {{- end}}
+	{{- end}}
 	{{- end}}
   }]
 {{- else}}

@@ -138,6 +138,7 @@ type YamlConfigAttribute struct {
 	TfName          string                `yaml:"tf_name"`
 	Type            string                `yaml:"type"`
 	ObjectType      string                `yaml:"object_type"`
+	ModelTypeString bool                  `yaml:"model_type_string"`
 	DataPath        []string              `yaml:"data_path"`
 	Keys            []string              `yaml:"keys"`
 	Id              bool                  `yaml:"id"`
@@ -214,6 +215,7 @@ var functions = template.FuncMap{
 	"camelCase": CamelCase,
 	"snakeCase": SnakeCase,
 	"sprintf":   fmt.Sprintf,
+	"toLower":   strings.ToLower,
 }
 
 func parseFeatureTemplateAttribute(attr *YamlConfigAttribute, model gjson.Result) {

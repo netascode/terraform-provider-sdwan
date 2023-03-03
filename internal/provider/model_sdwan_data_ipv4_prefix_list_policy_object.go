@@ -4,7 +4,6 @@ package provider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/tidwall/gjson"
@@ -33,7 +32,9 @@ func (data DataIPv4PrefixList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "ipPrefix", fmt.Sprint(item.Prefix.ValueString()))
+			if !item.Prefix.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "ipPrefix", item.Prefix.ValueString())
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

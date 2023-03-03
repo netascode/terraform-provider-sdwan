@@ -35,9 +35,15 @@ func (data IPv6PrefixList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "ipv6Prefix", fmt.Sprint(item.Prefix.ValueString()))
-			itemBody, _ = sjson.Set(itemBody, "le", fmt.Sprint(item.Le.ValueInt64()))
-			itemBody, _ = sjson.Set(itemBody, "ge", fmt.Sprint(item.Ge.ValueInt64()))
+			if !item.Prefix.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "ipv6Prefix", item.Prefix.ValueString())
+			}
+			if !item.Le.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "le", fmt.Sprint(item.Le.ValueInt64()))
+			}
+			if !item.Ge.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "ge", fmt.Sprint(item.Ge.ValueInt64()))
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

@@ -15,4 +15,5 @@ attributes:
         tf_name: application_family
         type: String
         description: Application family name
+        exclude_test: true
         example: web

@@ -4,7 +4,6 @@ package provider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/tidwall/gjson"
@@ -33,7 +32,9 @@ func (data ColorList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "color", fmt.Sprint(item.Color.ValueString()))
+			if !item.Color.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "color", item.Color.ValueString())
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

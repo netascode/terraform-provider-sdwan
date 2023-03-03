@@ -35,9 +35,15 @@ func (data Policer) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "burst", fmt.Sprint(item.Burst.ValueInt64()))
-			itemBody, _ = sjson.Set(itemBody, "exceed", fmt.Sprint(item.ExceedAction.ValueString()))
-			itemBody, _ = sjson.Set(itemBody, "rate", fmt.Sprint(item.Rate.ValueInt64()))
+			if !item.Burst.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "burst", fmt.Sprint(item.Burst.ValueInt64()))
+			}
+			if !item.ExceedAction.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "exceed", item.ExceedAction.ValueString())
+			}
+			if !item.Rate.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "rate", fmt.Sprint(item.Rate.ValueInt64()))
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

@@ -60,9 +60,27 @@ func (d *{{camelCase .Name}}PolicyObjectDataSource) Schema(ctx context.Context, 
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						{{- range  .Attributes}}
-						"{{.TfName}}": schema.{{.Type}}Attribute{
+						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 							MarkdownDescription: "{{.Description}}",
+							{{- if eq .Type "ListString"}}
+							ElementType:         types.StringType,
+							{{- end}}
 							Computed:            true,
+							{{- if eq .Type "List"}}
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									{{- range  .Attributes}}
+									"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+										MarkdownDescription: "{{.Description}}",
+										{{- if eq .Type "ListString"}}
+										ElementType:         types.StringType,
+										{{- end}}
+										Computed:            true,
+									},
+									{{- end}}
+								},
+							},
+							{{- end}}
 						},
 						{{- end}}
 					},
@@ -94,7 +112,7 @@ func (d *{{camelCase .Name}}PolicyObjectDataSource) Read(ctx context.Context, re
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", config.Id.String()))
 
-	res, err := d.client.Get("/template/policy/list/{{.Type}}/" + config.Id.ValueString())
+	res, err := d.client.Get("/template/policy/list/{{toLower .Type}}/" + config.Id.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to retrieve object, got error: %s", err))
 		return

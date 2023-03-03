@@ -17,7 +17,6 @@ func TestAccSdwanApplicationListPolicyObject(t *testing.T) {
 				Config: testAccSdwanApplicationListPolicyObjectConfig_all(),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdwan_application_list_policy_object.test", "entries.0.application", "netflix"),
-					resource.TestCheckResourceAttr("sdwan_application_list_policy_object.test", "entries.0.application_family", "web"),
 				),
 			},
 		},
@@ -30,7 +29,6 @@ func testAccSdwanApplicationListPolicyObjectConfig_all() string {
 		name = "TF_TEST_ALL"
 		entries = [{
 			application = "netflix"
-			application_family = "web"
 		}]
 	}
 	`

@@ -33,7 +33,9 @@ func (data ClassMap) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "queue", fmt.Sprint(item.Queue.ValueInt64()))
+			if !item.Queue.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "queue", fmt.Sprint(item.Queue.ValueInt64()))
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}

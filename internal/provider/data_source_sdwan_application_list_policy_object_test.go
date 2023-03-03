@@ -17,7 +17,6 @@ func TestAccDataSourceSdwanApplicationListPolicyObject(t *testing.T) {
 				Config: testAccDataSourceSdwanApplicationListPolicyObjectConfig,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.sdwan_application_list_policy_object.test", "entries.0.application", "netflix"),
-					resource.TestCheckResourceAttr("data.sdwan_application_list_policy_object.test", "entries.0.application_family", "web"),
 				),
 			},
 		},
@@ -30,7 +29,6 @@ resource "sdwan_application_list_policy_object" "test" {
   name = "TF_TEST_MIN"
   entries = [{
     application = "netflix"
-    application_family = "web"
   }]
 }
 

@@ -13,9 +13,11 @@ attributes:
         example: 10.0.0.0/12
       - model_name: le
         type: Int64
+        model_type_string: true
         description: Lesser equal
         example: 32
       - model_name: ge
         type: Int64
+        model_type_string: true
         description: Greater equal
         example: 24

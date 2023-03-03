@@ -8,6 +8,7 @@ attributes:
     attributes:
       - model_name: burst
         type: Int64
+        model_type_string: true
         description: Burst in bytes
         min_int: 15000
         max_int: 10000000
@@ -20,6 +21,7 @@ attributes:
         example: remark
       - model_name: rate
         type: Int64
+        model_type_string: true
         description: Rate in bps
         min_int: 8
         max_int: 100000000000

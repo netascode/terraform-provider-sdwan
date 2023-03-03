@@ -4,7 +4,6 @@ package provider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/tidwall/gjson"
@@ -34,8 +33,12 @@ func (data ApplicationList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "app", fmt.Sprint(item.Application.ValueString()))
-			itemBody, _ = sjson.Set(itemBody, "appFamily", fmt.Sprint(item.ApplicationFamily.ValueString()))
+			if !item.Application.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "app", item.Application.ValueString())
+			}
+			if !item.ApplicationFamily.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "appFamily", item.ApplicationFamily.ValueString())
+			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}
