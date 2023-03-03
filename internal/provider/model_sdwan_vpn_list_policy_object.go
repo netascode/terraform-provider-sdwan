@@ -18,7 +18,7 @@ type VPNList struct {
 }
 
 type VPNListEntries struct {
-	VpnId types.Int64 `tfsdk:"vpn_id"`
+	VpnId types.String `tfsdk:"vpn_id"`
 }
 
 func (data VPNList) getType() string {
@@ -33,7 +33,7 @@ func (data VPNList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "vpn", fmt.Sprint(item.VpnId.ValueInt64()))
+			itemBody, _ = sjson.Set(itemBody, "vpn", fmt.Sprint(item.VpnId.ValueString()))
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
 	}
@@ -51,9 +51,9 @@ func (data *VPNList) fromBody(ctx context.Context, res gjson.Result) {
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := VPNListEntries{}
 			if cValue := v.Get("vpn"); cValue.Exists() {
-				item.VpnId = types.Int64Value(cValue.Int())
+				item.VpnId = types.StringValue(cValue.String())
 			} else {
-				item.VpnId = types.Int64Null()
+				item.VpnId = types.StringNull()
 			}
 			data.Entries = append(data.Entries, item)
 			return true

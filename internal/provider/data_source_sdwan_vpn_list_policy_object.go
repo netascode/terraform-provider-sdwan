@@ -49,8 +49,8 @@ func (d *VPNListPolicyObjectDataSource) Schema(ctx context.Context, req datasour
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"vpn_id": schema.Int64Attribute{
-							MarkdownDescription: "VPN ID",
+						"vpn_id": schema.StringAttribute{
+							MarkdownDescription: "VPN ID or range of VPN IDs e.g., `100` or `200-300`",
 							Computed:            true,
 						},
 					},

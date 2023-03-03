@@ -8,6 +8,6 @@ attributes:
     attributes:
       - model_name: vpn
         tf_name: vpn_id
-        type: Int64
-        description: VPN ID
-        example: 1
+        type: String
+        description: VPN ID or range of VPN IDs e.g., `100` or `200-300`
+        example: 100-200

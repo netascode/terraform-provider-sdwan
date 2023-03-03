@@ -17,7 +17,7 @@ resource "sdwan_vpn_list_policy_object" "example" {
   name = "Example"
   entries = [
     {
-      vpn_id = 1
+      vpn_id = "100-200"
     }
   ]
 }
@@ -43,7 +43,7 @@ resource "sdwan_vpn_list_policy_object" "example" {
 
 Optional:
 
-- `vpn_id` (Number) VPN ID
+- `vpn_id` (String) VPN ID or range of VPN IDs e.g., `100` or `200-300`
 
 ## Import
 

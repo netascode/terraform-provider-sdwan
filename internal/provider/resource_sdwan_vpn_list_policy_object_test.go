@@ -16,7 +16,7 @@ func TestAccSdwanVPNListPolicyObject(t *testing.T) {
 			{
 				Config: testAccSdwanVPNListPolicyObjectConfig_all(),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdwan_vpn_list_policy_object.test", "entries.0.vpn_id", "1"),
+					resource.TestCheckResourceAttr("sdwan_vpn_list_policy_object.test", "entries.0.vpn_id", "100-200"),
 				),
 			},
 		},
@@ -28,7 +28,7 @@ func testAccSdwanVPNListPolicyObjectConfig_all() string {
 	resource "sdwan_vpn_list_policy_object" "test" {
 		name = "TF_TEST_ALL"
 		entries = [{
-			vpn_id = 1
+			vpn_id = "100-200"
 		}]
 	}
 	`
