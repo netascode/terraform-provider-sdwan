@@ -7,6 +7,7 @@
 - Add `sdwan_sla_class_policy_object` resource and data source
 - Add `sdwan_tloc_list_policy_object` resource and data source
 - Add `sdwan_region_list_policy_object` resource and data source
+- Add `sdwan_preferred_color_group_policy_object` resource and data source
 
 ## 0.1.1
 
