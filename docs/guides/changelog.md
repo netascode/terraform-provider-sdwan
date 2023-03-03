@@ -12,6 +12,9 @@ description: |-
 - Add `sdwan_application_list_policy_object` resource and data source
 - Add `sdwan_color_list_policy_object` resource and data source
 - Add `sdwan_site_list_policy_object` resource and data source
+- Add `sdwan_app_probe_class_policy_object` resource and data source
+- Add `sdwan_sla_class_policy_object` resource and data source
+- Add `sdwan_tloc_list_policy_object` resource and data source
 
 ## 0.1.1
 
