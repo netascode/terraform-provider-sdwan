@@ -27,7 +27,7 @@ data "sdwan_sla_class_policy_object" "example" {
 
 ### Read-Only
 
-- `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `entries` (Attributes List) List of entries, only 1 entry supported (see [below for nested schema](#nestedatt--entries))
 - `name` (String) The name of the policy object
 
 <a id="nestedatt--entries"></a>

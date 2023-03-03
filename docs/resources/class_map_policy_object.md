@@ -32,7 +32,7 @@ resource "sdwan_class_map_policy_object" "example" {
 
 ### Optional
 
-- `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `entries` (Attributes List) List of entries, only 1 entry supported (see [below for nested schema](#nestedatt--entries))
 
 ### Read-Only
 

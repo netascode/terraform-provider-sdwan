@@ -54,7 +54,7 @@ func (r *SLAClassPolicyObjectResource) Schema(ctx context.Context, req resource.
 				Required:            true,
 			},
 			"entries": schema.ListNestedAttribute{
-				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
+				MarkdownDescription: helpers.NewAttributeDescription("List of entries, only 1 entry supported").String,
 				Optional:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{

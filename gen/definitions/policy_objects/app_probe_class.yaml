@@ -4,7 +4,7 @@ type: appProbe
 attributes:
   - model_name: entries
     type: List
-    description: List of entries
+    description: List of entries, only 1 entry supported
     attributes:
       - model_name: forwardingClass
         tf_name: forwarding_class

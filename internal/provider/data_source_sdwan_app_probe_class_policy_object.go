@@ -45,7 +45,7 @@ func (d *AppProbeClassPolicyObjectDataSource) Schema(ctx context.Context, req da
 				Computed:            true,
 			},
 			"entries": schema.ListNestedAttribute{
-				MarkdownDescription: "List of entries",
+				MarkdownDescription: "List of entries, only 1 entry supported",
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{

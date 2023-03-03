@@ -4,7 +4,7 @@ type: sla
 attributes:
   - model_name: entries
     type: List
-    description: List of entries
+    description: List of entries, only 1 entry supported
     attributes:
       - model_name: appProbeClass
         tf_name: app_probe_class_id
