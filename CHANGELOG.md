@@ -2,6 +2,7 @@
 
 - Add `sdwan_application_list_policy_object` resource and data source
 - Add `sdwan_color_list_policy_object` resource and data source
+- Add `sdwan_site_list_policy_object` resource and data source
 
 ## 0.1.1
 
