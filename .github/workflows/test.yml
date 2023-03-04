@@ -17,13 +17,13 @@ permissions:
   contents: read
 
 jobs:
-  consecutiveness:
-    name: Consecutiveness
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mktcode/consecutive-workflow-action@325c790e765731dcd19a003e8e484e5e0afb84e7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+  # consecutiveness:
+  #   name: Consecutiveness
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: mktcode/consecutive-workflow-action@325c790e765731dcd19a003e8e484e5e0afb84e7
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
 
   # Ensure project builds before running testing matrix
   build:
@@ -47,7 +47,7 @@ jobs:
   # Run acceptance tests in a matrix with Terraform CLI versions
   test:
     name: Terraform Provider Acceptance Tests
-    needs: [consecutiveness, build]
+    needs: [build] # [consecutiveness, build]
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
