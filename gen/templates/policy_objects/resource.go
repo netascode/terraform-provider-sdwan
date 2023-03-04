@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -180,11 +181,31 @@ func (r *{{camelCase .Name}}PolicyObjectResource) Schema(ctx context.Context, re
 									{{- end}}
 								},
 							},
+							{{- if or (ne .MinList 0) (ne .MaxList 0)}}
+							Validators: []validator.List{
+								{{- if ne .MinList 0}}
+								listvalidator.SizeAtLeast({{.MinList}}),
+								{{- end}}
+								{{- if ne .MaxList 0}}
+								listvalidator.SizeAtMost({{.MaxList}}),
+								{{- end}}
+							},
+							{{- end}}
 							{{- end}}
 						},
 						{{- end}}
 					},
 				},
+				{{- if or (ne .MinList 0) (ne .MaxList 0)}}
+				Validators: []validator.List{
+					{{- if ne .MinList 0}}
+					listvalidator.SizeAtLeast({{.MinList}}),
+					{{- end}}
+					{{- if ne .MaxList 0}}
+					listvalidator.SizeAtMost({{.MaxList}}),
+					{{- end}}
+				},
+				{{- end}}
 				{{- end}}
 			},
 			{{- end}}

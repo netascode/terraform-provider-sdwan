@@ -150,6 +150,8 @@ type YamlConfigAttribute struct {
 	Description     string                `yaml:"description"`
 	Example         string                `yaml:"example"`
 	EnumValues      []string              `yaml:"enum_values"`
+	MinList         int64                 `yaml:"min_list"`
+	MaxList         int64                 `yaml:"max_list"`
 	MinInt          int64                 `yaml:"min_int"`
 	MaxInt          int64                 `yaml:"max_int"`
 	MinFloat        float64               `yaml:"min_float"`

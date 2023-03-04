@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -65,6 +66,9 @@ func (r *ColorListPolicyObjectResource) Schema(ctx context.Context, req resource
 							},
 						},
 					},
+				},
+				Validators: []validator.List{
+					listvalidator.SizeAtLeast(1),
 				},
 			},
 		},

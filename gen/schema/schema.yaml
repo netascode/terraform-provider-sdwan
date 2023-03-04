@@ -26,6 +26,8 @@ attribute:
   description: str(required=False)
   example: any(str(), int(), bool(), required=False)
   enum_values: list(str(), required=False)
+  min_list: int(required=False)
+  max_list: int(required=False)
   min_int: int(required=False)
   max_int: int(required=False)
   min_float: num(required=False)

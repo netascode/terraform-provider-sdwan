@@ -4,6 +4,7 @@ type: site
 attributes:
   - model_name: entries
     type: List
+    min_list: 1
     description: List of entries
     attributes:
       - model_name: siteId
