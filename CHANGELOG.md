@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2
 
 - Add `sdwan_application_list_policy_object` resource and data source
 - Add `sdwan_color_list_policy_object` resource and data source
