@@ -367,7 +367,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 		{{if .Variable}}data.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
 	}
 	{{- else if eq .Type "ListString"}}
-	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); value.Exists() {
+	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.{{toGoName .TfName}} = types.ListNull(types.StringType)
 			{{if .Variable}}
@@ -387,7 +387,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 		{{if .Variable}}data.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
 	}
 	{{- else if eq .Type "List"}}
-	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue"); value.Exists() {
+	if value := res.Get(path + "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue"); len(value.Array()) > 0 {
 		data.{{toGoName .TfName}} = make([]{{$name}}{{toGoName .TfName}}, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := {{$name}}{{toGoName .TfName}}{}
@@ -473,7 +473,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 				{{if .Variable}}item.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
 			}
 			{{- else if eq .Type "ListString"}}
-			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); len(cValue.Array()) > 0 {
 				if cValue.String() == "variableName" {
 					item.{{toGoName .TfName}} = types.ListNull(types.StringType)
 					{{if .Variable}}
@@ -493,7 +493,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 				{{if .Variable}}item.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
 			}
 			{{- else if eq .Type "List"}}
-			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue"); cValue.Exists() {
+			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue"); len(cValue.Array()) > 0 {
 				item.{{toGoName .TfName}} = make([]{{$name}}{{$cname}}{{toGoName .TfName}}, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := {{$name}}{{$cname}}{{toGoName .TfName}}{}
@@ -579,7 +579,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 						{{if .Variable}}cItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
 					}
 					{{- else if eq .Type "ListString"}}
-					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); ccValue.Exists() {
+					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); len(ccValue.Array()) > 0 {
 						if ccValue.String() == "variableName" {
 							cItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
 							{{if .Variable}}

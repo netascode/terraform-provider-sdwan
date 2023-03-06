@@ -146,9 +146,6 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						"name": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP community").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(1, 32),
-							},
 						},
 						"view": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set name of the SNMP view").String,
@@ -231,9 +228,6 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						"authentication_password": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify authentication protocol password").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(1, 128),
-							},
 						},
 						"authentication_password_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -253,9 +247,6 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						"privacy_password": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Specify privacy protocol password").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(1, 128),
-							},
 						},
 						"privacy_password_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,

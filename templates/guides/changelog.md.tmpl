@@ -7,6 +7,11 @@ description: |-
 
 # Changelog
 
+## 0.1.3 (unreleased)
+
+- Fix string length validation of encrypted passhprases in feature templates
+- Fix parsing of empty lists in feature template payloads
+
 ## 0.1.2
 
 - Add `sdwan_application_list_policy_object` resource and data source

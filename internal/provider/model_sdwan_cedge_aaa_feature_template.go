@@ -804,7 +804,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.ServerGroupsPriorityOrder = types.StringNull()
 
 	}
-	if value := res.Get(path + "user.vipValue"); value.Exists() {
+	if value := res.Get(path + "user.vipValue"); len(value.Array()) > 0 {
 		data.Users = make([]CEdgeAAAUsers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAUsers{}
@@ -878,7 +878,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.PrivilegeLevel = types.StringNull()
 				item.PrivilegeLevelVariable = types.StringNull()
 			}
-			if cValue := v.Get("pubkey-chain.vipValue"); cValue.Exists() {
+			if cValue := v.Get("pubkey-chain.vipValue"); len(cValue.Array()) > 0 {
 				item.SshPubkeys = make([]CEdgeAAAUsersSshPubkeys, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAAUsersSshPubkeys{}
@@ -925,7 +925,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "radius.vipValue"); value.Exists() {
+	if value := res.Get(path + "radius.vipValue"); len(value.Array()) > 0 {
 		data.RadiusServerGroups = make([]CEdgeAAARadiusServerGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusServerGroups{}
@@ -980,7 +980,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.SourceInterface = types.StringNull()
 				item.SourceInterfaceVariable = types.StringNull()
 			}
-			if cValue := v.Get("server.vipValue"); cValue.Exists() {
+			if cValue := v.Get("server.vipValue"); len(cValue.Array()) > 0 {
 				item.Servers = make([]CEdgeAAARadiusServerGroupsServers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusServerGroupsServers{}
@@ -1154,7 +1154,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "radius-dynamic-author.radius-client.vipValue"); value.Exists() {
+	if value := res.Get(path + "radius-dynamic-author.radius-client.vipValue"); len(value.Array()) > 0 {
 		data.RadiusClients = make([]CEdgeAAARadiusClients, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusClients{}
@@ -1177,7 +1177,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.ClientIp = types.StringNull()
 				item.ClientIpVariable = types.StringNull()
 			}
-			if cValue := v.Get("vpn.vipValue"); cValue.Exists() {
+			if cValue := v.Get("vpn.vipValue"); len(cValue.Array()) > 0 {
 				item.VonConfigurations = make([]CEdgeAAARadiusClientsVonConfigurations, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusClientsVonConfigurations{}
@@ -1338,7 +1338,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusTrustsecGroup = types.StringNull()
 
 	}
-	if value := res.Get(path + "tacacs.vipValue"); value.Exists() {
+	if value := res.Get(path + "tacacs.vipValue"); len(value.Array()) > 0 {
 		data.TacacsServerGroups = make([]CEdgeAAATacacsServerGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAATacacsServerGroups{}
@@ -1393,7 +1393,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.SourceInterface = types.StringNull()
 				item.SourceInterfaceVariable = types.StringNull()
 			}
-			if cValue := v.Get("server.vipValue"); cValue.Exists() {
+			if cValue := v.Get("server.vipValue"); len(cValue.Array()) > 0 {
 				item.Servers = make([]CEdgeAAATacacsServerGroupsServers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAATacacsServerGroupsServers{}
@@ -1510,7 +1510,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "accounting.accounting-rule.vipValue"); value.Exists() {
+	if value := res.Get(path + "accounting.accounting-rule.vipValue"); len(value.Array()) > 0 {
 		data.AccountingRules = make([]CEdgeAAAAccountingRules, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAccountingRules{}
@@ -1581,7 +1581,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.StartStop = types.BoolNull()
 				item.StartStopVariable = types.StringNull()
 			}
-			if cValue := v.Get("group.vipType"); cValue.Exists() {
+			if cValue := v.Get("group.vipType"); len(cValue.Array()) > 0 {
 				if cValue.String() == "variableName" {
 					item.Group = types.ListNull(types.StringType)
 
@@ -1639,7 +1639,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.AuthorizationConfigCommands = types.BoolNull()
 		data.AuthorizationConfigCommandsVariable = types.StringNull()
 	}
-	if value := res.Get(path + "authorization.authorization-rule.vipValue"); value.Exists() {
+	if value := res.Get(path + "authorization.authorization-rule.vipValue"); len(value.Array()) > 0 {
 		data.AuthorizationRules = make([]CEdgeAAAAuthorizationRules, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAuthorizationRules{}
@@ -1691,7 +1691,7 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.PrivilegeLevel = types.StringNull()
 
 			}
-			if cValue := v.Get("group.vipType"); cValue.Exists() {
+			if cValue := v.Get("group.vipType"); len(cValue.Array()) > 0 {
 				if cValue.String() == "variableName" {
 					item.Group = types.ListNull(types.StringType)
 

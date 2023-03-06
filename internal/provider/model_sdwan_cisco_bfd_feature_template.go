@@ -238,7 +238,7 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		data.DefaultDscp = types.Int64Null()
 		data.DefaultDscpVariable = types.StringNull()
 	}
-	if value := res.Get(path + "color.vipValue"); value.Exists() {
+	if value := res.Get(path + "color.vipValue"); len(value.Array()) > 0 {
 		data.Colors = make([]CiscoBFDColors, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBFDColors{}

@@ -283,11 +283,13 @@ func parseFeatureTemplateAttribute(attr *YamlConfigAttribute, model gjson.Result
 		}
 		if contains([]string{"string", "passphrase", "restrictedPassphrase", "datetimelocal", "ip", "ipv4", "ipv6", "ipv4-prefix", "ipv6-prefix", "dnsHostName", "interfaceList", "tlocExtension", "xConnect", "mac"}, t) {
 			attr.Type = "String"
-			if r.Get("dataType.minLength").Exists() {
-				attr.StringMinLength = r.Get("dataType.minLength").Int()
-			}
-			if r.Get("dataType.maxLength").Exists() {
-				attr.StringMaxLength = r.Get("dataType.maxLength").Int()
+			if t != "passphrase" && t != "restrictedPassphrase" {
+				if r.Get("dataType.minLength").Exists() {
+					attr.StringMinLength = r.Get("dataType.minLength").Int()
+				}
+				if r.Get("dataType.maxLength").Exists() {
+					attr.StringMaxLength = r.Get("dataType.maxLength").Int()
+				}
 			}
 		} else if t == "stringList" {
 			attr.Type = "ListString"

@@ -491,7 +491,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Location = types.StringNull()
 		data.LocationVariable = types.StringNull()
 	}
-	if value := res.Get(path + "view.vipValue"); value.Exists() {
+	if value := res.Get(path + "view.vipValue"); len(value.Array()) > 0 {
 		data.Views = make([]CiscoSNMPViews, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPViews{}
@@ -511,7 +511,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Name = types.StringNull()
 
 			}
-			if cValue := v.Get("oid.vipValue"); cValue.Exists() {
+			if cValue := v.Get("oid.vipValue"); len(cValue.Array()) > 0 {
 				item.ObjectIdentifiers = make([]CiscoSNMPViewsObjectIdentifiers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoSNMPViewsObjectIdentifiers{}
@@ -561,7 +561,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "community.vipValue"); value.Exists() {
+	if value := res.Get(path + "community.vipValue"); len(value.Array()) > 0 {
 		data.Communities = make([]CiscoSNMPCommunities, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPCommunities{}
@@ -623,7 +623,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "group.vipValue"); value.Exists() {
+	if value := res.Get(path + "group.vipValue"); len(value.Array()) > 0 {
 		data.Groups = make([]CiscoSNMPGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPGroups{}
@@ -682,7 +682,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "user.vipValue"); value.Exists() {
+	if value := res.Get(path + "user.vipValue"); len(value.Array()) > 0 {
 		data.Users = make([]CiscoSNMPUsers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPUsers{}
@@ -801,7 +801,7 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "trap.target.vipValue"); value.Exists() {
+	if value := res.Get(path + "trap.target.vipValue"); len(value.Array()) > 0 {
 		data.TrapTargets = make([]CiscoSNMPTrapTargets, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPTrapTargets{}

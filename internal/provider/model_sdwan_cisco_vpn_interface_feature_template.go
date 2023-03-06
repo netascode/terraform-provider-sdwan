@@ -2220,7 +2220,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.Address = types.StringNull()
 		data.AddressVariable = types.StringNull()
 	}
-	if value := res.Get(path + "ip.secondary-address.vipValue"); value.Exists() {
+	if value := res.Get(path + "ip.secondary-address.vipValue"); len(value.Array()) > 0 {
 		data.Ipv4SecondaryAddresses = make([]CiscoVPNInterfaceIpv4SecondaryAddresses, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv4SecondaryAddresses{}
@@ -2323,7 +2323,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.Dhcpv6 = types.BoolNull()
 		data.Dhcpv6Variable = types.StringNull()
 	}
-	if value := res.Get(path + "ipv6.secondary-address.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6.secondary-address.vipValue"); len(value.Array()) > 0 {
 		data.Ipv6SecondaryAddresses = make([]CiscoVPNInterfaceIpv6SecondaryAddresses, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv6SecondaryAddresses{}
@@ -2350,7 +2350,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "ipv6.access-list.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6.access-list.vipValue"); len(value.Array()) > 0 {
 		data.Ipv6AccessLists = make([]CiscoVPNInterfaceIpv6AccessLists, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv6AccessLists{}
@@ -2393,7 +2393,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "dhcp-helper.vipType"); value.Exists() {
+	if value := res.Get(path + "dhcp-helper.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.Ipv4DhcpHelper = types.ListNull(types.StringType)
 
@@ -2412,7 +2412,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv4DhcpHelper = types.ListNull(types.StringType)
 		data.Ipv4DhcpHelperVariable = types.StringNull()
 	}
-	if value := res.Get(path + "ipv6.dhcp-helper-v6.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6.dhcp-helper-v6.vipValue"); len(value.Array()) > 0 {
 		data.Ipv6DhcpHelpers = make([]CiscoVPNInterfaceIpv6DhcpHelpers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv6DhcpHelpers{}
@@ -2458,7 +2458,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "tracker.vipType"); value.Exists() {
+	if value := res.Get(path + "tracker.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.Tracker = types.ListNull(types.StringType)
 
@@ -2740,7 +2740,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.Nat66Interface = types.BoolNull()
 
 	}
-	if value := res.Get(path + "nat66.static-nat66.vipValue"); value.Exists() {
+	if value := res.Get(path + "nat66.static-nat66.vipValue"); len(value.Array()) > 0 {
 		data.StaticNat66Entries = make([]CiscoVPNInterfaceStaticNat66Entries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceStaticNat66Entries{}
@@ -2805,7 +2805,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "nat.static.vipValue"); value.Exists() {
+	if value := res.Get(path + "nat.static.vipValue"); len(value.Array()) > 0 {
 		data.StaticNatEntries = make([]CiscoVPNInterfaceStaticNatEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceStaticNatEntries{}
@@ -2889,7 +2889,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "nat.static-port-forward.vipValue"); value.Exists() {
+	if value := res.Get(path + "nat.static-port-forward.vipValue"); len(value.Array()) > 0 {
 		data.StaticPortForwardEntries = make([]CiscoVPNInterfaceStaticPortForwardEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceStaticPortForwardEntries{}
@@ -3084,7 +3084,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.SecondaryRegion = types.StringNull()
 		data.SecondaryRegionVariable = types.StringNull()
 	}
-	if value := res.Get(path + "tunnel-interface.encapsulation.vipValue"); value.Exists() {
+	if value := res.Get(path + "tunnel-interface.encapsulation.vipValue"); len(value.Array()) > 0 {
 		data.TunnelInterfaceEncapsulations = make([]CiscoVPNInterfaceTunnelInterfaceEncapsulations, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceTunnelInterfaceEncapsulations{}
@@ -3241,7 +3241,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.TunnelBandwidth = types.Int64Null()
 		data.TunnelBandwidthVariable = types.StringNull()
 	}
-	if value := res.Get(path + "tunnel-interface.group.vipType"); value.Exists() {
+	if value := res.Get(path + "tunnel-interface.group.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.TunnelInterfaceGroups = types.ListNull(types.StringType)
 
@@ -3336,7 +3336,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.TunnelInterfaceVbondAsStunServer = types.BoolNull()
 		data.TunnelInterfaceVbondAsStunServerVariable = types.StringNull()
 	}
-	if value := res.Get(path + "tunnel-interface.exclude-controller-group-list.vipType"); value.Exists() {
+	if value := res.Get(path + "tunnel-interface.exclude-controller-group-list.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.TunnelInterfaceExcludeControllerGroupList = types.ListNull(types.StringType)
 
@@ -4454,7 +4454,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.RewriteRuleName = types.StringNull()
 		data.RewriteRuleNameVariable = types.StringNull()
 	}
-	if value := res.Get(path + "access-list.vipValue"); value.Exists() {
+	if value := res.Get(path + "access-list.vipValue"); len(value.Array()) > 0 {
 		data.AccessLists = make([]CiscoVPNInterfaceAccessLists, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceAccessLists{}
@@ -4497,7 +4497,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "arp.ip.vipValue"); value.Exists() {
+	if value := res.Get(path + "arp.ip.vipValue"); len(value.Array()) > 0 {
 		data.StaticArps = make([]CiscoVPNInterfaceStaticArps, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceStaticArps{}
@@ -4543,7 +4543,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "vrrp.vipValue"); value.Exists() {
+	if value := res.Get(path + "vrrp.vipValue"); len(value.Array()) > 0 {
 		data.Ipv4Vrrps = make([]CiscoVPNInterfaceIpv4Vrrps, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv4Vrrps{}
@@ -4658,7 +4658,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 				item.IpAddress = types.StringNull()
 				item.IpAddressVariable = types.StringNull()
 			}
-			if cValue := v.Get("ipv4-secondary.vipValue"); cValue.Exists() {
+			if cValue := v.Get("ipv4-secondary.vipValue"); len(cValue.Array()) > 0 {
 				item.Ipv4SecondaryAddresses = make([]CiscoVPNInterfaceIpv4VrrpsIpv4SecondaryAddresses, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoVPNInterfaceIpv4VrrpsIpv4SecondaryAddresses{}
@@ -4720,7 +4720,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 				item.TlocPreferenceChangeValue = types.Int64Null()
 				item.TlocPreferenceChangeValueVariable = types.StringNull()
 			}
-			if cValue := v.Get("tracking-object.vipValue"); cValue.Exists() {
+			if cValue := v.Get("tracking-object.vipValue"); len(cValue.Array()) > 0 {
 				item.TrackingObjects = make([]CiscoVPNInterfaceIpv4VrrpsTrackingObjects, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoVPNInterfaceIpv4VrrpsTrackingObjects{}
@@ -4789,7 +4789,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "ipv6-vrrp.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6-vrrp.vipValue"); len(value.Array()) > 0 {
 		data.Ipv6Vrrps = make([]CiscoVPNInterfaceIpv6Vrrps, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoVPNInterfaceIpv6Vrrps{}
@@ -4888,7 +4888,7 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 				item.TrackPrefixList = types.StringNull()
 				item.TrackPrefixListVariable = types.StringNull()
 			}
-			if cValue := v.Get("ipv6.vipValue"); cValue.Exists() {
+			if cValue := v.Get("ipv6.vipValue"); len(cValue.Array()) > 0 {
 				item.Ipv6Adresses = make([]CiscoVPNInterfaceIpv6VrrpsIpv6Adresses, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoVPNInterfaceIpv6VrrpsIpv6Adresses{}

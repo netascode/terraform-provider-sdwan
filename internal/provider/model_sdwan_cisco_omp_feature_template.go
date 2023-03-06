@@ -536,7 +536,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.TransportGateway = types.StringNull()
 		data.TransportGatewayVariable = types.StringNull()
 	}
-	if value := res.Get(path + "advertise.vipValue"); value.Exists() {
+	if value := res.Get(path + "advertise.vipValue"); len(value.Array()) > 0 {
 		data.AdvertiseIpv4Routes = make([]CiscoOMPAdvertiseIpv4Routes, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv4Routes{}
@@ -579,7 +579,7 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "ipv6-advertise.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6-advertise.vipValue"); len(value.Array()) > 0 {
 		data.AdvertiseIpv6Routes = make([]CiscoOMPAdvertiseIpv6Routes, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv6Routes{}

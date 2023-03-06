@@ -430,7 +430,7 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 		data.LogRotations = types.Int64Null()
 		data.LogRotationsVariable = types.StringNull()
 	}
-	if value := res.Get(path + "tls-profile.vipValue"); value.Exists() {
+	if value := res.Get(path + "tls-profile.vipValue"); len(value.Array()) > 0 {
 		data.TlsProfiles = make([]CiscoLoggingTlsProfiles, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingTlsProfiles{}
@@ -511,7 +511,7 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "server.vipValue"); value.Exists() {
+	if value := res.Get(path + "server.vipValue"); len(value.Array()) > 0 {
 		data.Ipv4Servers = make([]CiscoLoggingIpv4Servers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingIpv4Servers{}
@@ -652,7 +652,7 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "ipv6-server.vipValue"); value.Exists() {
+	if value := res.Get(path + "ipv6-server.vipValue"); len(value.Array()) > 0 {
 		data.Ipv6Servers = make([]CiscoLoggingIpv6Servers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingIpv6Servers{}

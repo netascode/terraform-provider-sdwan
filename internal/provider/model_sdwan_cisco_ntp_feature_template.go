@@ -306,7 +306,7 @@ func (data *CiscoNTP) fromBody(ctx context.Context, res gjson.Result) {
 		data.MasterSourceInterface = types.StringNull()
 		data.MasterSourceInterfaceVariable = types.StringNull()
 	}
-	if value := res.Get(path + "keys.trusted.vipType"); value.Exists() {
+	if value := res.Get(path + "keys.trusted.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.TrustedKeys = types.ListNull(types.StringType)
 
@@ -325,7 +325,7 @@ func (data *CiscoNTP) fromBody(ctx context.Context, res gjson.Result) {
 		data.TrustedKeys = types.ListNull(types.StringType)
 		data.TrustedKeysVariable = types.StringNull()
 	}
-	if value := res.Get(path + "keys.authentication.vipValue"); value.Exists() {
+	if value := res.Get(path + "keys.authentication.vipValue"); len(value.Array()) > 0 {
 		data.AuthenticationKeys = make([]CiscoNTPAuthenticationKeys, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoNTPAuthenticationKeys{}
@@ -371,7 +371,7 @@ func (data *CiscoNTP) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "server.vipValue"); value.Exists() {
+	if value := res.Get(path + "server.vipValue"); len(value.Array()) > 0 {
 		data.Servers = make([]CiscoNTPServers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoNTPServers{}

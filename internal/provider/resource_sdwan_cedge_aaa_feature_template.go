@@ -111,16 +111,10 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"password": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the user password").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(0, 32),
-							},
 						},
 						"secret": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set the user scrypt password/hash").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(0, 32),
-							},
 						},
 						"privilege_level": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Set Privilege Level for this user").AddStringEnumDescription("1", "15").AddDefaultValueDescription("15").String,
@@ -248,16 +242,10 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 									"key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the Radius server shared key").String,
 										Optional:            true,
-										Validators: []validator.String{
-											stringvalidator.LengthBetween(1, 256),
-										},
 									},
 									"secret_key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the Radius server shared type 7 encrypted key").String,
 										Optional:            true,
-										Validators: []validator.String{
-											stringvalidator.LengthBetween(1, 150),
-										},
 									},
 									"secret_key_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
@@ -450,16 +438,10 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 									"key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the TACACS server shared key").String,
 										Optional:            true,
-										Validators: []validator.String{
-											stringvalidator.LengthBetween(1, 256),
-										},
 									},
 									"secret_key": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Set the TACACS server shared type 7 encrypted key").String,
 										Optional:            true,
-										Validators: []validator.String{
-											stringvalidator.LengthBetween(1, 150),
-										},
 									},
 									"secret_key_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,

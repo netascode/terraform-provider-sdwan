@@ -1008,7 +1008,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.GeoFencingSms = types.BoolNull()
 
 	}
-	if value := res.Get(path + "gps-location.geo-fencing.sms.mobile-number.vipValue"); value.Exists() {
+	if value := res.Get(path + "gps-location.geo-fencing.sms.mobile-number.vipValue"); len(value.Array()) > 0 {
 		data.GeoFencingSmsPhoneNumbers = make([]CiscoSystemGeoFencingSmsPhoneNumbers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemGeoFencingSmsPhoneNumbers{}
@@ -1035,7 +1035,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "device-groups.vipType"); value.Exists() {
+	if value := res.Get(path + "device-groups.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.DeviceGroups = types.ListNull(types.StringType)
 
@@ -1054,7 +1054,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.DeviceGroups = types.ListNull(types.StringType)
 		data.DeviceGroupsVariable = types.StringNull()
 	}
-	if value := res.Get(path + "controller-group-list.vipType"); value.Exists() {
+	if value := res.Get(path + "controller-group-list.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.ControllerGroupList = types.ListNull(types.StringType)
 
@@ -1339,7 +1339,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.IdleTimeout = types.Int64Null()
 		data.IdleTimeoutVariable = types.StringNull()
 	}
-	if value := res.Get(path + "tracker.vipValue"); value.Exists() {
+	if value := res.Get(path + "tracker.vipValue"); len(value.Array()) > 0 {
 		data.Trackers = make([]CiscoSystemTrackers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemTrackers{}
@@ -1476,7 +1476,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.EndpointApiUrl = types.StringNull()
 				item.EndpointApiUrlVariable = types.StringNull()
 			}
-			if cValue := v.Get("elements.vipType"); cValue.Exists() {
+			if cValue := v.Get("elements.vipType"); len(cValue.Array()) > 0 {
 				if cValue.String() == "variableName" {
 					item.Elements = types.ListNull(types.StringType)
 
@@ -1594,7 +1594,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "object-track.vipValue"); value.Exists() {
+	if value := res.Get(path + "object-track.vipValue"); len(value.Array()) > 0 {
 		data.ObjectTrackers = make([]CiscoSystemObjectTrackers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSystemObjectTrackers{}
@@ -1709,7 +1709,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 				item.VpnId = types.Int64Null()
 
 			}
-			if cValue := v.Get("object.vipValue"); cValue.Exists() {
+			if cValue := v.Get("object.vipValue"); len(cValue.Array()) > 0 {
 				item.GroupTracksIds = make([]CiscoSystemObjectTrackersGroupTracksIds, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoSystemObjectTrackersGroupTracksIds{}
@@ -1873,7 +1873,7 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 		data.AffinityGroupNumber = types.Int64Null()
 		data.AffinityGroupNumberVariable = types.StringNull()
 	}
-	if value := res.Get(path + "affinity-group.preference.vipType"); value.Exists() {
+	if value := res.Get(path + "affinity-group.preference.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.AffinityGroupPreference = types.ListNull(types.StringType)
 

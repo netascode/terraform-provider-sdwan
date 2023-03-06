@@ -461,7 +461,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.ExtendedArWindow = types.Int64Null()
 		data.ExtendedArWindowVariable = types.StringNull()
 	}
-	if value := res.Get(path + "ipsec.authentication-type.vipType"); value.Exists() {
+	if value := res.Get(path + "ipsec.authentication-type.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.AuthenticationType = types.ListNull(types.StringType)
 
@@ -480,7 +480,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.AuthenticationType = types.ListNull(types.StringType)
 		data.AuthenticationTypeVariable = types.StringNull()
 	}
-	if value := res.Get(path + "ipsec.integrity-type.vipType"); value.Exists() {
+	if value := res.Get(path + "ipsec.integrity-type.vipType"); len(value.Array()) > 0 {
 		if value.String() == "variableName" {
 			data.IntegrityType = types.ListNull(types.StringType)
 
@@ -518,7 +518,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.PairwiseKeying = types.BoolNull()
 		data.PairwiseKeyingVariable = types.StringNull()
 	}
-	if value := res.Get(path + "trustsec.keychain.vipValue"); value.Exists() {
+	if value := res.Get(path + "trustsec.keychain.vipValue"); len(value.Array()) > 0 {
 		data.Keychains = make([]CiscoSecurityKeychains, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeychains{}
@@ -558,7 +558,7 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 			return true
 		})
 	}
-	if value := res.Get(path + "key.vipValue"); value.Exists() {
+	if value := res.Get(path + "key.vipValue"); len(value.Array()) > 0 {
 		data.Keys = make([]CiscoSecurityKeys, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeys{}

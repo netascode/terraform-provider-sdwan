@@ -127,9 +127,6 @@ func (r *CiscoNTPFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"value": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Enter cleartext or AES-encrypted MD5 authentication key").String,
 							Optional:            true,
-							Validators: []validator.String{
-								stringvalidator.LengthBetween(1, 32),
-							},
 						},
 						"value_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
