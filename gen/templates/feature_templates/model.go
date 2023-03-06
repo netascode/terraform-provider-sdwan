@@ -147,114 +147,118 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
 	}
 	{{- else if eq .Type "List"}}
+	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 	if len(data.{{toGoName .TfName}}) > 0 {
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipPrimaryKey", []string{ {{range .Keys}}"{{.}}",{{end}} })
-		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", []interface{}{})
-		for _, item := range data.{{toGoName .TfName}} {
-			itemBody := ""
+	} else {
+		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+	}
+	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipPrimaryKey", []string{ {{range .Keys}}"{{.}}",{{end}} })
+	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", []interface{}{})
+	for _, item := range data.{{toGoName .TfName}} {
+		itemBody := ""
+		{{- range .Attributes}}
+		{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+		{{if eq .Variable true}}
+		if !item.{{toGoName .TfName}}Variable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+		} else
+		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", item.{{toGoName .TfName}}.Value{{.Type}}())
+		}
+		{{- else if eq .Type "Bool"}}
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+		{{if eq .Variable true}}
+		if !item.{{toGoName .TfName}}Variable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+		} else
+		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", strconv.FormatBool(item.{{toGoName .TfName}}.ValueBool()))
+		}
+		{{- else if eq .Type "ListString"}}
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+		{{if eq .Variable true}}
+		if !item.{{toGoName .TfName}}Variable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+		} else
+		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+			var values []string
+			item.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
+		}
+		{{- else if eq .Type "List"}}
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+		if len(item.{{toGoName .TfName}}) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipPrimaryKey", []string{ {{range .Keys}}"{{.}}",{{end}} })
+		itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", []interface{}{})
+		for _, childItem := range item.{{toGoName .TfName}} {
+			itemChildBody := ""
 			{{- range .Attributes}}
 			{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
-			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
-			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+			if !childItem.{{toGoName .TfName}}Variable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
-			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			} else {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", item.{{toGoName .TfName}}.Value{{.Type}}())
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", childItem.{{toGoName .TfName}}.Value{{.Type}}())
 			}
 			{{- else if eq .Type "Bool"}}
-			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
-			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+			if !childItem.{{toGoName .TfName}}Variable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
-			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			} else {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", strconv.FormatBool(item.{{toGoName .TfName}}.ValueBool()))
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", strconv.FormatBool(childItem.{{toGoName .TfName}}.ValueBool()))
 			}
 			{{- else if eq .Type "ListString"}}
-			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			{{if eq .Variable true}}
-			if !item.{{toGoName .TfName}}Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
+			if !childItem.{{toGoName .TfName}}Variable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
-			{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			} else {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
 				var values []string
 				item.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
-			}
-			{{- else if eq .Type "List"}}
-			if len(item.{{toGoName .TfName}}) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipPrimaryKey", []string{ {{range .Keys}}"{{.}}",{{end}} })
-				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", []interface{}{})
-				for _, childItem := range item.{{toGoName .TfName}} {
-					itemChildBody := ""
-					{{- range .Attributes}}
-					{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
-					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
-					{{if eq .Variable true}}
-					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
-					} else
-					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", childItem.{{toGoName .TfName}}.Value{{.Type}}())
-					}
-					{{- else if eq .Type "Bool"}}
-					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
-					{{if eq .Variable true}}
-					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
-					} else
-					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", strconv.FormatBool(childItem.{{toGoName .TfName}}.ValueBool()))
-					}
-					{{- else if eq .Type "ListString"}}
-					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
-					{{if eq .Variable true}}
-					if !childItem.{{toGoName .TfName}}Variable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
-					} else
-					{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
-						var values []string
-						item.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
-						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
-					}
-					{{- end}}
-					{{- end}}
-					itemBody, _ = sjson.SetRaw(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue.-1", itemChildBody)
-				}
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
 			}
 			{{- end}}
 			{{- end}}
-			body, _ = sjson.SetRaw(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue.-1", itemBody)
+			itemBody, _ = sjson.SetRaw(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue.-1", itemChildBody)
 		}
+		{{- end}}
+		{{- end}}
+		body, _ = sjson.SetRaw(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue.-1", itemBody)
 	}
 	{{- end}}
 	{{- end}}

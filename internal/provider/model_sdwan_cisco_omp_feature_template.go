@@ -218,50 +218,54 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipValue", data.TransportGateway.ValueString())
 	}
+	body, _ = sjson.Set(body, path+"advertise."+"vipObjectType", "tree")
 	if len(data.AdvertiseIpv4Routes) > 0 {
-		body, _ = sjson.Set(body, path+"advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"advertise."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"advertise."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
-		for _, item := range data.AdvertiseIpv4Routes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-			if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
-
-			if !item.AdvertiseExternalOspfVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipVariableName", item.AdvertiseExternalOspfVariable.ValueString())
-			} else if item.AdvertiseExternalOspf.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route."+"vipValue", item.AdvertiseExternalOspf.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"advertise."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"advertise."+"vipType", "ignore")
 	}
-	if len(data.AdvertiseIpv6Routes) > 0 {
-		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipObjectType", "tree")
-		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
-		for _, item := range data.AdvertiseIpv6Routes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-			if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"ipv6-advertise."+"vipValue.-1", itemBody)
+	body, _ = sjson.Set(body, path+"advertise."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
+	for _, item := range data.AdvertiseIpv4Routes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+		if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
 		}
+		itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
+
+		if !item.AdvertiseExternalOspfVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipVariableName", item.AdvertiseExternalOspfVariable.ValueString())
+		} else if item.AdvertiseExternalOspf.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipValue", item.AdvertiseExternalOspf.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"advertise."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipObjectType", "tree")
+	if len(data.AdvertiseIpv6Routes) > 0 {
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipType", "constant")
+	} else {
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipType", "ignore")
+	}
+	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
+	for _, item := range data.AdvertiseIpv6Routes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+		if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"ipv6-advertise."+"vipValue.-1", itemBody)
 	}
 	return body
 }

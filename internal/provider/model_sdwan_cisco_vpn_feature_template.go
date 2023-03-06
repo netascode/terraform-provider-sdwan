@@ -387,1234 +387,1288 @@ func (data CiscoVPN) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipValue", strconv.FormatBool(data.EnhanceEcnpKeying.ValueBool()))
 	}
+	body, _ = sjson.Set(body, path+"dns."+"vipObjectType", "tree")
 	if len(data.DnsIpv4Servers) > 0 {
-		body, _ = sjson.Set(body, path+"dns."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"dns."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"dns."+"vipPrimaryKey", []string{"dns-addr"})
-		body, _ = sjson.Set(body, path+"dns."+"vipValue", []interface{}{})
-		for _, item := range data.DnsIpv4Servers {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipObjectType", "object")
-			if item.Address.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipValue", item.Address.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "role."+"vipObjectType", "object")
-
-			if !item.RoleVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipVariableName", item.RoleVariable.ValueString())
-			} else if item.Role.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipValue", item.Role.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"dns."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"dns."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"dns."+"vipPrimaryKey", []string{"dns-addr"})
+	body, _ = sjson.Set(body, path+"dns."+"vipValue", []interface{}{})
+	for _, item := range data.DnsIpv4Servers {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipObjectType", "object")
+		if item.Address.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipValue", item.Address.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "role."+"vipObjectType", "object")
+
+		if !item.RoleVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipVariableName", item.RoleVariable.ValueString())
+		} else if item.Role.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipValue", item.Role.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"dns."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"dns-ipv6."+"vipObjectType", "tree")
 	if len(data.DnsIpv6Servers) > 0 {
-		body, _ = sjson.Set(body, path+"dns-ipv6."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"dns-ipv6."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"dns-ipv6."+"vipPrimaryKey", []string{"dns-addr"})
-		body, _ = sjson.Set(body, path+"dns-ipv6."+"vipValue", []interface{}{})
-		for _, item := range data.DnsIpv6Servers {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipObjectType", "object")
-			if item.Address.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipValue", item.Address.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "role."+"vipObjectType", "object")
-
-			if !item.RoleVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipVariableName", item.RoleVariable.ValueString())
-			} else if item.Role.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "role."+"vipValue", item.Role.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"dns-ipv6."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"dns-ipv6."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"dns-ipv6."+"vipPrimaryKey", []string{"dns-addr"})
+	body, _ = sjson.Set(body, path+"dns-ipv6."+"vipValue", []interface{}{})
+	for _, item := range data.DnsIpv6Servers {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipObjectType", "object")
+		if item.Address.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "dns-addr."+"vipValue", item.Address.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "role."+"vipObjectType", "object")
+
+		if !item.RoleVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipVariableName", item.RoleVariable.ValueString())
+		} else if item.Role.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "role."+"vipValue", item.Role.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"dns-ipv6."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"host."+"vipObjectType", "tree")
 	if len(data.DnsHosts) > 0 {
-		body, _ = sjson.Set(body, path+"host."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"host."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"host."+"vipPrimaryKey", []string{"hostname"})
-		body, _ = sjson.Set(body, path+"host."+"vipValue", []interface{}{})
-		for _, item := range data.DnsHosts {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipObjectType", "object")
-
-			if !item.HostnameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "hostname."+"vipVariableName", item.HostnameVariable.ValueString())
-			} else if item.Hostname.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "hostname."+"vipValue", item.Hostname.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "list")
-
-			if !item.IpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipVariableName", item.IpVariable.ValueString())
-			} else if item.Ip.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "constant")
-				var values []string
-				item.Ip.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "ip."+"vipValue", values)
-			}
-			body, _ = sjson.SetRaw(body, path+"host."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"host."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"host."+"vipPrimaryKey", []string{"hostname"})
+	body, _ = sjson.Set(body, path+"host."+"vipValue", []interface{}{})
+	for _, item := range data.DnsHosts {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "hostname."+"vipObjectType", "object")
+
+		if !item.HostnameVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipVariableName", item.HostnameVariable.ValueString())
+		} else if item.Hostname.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "hostname."+"vipValue", item.Hostname.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "list")
+
+		if !item.IpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "ip."+"vipVariableName", item.IpVariable.ValueString())
+		} else if item.Ip.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "constant")
+			var values []string
+			item.Ip.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "ip."+"vipValue", values)
+		}
+		body, _ = sjson.SetRaw(body, path+"host."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"service."+"vipObjectType", "tree")
 	if len(data.Services) > 0 {
-		body, _ = sjson.Set(body, path+"service."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"service."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"service."+"vipPrimaryKey", []string{"svc-type"})
-		body, _ = sjson.Set(body, path+"service."+"vipValue", []interface{}{})
-		for _, item := range data.Services {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipObjectType", "object")
-			if item.ServiceTypes.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipValue", item.ServiceTypes.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "address."+"vipObjectType", "list")
-
-			if !item.AddressVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "address."+"vipVariableName", item.AddressVariable.ValueString())
-			} else if item.Address.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "constant")
-				var values []string
-				item.Address.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "address."+"vipValue", values)
-			}
-			itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "object")
-
-			if !item.InterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
-			} else if item.Interface.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", item.Interface.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipObjectType", "object")
-
-			if !item.TrackEnableVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipVariableName", item.TrackEnableVariable.ValueString())
-			} else if item.TrackEnable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipValue", strconv.FormatBool(item.TrackEnable.ValueBool()))
-			}
-			body, _ = sjson.SetRaw(body, path+"service."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"service."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"service."+"vipPrimaryKey", []string{"svc-type"})
+	body, _ = sjson.Set(body, path+"service."+"vipValue", []interface{}{})
+	for _, item := range data.Services {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipObjectType", "object")
+		if item.ServiceTypes.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "svc-type."+"vipValue", item.ServiceTypes.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "address."+"vipObjectType", "list")
+
+		if !item.AddressVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "address."+"vipVariableName", item.AddressVariable.ValueString())
+		} else if item.Address.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "constant")
+			var values []string
+			item.Address.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "address."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "object")
+
+		if !item.InterfaceVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
+		} else if item.Interface.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", item.Interface.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipObjectType", "object")
+
+		if !item.TrackEnableVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipVariableName", item.TrackEnableVariable.ValueString())
+		} else if item.TrackEnable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "track-enable."+"vipValue", strconv.FormatBool(item.TrackEnable.ValueBool()))
+		}
+		body, _ = sjson.SetRaw(body, path+"service."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ip.service-route."+"vipObjectType", "tree")
 	if len(data.Ipv4StaticServiceRoutes) > 0 {
-		body, _ = sjson.Set(body, path+"ip.service-route."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ip.service-route."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ip.service-route."+"vipPrimaryKey", []string{"prefix"})
-		body, _ = sjson.Set(body, path+"ip.service-route."+"vipValue", []interface{}{})
-		for _, item := range data.Ipv4StaticServiceRoutes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
-
-			if !item.PrefixVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
-			} else if item.Prefix.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
-			if item.VpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "service."+"vipObjectType", "object")
-			if item.Service.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "service."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "service."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "service."+"vipValue", item.Service.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"ip.service-route."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"ip.service-route."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"ip.service-route."+"vipPrimaryKey", []string{"prefix"})
+	body, _ = sjson.Set(body, path+"ip.service-route."+"vipValue", []interface{}{})
+	for _, item := range data.Ipv4StaticServiceRoutes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
+
+		if !item.PrefixVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
+		} else if item.Prefix.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
+		if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "service."+"vipObjectType", "object")
+		if item.Service.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "service."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "service."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "service."+"vipValue", item.Service.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"ip.service-route."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ip.route."+"vipObjectType", "tree")
 	if len(data.Ipv4StaticRoutes) > 0 {
-		body, _ = sjson.Set(body, path+"ip.route."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ip.route."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ip.route."+"vipPrimaryKey", []string{"prefix"})
-		body, _ = sjson.Set(body, path+"ip.route."+"vipValue", []interface{}{})
-		for _, item := range data.Ipv4StaticRoutes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
-
-			if !item.PrefixVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
-			} else if item.Prefix.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "null0."+"vipObjectType", "node-only")
-
-			if !item.Null0Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipVariableName", item.Null0Variable.ValueString())
-			} else if item.Null0.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipValue", strconv.FormatBool(item.Null0.ValueBool()))
-			}
-			itemBody, _ = sjson.Set(itemBody, "distance."+"vipObjectType", "object")
-
-			if !item.DistanceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "distance."+"vipVariableName", item.DistanceVariable.ValueString())
-			} else if item.Distance.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "distance."+"vipValue", item.Distance.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
-
-			if !item.VpnIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipVariableName", item.VpnIdVariable.ValueString())
-			} else if item.VpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipObjectType", "node-only")
-
-			if !item.DhcpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipVariableName", item.DhcpVariable.ValueString())
-			} else if item.Dhcp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipValue", strconv.FormatBool(item.Dhcp.ValueBool()))
-			}
-			if len(item.NextHops) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipPrimaryKey", []string{"address"})
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipValue", []interface{}{})
-				for _, childItem := range item.NextHops {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
-
-					if !childItem.AddressVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
-					} else if childItem.Address.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
-
-					if !childItem.DistanceVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
-					} else if childItem.Distance.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "next-hop."+"vipValue.-1", itemChildBody)
-				}
-			}
-			if len(item.TrackNextHops) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipPrimaryKey", []string{"address"})
-				itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipValue", []interface{}{})
-				for _, childItem := range item.TrackNextHops {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
-
-					if !childItem.AddressVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
-					} else if childItem.Address.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
-
-					if !childItem.DistanceVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
-					} else if childItem.Distance.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipObjectType", "object")
-
-					if !childItem.TrackerVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipVariableName", childItem.TrackerVariable.ValueString())
-					} else if childItem.Tracker.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipValue", childItem.Tracker.ValueString())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "next-hop-with-track."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"ip.route."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"ip.route."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"ip.route."+"vipPrimaryKey", []string{"prefix"})
+	body, _ = sjson.Set(body, path+"ip.route."+"vipValue", []interface{}{})
+	for _, item := range data.Ipv4StaticRoutes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
+
+		if !item.PrefixVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
+		} else if item.Prefix.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "null0."+"vipObjectType", "node-only")
+
+		if !item.Null0Variable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipVariableName", item.Null0Variable.ValueString())
+		} else if item.Null0.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipValue", strconv.FormatBool(item.Null0.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "distance."+"vipObjectType", "object")
+
+		if !item.DistanceVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "distance."+"vipVariableName", item.DistanceVariable.ValueString())
+		} else if item.Distance.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "distance."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "distance."+"vipValue", item.Distance.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
+
+		if !item.VpnIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipVariableName", item.VpnIdVariable.ValueString())
+		} else if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipObjectType", "node-only")
+
+		if !item.DhcpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipVariableName", item.DhcpVariable.ValueString())
+		} else if item.Dhcp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "dhcp."+"vipValue", strconv.FormatBool(item.Dhcp.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipObjectType", "tree")
+		if len(item.NextHops) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipPrimaryKey", []string{"address"})
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipValue", []interface{}{})
+		for _, childItem := range item.NextHops {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
+
+			if !childItem.AddressVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
+			} else if childItem.Address.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
+
+			if !childItem.DistanceVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
+			} else if childItem.Distance.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "next-hop."+"vipValue.-1", itemChildBody)
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipObjectType", "tree")
+		if len(item.TrackNextHops) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipPrimaryKey", []string{"address"})
+		itemBody, _ = sjson.Set(itemBody, "next-hop-with-track."+"vipValue", []interface{}{})
+		for _, childItem := range item.TrackNextHops {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
+
+			if !childItem.AddressVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
+			} else if childItem.Address.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
+
+			if !childItem.DistanceVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
+			} else if childItem.Distance.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipObjectType", "object")
+
+			if !childItem.TrackerVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipVariableName", childItem.TrackerVariable.ValueString())
+			} else if childItem.Tracker.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "tracker."+"vipValue", childItem.Tracker.ValueString())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "next-hop-with-track."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"ip.route."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ipv6.route."+"vipObjectType", "tree")
 	if len(data.Ipv6StaticRoutes) > 0 {
-		body, _ = sjson.Set(body, path+"ipv6.route."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ipv6.route."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ipv6.route."+"vipPrimaryKey", []string{"prefix"})
-		body, _ = sjson.Set(body, path+"ipv6.route."+"vipValue", []interface{}{})
-		for _, item := range data.Ipv6StaticRoutes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
-
-			if !item.PrefixVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
-			} else if item.Prefix.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "null0."+"vipObjectType", "node-only")
-
-			if !item.Null0Variable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipVariableName", item.Null0Variable.ValueString())
-			} else if item.Null0.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "null0."+"vipValue", strconv.FormatBool(item.Null0.ValueBool()))
-			}
-			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
-
-			if !item.VpnIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipVariableName", item.VpnIdVariable.ValueString())
-			} else if item.VpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "nat."+"vipObjectType", "object")
-
-			if !item.NatVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "nat."+"vipVariableName", item.NatVariable.ValueString())
-			} else if item.Nat.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "nat."+"vipValue", item.Nat.ValueString())
-			}
-			if len(item.NextHops) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipPrimaryKey", []string{"address"})
-				itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipValue", []interface{}{})
-				for _, childItem := range item.NextHops {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
-
-					if !childItem.AddressVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
-					} else if childItem.Address.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
-
-					if !childItem.DistanceVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
-					} else if childItem.Distance.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "next-hop."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"ipv6.route."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"ipv6.route."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"ipv6.route."+"vipPrimaryKey", []string{"prefix"})
+	body, _ = sjson.Set(body, path+"ipv6.route."+"vipValue", []interface{}{})
+	for _, item := range data.Ipv6StaticRoutes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
+
+		if !item.PrefixVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
+		} else if item.Prefix.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "null0."+"vipObjectType", "node-only")
+
+		if !item.Null0Variable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipVariableName", item.Null0Variable.ValueString())
+		} else if item.Null0.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "null0."+"vipValue", strconv.FormatBool(item.Null0.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
+
+		if !item.VpnIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipVariableName", item.VpnIdVariable.ValueString())
+		} else if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "nat."+"vipObjectType", "object")
+
+		if !item.NatVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "nat."+"vipVariableName", item.NatVariable.ValueString())
+		} else if item.Nat.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "nat."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "nat."+"vipValue", item.Nat.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipObjectType", "tree")
+		if len(item.NextHops) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipPrimaryKey", []string{"address"})
+		itemBody, _ = sjson.Set(itemBody, "next-hop."+"vipValue", []interface{}{})
+		for _, childItem := range item.NextHops {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
+
+			if !childItem.AddressVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipVariableName", childItem.AddressVariable.ValueString())
+			} else if childItem.Address.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipObjectType", "object")
+
+			if !childItem.DistanceVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipVariableName", childItem.DistanceVariable.ValueString())
+			} else if childItem.Distance.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "distance."+"vipValue", childItem.Distance.ValueInt64())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "next-hop."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"ipv6.route."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ip.gre-route."+"vipObjectType", "tree")
 	if len(data.Ipv4StaticGreRoutes) > 0 {
-		body, _ = sjson.Set(body, path+"ip.gre-route."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ip.gre-route."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ip.gre-route."+"vipPrimaryKey", []string{"prefix"})
-		body, _ = sjson.Set(body, path+"ip.gre-route."+"vipValue", []interface{}{})
-		for _, item := range data.Ipv4StaticGreRoutes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
-
-			if !item.PrefixVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
-			} else if item.Prefix.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
-			if item.VpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "list")
-
-			if !item.InterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
-			} else if item.Interface.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
-				var values []string
-				item.Interface.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", values)
-			}
-			body, _ = sjson.SetRaw(body, path+"ip.gre-route."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"ip.gre-route."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"ip.gre-route."+"vipPrimaryKey", []string{"prefix"})
+	body, _ = sjson.Set(body, path+"ip.gre-route."+"vipValue", []interface{}{})
+	for _, item := range data.Ipv4StaticGreRoutes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
+
+		if !item.PrefixVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
+		} else if item.Prefix.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
+		if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "list")
+
+		if !item.InterfaceVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
+		} else if item.Interface.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
+			var values []string
+			item.Interface.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", values)
+		}
+		body, _ = sjson.SetRaw(body, path+"ip.gre-route."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipObjectType", "tree")
 	if len(data.Ipv4StaticIpsecRoutes) > 0 {
-		body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipPrimaryKey", []string{"prefix"})
-		body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipValue", []interface{}{})
-		for _, item := range data.Ipv4StaticIpsecRoutes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
-
-			if !item.PrefixVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
-			} else if item.Prefix.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
-			if item.VpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "list")
-
-			if !item.InterfaceVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
-			} else if item.Interface.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
-				var values []string
-				item.Interface.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", values)
-			}
-			body, _ = sjson.SetRaw(body, path+"ip.ipsec-route."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipPrimaryKey", []string{"prefix"})
+	body, _ = sjson.Set(body, path+"ip.ipsec-route."+"vipValue", []interface{}{})
+	for _, item := range data.Ipv4StaticIpsecRoutes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "prefix."+"vipObjectType", "object")
+
+		if !item.PrefixVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipVariableName", item.PrefixVariable.ValueString())
+		} else if item.Prefix.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix."+"vipValue", item.Prefix.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
+		if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "interface."+"vipObjectType", "list")
+
+		if !item.InterfaceVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipVariableName", item.InterfaceVariable.ValueString())
+		} else if item.Interface.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipType", "constant")
+			var values []string
+			item.Interface.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "interface."+"vipValue", values)
+		}
+		body, _ = sjson.SetRaw(body, path+"ip.ipsec-route."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"omp.advertise."+"vipObjectType", "tree")
 	if len(data.OmpAdvertiseIpv4Routes) > 0 {
-		body, _ = sjson.Set(body, path+"omp.advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"omp.advertise."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"omp.advertise."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"omp.advertise."+"vipValue", []interface{}{})
-		for _, item := range data.OmpAdvertiseIpv4Routes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
-
-			if !item.RoutePolicyVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
-			} else if item.RoutePolicy.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
-
-			if !item.ProtocolSubTypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
-			} else if item.ProtocolSubType.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
-				var values []string
-				item.ProtocolSubType.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
-			}
-			if len(item.Prefixes) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipPrimaryKey", []string{"prefix-entry"})
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipValue", []interface{}{})
-				for _, childItem := range item.Prefixes {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipObjectType", "object")
-
-					if !childItem.PrefixEntryVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipVariableName", childItem.PrefixEntryVariable.ValueString())
-					} else if childItem.PrefixEntry.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipValue", childItem.PrefixEntry.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipObjectType", "object")
-
-					if !childItem.AggregateOnlyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipVariableName", childItem.AggregateOnlyVariable.ValueString())
-					} else if childItem.AggregateOnly.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipValue", strconv.FormatBool(childItem.AggregateOnly.ValueBool()))
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "prefix-list."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"omp.advertise."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"omp.advertise."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"omp.advertise."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"omp.advertise."+"vipValue", []interface{}{})
+	for _, item := range data.OmpAdvertiseIpv4Routes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
+
+		if !item.RoutePolicyVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
+		} else if item.RoutePolicy.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
+
+		if !item.ProtocolSubTypeVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
+		} else if item.ProtocolSubType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
+			var values []string
+			item.ProtocolSubType.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipObjectType", "tree")
+		if len(item.Prefixes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipPrimaryKey", []string{"prefix-entry"})
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipValue", []interface{}{})
+		for _, childItem := range item.Prefixes {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipObjectType", "object")
+
+			if !childItem.PrefixEntryVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipVariableName", childItem.PrefixEntryVariable.ValueString())
+			} else if childItem.PrefixEntry.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipValue", childItem.PrefixEntry.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipObjectType", "object")
+
+			if !childItem.AggregateOnlyVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipVariableName", childItem.AggregateOnlyVariable.ValueString())
+			} else if childItem.AggregateOnly.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipValue", strconv.FormatBool(childItem.AggregateOnly.ValueBool()))
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "prefix-list."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"omp.advertise."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipObjectType", "tree")
 	if len(data.OmpAdvertiseIpv6Routes) > 0 {
-		body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipValue", []interface{}{})
-		for _, item := range data.OmpAdvertiseIpv6Routes {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
-
-			if !item.RoutePolicyVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
-			} else if item.RoutePolicy.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
-
-			if !item.ProtocolSubTypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
-			} else if item.ProtocolSubType.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
-				var values []string
-				item.ProtocolSubType.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
-			}
-			if len(item.Prefixes) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipPrimaryKey", []string{"prefix-entry"})
-				itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipValue", []interface{}{})
-				for _, childItem := range item.Prefixes {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipObjectType", "object")
-
-					if !childItem.PrefixEntryVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipVariableName", childItem.PrefixEntryVariable.ValueString())
-					} else if childItem.PrefixEntry.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipValue", childItem.PrefixEntry.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipObjectType", "object")
-
-					if !childItem.AggregateOnlyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipVariableName", childItem.AggregateOnlyVariable.ValueString())
-					} else if childItem.AggregateOnly.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipValue", strconv.FormatBool(childItem.AggregateOnly.ValueBool()))
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "prefix-list."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"omp.ipv6-advertise."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"omp.ipv6-advertise."+"vipValue", []interface{}{})
+	for _, item := range data.OmpAdvertiseIpv6Routes {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
+
+		if !item.RoutePolicyVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
+		} else if item.RoutePolicy.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
+
+		if !item.ProtocolSubTypeVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
+		} else if item.ProtocolSubType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
+			var values []string
+			item.ProtocolSubType.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipObjectType", "tree")
+		if len(item.Prefixes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipPrimaryKey", []string{"prefix-entry"})
+		itemBody, _ = sjson.Set(itemBody, "prefix-list."+"vipValue", []interface{}{})
+		for _, childItem := range item.Prefixes {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipObjectType", "object")
+
+			if !childItem.PrefixEntryVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipVariableName", childItem.PrefixEntryVariable.ValueString())
+			} else if childItem.PrefixEntry.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "prefix-entry."+"vipValue", childItem.PrefixEntry.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipObjectType", "object")
+
+			if !childItem.AggregateOnlyVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipVariableName", childItem.AggregateOnlyVariable.ValueString())
+			} else if childItem.AggregateOnly.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "aggregate-only."+"vipValue", strconv.FormatBool(childItem.AggregateOnly.ValueBool()))
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "prefix-list."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"omp.ipv6-advertise."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipObjectType", "tree")
 	if len(data.Nat64Pools) > 0 {
-		body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipPrimaryKey", []string{"name"})
-		body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipValue", []interface{}{})
-		for _, item := range data.Nat64Pools {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
-			if item.Name.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipObjectType", "object")
-
-			if !item.StartAddressVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "start-address."+"vipVariableName", item.StartAddressVariable.ValueString())
-			} else if item.StartAddress.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "start-address."+"vipValue", item.StartAddress.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipObjectType", "object")
-
-			if !item.EndAddressVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "end-address."+"vipVariableName", item.EndAddressVariable.ValueString())
-			} else if item.EndAddress.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "end-address."+"vipValue", item.EndAddress.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "overload."+"vipObjectType", "node-only")
-
-			if !item.OverloadVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipVariableName", item.OverloadVariable.ValueString())
-			} else if item.Overload.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipValue", strconv.FormatBool(item.Overload.ValueBool()))
-			}
-			itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipObjectType", "object")
-			if item.LeakFromGlobal.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipValue", strconv.FormatBool(item.LeakFromGlobal.ValueBool()))
-			}
-			itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipObjectType", "object")
-			if item.LeakFromGlobalProtocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipValue", item.LeakFromGlobalProtocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipObjectType", "object")
-			if item.LeakToGlobal.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipValue", strconv.FormatBool(item.LeakToGlobal.ValueBool()))
-			}
-			body, _ = sjson.SetRaw(body, path+"nat64.v4.pool."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipPrimaryKey", []string{"name"})
+	body, _ = sjson.Set(body, path+"nat64.v4.pool."+"vipValue", []interface{}{})
+	for _, item := range data.Nat64Pools {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
+		if item.Name.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "start-address."+"vipObjectType", "object")
+
+		if !item.StartAddressVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipVariableName", item.StartAddressVariable.ValueString())
+		} else if item.StartAddress.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "start-address."+"vipValue", item.StartAddress.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "end-address."+"vipObjectType", "object")
+
+		if !item.EndAddressVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipVariableName", item.EndAddressVariable.ValueString())
+		} else if item.EndAddress.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "end-address."+"vipValue", item.EndAddress.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "overload."+"vipObjectType", "node-only")
+
+		if !item.OverloadVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipVariableName", item.OverloadVariable.ValueString())
+		} else if item.Overload.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipValue", strconv.FormatBool(item.Overload.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipObjectType", "object")
+		if item.LeakFromGlobal.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global."+"vipValue", strconv.FormatBool(item.LeakFromGlobal.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipObjectType", "object")
+		if item.LeakFromGlobalProtocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "leak_from_global_protocol."+"vipValue", item.LeakFromGlobalProtocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipObjectType", "object")
+		if item.LeakToGlobal.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "leak_to_global."+"vipValue", strconv.FormatBool(item.LeakToGlobal.ValueBool()))
+		}
+		body, _ = sjson.SetRaw(body, path+"nat64.v4.pool."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"nat.natpool."+"vipObjectType", "tree")
 	if len(data.NatPools) > 0 {
-		body, _ = sjson.Set(body, path+"nat.natpool."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"nat.natpool."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"nat.natpool."+"vipPrimaryKey", []string{"name"})
-		body, _ = sjson.Set(body, path+"nat.natpool."+"vipValue", []interface{}{})
-		for _, item := range data.NatPools {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
-
-			if !item.NameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipVariableName", item.NameVariable.ValueString())
-			} else if item.Name.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipObjectType", "object")
-
-			if !item.PrefixLengthVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipVariableName", item.PrefixLengthVariable.ValueString())
-			} else if item.PrefixLength.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipValue", item.PrefixLength.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipObjectType", "object")
-
-			if !item.RangeStartVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "range-start."+"vipVariableName", item.RangeStartVariable.ValueString())
-			} else if item.RangeStart.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "range-start."+"vipValue", item.RangeStart.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipObjectType", "object")
-
-			if !item.RangeEndVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "range-end."+"vipVariableName", item.RangeEndVariable.ValueString())
-			} else if item.RangeEnd.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "range-end."+"vipValue", item.RangeEnd.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "overload."+"vipObjectType", "object")
-
-			if !item.OverloadVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipVariableName", item.OverloadVariable.ValueString())
-			} else if item.Overload.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "overload."+"vipValue", strconv.FormatBool(item.Overload.ValueBool()))
-			}
-			itemBody, _ = sjson.Set(itemBody, "direction."+"vipObjectType", "object")
-
-			if !item.DirectionVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "direction."+"vipVariableName", item.DirectionVariable.ValueString())
-			} else if item.Direction.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "direction."+"vipValue", item.Direction.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
-
-			if !item.TrackerIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
-			} else if item.TrackerId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
-			}
-			body, _ = sjson.SetRaw(body, path+"nat.natpool."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"nat.natpool."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"nat.natpool."+"vipPrimaryKey", []string{"name"})
+	body, _ = sjson.Set(body, path+"nat.natpool."+"vipValue", []interface{}{})
+	for _, item := range data.NatPools {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
+
+		if !item.NameVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipVariableName", item.NameVariable.ValueString())
+		} else if item.Name.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipObjectType", "object")
+
+		if !item.PrefixLengthVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipVariableName", item.PrefixLengthVariable.ValueString())
+		} else if item.PrefixLength.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipValue", item.PrefixLength.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "range-start."+"vipObjectType", "object")
+
+		if !item.RangeStartVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipVariableName", item.RangeStartVariable.ValueString())
+		} else if item.RangeStart.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "range-start."+"vipValue", item.RangeStart.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "range-end."+"vipObjectType", "object")
+
+		if !item.RangeEndVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipVariableName", item.RangeEndVariable.ValueString())
+		} else if item.RangeEnd.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "range-end."+"vipValue", item.RangeEnd.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "overload."+"vipObjectType", "object")
+
+		if !item.OverloadVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipVariableName", item.OverloadVariable.ValueString())
+		} else if item.Overload.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "overload."+"vipValue", strconv.FormatBool(item.Overload.ValueBool()))
+		}
+		itemBody, _ = sjson.Set(itemBody, "direction."+"vipObjectType", "object")
+
+		if !item.DirectionVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "direction."+"vipVariableName", item.DirectionVariable.ValueString())
+		} else if item.Direction.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "direction."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "direction."+"vipValue", item.Direction.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
+
+		if !item.TrackerIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
+		} else if item.TrackerId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
+		}
+		body, _ = sjson.SetRaw(body, path+"nat.natpool."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"nat.static."+"vipObjectType", "tree")
 	if len(data.StaticNatRules) > 0 {
-		body, _ = sjson.Set(body, path+"nat.static."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"nat.static."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"nat.static."+"vipPrimaryKey", []string{"source-ip", "translate-ip"})
-		body, _ = sjson.Set(body, path+"nat.static."+"vipValue", []interface{}{})
-		for _, item := range data.StaticNatRules {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipObjectType", "object")
-
-			if !item.PoolNameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipVariableName", item.PoolNameVariable.ValueString())
-			} else if item.PoolName.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipValue", item.PoolName.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipObjectType", "object")
-
-			if !item.SourceIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipVariableName", item.SourceIpVariable.ValueString())
-			} else if item.SourceIp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipValue", item.SourceIp.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipObjectType", "object")
-
-			if !item.TranslateIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipVariableName", item.TranslateIpVariable.ValueString())
-			} else if item.TranslateIp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipValue", item.TranslateIp.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipObjectType", "object")
-
-			if !item.StaticNatDirectionVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipVariableName", item.StaticNatDirectionVariable.ValueString())
-			} else if item.StaticNatDirection.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipValue", item.StaticNatDirection.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
-
-			if !item.TrackerIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
-			} else if item.TrackerId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
-			}
-			body, _ = sjson.SetRaw(body, path+"nat.static."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"nat.static."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"nat.static."+"vipPrimaryKey", []string{"source-ip", "translate-ip"})
+	body, _ = sjson.Set(body, path+"nat.static."+"vipValue", []interface{}{})
+	for _, item := range data.StaticNatRules {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipObjectType", "object")
+
+		if !item.PoolNameVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipVariableName", item.PoolNameVariable.ValueString())
+		} else if item.PoolName.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipValue", item.PoolName.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipObjectType", "object")
+
+		if !item.SourceIpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipVariableName", item.SourceIpVariable.ValueString())
+		} else if item.SourceIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipValue", item.SourceIp.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipObjectType", "object")
+
+		if !item.TranslateIpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipVariableName", item.TranslateIpVariable.ValueString())
+		} else if item.TranslateIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipValue", item.TranslateIp.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipObjectType", "object")
+
+		if !item.StaticNatDirectionVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipVariableName", item.StaticNatDirectionVariable.ValueString())
+		} else if item.StaticNatDirection.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipValue", item.StaticNatDirection.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
+
+		if !item.TrackerIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
+		} else if item.TrackerId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
+		}
+		body, _ = sjson.SetRaw(body, path+"nat.static."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipObjectType", "tree")
 	if len(data.StaticNatSubnetRules) > 0 {
-		body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipPrimaryKey", []string{"source-ip-subnet", "translate-ip-subnet"})
-		body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipValue", []interface{}{})
-		for _, item := range data.StaticNatSubnetRules {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipObjectType", "object")
-
-			if !item.SourceIpSubnetVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipVariableName", item.SourceIpSubnetVariable.ValueString())
-			} else if item.SourceIpSubnet.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipValue", item.SourceIpSubnet.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipObjectType", "object")
-
-			if !item.TranslateIpSubnetVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipVariableName", item.TranslateIpSubnetVariable.ValueString())
-			} else if item.TranslateIpSubnet.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipValue", item.TranslateIpSubnet.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipObjectType", "object")
-
-			if !item.PrefixLengthVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipVariableName", item.PrefixLengthVariable.ValueString())
-			} else if item.PrefixLength.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipValue", item.PrefixLength.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipObjectType", "object")
-
-			if !item.StaticNatDirectionVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipVariableName", item.StaticNatDirectionVariable.ValueString())
-			} else if item.StaticNatDirection.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipValue", item.StaticNatDirection.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
-
-			if !item.TrackerIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
-			} else if item.TrackerId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
-			}
-			body, _ = sjson.SetRaw(body, path+"nat.subnet-static."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipPrimaryKey", []string{"source-ip-subnet", "translate-ip-subnet"})
+	body, _ = sjson.Set(body, path+"nat.subnet-static."+"vipValue", []interface{}{})
+	for _, item := range data.StaticNatSubnetRules {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipObjectType", "object")
+
+		if !item.SourceIpSubnetVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipVariableName", item.SourceIpSubnetVariable.ValueString())
+		} else if item.SourceIpSubnet.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "source-ip-subnet."+"vipValue", item.SourceIpSubnet.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipObjectType", "object")
+
+		if !item.TranslateIpSubnetVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipVariableName", item.TranslateIpSubnetVariable.ValueString())
+		} else if item.TranslateIpSubnet.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip-subnet."+"vipValue", item.TranslateIpSubnet.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipObjectType", "object")
+
+		if !item.PrefixLengthVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipVariableName", item.PrefixLengthVariable.ValueString())
+		} else if item.PrefixLength.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "prefix-length."+"vipValue", item.PrefixLength.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipObjectType", "object")
+
+		if !item.StaticNatDirectionVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipVariableName", item.StaticNatDirectionVariable.ValueString())
+		} else if item.StaticNatDirection.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "static-nat-direction."+"vipValue", item.StaticNatDirection.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipObjectType", "object")
+
+		if !item.TrackerIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipVariableName", item.TrackerIdVariable.ValueString())
+		} else if item.TrackerId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "tracker-id."+"vipValue", item.TrackerId.ValueInt64())
+		}
+		body, _ = sjson.SetRaw(body, path+"nat.subnet-static."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"nat.port-forward."+"vipObjectType", "tree")
 	if len(data.PortForwardRules) > 0 {
-		body, _ = sjson.Set(body, path+"nat.port-forward."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"nat.port-forward."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"nat.port-forward."+"vipPrimaryKey", []string{"source-port", "translate-port", "source-ip", "translate-ip", "proto"})
-		body, _ = sjson.Set(body, path+"nat.port-forward."+"vipValue", []interface{}{})
-		for _, item := range data.PortForwardRules {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipObjectType", "object")
-
-			if !item.PoolNameVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipVariableName", item.PoolNameVariable.ValueString())
-			} else if item.PoolName.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipValue", item.PoolName.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipObjectType", "object")
-
-			if !item.SourcePortVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "source-port."+"vipVariableName", item.SourcePortVariable.ValueString())
-			} else if item.SourcePort.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "source-port."+"vipValue", item.SourcePort.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipObjectType", "object")
-
-			if !item.TranslatePortVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipVariableName", item.TranslatePortVariable.ValueString())
-			} else if item.TranslatePort.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipValue", item.TranslatePort.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipObjectType", "object")
-
-			if !item.SourceIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipVariableName", item.SourceIpVariable.ValueString())
-			} else if item.SourceIp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipValue", item.SourceIp.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipObjectType", "object")
-
-			if !item.TranslateIpVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipVariableName", item.TranslateIpVariable.ValueString())
-			} else if item.TranslateIp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipValue", item.TranslateIp.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "proto."+"vipObjectType", "object")
-
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "proto."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "proto."+"vipValue", item.Protocol.ValueString())
-			}
-			body, _ = sjson.SetRaw(body, path+"nat.port-forward."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"nat.port-forward."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"nat.port-forward."+"vipPrimaryKey", []string{"source-port", "translate-port", "source-ip", "translate-ip", "proto"})
+	body, _ = sjson.Set(body, path+"nat.port-forward."+"vipValue", []interface{}{})
+	for _, item := range data.PortForwardRules {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipObjectType", "object")
+
+		if !item.PoolNameVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipVariableName", item.PoolNameVariable.ValueString())
+		} else if item.PoolName.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "pool-name."+"vipValue", item.PoolName.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "source-port."+"vipObjectType", "object")
+
+		if !item.SourcePortVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipVariableName", item.SourcePortVariable.ValueString())
+		} else if item.SourcePort.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "source-port."+"vipValue", item.SourcePort.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipObjectType", "object")
+
+		if !item.TranslatePortVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipVariableName", item.TranslatePortVariable.ValueString())
+		} else if item.TranslatePort.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "translate-port."+"vipValue", item.TranslatePort.ValueInt64())
+		}
+		itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipObjectType", "object")
+
+		if !item.SourceIpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipVariableName", item.SourceIpVariable.ValueString())
+		} else if item.SourceIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "source-ip."+"vipValue", item.SourceIp.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipObjectType", "object")
+
+		if !item.TranslateIpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipVariableName", item.TranslateIpVariable.ValueString())
+		} else if item.TranslateIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "translate-ip."+"vipValue", item.TranslateIp.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "proto."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "proto."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "proto."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "proto."+"vipValue", item.Protocol.ValueString())
+		}
+		body, _ = sjson.SetRaw(body, path+"nat.port-forward."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"route-import."+"vipObjectType", "tree")
 	if len(data.RouteGlobalImports) > 0 {
-		body, _ = sjson.Set(body, path+"route-import."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"route-import."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"route-import."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"route-import."+"vipValue", []interface{}{})
-		for _, item := range data.RouteGlobalImports {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
-
-			if !item.ProtocolSubTypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
-			} else if item.ProtocolSubType.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
-				var values []string
-				item.ProtocolSubType.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
-			}
-			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
-			if item.RoutePolicy.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
-			}
-			if len(item.Redistributes) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
-				for _, childItem := range item.Redistributes {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
-
-					if !childItem.ProtocolVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
-					} else if childItem.Protocol.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
-					if childItem.RoutePolicy.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"route-import."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"route-import."+"vipType", "ignore")
 	}
+	body, _ = sjson.Set(body, path+"route-import."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"route-import."+"vipValue", []interface{}{})
+	for _, item := range data.RouteGlobalImports {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
+
+		if !item.ProtocolSubTypeVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
+		} else if item.ProtocolSubType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
+			var values []string
+			item.ProtocolSubType.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
+		if item.RoutePolicy.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
+		if len(item.Redistributes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
+		for _, childItem := range item.Redistributes {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
+
+			if !childItem.ProtocolVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
+			} else if childItem.Protocol.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
+			if childItem.RoutePolicy.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"route-import."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"route-import-from."+"vipObjectType", "tree")
 	if len(data.RouteVpnImports) > 0 {
-		body, _ = sjson.Set(body, path+"route-import-from."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"route-import-from."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"route-import-from."+"vipPrimaryKey", []string{"source-vpn", "protocol"})
-		body, _ = sjson.Set(body, path+"route-import-from."+"vipValue", []interface{}{})
-		for _, item := range data.RouteVpnImports {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipObjectType", "object")
-
-			if !item.SourceVpnIdVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipVariableName", item.SourceVpnIdVariable.ValueString())
-			} else if item.SourceVpnId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipValue", item.SourceVpnId.ValueInt64())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
-
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
-
-			if !item.ProtocolSubTypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
-			} else if item.ProtocolSubType.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
-				var values []string
-				item.ProtocolSubType.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
-			}
-			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
-
-			if !item.RoutePolicyVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
-			} else if item.RoutePolicy.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
-			}
-			if len(item.Redistributes) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
-				for _, childItem := range item.Redistributes {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
-
-					if !childItem.ProtocolVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
-					} else if childItem.Protocol.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
-
-					if !childItem.RoutePolicyVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipVariableName", childItem.RoutePolicyVariable.ValueString())
-					} else if childItem.RoutePolicy.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"route-import-from."+"vipValue.-1", itemBody)
-		}
+	} else {
+		body, _ = sjson.Set(body, path+"route-import-from."+"vipType", "ignore")
 	}
-	if len(data.RouteGlobalExports) > 0 {
-		body, _ = sjson.Set(body, path+"route-export."+"vipObjectType", "tree")
-		body, _ = sjson.Set(body, path+"route-export."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"route-export."+"vipPrimaryKey", []string{"protocol"})
-		body, _ = sjson.Set(body, path+"route-export."+"vipValue", []interface{}{})
-		for _, item := range data.RouteGlobalExports {
-			itemBody := ""
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+	body, _ = sjson.Set(body, path+"route-import-from."+"vipPrimaryKey", []string{"source-vpn", "protocol"})
+	body, _ = sjson.Set(body, path+"route-import-from."+"vipValue", []interface{}{})
+	for _, item := range data.RouteVpnImports {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipObjectType", "object")
 
-			if !item.ProtocolVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
-			} else if item.Protocol.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
-			}
-			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
-
-			if !item.ProtocolSubTypeVariable.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
-			} else if item.ProtocolSubType.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
-				var values []string
-				item.ProtocolSubType.ElementsAs(ctx, &values, false)
-				itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
-			}
-			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
-			if item.RoutePolicy.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
-			} else {
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
-			}
-			if len(item.Redistributes) > 0 {
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
-				itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
-				for _, childItem := range item.Redistributes {
-					itemChildBody := ""
-					itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
-
-					if !childItem.ProtocolVariable.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
-					} else if childItem.Protocol.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
-					}
-					itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
-					if childItem.RoutePolicy.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
-					} else {
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
-						itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
-					}
-					itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
-				}
-			}
-			body, _ = sjson.SetRaw(body, path+"route-export."+"vipValue.-1", itemBody)
+		if !item.SourceVpnIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipVariableName", item.SourceVpnIdVariable.ValueString())
+		} else if item.SourceVpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "source-vpn."+"vipValue", item.SourceVpnId.ValueInt64())
 		}
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
+
+		if !item.ProtocolSubTypeVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
+		} else if item.ProtocolSubType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
+			var values []string
+			item.ProtocolSubType.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
+
+		if !item.RoutePolicyVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipVariableName", item.RoutePolicyVariable.ValueString())
+		} else if item.RoutePolicy.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
+		if len(item.Redistributes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
+		for _, childItem := range item.Redistributes {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
+
+			if !childItem.ProtocolVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
+			} else if childItem.Protocol.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
+
+			if !childItem.RoutePolicyVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipVariableName", childItem.RoutePolicyVariable.ValueString())
+			} else if childItem.RoutePolicy.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"route-import-from."+"vipValue.-1", itemBody)
+	}
+	body, _ = sjson.Set(body, path+"route-export."+"vipObjectType", "tree")
+	if len(data.RouteGlobalExports) > 0 {
+		body, _ = sjson.Set(body, path+"route-export."+"vipType", "constant")
+	} else {
+		body, _ = sjson.Set(body, path+"route-export."+"vipType", "ignore")
+	}
+	body, _ = sjson.Set(body, path+"route-export."+"vipPrimaryKey", []string{"protocol"})
+	body, _ = sjson.Set(body, path+"route-export."+"vipValue", []interface{}{})
+	for _, item := range data.RouteGlobalExports {
+		itemBody := ""
+		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
+
+		if !item.ProtocolVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipVariableName", item.ProtocolVariable.ValueString())
+		} else if item.Protocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipObjectType", "list")
+
+		if !item.ProtocolSubTypeVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "variableName")
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipVariableName", item.ProtocolSubTypeVariable.ValueString())
+		} else if item.ProtocolSubType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipType", "constant")
+			var values []string
+			item.ProtocolSubType.ElementsAs(ctx, &values, false)
+			itemBody, _ = sjson.Set(itemBody, "protocol-sub-type."+"vipValue", values)
+		}
+		itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipObjectType", "object")
+		if item.RoutePolicy.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "ignore")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "route-policy."+"vipValue", item.RoutePolicy.ValueString())
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
+		if len(item.Redistributes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
+		} else {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "ignore")
+		}
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
+		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
+		for _, childItem := range item.Redistributes {
+			itemChildBody := ""
+			itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
+
+			if !childItem.ProtocolVariable.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "variableName")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipVariableName", childItem.ProtocolVariable.ValueString())
+			} else if childItem.Protocol.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
+			if childItem.RoutePolicy.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
+			}
+			itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
+		}
+		body, _ = sjson.SetRaw(body, path+"route-export."+"vipValue.-1", itemBody)
 	}
 	return body
 }
