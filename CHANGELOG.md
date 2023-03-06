@@ -1,4 +1,4 @@
-## 0.1.3 (unreleased)
+## 0.1.3
 
 - Fix string length validation of encrypted passhprases in feature templates
 - Fix parsing of empty lists in feature template payloads
