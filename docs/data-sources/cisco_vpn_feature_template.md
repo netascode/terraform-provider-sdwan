@@ -79,6 +79,7 @@ Read-Only:
 Read-Only:
 
 - `address` (String) DNS Address
+- `address_variable` (String) Variable name
 - `role` (String) Role
 - `role_variable` (String) Variable name
 

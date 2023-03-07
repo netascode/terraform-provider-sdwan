@@ -300,6 +300,7 @@ Optional:
 Optional:
 
 - `address` (String) DNS Address
+- `address_variable` (String) Variable name
 - `role` (String) Role
   - Choices: `primary`, `secondary`
   - Default value: `primary`

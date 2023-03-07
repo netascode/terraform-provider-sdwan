@@ -2,6 +2,7 @@
 
 - Fix error when pushing feature template attributes without type `ignore`
 - BREAKING CHANGE: Rename `enhance_ecnp_keying` attribte of `sdwan_cisco_vpn_feature_template` resource and data source to `enhance_ecmp_keying`
+- Fix `sdwan_cisco_vpn_feature_template` schema inconsistency, where DNS address cannot be configured as a device specific variable
 
 ## 0.1.3
 
