@@ -12,6 +12,7 @@ attributes:
     example: false
   - model_name: address
     data_path: [ip]
+    exclude_ignore: true
     example: 1.1.1.1/24
   - model_name: secondary-address
     data_path: [ip]

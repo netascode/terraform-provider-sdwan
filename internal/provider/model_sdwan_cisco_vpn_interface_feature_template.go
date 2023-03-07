@@ -423,8 +423,6 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"ip.address."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ip.address."+"vipVariableName", data.AddressVariable.ValueString())
 	} else if data.Address.IsNull() {
-		body, _ = sjson.Set(body, path+"ip.address."+"vipObjectType", "object")
-		body, _ = sjson.Set(body, path+"ip.address."+"vipType", "ignore")
 	} else {
 		body, _ = sjson.Set(body, path+"ip.address."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ip.address."+"vipType", "constant")

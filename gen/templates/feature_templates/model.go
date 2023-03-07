@@ -113,7 +113,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
-		{{- if not .Mandatory}}
+		{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 		{{- end}}
@@ -130,7 +130,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
-		{{- if not .Mandatory}}
+		{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 		{{- end}}
@@ -147,7 +147,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", data.{{toGoName .TfName}}Variable.ValueString())
 	} else
 	{{- end}} if data.{{toGoName .TfName}}.IsNull() {
-		{{- if not .Mandatory}}
+		{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 		{{- end}}
@@ -178,7 +178,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 		} else
 		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-			{{- if not .Mandatory}}
+			{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			{{- end}}
@@ -195,7 +195,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 		} else
 		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-			{{- if not .Mandatory}}
+			{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			{{- end}}
@@ -212,7 +212,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", item.{{toGoName .TfName}}Variable.ValueString())
 		} else
 		{{- end}} if item.{{toGoName .TfName}}.IsNull() {
-			{{- if not .Mandatory}}
+			{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 			{{- end}}
@@ -243,7 +243,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-				{{- if not .Mandatory}}
+				{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 				{{- end}}
@@ -260,7 +260,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-				{{- if not .Mandatory}}
+				{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 				{{- end}}
@@ -277,7 +277,7 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childItem.{{toGoName .TfName}}Variable.ValueString())
 			} else
 			{{- end}} if childItem.{{toGoName .TfName}}.IsNull() {
-				{{- if not .Mandatory}}
+				{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
 				{{- end}}

@@ -4,6 +4,7 @@
 - BREAKING CHANGE: Rename `enhance_ecnp_keying` attribte of `sdwan_cisco_vpn_feature_template` resource and data source to `enhance_ecmp_keying`
 - Fix `sdwan_cisco_vpn_feature_template` schema inconsistency, where DNS address cannot be configured as a device specific variable
 - BREAKING CHANGE: Rename `tunnel_interface_restrict` attribte of `sdwan_cisco_vpn_interface_feature_template` resource and data source to `tunnel_interface_color_restrict`
+- Remove specific ignored feature template attributes from payload
 
 ## 0.1.3
 

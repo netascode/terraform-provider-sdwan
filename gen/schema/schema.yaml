@@ -23,6 +23,7 @@ attribute:
   write_only: bool(required=False)
   exclude_test: bool(required=False)
   exclude_example: bool(required=False)
+  exclude_ignore: bool(required=False)
   description: str(required=False)
   example: any(str(), int(), bool(), required=False)
   enum_values: list(str(), required=False)
