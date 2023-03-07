@@ -7,6 +7,10 @@ description: |-
 
 # Changelog
 
+## 0.1.4 (unreleased)
+
+- Fix error when pushing feature template attributes without type `ignore`
+
 ## 0.1.3
 
 - Fix string length validation of encrypted passhprases in feature templates

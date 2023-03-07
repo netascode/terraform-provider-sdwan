@@ -40,25 +40,29 @@ func (data CiscoBanner) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cisco_banner")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"login."+"vipObjectType", "object")
 
 	if !data.LoginVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"login."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"login."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"login."+"vipVariableName", data.LoginVariable.ValueString())
 	} else if data.Login.IsNull() {
+		body, _ = sjson.Set(body, path+"login."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"login."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"login."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"login."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"login."+"vipValue", data.Login.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"motd."+"vipObjectType", "object")
 
 	if !data.MotdVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"motd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"motd."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"motd."+"vipVariableName", data.MotdVariable.ValueString())
 	} else if data.Motd.IsNull() {
+		body, _ = sjson.Set(body, path+"motd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"motd."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"motd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"motd."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"motd."+"vipValue", data.Motd.ValueString())
 	}

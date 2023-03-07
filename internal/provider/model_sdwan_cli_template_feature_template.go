@@ -37,10 +37,9 @@ func (data CLITemplate) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cli-template")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"config."+"vipObjectType", "object")
 	if data.CliConfig.IsNull() {
-		body, _ = sjson.Set(body, path+"config."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"config."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"config."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"config."+"vipValue", data.CliConfig.ValueString())
 	}

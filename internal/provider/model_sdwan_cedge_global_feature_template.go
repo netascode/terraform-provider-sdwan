@@ -83,256 +83,302 @@ func (data CEdgeGlobal) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cedge_global")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipObjectType", "object")
 
 	if !data.Nat64UdpTimeoutVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipVariableName", data.Nat64UdpTimeoutVariable.ValueString())
 	} else if data.Nat64UdpTimeout.IsNull() {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.udp-timeout."+"vipValue", data.Nat64UdpTimeout.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipObjectType", "object")
 
 	if !data.Nat64TcpTimeoutVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipVariableName", data.Nat64TcpTimeoutVariable.ValueString())
 	} else if data.Nat64TcpTimeout.IsNull() {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"nat64-global.nat64-timeout.tcp-timeout."+"vipValue", data.Nat64TcpTimeout.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipObjectType", "object")
 
 	if !data.HttpAuthenticationVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipVariableName", data.HttpAuthenticationVariable.ValueString())
 	} else if data.HttpAuthentication.IsNull() {
+		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"http-global.http-authentication."+"vipValue", data.HttpAuthentication.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"ssh.version."+"vipObjectType", "object")
 
 	if !data.SshVersionVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"ssh.version."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipVariableName", data.SshVersionVariable.ValueString())
 	} else if data.SshVersion.IsNull() {
+		body, _ = sjson.Set(body, path+"ssh.version."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"ssh.version."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"ssh.version."+"vipValue", data.SshVersion.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipObjectType", "object")
 
 	if !data.HttpServerVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipVariableName", data.HttpServerVariable.ValueString())
 	} else if data.HttpServer.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.http-server."+"vipValue", strconv.FormatBool(data.HttpServer.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipObjectType", "object")
 
 	if !data.HttpsServerVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipVariableName", data.HttpsServerVariable.ValueString())
 	} else if data.HttpsServer.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.https-server."+"vipValue", strconv.FormatBool(data.HttpsServer.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipObjectType", "object")
 
 	if !data.SourceInterfaceVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipVariableName", data.SourceInterfaceVariable.ValueString())
 	} else if data.SourceInterface.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.source-intrf."+"vipValue", data.SourceInterface.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipObjectType", "object")
 
 	if !data.IpSourceRoutingVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipVariableName", data.IpSourceRoutingVariable.ValueString())
 	} else if data.IpSourceRouting.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.source-route."+"vipValue", strconv.FormatBool(data.IpSourceRouting.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipObjectType", "object")
 
 	if !data.ArpProxyVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipVariableName", data.ArpProxyVariable.ValueString())
 	} else if data.ArpProxy.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.arp-proxy."+"vipValue", strconv.FormatBool(data.ArpProxy.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipObjectType", "object")
 
 	if !data.FtpPassiveVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipVariableName", data.FtpPassiveVariable.ValueString())
 	} else if data.FtpPassive.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.ftp-passive."+"vipValue", strconv.FormatBool(data.FtpPassive.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipObjectType", "object")
 
 	if !data.RshRcpVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipVariableName", data.RshRcpVariable.ValueString())
 	} else if data.RshRcp.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.rcmd."+"vipValue", strconv.FormatBool(data.RshRcp.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipObjectType", "object")
 
 	if !data.BootpVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipVariableName", data.BootpVariable.ValueString())
 	} else if data.Bootp.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.bootp."+"vipValue", strconv.FormatBool(data.Bootp.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipObjectType", "object")
 
 	if !data.DomainLookupVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipVariableName", data.DomainLookupVariable.ValueString())
 	} else if data.DomainLookup.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.domain-lookup."+"vipValue", strconv.FormatBool(data.DomainLookup.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipObjectType", "object")
 
 	if !data.TcpKeepalivesOutVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipVariableName", data.TcpKeepalivesOutVariable.ValueString())
 	} else if data.TcpKeepalivesOut.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-out."+"vipValue", strconv.FormatBool(data.TcpKeepalivesOut.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipObjectType", "object")
 
 	if !data.TcpKeepalivesInVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipVariableName", data.TcpKeepalivesInVariable.ValueString())
 	} else if data.TcpKeepalivesIn.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-keepalives-in."+"vipValue", strconv.FormatBool(data.TcpKeepalivesIn.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipObjectType", "object")
 
 	if !data.TcpSmallServersVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipVariableName", data.TcpSmallServersVariable.ValueString())
 	} else if data.TcpSmallServers.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.tcp-small-servers."+"vipValue", strconv.FormatBool(data.TcpSmallServers.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipObjectType", "object")
 
 	if !data.UdpSmallServersVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipVariableName", data.UdpSmallServersVariable.ValueString())
 	} else if data.UdpSmallServers.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.udp-small-servers."+"vipValue", strconv.FormatBool(data.UdpSmallServers.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipObjectType", "object")
 
 	if !data.LldpVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipVariableName", data.LldpVariable.ValueString())
 	} else if data.Lldp.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.lldp."+"vipValue", strconv.FormatBool(data.Lldp.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipObjectType", "object")
 
 	if !data.CdpVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipVariableName", data.CdpVariable.ValueString())
 	} else if data.Cdp.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.cdp."+"vipValue", strconv.FormatBool(data.Cdp.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipObjectType", "object")
 
 	if !data.SnmpIfindexPersistVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipVariableName", data.SnmpIfindexPersistVariable.ValueString())
 	} else if data.SnmpIfindexPersist.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.snmp-ifindex-persist."+"vipValue", strconv.FormatBool(data.SnmpIfindexPersist.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipObjectType", "object")
 
 	if !data.ConsoleLoggingVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipVariableName", data.ConsoleLoggingVariable.ValueString())
 	} else if data.ConsoleLogging.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.console-logging."+"vipValue", strconv.FormatBool(data.ConsoleLogging.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipObjectType", "object")
 
 	if !data.VtyLoggingVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipVariableName", data.VtyLoggingVariable.ValueString())
 	} else if data.VtyLogging.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-other.vty-logging."+"vipValue", strconv.FormatBool(data.VtyLogging.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipObjectType", "object")
 
 	if !data.LineVtyVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipVariableName", data.LineVtyVariable.ValueString())
 	} else if data.LineVty.IsNull() {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"services-global.services-ip.line-vty."+"vipValue", strconv.FormatBool(data.LineVty.ValueBool()))
 	}

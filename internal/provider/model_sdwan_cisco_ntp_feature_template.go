@@ -69,47 +69,55 @@ func (data CiscoNTP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cisco_ntp")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"master.enable."+"vipObjectType", "object")
 
 	if !data.MasterVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"master.enable."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.enable."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"master.enable."+"vipVariableName", data.MasterVariable.ValueString())
 	} else if data.Master.IsNull() {
+		body, _ = sjson.Set(body, path+"master.enable."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.enable."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"master.enable."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.enable."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"master.enable."+"vipValue", strconv.FormatBool(data.Master.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"master.stratum."+"vipObjectType", "object")
 
 	if !data.MasterStratumVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"master.stratum."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.stratum."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"master.stratum."+"vipVariableName", data.MasterStratumVariable.ValueString())
 	} else if data.MasterStratum.IsNull() {
+		body, _ = sjson.Set(body, path+"master.stratum."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.stratum."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"master.stratum."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.stratum."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"master.stratum."+"vipValue", data.MasterStratum.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"master.source."+"vipObjectType", "object")
 
 	if !data.MasterSourceInterfaceVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"master.source."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.source."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"master.source."+"vipVariableName", data.MasterSourceInterfaceVariable.ValueString())
 	} else if data.MasterSourceInterface.IsNull() {
+		body, _ = sjson.Set(body, path+"master.source."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.source."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"master.source."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"master.source."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"master.source."+"vipValue", data.MasterSourceInterface.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"keys.trusted."+"vipObjectType", "list")
 
 	if !data.TrustedKeysVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"keys.trusted."+"vipObjectType", "list")
 		body, _ = sjson.Set(body, path+"keys.trusted."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"keys.trusted."+"vipVariableName", data.TrustedKeysVariable.ValueString())
 	} else if data.TrustedKeys.IsNull() {
+		body, _ = sjson.Set(body, path+"keys.trusted."+"vipObjectType", "list")
 		body, _ = sjson.Set(body, path+"keys.trusted."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"keys.trusted."+"vipObjectType", "list")
 		body, _ = sjson.Set(body, path+"keys.trusted."+"vipType", "constant")
 		var values []string
 		data.TrustedKeys.ElementsAs(ctx, &values, false)
@@ -125,25 +133,25 @@ func (data CiscoNTP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"keys.authentication."+"vipValue", []interface{}{})
 	for _, item := range data.AuthenticationKeys {
 		itemBody := ""
-		itemBody, _ = sjson.Set(itemBody, "number."+"vipObjectType", "object")
 
 		if !item.IdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "number."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "number."+"vipVariableName", item.IdVariable.ValueString())
 		} else if item.Id.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "number."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "number."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "number."+"vipValue", item.Id.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "md5."+"vipObjectType", "object")
 
 		if !item.ValueVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "md5."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "md5."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "md5."+"vipVariableName", item.ValueVariable.ValueString())
 		} else if item.Value.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "md5."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "md5."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "md5."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "md5."+"vipValue", item.Value.ValueString())
 		}
@@ -159,69 +167,79 @@ func (data CiscoNTP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"server."+"vipValue", []interface{}{})
 	for _, item := range data.Servers {
 		itemBody := ""
-		itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 
 		if !item.HostnameIpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipVariableName", item.HostnameIpVariable.ValueString())
 		} else if item.HostnameIp.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.HostnameIp.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "key."+"vipObjectType", "object")
 
 		if !item.AuthenticationKeyIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "key."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "key."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "key."+"vipVariableName", item.AuthenticationKeyIdVariable.ValueString())
 		} else if item.AuthenticationKeyId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "key."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "key."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "key."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "key."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "key."+"vipValue", item.AuthenticationKeyId.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 
 		if !item.VpnIdVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipVariableName", item.VpnIdVariable.ValueString())
 		} else if item.VpnId.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "version."+"vipObjectType", "object")
 
 		if !item.VersionVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "version."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "version."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "version."+"vipVariableName", item.VersionVariable.ValueString())
 		} else if item.Version.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "version."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "version."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "version."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "version."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "version."+"vipValue", item.Version.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 
 		if !item.SourceInterfaceVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipVariableName", item.SourceInterfaceVariable.ValueString())
 		} else if item.SourceInterface.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "prefer."+"vipObjectType", "object")
 
 		if !item.PreferVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipVariableName", item.PreferVariable.ValueString())
 		} else if item.Prefer.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "prefer."+"vipValue", strconv.FormatBool(item.Prefer.ValueBool()))
 		}

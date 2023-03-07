@@ -58,124 +58,124 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cisco_sig_credentials")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"zscaler.organization."+"vipObjectType", "object")
 
 	if !data.ZscalerOrganizationVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipVariableName", data.ZscalerOrganizationVariable.ValueString())
 	} else if data.ZscalerOrganization.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipValue", data.ZscalerOrganization.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerBaseUriVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipVariableName", data.ZscalerPartnerBaseUriVariable.ValueString())
 	} else if data.ZscalerPartnerBaseUri.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipValue", data.ZscalerPartnerBaseUri.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.username."+"vipObjectType", "object")
 
 	if !data.ZscalerUsernameVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.username."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipVariableName", data.ZscalerUsernameVariable.ValueString())
 	} else if data.ZscalerUsername.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.username."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipValue", data.ZscalerUsername.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.password."+"vipObjectType", "object")
 
 	if !data.ZscalerPasswordVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.password."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipVariableName", data.ZscalerPasswordVariable.ValueString())
 	} else if data.ZscalerPassword.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.password."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipValue", data.ZscalerPassword.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipObjectType", "object")
 
 	if !data.ZscalerCloudNameVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipVariableName", data.ZscalerCloudNameVariable.ValueString())
 	} else if data.ZscalerCloudName.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipValue", data.ZscalerCloudName.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerUsernameVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipVariableName", data.ZscalerPartnerUsernameVariable.ValueString())
 	} else if data.ZscalerPartnerUsername.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipValue", data.ZscalerPartnerUsername.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerPasswordVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipVariableName", data.ZscalerPartnerPasswordVariable.ValueString())
 	} else if data.ZscalerPartnerPassword.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipValue", data.ZscalerPartnerPassword.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipObjectType", "object")
 
 	if !data.ZscalerPartnerApiKeyVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipVariableName", data.ZscalerPartnerApiKeyVariable.ValueString())
 	} else if data.ZscalerPartnerApiKey.IsNull() {
-		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipValue", data.ZscalerPartnerApiKey.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipObjectType", "object")
 
 	if !data.UmbrellaApiKeyVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipVariableName", data.UmbrellaApiKeyVariable.ValueString())
 	} else if data.UmbrellaApiKey.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipValue", data.UmbrellaApiKey.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipObjectType", "object")
 
 	if !data.UmbrellaApiSecretVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipVariableName", data.UmbrellaApiSecretVariable.ValueString())
 	} else if data.UmbrellaApiSecret.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipValue", data.UmbrellaApiSecret.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipObjectType", "object")
 
 	if !data.UmbrellaOrganizationIdVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipVariableName", data.UmbrellaOrganizationIdVariable.ValueString())
 	} else if data.UmbrellaOrganizationId.IsNull() {
-		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipValue", data.UmbrellaOrganizationId.ValueString())
 	}

@@ -57,36 +57,42 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cisco_bfd")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipObjectType", "object")
 
 	if !data.MultiplierVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipVariableName", data.MultiplierVariable.ValueString())
 	} else if data.Multiplier.IsNull() {
+		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"app-route.multiplier."+"vipValue", data.Multiplier.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipObjectType", "object")
 
 	if !data.PollIntervalVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipVariableName", data.PollIntervalVariable.ValueString())
 	} else if data.PollInterval.IsNull() {
+		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"app-route.poll-interval."+"vipValue", data.PollInterval.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"default-dscp."+"vipObjectType", "object")
 
 	if !data.DefaultDscpVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"default-dscp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipVariableName", data.DefaultDscpVariable.ValueString())
 	} else if data.DefaultDscp.IsNull() {
+		body, _ = sjson.Set(body, path+"default-dscp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"default-dscp."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipValue", data.DefaultDscp.ValueInt64())
 	}
@@ -100,58 +106,66 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"color."+"vipValue", []interface{}{})
 	for _, item := range data.Colors {
 		itemBody := ""
-		itemBody, _ = sjson.Set(itemBody, "color."+"vipObjectType", "object")
 
 		if !item.ColorVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "color."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipVariableName", item.ColorVariable.ValueString())
 		} else if item.Color.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "color."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipValue", item.Color.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
 
 		if !item.HelloIntervalVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipVariableName", item.HelloIntervalVariable.ValueString())
 		} else if item.HelloInterval.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipValue", item.HelloInterval.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 
 		if !item.MultiplierVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipVariableName", item.MultiplierVariable.ValueString())
 		} else if item.Multiplier.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipValue", item.Multiplier.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
 
 		if !item.PmtuDiscoveryVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipVariableName", item.PmtuDiscoveryVariable.ValueString())
 		} else if item.PmtuDiscovery.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipValue", strconv.FormatBool(item.PmtuDiscovery.ValueBool()))
 		}
-		itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 
 		if !item.DscpVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipVariableName", item.DscpVariable.ValueString())
 		} else if item.Dscp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipValue", item.Dscp.ValueInt64())
 		}

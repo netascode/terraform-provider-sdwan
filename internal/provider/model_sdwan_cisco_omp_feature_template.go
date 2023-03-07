@@ -75,146 +75,172 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateType", "cisco_omp")
 
 	path := "templateDefinition."
-	body, _ = sjson.Set(body, path+"graceful-restart."+"vipObjectType", "object")
 
 	if !data.GracefulRestartVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"graceful-restart."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipVariableName", data.GracefulRestartVariable.ValueString())
 	} else if data.GracefulRestart.IsNull() {
+		body, _ = sjson.Set(body, path+"graceful-restart."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"graceful-restart."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"graceful-restart."+"vipValue", strconv.FormatBool(data.GracefulRestart.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"overlay-as."+"vipObjectType", "object")
 
 	if !data.OverlayAsVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"overlay-as."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipVariableName", data.OverlayAsVariable.ValueString())
 	} else if data.OverlayAs.IsNull() {
+		body, _ = sjson.Set(body, path+"overlay-as."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"overlay-as."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"overlay-as."+"vipValue", data.OverlayAs.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"send-path-limit."+"vipObjectType", "object")
 
 	if !data.SendPathLimitVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"send-path-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipVariableName", data.SendPathLimitVariable.ValueString())
 	} else if data.SendPathLimit.IsNull() {
+		body, _ = sjson.Set(body, path+"send-path-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"send-path-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"send-path-limit."+"vipValue", data.SendPathLimit.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"ecmp-limit."+"vipObjectType", "object")
 
 	if !data.EcmpLimitVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipVariableName", data.EcmpLimitVariable.ValueString())
 	} else if data.EcmpLimit.IsNull() {
+		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"ecmp-limit."+"vipValue", data.EcmpLimit.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"shutdown."+"vipObjectType", "object")
 
 	if !data.ShutdownVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"shutdown."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipVariableName", data.ShutdownVariable.ValueString())
 	} else if data.Shutdown.IsNull() {
+		body, _ = sjson.Set(body, path+"shutdown."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"shutdown."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"shutdown."+"vipValue", strconv.FormatBool(data.Shutdown.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipObjectType", "object")
 
 	if !data.OmpAdminDistanceIpv4Variable.IsNull() {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipVariableName", data.OmpAdminDistanceIpv4Variable.ValueString())
 	} else if data.OmpAdminDistanceIpv4.IsNull() {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv4."+"vipValue", data.OmpAdminDistanceIpv4.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipObjectType", "object")
 
 	if !data.OmpAdminDistanceIpv6Variable.IsNull() {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipVariableName", data.OmpAdminDistanceIpv6Variable.ValueString())
 	} else if data.OmpAdminDistanceIpv6.IsNull() {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipValue", data.OmpAdminDistanceIpv6.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipObjectType", "object")
 
 	if !data.AdvertisementIntervalVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipVariableName", data.AdvertisementIntervalVariable.ValueString())
 	} else if data.AdvertisementInterval.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"timers.advertisement-interval."+"vipValue", data.AdvertisementInterval.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipObjectType", "object")
 
 	if !data.GracefulRestartTimerVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipVariableName", data.GracefulRestartTimerVariable.ValueString())
 	} else if data.GracefulRestartTimer.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"timers.graceful-restart-timer."+"vipValue", data.GracefulRestartTimer.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipObjectType", "object")
 
 	if !data.EorTimerVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipVariableName", data.EorTimerVariable.ValueString())
 	} else if data.EorTimer.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"timers.eor-timer."+"vipValue", data.EorTimer.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"timers.holdtime."+"vipObjectType", "object")
 
 	if !data.HoldtimeVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipVariableName", data.HoldtimeVariable.ValueString())
 	} else if data.Holdtime.IsNull() {
+		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"timers.holdtime."+"vipValue", data.Holdtime.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipObjectType", "object")
 
 	if !data.IgnoreRegionPathLengthVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipVariableName", data.IgnoreRegionPathLengthVariable.ValueString())
 	} else if data.IgnoreRegionPathLength.IsNull() {
+		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"ignore-region-path-length."+"vipValue", strconv.FormatBool(data.IgnoreRegionPathLength.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 
 	if !data.TransportGatewayVariable.IsNull() {
+		body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipVariableName", data.TransportGatewayVariable.ValueString())
 	} else if data.TransportGateway.IsNull() {
+		body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "ignore")
 	} else {
+		body, _ = sjson.Set(body, path+"transport-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipValue", data.TransportGateway.ValueString())
 	}
@@ -228,21 +254,22 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
 	for _, item := range data.AdvertiseIpv4Routes {
 		itemBody := ""
-		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 		if item.Protocol.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
 
 		if !item.AdvertiseExternalOspfVariable.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipVariableName", item.AdvertiseExternalOspfVariable.ValueString())
 		} else if item.AdvertiseExternalOspf.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipValue", item.AdvertiseExternalOspf.ValueString())
 		}
@@ -258,10 +285,9 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
 	for _, item := range data.AdvertiseIpv6Routes {
 		itemBody := ""
-		itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 		if item.Protocol.IsNull() {
-			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "ignore")
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
 		}
