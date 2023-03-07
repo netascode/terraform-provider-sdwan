@@ -200,6 +200,8 @@ data "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tunnel_interface_clear_dont_fragment` (Boolean) Enable clear dont fragment (Currently Only SDWAN Tunnel Interface)
 - `tunnel_interface_clear_dont_fragment_variable` (String) Variable name
 - `tunnel_interface_color` (String) Set color for TLOC
+- `tunnel_interface_color_restrict` (Boolean) Restrict this TLOC behavior
+- `tunnel_interface_color_restrict_variable` (String) Variable name
 - `tunnel_interface_color_variable` (String) Variable name
 - `tunnel_interface_control_connections` (Boolean) Allow Control Connection
 - `tunnel_interface_control_connections_variable` (String) Variable name
@@ -228,8 +230,6 @@ data "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tunnel_interface_port_hop_variable` (String) Variable name
 - `tunnel_interface_propagate_sgt` (Boolean) CTS SGT Propagation configuration
 - `tunnel_interface_propagate_sgt_variable` (String) Variable name
-- `tunnel_interface_restrict` (Boolean) Restrict this TLOC behavior
-- `tunnel_interface_restrict_variable` (String) Variable name
 - `tunnel_interface_tunnel_tcp_mss` (Number) Tunnel TCP MSS on SYN packets, in bytes
 - `tunnel_interface_tunnel_tcp_mss_variable` (String) Variable name
 - `tunnel_interface_vbond_as_stun_server` (Boolean) Put this wan interface in STUN mode only

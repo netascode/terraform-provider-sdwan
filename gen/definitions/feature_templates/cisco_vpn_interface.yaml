@@ -192,7 +192,7 @@ attributes:
     tf_name: tunnel_interface_port_hop
     example: false
   - model_name: restrict
-    tf_name: tunnel_interface_restrict
+    tf_name: tunnel_interface_color_restrict
     example: false
   - model_name: dst-ip
     tf_name: tunnel_interface_gre_tunnel_destination_ip

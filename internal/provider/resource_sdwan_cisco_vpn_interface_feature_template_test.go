@@ -95,7 +95,7 @@ func TestAccSdwanCiscoVPNInterfaceFeatureTemplate(t *testing.T) {
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_vbond_as_stun_server", "false"),
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_vmanage_connection_preference", "5"),
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_port_hop", "false"),
-					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_restrict", "false"),
+					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_color_restrict", "false"),
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_gre_tunnel_destination_ip", "5.5.5.5"),
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_carrier", "carrier1"),
 					resource.TestCheckResourceAttr("sdwan_cisco_vpn_interface_feature_template.test", "tunnel_interface_nat_refresh_interval", "5"),
@@ -296,7 +296,7 @@ func testAccSdwanCiscoVPNInterfaceFeatureTemplateConfig_all() string {
 		tunnel_interface_exclude_controller_group_list = [10]
 		tunnel_interface_vmanage_connection_preference = 5
 		tunnel_interface_port_hop = false
-		tunnel_interface_restrict = false
+		tunnel_interface_color_restrict = false
 		tunnel_interface_gre_tunnel_destination_ip = "5.5.5.5"
 		tunnel_interface_carrier = "carrier1"
 		tunnel_interface_nat_refresh_interval = 5

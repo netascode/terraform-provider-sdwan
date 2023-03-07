@@ -104,8 +104,8 @@ type CiscoVPNInterface struct {
 	TunnelInterfaceVmanageConnectionPreferenceVariable types.String                                     `tfsdk:"tunnel_interface_vmanage_connection_preference_variable"`
 	TunnelInterfacePortHop                             types.Bool                                       `tfsdk:"tunnel_interface_port_hop"`
 	TunnelInterfacePortHopVariable                     types.String                                     `tfsdk:"tunnel_interface_port_hop_variable"`
-	TunnelInterfaceRestrict                            types.Bool                                       `tfsdk:"tunnel_interface_restrict"`
-	TunnelInterfaceRestrictVariable                    types.String                                     `tfsdk:"tunnel_interface_restrict_variable"`
+	TunnelInterfaceColorRestrict                       types.Bool                                       `tfsdk:"tunnel_interface_color_restrict"`
+	TunnelInterfaceColorRestrictVariable               types.String                                     `tfsdk:"tunnel_interface_color_restrict_variable"`
 	TunnelInterfaceGreTunnelDestinationIp              types.String                                     `tfsdk:"tunnel_interface_gre_tunnel_destination_ip"`
 	TunnelInterfaceGreTunnelDestinationIpVariable      types.String                                     `tfsdk:"tunnel_interface_gre_tunnel_destination_ip_variable"`
 	TunnelInterfaceCarrier                             types.String                                     `tfsdk:"tunnel_interface_carrier"`
@@ -1240,17 +1240,17 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"tunnel-interface.port-hop."+"vipValue", strconv.FormatBool(data.TunnelInterfacePortHop.ValueBool()))
 	}
 
-	if !data.TunnelInterfaceRestrictVariable.IsNull() {
+	if !data.TunnelInterfaceColorRestrictVariable.IsNull() {
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipObjectType", "node-only")
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipType", "variableName")
-		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipVariableName", data.TunnelInterfaceRestrictVariable.ValueString())
-	} else if data.TunnelInterfaceRestrict.IsNull() {
+		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipVariableName", data.TunnelInterfaceColorRestrictVariable.ValueString())
+	} else if data.TunnelInterfaceColorRestrict.IsNull() {
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipObjectType", "node-only")
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipType", "ignore")
 	} else {
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipObjectType", "node-only")
 		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipValue", strconv.FormatBool(data.TunnelInterfaceRestrict.ValueBool()))
+		body, _ = sjson.Set(body, path+"tunnel-interface.color.restrict."+"vipValue", strconv.FormatBool(data.TunnelInterfaceColorRestrict.ValueBool()))
 	}
 
 	if !data.TunnelInterfaceGreTunnelDestinationIpVariable.IsNull() {
@@ -3629,22 +3629,22 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 	}
 	if value := res.Get(path + "tunnel-interface.color.restrict.vipType"); value.Exists() {
 		if value.String() == "variableName" {
-			data.TunnelInterfaceRestrict = types.BoolNull()
+			data.TunnelInterfaceColorRestrict = types.BoolNull()
 
 			v := res.Get(path + "tunnel-interface.color.restrict.vipVariableName")
-			data.TunnelInterfaceRestrictVariable = types.StringValue(v.String())
+			data.TunnelInterfaceColorRestrictVariable = types.StringValue(v.String())
 
 		} else if value.String() == "ignore" {
-			data.TunnelInterfaceRestrict = types.BoolNull()
-			data.TunnelInterfaceRestrictVariable = types.StringNull()
+			data.TunnelInterfaceColorRestrict = types.BoolNull()
+			data.TunnelInterfaceColorRestrictVariable = types.StringNull()
 		} else if value.String() == "constant" {
 			v := res.Get(path + "tunnel-interface.color.restrict.vipValue")
-			data.TunnelInterfaceRestrict = types.BoolValue(v.Bool())
-			data.TunnelInterfaceRestrictVariable = types.StringNull()
+			data.TunnelInterfaceColorRestrict = types.BoolValue(v.Bool())
+			data.TunnelInterfaceColorRestrictVariable = types.StringNull()
 		}
 	} else {
-		data.TunnelInterfaceRestrict = types.BoolNull()
-		data.TunnelInterfaceRestrictVariable = types.StringNull()
+		data.TunnelInterfaceColorRestrict = types.BoolNull()
+		data.TunnelInterfaceColorRestrictVariable = types.StringNull()
 	}
 	if value := res.Get(path + "tunnel-interface.tloc-extension-gre-to.dst-ip.vipType"); value.Exists() {
 		if value.String() == "variableName" {

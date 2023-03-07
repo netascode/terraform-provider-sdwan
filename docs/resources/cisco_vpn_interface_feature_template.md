@@ -114,7 +114,7 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
   tunnel_interface_exclude_controller_group_list = [10]
   tunnel_interface_vmanage_connection_preference = 5
   tunnel_interface_port_hop                      = false
-  tunnel_interface_restrict                      = false
+  tunnel_interface_color_restrict                = false
   tunnel_interface_gre_tunnel_destination_ip     = "5.5.5.5"
   tunnel_interface_carrier                       = "carrier1"
   tunnel_interface_nat_refresh_interval          = 5
@@ -487,6 +487,9 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tunnel_interface_color` (String) Set color for TLOC
   - Choices: `default`, `mpls`, `metro-ethernet`, `biz-internet`, `public-internet`, `lte`, `3g`, `red`, `green`, `blue`, `gold`, `silver`, `bronze`, `custom1`, `custom2`, `custom3`, `private1`, `private2`, `private3`, `private4`, `private5`, `private6`
   - Default value: `default`
+- `tunnel_interface_color_restrict` (Boolean) Restrict this TLOC behavior
+  - Default value: `false`
+- `tunnel_interface_color_restrict_variable` (String) Variable name
 - `tunnel_interface_color_variable` (String) Variable name
 - `tunnel_interface_control_connections` (Boolean) Allow Control Connection
   - Default value: `true`
@@ -528,9 +531,6 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tunnel_interface_propagate_sgt` (Boolean) CTS SGT Propagation configuration
   - Default value: `false`
 - `tunnel_interface_propagate_sgt_variable` (String) Variable name
-- `tunnel_interface_restrict` (Boolean) Restrict this TLOC behavior
-  - Default value: `false`
-- `tunnel_interface_restrict_variable` (String) Variable name
 - `tunnel_interface_tunnel_tcp_mss` (Number) Tunnel TCP MSS on SYN packets, in bytes
   - Range: `500`-`1460`
 - `tunnel_interface_tunnel_tcp_mss_variable` (String) Variable name

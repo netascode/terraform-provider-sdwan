@@ -97,7 +97,7 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
   tunnel_interface_exclude_controller_group_list = [10]
   tunnel_interface_vmanage_connection_preference = 5
   tunnel_interface_port_hop                      = false
-  tunnel_interface_restrict                      = false
+  tunnel_interface_color_restrict                = false
   tunnel_interface_gre_tunnel_destination_ip     = "5.5.5.5"
   tunnel_interface_carrier                       = "carrier1"
   tunnel_interface_nat_refresh_interval          = 5
