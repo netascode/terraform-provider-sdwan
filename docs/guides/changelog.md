@@ -14,6 +14,7 @@ description: |-
 - Fix `sdwan_cisco_vpn_feature_template` schema inconsistency, where DNS address cannot be configured as a device specific variable
 - BREAKING CHANGE: Rename `tunnel_interface_restrict` attribte of `sdwan_cisco_vpn_interface_feature_template` resource and data source to `tunnel_interface_color_restrict`
 - Remove specific ignored feature template attributes from payload
+- Add `sdwan_cisco_bgp_feature_template` resource and data source
 
 ## 0.1.3
 

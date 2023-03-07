@@ -66,8 +66,39 @@ type {{$name}}{{toGoName .TfName}} struct {
 {{- $childName := toGoName .TfName}}
 {{- if eq .Type "List"}}
 {{ range .Attributes}}
+{{- $childChildName := toGoName .TfName}}
 {{- if eq .Type "List"}}
 type {{$name}}{{$childName}}{{toGoName .TfName}} struct {
+{{- range .Attributes}}
+{{- if eq .Type "List"}}
+	{{toGoName .TfName}} []{{$name}}{{$childName}}{{$childChildName}}{{toGoName .TfName}} `tfsdk:"{{.TfName}}"`
+{{- else if eq .Type "ListString"}}
+	{{toGoName .TfName}} types.List `tfsdk:"{{.TfName}}"`
+{{- if eq .Variable true}}
+	{{toGoName .TfName}}Variable types.String `tfsdk:"{{.TfName}}_variable"`
+{{- end}}
+{{- else}}
+	{{toGoName .TfName}} types.{{.Type}} `tfsdk:"{{.TfName}}"`
+{{- if eq .Variable true}}
+	{{toGoName .TfName}}Variable types.String `tfsdk:"{{.TfName}}_variable"`
+{{- end}}
+{{- end}}
+{{- end}}
+}
+{{- end}}
+{{- end}}
+{{- end}}
+{{ end}}
+
+{{ range .Attributes}}
+{{- $childName := toGoName .TfName}}
+{{- if eq .Type "List"}}
+{{ range .Attributes}}
+{{- $childChildName := toGoName .TfName}}
+{{- if eq .Type "List"}}
+{{ range .Attributes}}
+{{- if eq .Type "List"}}
+type {{$name}}{{$childName}}{{$childChildName}}{{toGoName .TfName}} struct {
 {{- range .Attributes}}
 {{- if eq .Type "ListString"}}
 	{{toGoName .TfName}} types.List `tfsdk:"{{.TfName}}"`
@@ -82,6 +113,8 @@ type {{$name}}{{$childName}}{{toGoName .TfName}} struct {
 {{- end}}
 {{- end}}
 }
+{{- end}}
+{{- end}}
 {{- end}}
 {{- end}}
 {{- end}}
@@ -285,8 +318,77 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
 				var values []string
-				item.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
+				childItem.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
 				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
+			}
+			{{- else if eq .Type "List"}}
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+			if len(childItem.{{toGoName .TfName}}) > 0 {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+			}
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipPrimaryKey", []string{ {{range .Keys}}"{{.}}",{{end}} })
+			itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", []interface{}{})
+			for _, childChildItem := range childItem.{{toGoName .TfName}} {
+				itemChildChildBody := ""
+				{{- range .Attributes}}
+				{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
+				{{if eq .Variable true}}
+				if !childChildItem.{{toGoName .TfName}}Variable.IsNull() {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childChildItem.{{toGoName .TfName}}Variable.ValueString())
+				} else
+				{{- end}} if childChildItem.{{toGoName .TfName}}.IsNull() {
+					{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+					{{- end}}
+				} else {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", childChildItem.{{toGoName .TfName}}.Value{{.Type}}())
+				}
+				{{- else if eq .Type "Bool"}}
+				{{if eq .Variable true}}
+				if !childChildItem.{{toGoName .TfName}}Variable.IsNull() {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childChildItem.{{toGoName .TfName}}Variable.ValueString())
+				} else
+				{{- end}} if childChildItem.{{toGoName .TfName}}.IsNull() {
+					{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+					{{- end}}
+				} else {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", strconv.FormatBool(childChildItem.{{toGoName .TfName}}.ValueBool()))
+				}
+				{{- else if eq .Type "ListString"}}
+				{{if eq .Variable true}}
+				if !childChildItem.{{toGoName .TfName}}Variable.IsNull() {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "variableName")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipVariableName", childChildItem.{{toGoName .TfName}}Variable.ValueString())
+				} else
+				{{- end}} if childChildItem.{{toGoName .TfName}}.IsNull() {
+					{{- if and (not .Mandatory) (not .ExcludeIgnore)}}
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "ignore")
+					{{- end}}
+				} else {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipObjectType", "{{.ObjectType}}")
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipType", "constant")
+					var values []string
+					childChildItem.{{toGoName .TfName}}.ElementsAs(ctx, &values, false)
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue", values)
+				}
+				{{- end}}
+				{{- end}}
+				itemChildBody, _ = sjson.SetRaw(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}."+"vipValue.-1", itemChildChildBody)
 			}
 			{{- end}}
 			{{- end}}
@@ -432,6 +534,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := {{$name}}{{toGoName .TfName}}{}
 			{{- range .Attributes}}
+			{{- $ccname := toGoName .TfName}}
 			{{- if eq .Type "String"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
@@ -637,6 +740,118 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 					} else {
 						cItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
 						{{if .Variable}}cItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+					}
+					{{- else if eq .Type "List"}}
+					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue"); len(ccValue.Array()) > 0 {
+						cItem.{{toGoName .TfName}} = make([]{{$name}}{{$cname}}{{$ccname}}{{toGoName .TfName}}, 0)
+						ccValue.ForEach(func(cck, ccv gjson.Result) bool {
+							ccItem := {{$name}}{{$cname}}{{$ccname}}{{toGoName .TfName}}{}
+							{{- range .Attributes}}
+							{{- if eq .Type "String"}}
+							if cccValue := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cccValue.Exists() {
+								if cccValue.String() == "variableName" {
+									ccItem.{{toGoName .TfName}} = types.StringNull()
+									{{if .Variable}}
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
+									ccItem.{{toGoName .TfName}}Variable = types.StringValue(cccv.String())
+									{{end}}
+								} else if cccValue.String() == "ignore" {
+									ccItem.{{toGoName .TfName}} = types.StringNull()
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								} else if cccValue.String() == "constant" {
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue")
+									ccItem.{{toGoName .TfName}} = types.StringValue(cccv.String())
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								}
+							} else {
+								ccItem.{{toGoName .TfName}} = types.StringNull()
+								{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+							}
+							{{- else if eq .Type "Int64"}}
+							if cccValue := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cccValue.Exists() {
+								if cccValue.String() == "variableName" {
+									ccItem.{{toGoName .TfName}} = types.Int64Null()
+									{{if .Variable}}
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
+									ccItem.{{toGoName .TfName}}Variable = types.StringValue(cccv.String())
+									{{end}}
+								} else if cccValue.String() == "ignore" {
+									ccItem.{{toGoName .TfName}} = types.Int64Null()
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								} else if cccValue.String() == "constant" {
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue")
+									ccItem.{{toGoName .TfName}} = types.Int64Value(cccv.Int())
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								}
+							} else {
+								ccItem.{{toGoName .TfName}} = types.Int64Null()
+								{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+							}
+							{{- else if eq .Type "Float64"}}
+							if cccValue := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cccValue.Exists() {
+								if cccValue.String() == "variableName" {
+									ccItem.{{toGoName .TfName}} = types.Float64Null()
+									{{if .Variable}}
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
+									ccItem.{{toGoName .TfName}}Variable = types.StringValue(cccv.String())
+									{{end}}
+								} else if cccValue.String() == "ignore" {
+									ccItem.{{toGoName .TfName}} = types.Float64Null()
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								} else if cccValue.String() == "constant" {
+									cccv := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue")
+									ccItem.{{toGoName .TfName}} = types.Float64Value(cccv.Float())
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								}
+							} else {
+								ccItem.{{toGoName .TfName}} = types.Float64Null()
+								{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+							}
+							{{- else if eq .Type "Bool"}}
+							if cccValue := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); cccValue.Exists() {
+								if cccValue.String() == "variableName" {
+									ccItem.{{toGoName .TfName}} = types.BoolNull()
+									{{if .Variable}}
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
+									ccItem.{{toGoName .TfName}}Variable = types.StringValue(cccv.String())
+									{{end}}
+								} else if cccValue.String() == "ignore" {
+									ccItem.{{toGoName .TfName}} = types.BoolNull()
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								} else if cccValue.String() == "constant" {
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue")
+									ccItem.{{toGoName .TfName}} = types.BoolValue(cccv.Bool())
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								}
+							} else {
+								ccItem.{{toGoName .TfName}} = types.BoolNull()
+								{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+							}
+							{{- else if eq .Type "ListString"}}
+							if cccValue := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipType"); len(cccValue.Array()) > 0 {
+								if cccValue.String() == "variableName" {
+									ccItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
+									{{if .Variable}}
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipVariableName")
+									ccItem.{{toGoName .TfName}}Variable = types.StringValue(cccv.String())
+									{{end}}
+								} else if cccValue.String() == "ignore" {
+									ccItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								} else if cccValue.String() == "constant" {
+									cccv := ccv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}.vipValue")
+									ccItem.{{toGoName .TfName}} = helpers.GetStringList(cccv.Array())
+									{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+								}
+							} else {
+								ccItem.{{toGoName .TfName}} = types.ListNull(types.StringType)
+								{{if .Variable}}ccItem.{{toGoName .TfName}}Variable = types.StringNull(){{end}}
+							}
+							{{- end}}
+							{{- end}}
+							cItem.{{toGoName .TfName}} = append(cItem.{{toGoName .TfName}}, ccItem)
+							return true
+						})
 					}
 					{{- end}}
 					{{- end}}

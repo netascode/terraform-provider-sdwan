@@ -28,8 +28,17 @@ func TestAccDataSourceSdwan{{camelCase .Name}}FeatureTemplate(t *testing.T) {
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
+					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if eq .Type "List"}}
+					{{- $cclist := .TfName }}
+					{{- range  .Attributes}}
 					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true) (ne .Type "ListString")}}
+					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_feature_template.test", "{{$list}}.0.{{$clist}}.0.{{$cclist}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
+					{{- end}}
+					{{- else if ne .Type "ListString"}}
 					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_feature_template.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
 					{{- end}}
 					{{- end}}
 					{{- else if ne .Type "ListString"}}
@@ -55,16 +64,26 @@ resource "sdwan_{{snakeCase $name}}_feature_template" "test" {
   description = "Terraform integration test"
   device_types = ["vedge-C8000V"]
 {{- range  .Attributes}}
-{{- if ne .ExcludeTest true}}
+{{- if not .ExcludeTest}}
 {{- if eq .Type "List"}}
   {{.TfName}} = [{
     {{- range  .Attributes}}
-    {{- if ne .ExcludeTest true}}
+    {{- if not .ExcludeTest}}
 	{{- if eq .Type "List"}}
 	{{.TfName}} = [{
 		{{- range  .Attributes}}
-		{{- if ne .ExcludeTest true}}
+		{{- if not .ExcludeTest}}
+		{{- if eq .Type "List"}}
+		{{.TfName}} = [{
+			{{- range  .Attributes}}
+			{{- if not .ExcludeTest}}
+			{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
+			{{- end}}
+			{{- end}}
+		}]
+		{{- else}}
 		{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
+		{{- end}}
 		{{- end}}
 		{{- end}}
 	}]

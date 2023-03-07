@@ -39,8 +39,17 @@ func TestAccSdwan{{camelCase .Name}}FeatureTemplate(t *testing.T) {
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
+					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if eq .Type "List"}}
+					{{- $cclist := .TfName }}
+					{{- range  .Attributes}}
 					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true) (ne .Type "ListString")}}
+					resource.TestCheckResourceAttr("sdwan_{{snakeCase $name}}_feature_template.test", "{{$list}}.0.{{$clist}}.0.{{$cclist}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
+					{{- end}}
+					{{- else if ne .Type "ListString"}}
 					resource.TestCheckResourceAttr("sdwan_{{snakeCase $name}}_feature_template.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
+					{{- end}}
 					{{- end}}
 					{{- end}}
 					{{- else if ne .Type "ListString"}}
@@ -90,7 +99,17 @@ func testAccSdwan{{camelCase .Name}}FeatureTemplateConfig_all() string {
 			{{.TfName}} = [{
 				{{- range  .Attributes}}
 				{{- if not .ExcludeTest}}
+				{{- if eq .Type "List"}}
+				{{.TfName}} = [{
+					{{- range  .Attributes}}
+					{{- if not .ExcludeTest}}
+					{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
+					{{- end}}
+					{{- end}}
+				}]
+				{{- else}}
 				{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
+				{{- end}}
 				{{- end}}
 				{{- end}}
 			}]
