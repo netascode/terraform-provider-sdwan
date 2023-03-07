@@ -95,11 +95,11 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 				Computed:            true,
 			},
-			"enhance_ecnp_keying": schema.BoolAttribute{
+			"enhance_ecmp_keying": schema.BoolAttribute{
 				MarkdownDescription: "Optional packet fields for ECMP keying",
 				Computed:            true,
 			},
-			"enhance_ecnp_keying_variable": schema.StringAttribute{
+			"enhance_ecmp_keying_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 				Computed:            true,
 			},

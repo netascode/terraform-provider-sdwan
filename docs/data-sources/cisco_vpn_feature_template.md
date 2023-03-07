@@ -32,8 +32,8 @@ data "sdwan_cisco_vpn_feature_template" "example" {
 - `dns_hosts` (Attributes List) Static DNS mapping (see [below for nested schema](#nestedatt--dns_hosts))
 - `dns_ipv4_servers` (Attributes List) DNS (see [below for nested schema](#nestedatt--dns_ipv4_servers))
 - `dns_ipv6_servers` (Attributes List) DNS (see [below for nested schema](#nestedatt--dns_ipv6_servers))
-- `enhance_ecnp_keying` (Boolean) Optional packet fields for ECMP keying
-- `enhance_ecnp_keying_variable` (String) Variable name
+- `enhance_ecmp_keying` (Boolean) Optional packet fields for ECMP keying
+- `enhance_ecmp_keying_variable` (String) Variable name
 - `ipv4_static_gre_routes` (Attributes List) Configure routes pointing to a GRE tunnel (see [below for nested schema](#nestedatt--ipv4_static_gre_routes))
 - `ipv4_static_ipsec_routes` (Attributes List) Configure routes pointing to a IPSEC tunnel (see [below for nested schema](#nestedatt--ipv4_static_ipsec_routes))
 - `ipv4_static_routes` (Attributes List) Configure IPv4 Static Routes (see [below for nested schema](#nestedatt--ipv4_static_routes))

@@ -22,7 +22,7 @@ func TestAccDataSourceSdwanCiscoVPNFeatureTemplate(t *testing.T) {
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "organization_name", "org1"),
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "omp_admin_distance_ipv4", "10"),
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "omp_admin_distance_ipv6", "10"),
-					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "enhance_ecnp_keying", "true"),
+					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "enhance_ecmp_keying", "true"),
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "dns_ipv4_servers.0.address", "9.9.9.9"),
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "dns_ipv4_servers.0.role", "primary"),
 					resource.TestCheckResourceAttr("data.sdwan_cisco_vpn_feature_template.test", "dns_ipv6_servers.0.address", "2001::9"),
@@ -123,7 +123,7 @@ resource "sdwan_cisco_vpn_feature_template" "test" {
   organization_name = "org1"
   omp_admin_distance_ipv4 = 10
   omp_admin_distance_ipv6 = 10
-  enhance_ecnp_keying = true
+  enhance_ecmp_keying = true
   dns_ipv4_servers = [{
     address = "9.9.9.9"
     role = "primary"

@@ -27,8 +27,8 @@ type CiscoVPN struct {
 	OmpAdminDistanceIpv4Variable types.String                      `tfsdk:"omp_admin_distance_ipv4_variable"`
 	OmpAdminDistanceIpv6         types.Int64                       `tfsdk:"omp_admin_distance_ipv6"`
 	OmpAdminDistanceIpv6Variable types.String                      `tfsdk:"omp_admin_distance_ipv6_variable"`
-	EnhanceEcnpKeying            types.Bool                        `tfsdk:"enhance_ecnp_keying"`
-	EnhanceEcnpKeyingVariable    types.String                      `tfsdk:"enhance_ecnp_keying_variable"`
+	EnhanceEcmpKeying            types.Bool                        `tfsdk:"enhance_ecmp_keying"`
+	EnhanceEcmpKeyingVariable    types.String                      `tfsdk:"enhance_ecmp_keying_variable"`
 	DnsIpv4Servers               []CiscoVPNDnsIpv4Servers          `tfsdk:"dns_ipv4_servers"`
 	DnsIpv6Servers               []CiscoVPNDnsIpv6Servers          `tfsdk:"dns_ipv6_servers"`
 	DnsHosts                     []CiscoVPNDnsHosts                `tfsdk:"dns_hosts"`
@@ -380,17 +380,17 @@ func (data CiscoVPN) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"omp-admin-distance-ipv6."+"vipValue", data.OmpAdminDistanceIpv6.ValueInt64())
 	}
 
-	if !data.EnhanceEcnpKeyingVariable.IsNull() {
+	if !data.EnhanceEcmpKeyingVariable.IsNull() {
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipType", "variableName")
-		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipVariableName", data.EnhanceEcnpKeyingVariable.ValueString())
-	} else if data.EnhanceEcnpKeying.IsNull() {
+		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipVariableName", data.EnhanceEcmpKeyingVariable.ValueString())
+	} else if data.EnhanceEcmpKeying.IsNull() {
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipType", "ignore")
 	} else {
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipType", "constant")
-		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipValue", strconv.FormatBool(data.EnhanceEcnpKeying.ValueBool()))
+		body, _ = sjson.Set(body, path+"ecmp-hash-key.layer4."+"vipValue", strconv.FormatBool(data.EnhanceEcmpKeying.ValueBool()))
 	}
 	body, _ = sjson.Set(body, path+"dns."+"vipObjectType", "tree")
 	if len(data.DnsIpv4Servers) > 0 {
@@ -1865,22 +1865,22 @@ func (data *CiscoVPN) fromBody(ctx context.Context, res gjson.Result) {
 	}
 	if value := res.Get(path + "ecmp-hash-key.layer4.vipType"); value.Exists() {
 		if value.String() == "variableName" {
-			data.EnhanceEcnpKeying = types.BoolNull()
+			data.EnhanceEcmpKeying = types.BoolNull()
 
 			v := res.Get(path + "ecmp-hash-key.layer4.vipVariableName")
-			data.EnhanceEcnpKeyingVariable = types.StringValue(v.String())
+			data.EnhanceEcmpKeyingVariable = types.StringValue(v.String())
 
 		} else if value.String() == "ignore" {
-			data.EnhanceEcnpKeying = types.BoolNull()
-			data.EnhanceEcnpKeyingVariable = types.StringNull()
+			data.EnhanceEcmpKeying = types.BoolNull()
+			data.EnhanceEcmpKeyingVariable = types.StringNull()
 		} else if value.String() == "constant" {
 			v := res.Get(path + "ecmp-hash-key.layer4.vipValue")
-			data.EnhanceEcnpKeying = types.BoolValue(v.Bool())
-			data.EnhanceEcnpKeyingVariable = types.StringNull()
+			data.EnhanceEcmpKeying = types.BoolValue(v.Bool())
+			data.EnhanceEcmpKeyingVariable = types.StringNull()
 		}
 	} else {
-		data.EnhanceEcnpKeying = types.BoolNull()
-		data.EnhanceEcnpKeyingVariable = types.StringNull()
+		data.EnhanceEcmpKeying = types.BoolNull()
+		data.EnhanceEcmpKeyingVariable = types.StringNull()
 	}
 	if value := res.Get(path + "dns.vipValue"); len(value.Array()) > 0 {
 		data.DnsIpv4Servers = make([]CiscoVPNDnsIpv4Servers, 0)

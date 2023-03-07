@@ -17,7 +17,7 @@ attributes:
   - model_name: omp-admin-distance-ipv6
     example: 10
   - model_name: layer4
-    tf_name: enhance_ecnp_keying
+    tf_name: enhance_ecmp_keying
     example: true
   - model_name: dns
     tf_name: dns_ipv4_servers

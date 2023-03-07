@@ -8,7 +8,7 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
   organization_name       = "org1"
   omp_admin_distance_ipv4 = 10
   omp_admin_distance_ipv6 = 10
-  enhance_ecnp_keying     = true
+  enhance_ecmp_keying     = true
   dns_ipv4_servers = [
     {
       address = "9.9.9.9"
