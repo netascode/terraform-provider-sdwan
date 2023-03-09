@@ -292,6 +292,7 @@ Optional:
 - `hostname_variable` (String) Variable name
 - `ip` (List of String) List of IP
 - `ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--dns_ipv4_servers"></a>
@@ -301,6 +302,7 @@ Optional:
 
 - `address` (String) DNS Address
 - `address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `role` (String) Role
   - Choices: `primary`, `secondary`
   - Default value: `primary`
@@ -313,6 +315,7 @@ Optional:
 Optional:
 
 - `address` (String) DNS Address
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `role` (String) Role
   - Choices: `primary`, `secondary`
   - Default value: `primary`
@@ -326,6 +329,7 @@ Optional:
 
 - `interface` (List of String) List of GRE Interfaces
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN to resolve the prefix
@@ -339,6 +343,7 @@ Optional:
 
 - `interface` (List of String) List of IPSEC Interfaces (Separated by commas)
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN to resolve the prefix
@@ -361,6 +366,7 @@ Optional:
 - `null0` (Boolean) null0
   - Default value: `false`
 - `null0_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `track_next_hops` (Attributes List) IP gateway address (see [below for nested schema](#nestedatt--ipv4_static_routes--track_next_hops))
@@ -379,6 +385,7 @@ Optional:
   - Range: `1`-`255`
   - Default value: `1`
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_static_routes--track_next_hops"></a>
@@ -392,6 +399,7 @@ Optional:
   - Range: `1`-`255`
   - Default value: `1`
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `tracker` (String) Static route tracker
 - `tracker_variable` (String) Variable name
 
@@ -402,6 +410,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `service` (String) Service
@@ -424,6 +433,7 @@ Optional:
 - `null0` (Boolean) null0
   - Default value: `false`
 - `null0_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN(!=0 or !=512) to resolve the prefix
@@ -441,6 +451,7 @@ Optional:
   - Range: `1`-`255`
   - Default value: `1`
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 
@@ -458,6 +469,7 @@ Optional:
 - `leak_to_global` (Boolean) Enable Route Leaking from this Service VPN to Global VPN
   - Default value: `false`
 - `name` (String) NAT64 Pool name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `overload` (Boolean) NAT 64 Overload Option
   - Default value: `false`
 - `overload_variable` (String) Variable name
@@ -476,6 +488,7 @@ Optional:
 - `name` (Number) NAT Pool Name, natpool1..31
   - Range: `1`-`31`
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `overload` (Boolean) Enable port translation(PAT)
   - Default value: `true`
 - `overload_variable` (String) Variable name
@@ -496,6 +509,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefixes` (Attributes List) (see [below for nested schema](#nestedatt--omp_advertise_ipv4_routes--prefixes))
 - `protocol` (String) Advertised routes protocol
   - Choices: `bgp`, `ospf`, `ospfv3`, `connected`, `static`, `network`, `aggregate`, `eigrp`, `lisp`, `isis`
@@ -513,6 +527,7 @@ Optional:
 - `aggregate_only` (Boolean) Aggregate Only
   - Default value: `false`
 - `aggregate_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
@@ -523,6 +538,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefixes` (Attributes List) (see [below for nested schema](#nestedatt--omp_advertise_ipv6_routes--prefixes))
 - `protocol` (String) Advertised routes protocol
   - Choices: `bgp`, `ospf`, `connected`, `static`, `network`, `aggregate`
@@ -540,6 +556,7 @@ Optional:
 - `aggregate_only` (Boolean) Aggregate Only
   - Default value: `false`
 - `aggregate_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
@@ -550,6 +567,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
 - `protocol` (String) Protocol
@@ -572,6 +590,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking from this Service VPN to Global VPN
   - Choices: `static`, `connected`, `bgp`, `eigrp`, `ospf`
 - `protocol_sub_type` (List of String) - Default value: `external`
@@ -585,6 +604,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `ospf`
 - `protocol_variable` (String) Variable name
@@ -597,6 +617,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking from Global VPN to this Service VPN
   - Choices: `static`, `connected`, `bgp`, `ospf`
 - `protocol_sub_type` (List of String) - Default value: `external`
@@ -610,6 +631,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `eigrp`, `ospf`
 - `protocol_variable` (String) Variable name
@@ -622,6 +644,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking to current VPN
   - Choices: `static`, `connected`, `bgp`, `ospf`, `eigrp`
 - `protocol_sub_type` (List of String) - Default value: `external`
@@ -640,6 +663,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
   - Choices: `bgp`, `eigrp`, `ospf`
 - `protocol_variable` (String) Variable name
@@ -657,6 +681,7 @@ Optional:
 - `address_variable` (String) Variable name
 - `interface` (String) Tracking Service
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `service_types` (String) Service Type
   - Choices: `FW`, `IDS`, `IDP`, `netsvc1`, `netsvc2`, `netsvc3`, `netsvc4`, `TE`, `appqoe`
 - `track_enable` (Boolean) Tracking Service
@@ -669,6 +694,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
 - `source_ip` (String) Source IP address to be translated
@@ -688,6 +714,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_length` (Number) Network Prefix Length
   - Range: `1`-`32`
 - `prefix_length_variable` (String) Variable name

@@ -120,6 +120,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -171,6 +175,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -195,6 +203,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"acl_name_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -231,6 +243,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"vpn_id_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -397,6 +413,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -441,6 +461,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"source_vpn_id_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -522,6 +546,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -583,6 +611,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"weight_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -1257,6 +1289,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -1279,6 +1315,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 						},
 						"mac_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -1355,6 +1395,10 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
 						},
@@ -1411,8 +1455,16 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -1495,8 +1547,16 @@ func (r *CiscoVPNInterfaceFeatureTemplateResource) Schema(ctx context.Context, r
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},

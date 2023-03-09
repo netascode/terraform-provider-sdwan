@@ -104,6 +104,7 @@ Optional:
   - Choices: `information`, `debugging`, `notice`, `warn`, `error`, `critical`, `alert`, `emergency`
   - Default value: `information`
 - `logging_level_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `profile` (String) Configure a TLS profile
 - `profile_variable` (String) Variable name
 - `source_interface` (String) Set interface to use to reach syslog server
@@ -131,6 +132,7 @@ Optional:
   - Choices: `information`, `debugging`, `notification`, `warn`, `error`, `critical`, `alert`, `emergency`
   - Default value: `information`
 - `logging_level_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `profile` (String) Configure a TLS profile
 - `profile_variable` (String) Variable name
 - `source_interface` (String) Set interface to use to reach syslog server
@@ -153,6 +155,7 @@ Optional:
 - `ciphersuite_list_variable` (String) Variable name
 - `name` (String) Specify the name of the TLS profile
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `version` (String) TLS Version
   - Choices: `TLSv1.1`, `TLSv1.2`
   - Default value: `TLSv1.1`

@@ -47,6 +47,7 @@ type CEdgeAAA struct {
 }
 
 type CEdgeAAAUsers struct {
+	Optional               types.Bool                `tfsdk:"optional"`
 	Name                   types.String              `tfsdk:"name"`
 	NameVariable           types.String              `tfsdk:"name_variable"`
 	Password               types.String              `tfsdk:"password"`
@@ -57,6 +58,7 @@ type CEdgeAAAUsers struct {
 }
 
 type CEdgeAAARadiusServerGroups struct {
+	Optional                types.Bool                          `tfsdk:"optional"`
 	GroupName               types.String                        `tfsdk:"group_name"`
 	VpnId                   types.Int64                         `tfsdk:"vpn_id"`
 	SourceInterface         types.String                        `tfsdk:"source_interface"`
@@ -65,12 +67,14 @@ type CEdgeAAARadiusServerGroups struct {
 }
 
 type CEdgeAAARadiusClients struct {
+	Optional          types.Bool                               `tfsdk:"optional"`
 	ClientIp          types.String                             `tfsdk:"client_ip"`
 	ClientIpVariable  types.String                             `tfsdk:"client_ip_variable"`
 	VonConfigurations []CEdgeAAARadiusClientsVonConfigurations `tfsdk:"von_configurations"`
 }
 
 type CEdgeAAATacacsServerGroups struct {
+	Optional                types.Bool                          `tfsdk:"optional"`
 	GroupName               types.String                        `tfsdk:"group_name"`
 	VpnId                   types.Int64                         `tfsdk:"vpn_id"`
 	SourceInterface         types.String                        `tfsdk:"source_interface"`
@@ -79,6 +83,7 @@ type CEdgeAAATacacsServerGroups struct {
 }
 
 type CEdgeAAAAccountingRules struct {
+	Optional          types.Bool   `tfsdk:"optional"`
 	Name              types.String `tfsdk:"name"`
 	Method            types.String `tfsdk:"method"`
 	PrivilegeLevel    types.String `tfsdk:"privilege_level"`
@@ -88,6 +93,7 @@ type CEdgeAAAAccountingRules struct {
 }
 
 type CEdgeAAAAuthorizationRules struct {
+	Optional       types.Bool   `tfsdk:"optional"`
 	Name           types.String `tfsdk:"name"`
 	Method         types.String `tfsdk:"method"`
 	PrivilegeLevel types.String `tfsdk:"privilege_level"`
@@ -96,12 +102,14 @@ type CEdgeAAAAuthorizationRules struct {
 }
 
 type CEdgeAAAUsersSshPubkeys struct {
+	Optional        types.Bool   `tfsdk:"optional"`
 	KeyString       types.String `tfsdk:"key_string"`
 	KeyType         types.String `tfsdk:"key_type"`
 	KeyTypeVariable types.String `tfsdk:"key_type_variable"`
 }
 
 type CEdgeAAARadiusServerGroupsServers struct {
+	Optional                   types.Bool   `tfsdk:"optional"`
 	Address                    types.String `tfsdk:"address"`
 	AuthenticationPort         types.Int64  `tfsdk:"authentication_port"`
 	AuthenticationPortVariable types.String `tfsdk:"authentication_port_variable"`
@@ -120,6 +128,7 @@ type CEdgeAAARadiusServerGroupsServers struct {
 }
 
 type CEdgeAAARadiusClientsVonConfigurations struct {
+	Optional          types.Bool   `tfsdk:"optional"`
 	VpnId             types.String `tfsdk:"vpn_id"`
 	VpnIdVariable     types.String `tfsdk:"vpn_id_variable"`
 	ServerKey         types.String `tfsdk:"server_key"`
@@ -127,6 +136,7 @@ type CEdgeAAARadiusClientsVonConfigurations struct {
 }
 
 type CEdgeAAATacacsServerGroupsServers struct {
+	Optional          types.Bool   `tfsdk:"optional"`
 	Address           types.String `tfsdk:"address"`
 	Port              types.Int64  `tfsdk:"port"`
 	PortVariable      types.String `tfsdk:"port_variable"`
@@ -187,16 +197,21 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"server-auth-order."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"server-auth-order."+"vipValue", data.ServerGroupsPriorityOrder.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 	if len(data.Users) > 0 {
+		body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"user."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"user."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	for _, item := range data.Users {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 
 		if !item.NameVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
@@ -208,18 +223,21 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "password")
 		if item.Password.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipValue", item.Password.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "secret")
 		if item.Secret.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "secret."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "secret."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "secret."+"vipValue", item.Secret.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "privilege")
 
 		if !item.PrivilegeLevelVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "privilege."+"vipObjectType", "object")
@@ -233,22 +251,29 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "privilege."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "privilege."+"vipValue", item.PrivilegeLevel.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "pubkey-chain")
 		if len(item.SshPubkeys) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipPrimaryKey", []string{"key-string"})
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipPrimaryKey", []string{"key-string"})
+			itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipPrimaryKey", []string{"key-string"})
-		itemBody, _ = sjson.Set(itemBody, "pubkey-chain."+"vipValue", []interface{}{})
 		for _, childItem := range item.SshPubkeys {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "key-string")
 			if childItem.KeyString.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-string."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-string."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-string."+"vipValue", childItem.KeyString.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key-type")
 
 			if !childItem.KeyTypeVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipObjectType", "object")
@@ -262,26 +287,40 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipValue", childItem.KeyType.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "pubkey-chain."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"user."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"radius."+"vipObjectType", "tree")
 	if len(data.RadiusServerGroups) > 0 {
+		body, _ = sjson.Set(body, path+"radius."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"radius."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"radius."+"vipPrimaryKey", []string{"group-name"})
+		body, _ = sjson.Set(body, path+"radius."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"radius."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"radius."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"radius."+"vipPrimaryKey", []string{"group-name"})
+		body, _ = sjson.Set(body, path+"radius."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"radius."+"vipPrimaryKey", []string{"group-name"})
-	body, _ = sjson.Set(body, path+"radius."+"vipValue", []interface{}{})
 	for _, item := range data.RadiusServerGroups {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "group-name")
 		if item.GroupName.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipValue", item.GroupName.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "vpn")
 		if item.VpnId.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
@@ -290,6 +329,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "source-interface")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
@@ -303,22 +343,29 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "server")
 		if len(item.Servers) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "server."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "server."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		for _, childItem := range item.Servers {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "address")
 			if childItem.Address.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "auth-port")
 
 			if !childItem.AuthenticationPortVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipObjectType", "object")
@@ -332,6 +379,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "auth-port."+"vipValue", childItem.AuthenticationPort.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "acct-port")
 
 			if !childItem.AccountingPortVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipObjectType", "object")
@@ -345,6 +393,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "acct-port."+"vipValue", childItem.AccountingPort.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "timeout")
 
 			if !childItem.TimeoutVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipObjectType", "object")
@@ -358,6 +407,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipValue", childItem.Timeout.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "retransmit")
 
 			if !childItem.RetransmitVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipObjectType", "object")
@@ -371,12 +421,14 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "retransmit."+"vipValue", childItem.Retransmit.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key")
 			if childItem.Key.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipValue", childItem.Key.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "secret-key")
 
 			if !childItem.SecretKeyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipObjectType", "object")
@@ -390,6 +442,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipValue", childItem.SecretKey.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key-enum")
 			if childItem.EncryptionType.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipType", "ignore")
@@ -398,6 +451,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipValue", childItem.EncryptionType.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key-type")
 
 			if !childItem.KeyTypeVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipObjectType", "object")
@@ -411,20 +465,33 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-type."+"vipValue", childItem.KeyType.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "server."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"radius."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipObjectType", "tree")
 	if len(data.RadiusClients) > 0 {
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipPrimaryKey", []string{"ip"})
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipPrimaryKey", []string{"ip"})
+		body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipPrimaryKey", []string{"ip"})
-	body, _ = sjson.Set(body, path+"radius-dynamic-author.radius-client."+"vipValue", []interface{}{})
 	for _, item := range data.RadiusClients {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "ip")
 
 		if !item.ClientIpVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "object")
@@ -436,16 +503,22 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipValue", item.ClientIp.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "vpn")
 		if len(item.VonConfigurations) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipPrimaryKey", []string{"name"})
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipPrimaryKey", []string{"name"})
+			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipPrimaryKey", []string{"name"})
-		itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", []interface{}{})
 		for _, childItem := range item.VonConfigurations {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "name")
 
 			if !childItem.VpnIdVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipObjectType", "object")
@@ -457,6 +530,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "name."+"vipValue", childItem.VpnId.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "server-key")
 
 			if !childItem.ServerKeyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipObjectType", "object")
@@ -470,7 +544,15 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "server-key."+"vipValue", childItem.ServerKey.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "vpn."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"radius-dynamic-author.radius-client."+"vipValue.-1", itemBody)
 	}
@@ -547,22 +629,28 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"radius-trustsec.radius-trustsec-group."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"radius-trustsec.radius-trustsec-group."+"vipValue", data.RadiusTrustsecGroup.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"tacacs."+"vipObjectType", "tree")
 	if len(data.TacacsServerGroups) > 0 {
+		body, _ = sjson.Set(body, path+"tacacs."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"tacacs."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"tacacs."+"vipPrimaryKey", []string{"group-name"})
+		body, _ = sjson.Set(body, path+"tacacs."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"tacacs."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"tacacs."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"tacacs."+"vipPrimaryKey", []string{"group-name"})
+		body, _ = sjson.Set(body, path+"tacacs."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"tacacs."+"vipPrimaryKey", []string{"group-name"})
-	body, _ = sjson.Set(body, path+"tacacs."+"vipValue", []interface{}{})
 	for _, item := range data.TacacsServerGroups {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "group-name")
 		if item.GroupName.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "group-name."+"vipValue", item.GroupName.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "vpn")
 		if item.VpnId.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "ignore")
@@ -571,6 +659,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "source-interface")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
@@ -584,22 +673,29 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "server")
 		if len(item.Servers) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "server."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "server."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
+			itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipPrimaryKey", []string{"address"})
-		itemBody, _ = sjson.Set(itemBody, "server."+"vipValue", []interface{}{})
 		for _, childItem := range item.Servers {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "address")
 			if childItem.Address.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "address."+"vipValue", childItem.Address.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "port")
 
 			if !childItem.PortVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipObjectType", "object")
@@ -613,6 +709,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "port."+"vipValue", childItem.Port.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "timeout")
 
 			if !childItem.TimeoutVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipObjectType", "object")
@@ -626,12 +723,14 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "timeout."+"vipValue", childItem.Timeout.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key")
 			if childItem.Key.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key."+"vipValue", childItem.Key.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "secret-key")
 
 			if !childItem.SecretKeyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipObjectType", "object")
@@ -643,6 +742,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "secret-key."+"vipValue", childItem.SecretKey.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "key-enum")
 			if childItem.EncryptionType.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipType", "ignore")
@@ -651,32 +751,47 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "key-enum."+"vipValue", childItem.EncryptionType.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "server."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"tacacs."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipObjectType", "tree")
 	if len(data.AccountingRules) > 0 {
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipPrimaryKey", []string{"rule-id"})
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipPrimaryKey", []string{"rule-id"})
+		body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipPrimaryKey", []string{"rule-id"})
-	body, _ = sjson.Set(body, path+"accounting.accounting-rule."+"vipValue", []interface{}{})
 	for _, item := range data.AccountingRules {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "rule-id")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "method")
 		if item.Method.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipValue", item.Method.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "level")
 		if item.PrivilegeLevel.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipType", "ignore")
@@ -685,6 +800,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipValue", item.PrivilegeLevel.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "start-stop")
 
 		if !item.StartStopVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipObjectType", "object")
@@ -696,6 +812,7 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "start-stop."+"vipValue", strconv.FormatBool(item.StartStop.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "group")
 		if item.Group.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipObjectType", "object")
@@ -703,6 +820,10 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			var values []string
 			item.Group.ElementsAs(ctx, &values, false)
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipValue", values)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"accounting.accounting-rule."+"vipValue.-1", itemBody)
 	}
@@ -732,34 +853,42 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"authorization.authorization-config-commands."+"vipValue", strconv.FormatBool(data.AuthorizationConfigCommands.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipObjectType", "tree")
 	if len(data.AuthorizationRules) > 0 {
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipPrimaryKey", []string{"rule-id"})
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipPrimaryKey", []string{"rule-id"})
+		body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipPrimaryKey", []string{"rule-id"})
-	body, _ = sjson.Set(body, path+"authorization.authorization-rule."+"vipValue", []interface{}{})
 	for _, item := range data.AuthorizationRules {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "rule-id")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "rule-id."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "method")
 		if item.Method.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "method."+"vipValue", item.Method.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "level")
 		if item.PrivilegeLevel.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "level."+"vipValue", item.PrivilegeLevel.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "group")
 		if item.Group.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipObjectType", "object")
@@ -768,11 +897,16 @@ func (data CEdgeAAA) toBody(ctx context.Context) string {
 			item.Group.ElementsAs(ctx, &values, false)
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipValue", values)
 		}
+		itemAttributes = append(itemAttributes, "if-authenticated")
 		if item.Authenticated.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "if-authenticated."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "if-authenticated."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "if-authenticated."+"vipValue", strconv.FormatBool(item.Authenticated.ValueBool()))
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"authorization.authorization-rule."+"vipValue.-1", itemBody)
 	}
@@ -860,6 +994,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.Users = make([]CEdgeAAAUsers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAUsers{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -934,6 +1073,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.SshPubkeys = make([]CEdgeAAAUsersSshPubkeys, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAAUsersSshPubkeys{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("key-string.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.KeyString = types.StringNull()
@@ -981,6 +1125,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusServerGroups = make([]CEdgeAAARadiusServerGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusServerGroups{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("group-name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.GroupName = types.StringNull()
@@ -1036,6 +1185,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.Servers = make([]CEdgeAAARadiusServerGroupsServers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusServerGroupsServers{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("address.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Address = types.StringNull()
@@ -1210,6 +1364,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.RadiusClients = make([]CEdgeAAARadiusClients, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAARadiusClients{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("ip.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.ClientIp = types.StringNull()
@@ -1233,6 +1392,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.VonConfigurations = make([]CEdgeAAARadiusClientsVonConfigurations, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAARadiusClientsVonConfigurations{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("name.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.VpnId = types.StringNull()
@@ -1394,6 +1558,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.TacacsServerGroups = make([]CEdgeAAATacacsServerGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAATacacsServerGroups{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("group-name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.GroupName = types.StringNull()
@@ -1449,6 +1618,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 				item.Servers = make([]CEdgeAAATacacsServerGroupsServers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CEdgeAAATacacsServerGroupsServers{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("address.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Address = types.StringNull()
@@ -1566,6 +1740,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.AccountingRules = make([]CEdgeAAAAccountingRules, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAccountingRules{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("rule-id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -1695,6 +1874,11 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		data.AuthorizationRules = make([]CEdgeAAAAuthorizationRules, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CEdgeAAAAuthorizationRules{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("rule-id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()

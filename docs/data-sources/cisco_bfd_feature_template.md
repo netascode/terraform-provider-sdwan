@@ -52,6 +52,7 @@ Read-Only:
 - `hello_interval_variable` (String) Variable name
 - `multiplier` (Number) Set how many Hello packet intervals to wait before declaring that a tunnel has failed
 - `multiplier_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pmtu_discovery` (Boolean) Control automatic path MTU discovery
 - `pmtu_discovery_variable` (String) Variable name
 

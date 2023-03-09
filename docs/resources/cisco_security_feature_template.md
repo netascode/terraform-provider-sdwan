@@ -105,6 +105,7 @@ Optional:
 - `key_id` (Number) Specify the Key ID
   - Range: `0`-`2147483647`
 - `name` (String) Specify the name of the Keychain
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--keys"></a>
@@ -137,6 +138,7 @@ Optional:
 - `include_tcp_options_variable` (String) Variable name
 - `key_string` (String) Specify the Key String
 - `key_string_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `receive_id` (Number) Specify the Receiver ID
   - Range: `0`-`255`
   - Default value: `0`

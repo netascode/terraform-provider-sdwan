@@ -82,6 +82,7 @@ Read-Only:
 - `ipv6_networks` (Attributes List) Configure the networks for BGP to advertise (see [below for nested schema](#nestedatt--address_families--ipv6_networks))
 - `maximum_paths` (Number) Set maximum number of parallel IBGP paths for multipath load sharing
 - `maximum_paths_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `redistribute_routes` (Attributes List) Redistribute routes into BGP (see [below for nested schema](#nestedatt--address_families--redistribute_routes))
 - `table_map_filter` (Boolean) Filter
 - `table_map_filter_variable` (String) Variable name
@@ -95,6 +96,7 @@ Read-Only:
 
 - `as_set_path` (Boolean) Set AS set path information
 - `as_set_path_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Configure the prefixes to aggregate
 - `prefix_variable` (String) Variable name
 - `summary_only` (Boolean) Filter out more specific routes from updates
@@ -106,6 +108,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Configure the prefixes for BGP to announce
 - `prefix_variable` (String) Variable name
 
@@ -117,6 +120,7 @@ Read-Only:
 
 - `as_set_path` (Boolean) Set AS set path information
 - `as_set_path_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Configure the IPv6 prefixes to aggregate
 - `prefix_variable` (String) Variable name
 - `summary_only` (Boolean) Filter out more specific routes from updates
@@ -128,6 +132,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Configure the prefixes for BGP to announce
 - `prefix_variable` (String) Variable name
 
@@ -137,6 +142,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set the protocol to redistribute routes from
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Configure policy to apply to prefixes received from BGP neighbor
@@ -166,6 +172,7 @@ Read-Only:
 - `keepalive_variable` (String) Variable name
 - `next_hop_self` (Boolean) Set router to be next hop for routes advertised to neighbor
 - `next_hop_self_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `password` (String) Set MD5 password on TCP connection with BGP peer
 - `password_variable` (String) Variable name
 - `remote_as` (String) Set remote autonomous system number
@@ -197,6 +204,7 @@ Read-Only:
 - `maximum_prefixes_variable` (String) Variable name
 - `maximum_prefixes_warning_only` (Boolean) Display only a warning message when threshold is exceeded
 - `maximum_prefixes_warning_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `route_policies` (Attributes List) Select route policy to apply to prefixes received from BGP neighbor (see [below for nested schema](#nestedatt--ipv4_neighbors--address_families--route_policies))
 
 <a id="nestedatt--ipv4_neighbors--address_families--route_policies"></a>
@@ -205,6 +213,7 @@ Read-Only:
 Read-Only:
 
 - `direction` (String) Set direction for applying route policy
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `policy_name` (String) Configure name of route policy
 - `policy_name_variable` (String) Variable name
 
@@ -218,6 +227,7 @@ Read-Only:
 
 - `export` (Attributes List) Export Target-VPN community for IPV4 (see [below for nested schema](#nestedatt--ipv4_route_targets--export))
 - `import` (Attributes List) Import Target-VPN community for IPV4 (see [below for nested schema](#nestedatt--ipv4_route_targets--import))
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `vpn_id` (Number) VPN ID for IPv4
 - `vpn_id_variable` (String) Variable name
 
@@ -228,6 +238,7 @@ Read-Only:
 
 - `asn_ip` (String) asn-ip
 - `asn_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_route_targets--import"></a>
@@ -237,6 +248,7 @@ Read-Only:
 
 - `asn_ip` (String) asn-ip
 - `asn_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 
@@ -262,6 +274,7 @@ Read-Only:
 - `keepalive_variable` (String) Variable name
 - `next_hop_self` (Boolean) Set router to be next hop for routes advertised to neighbor
 - `next_hop_self_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `password` (String) Set MD5 password on TCP connection with BGP peer
 - `password_variable` (String) Variable name
 - `remote_as` (String) Set remote autonomous system number
@@ -293,6 +306,7 @@ Read-Only:
 - `maximum_prefixes_variable` (String) Variable name
 - `maximum_prefixes_warning_only` (Boolean) Display only a warning message when threshold is exceeded
 - `maximum_prefixes_warning_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `route_policies` (Attributes List) Select route policy to apply to prefixes received from BGP neighbor (see [below for nested schema](#nestedatt--ipv6_neighbors--address_families--route_policies))
 
 <a id="nestedatt--ipv6_neighbors--address_families--route_policies"></a>
@@ -301,6 +315,7 @@ Read-Only:
 Read-Only:
 
 - `direction` (String) Set direction for applying route policy
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `policy_name` (String) Configure name of route policy
 - `policy_name_variable` (String) Variable name
 
@@ -314,6 +329,7 @@ Read-Only:
 
 - `export` (Attributes List) Export Target-VPN community for IPV6 (see [below for nested schema](#nestedatt--ipv6_route_targets--export))
 - `import` (Attributes List) Import Target-VPN community for IPV6 (see [below for nested schema](#nestedatt--ipv6_route_targets--import))
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `vpn_id` (Number) VPN ID for IPv6
 - `vpn_id_variable` (String) Variable name
 
@@ -324,6 +340,7 @@ Read-Only:
 
 - `asn_ip` (String) asn-ip
 - `asn_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv6_route_targets--import"></a>
@@ -333,6 +350,7 @@ Read-Only:
 
 - `asn_ip` (String) asn-ip
 - `asn_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 
@@ -343,5 +361,6 @@ Read-Only:
 
 - `interface_name` (String) Interface Name
 - `interface_name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 

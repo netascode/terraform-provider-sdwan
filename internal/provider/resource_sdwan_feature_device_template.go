@@ -175,7 +175,7 @@ func (r *FeatureDeviceTemplateResource) Read(ctx context.Context, req resource.R
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
 	res, err := r.client.Get("/template/device/object/" + state.Id.ValueString())
-	if res.Get("error.message").String() == "Invalid Template Id" {
+	if res.Get("error.message").String() == "Template definition not found" {
 		resp.State.RemoveResource(ctx)
 		return
 	} else if err != nil {
@@ -229,7 +229,7 @@ func (r *FeatureDeviceTemplateResource) Delete(ctx context.Context, req resource
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Delete", state.Name.ValueString()))
 
 	res, err := r.client.Delete("/template/device/" + state.Id.ValueString())
-	if err != nil && res.Get("error.message").String() != "Invalid Template Id" {
+	if err != nil && res.Get("error.message").String() != "Template definition not found" {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to delete object (DELETE), got error: %s, %s", err, res.String()))
 		return
 	}

@@ -113,8 +113,16 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Schema(ctx context.Context, req dat
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -144,6 +152,10 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Schema(ctx context.Context, req dat
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -166,6 +178,10 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Schema(ctx context.Context, req dat
 						},
 						"view_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -218,6 +234,10 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Schema(ctx context.Context, req dat
 						},
 						"group_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -274,6 +294,10 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Schema(ctx context.Context, req dat
 						},
 						"source_interface_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},

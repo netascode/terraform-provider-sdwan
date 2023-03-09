@@ -177,6 +177,7 @@ Optional:
 - `method` (String) Configure Accounting Method
   - Choices: `commands`, `exec`, `network`, `system`
 - `name` (String) Configure Accounting Rule ID
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `privilege_level` (String) Privilege level when method is commands
   - Choices: `1`, `15`
 - `start_stop` (Boolean) Record start and stop without waiting
@@ -195,6 +196,7 @@ Optional:
 - `method` (String) Method
   - Choices: `commands`
 - `name` (String) Configure Authorization Rule ID
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `privilege_level` (String) Privilege level when method is commands
   - Choices: `1`, `15`
 
@@ -206,6 +208,7 @@ Optional:
 
 - `client_ip` (String) Client IP
 - `client_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `von_configurations` (Attributes List) VPN configuration (see [below for nested schema](#nestedatt--radius_clients--von_configurations))
 
 <a id="nestedatt--radius_clients--von_configurations"></a>
@@ -213,6 +216,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `server_key` (String) Specify a RADIUS client server-key
 - `server_key_variable` (String) Variable name
 - `vpn_id` (String) VPN ID
@@ -226,6 +230,7 @@ Optional:
 Optional:
 
 - `group_name` (String) Set Radius server Group Name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `servers` (Attributes List) Configure the Radius server (see [below for nested schema](#nestedatt--radius_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach Radius server
 - `source_interface_variable` (String) Variable name
@@ -254,6 +259,7 @@ Optional:
   - Choices: `key`, `pac`
   - Default value: `key`
 - `key_type_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `retransmit` (Number) Configure how many times to contact this Radius server
   - Range: `1`-`100`
   - Default value: `3`
@@ -273,6 +279,7 @@ Optional:
 Optional:
 
 - `group_name` (String) Set TACACS server Group Name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `servers` (Attributes List) Configure the TACACS server (see [below for nested schema](#nestedatt--tacacs_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach TACACS server
 - `source_interface_variable` (String) Variable name
@@ -289,6 +296,7 @@ Optional:
 - `encryption_type` (String) Type of encyption. To be used for type 6
   - Choices: `6`, `7`
 - `key` (String) Set the TACACS server shared key
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `port` (Number) TACACS Port
   - Range: `1`-`65535`
   - Default value: `49`
@@ -309,6 +317,7 @@ Optional:
 
 - `name` (String) Set the username
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `password` (String) Set the user password
 - `privilege_level` (String) Set Privilege Level for this user
   - Choices: `1`, `15`
@@ -325,6 +334,7 @@ Optional:
 - `key_string` (String) Set the RSA key string
 - `key_type` (String) Only RSA is supported
 - `key_type_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 ## Import
 

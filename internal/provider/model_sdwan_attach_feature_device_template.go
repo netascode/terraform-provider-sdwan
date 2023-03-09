@@ -93,6 +93,8 @@ func (data AttachFeatureDeviceTemplate) detachDevices(ctx context.Context, clien
 	devices, err := data.getAttachedDevices(ctx, client)
 	if err != nil {
 		return gjson.Result{}, err
+	} else if len(devices) == 0 {
+		return gjson.Result{}, nil
 	}
 
 	body, _ := sjson.Set("", "deviceType", "vedge")
@@ -123,6 +125,7 @@ func (data AttachFeatureDeviceTemplate) toBody(ctx context.Context, client *sdwa
 	for _, v := range deviceVariables {
 		itemBody := ""
 		for name, value := range v {
+			name = strings.Replace(name, ".", `\.`, -1)
 			itemBody, _ = sjson.Set(itemBody, name, value)
 		}
 		body, _ = sjson.SetRaw(body, "deviceTemplateList.0.device.-1", itemBody)

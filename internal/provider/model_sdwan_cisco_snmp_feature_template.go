@@ -32,11 +32,13 @@ type CiscoSNMP struct {
 }
 
 type CiscoSNMPViews struct {
+	Optional          types.Bool                        `tfsdk:"optional"`
 	Name              types.String                      `tfsdk:"name"`
 	ObjectIdentifiers []CiscoSNMPViewsObjectIdentifiers `tfsdk:"object_identifiers"`
 }
 
 type CiscoSNMPCommunities struct {
+	Optional              types.Bool   `tfsdk:"optional"`
 	Name                  types.String `tfsdk:"name"`
 	View                  types.String `tfsdk:"view"`
 	ViewVariable          types.String `tfsdk:"view_variable"`
@@ -45,6 +47,7 @@ type CiscoSNMPCommunities struct {
 }
 
 type CiscoSNMPGroups struct {
+	Optional      types.Bool   `tfsdk:"optional"`
 	Name          types.String `tfsdk:"name"`
 	SecurityLevel types.String `tfsdk:"security_level"`
 	View          types.String `tfsdk:"view"`
@@ -52,6 +55,7 @@ type CiscoSNMPGroups struct {
 }
 
 type CiscoSNMPUsers struct {
+	Optional                       types.Bool   `tfsdk:"optional"`
 	Name                           types.String `tfsdk:"name"`
 	AuthenticationProtocol         types.String `tfsdk:"authentication_protocol"`
 	AuthenticationProtocolVariable types.String `tfsdk:"authentication_protocol_variable"`
@@ -66,6 +70,7 @@ type CiscoSNMPUsers struct {
 }
 
 type CiscoSNMPTrapTargets struct {
+	Optional                types.Bool   `tfsdk:"optional"`
 	VpnId                   types.Int64  `tfsdk:"vpn_id"`
 	VpnIdVariable           types.String `tfsdk:"vpn_id_variable"`
 	Ip                      types.String `tfsdk:"ip"`
@@ -81,6 +86,7 @@ type CiscoSNMPTrapTargets struct {
 }
 
 type CiscoSNMPViewsObjectIdentifiers struct {
+	Optional        types.Bool   `tfsdk:"optional"`
 	Id              types.String `tfsdk:"id"`
 	IdVariable      types.String `tfsdk:"id_variable"`
 	Exclude         types.Bool   `tfsdk:"exclude"`
@@ -143,32 +149,43 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"location."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"location."+"vipValue", data.Location.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"view."+"vipObjectType", "tree")
 	if len(data.Views) > 0 {
+		body, _ = sjson.Set(body, path+"view."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"view."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"view."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"view."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"view."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"view."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"view."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"view."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"view."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"view."+"vipValue", []interface{}{})
 	for _, item := range data.Views {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "oid."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "oid")
 		if len(item.ObjectIdentifiers) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "oid."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipPrimaryKey", []string{"id"})
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "oid."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipPrimaryKey", []string{"id"})
+			itemBody, _ = sjson.Set(itemBody, "oid."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "oid."+"vipPrimaryKey", []string{"id"})
-		itemBody, _ = sjson.Set(itemBody, "oid."+"vipValue", []interface{}{})
 		for _, childItem := range item.ObjectIdentifiers {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "id")
 
 			if !childItem.IdVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "id."+"vipObjectType", "object")
@@ -180,6 +197,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "id."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "id."+"vipValue", childItem.Id.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "exclude")
 
 			if !childItem.ExcludeVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "exclude."+"vipObjectType", "node-only")
@@ -193,26 +211,40 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "exclude."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "exclude."+"vipValue", strconv.FormatBool(childItem.Exclude.ValueBool()))
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "oid."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"view."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"community."+"vipObjectType", "tree")
 	if len(data.Communities) > 0 {
+		body, _ = sjson.Set(body, path+"community."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"community."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"community."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"community."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"community."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"community."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"community."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"community."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"community."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"community."+"vipValue", []interface{}{})
 	for _, item := range data.Communities {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "view")
 
 		if !item.ViewVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipObjectType", "object")
@@ -224,6 +256,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipValue", item.View.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "authorization")
 
 		if !item.AuthorizationVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "authorization."+"vipObjectType", "object")
@@ -235,30 +268,41 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "authorization."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "authorization."+"vipValue", item.Authorization.ValueString())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"community."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"group."+"vipObjectType", "tree")
 	if len(data.Groups) > 0 {
+		body, _ = sjson.Set(body, path+"group."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"group."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"group."+"vipPrimaryKey", []string{"name", "security-level"})
+		body, _ = sjson.Set(body, path+"group."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"group."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"group."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"group."+"vipPrimaryKey", []string{"name", "security-level"})
+		body, _ = sjson.Set(body, path+"group."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"group."+"vipPrimaryKey", []string{"name", "security-level"})
-	body, _ = sjson.Set(body, path+"group."+"vipValue", []interface{}{})
 	for _, item := range data.Groups {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "security-level")
 		if item.SecurityLevel.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "security-level."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "security-level."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "security-level."+"vipValue", item.SecurityLevel.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "view")
 
 		if !item.ViewVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipObjectType", "object")
@@ -270,24 +314,34 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "view."+"vipValue", item.View.ValueString())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"group."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 	if len(data.Users) > 0 {
+		body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"user."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"user."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"user."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"user."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"user."+"vipValue", []interface{}{})
 	for _, item := range data.Users {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "auth")
 
 		if !item.AuthenticationProtocolVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "auth."+"vipObjectType", "object")
@@ -301,6 +355,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "auth."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "auth."+"vipValue", item.AuthenticationProtocol.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "auth-password")
 
 		if !item.AuthenticationPasswordVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "auth-password."+"vipObjectType", "object")
@@ -314,6 +369,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "auth-password."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "auth-password."+"vipValue", item.AuthenticationPassword.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "priv")
 
 		if !item.PrivacyProtocolVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "priv."+"vipObjectType", "object")
@@ -327,6 +383,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "priv."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "priv."+"vipValue", item.PrivacyProtocol.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "priv-password")
 
 		if !item.PrivacyPasswordVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "priv-password."+"vipObjectType", "object")
@@ -340,6 +397,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "priv-password."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "priv-password."+"vipValue", item.PrivacyPassword.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "group")
 
 		if !item.GroupVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipObjectType", "object")
@@ -351,18 +409,27 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "group."+"vipValue", item.Group.ValueString())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"user."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"trap.target."+"vipObjectType", "tree")
 	if len(data.TrapTargets) > 0 {
+		body, _ = sjson.Set(body, path+"trap.target."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"trap.target."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"trap.target."+"vipPrimaryKey", []string{"vpn-id", "ip", "port"})
+		body, _ = sjson.Set(body, path+"trap.target."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"trap.target."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"trap.target."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"trap.target."+"vipPrimaryKey", []string{"vpn-id", "ip", "port"})
+		body, _ = sjson.Set(body, path+"trap.target."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"trap.target."+"vipPrimaryKey", []string{"vpn-id", "ip", "port"})
-	body, _ = sjson.Set(body, path+"trap.target."+"vipValue", []interface{}{})
 	for _, item := range data.TrapTargets {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "vpn-id")
 
 		if !item.VpnIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipObjectType", "object")
@@ -374,6 +441,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipValue", item.VpnId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "ip")
 
 		if !item.IpVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipObjectType", "object")
@@ -385,6 +453,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "ip."+"vipValue", item.Ip.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "port")
 
 		if !item.UdpPortVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "port."+"vipObjectType", "object")
@@ -396,6 +465,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "port."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "port."+"vipValue", item.UdpPort.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "community-name")
 
 		if !item.CommunityNameVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "community-name."+"vipObjectType", "object")
@@ -407,6 +477,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "community-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "community-name."+"vipValue", item.CommunityName.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "user")
 
 		if !item.UserVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "user."+"vipObjectType", "object")
@@ -418,6 +489,7 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "user."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "user."+"vipValue", item.User.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "source-interface")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
@@ -428,6 +500,10 @@ func (data CiscoSNMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"trap.target."+"vipValue.-1", itemBody)
 	}
@@ -518,6 +594,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Views = make([]CiscoSNMPViews, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPViews{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -538,6 +619,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 				item.ObjectIdentifiers = make([]CiscoSNMPViewsObjectIdentifiers, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoSNMPViewsObjectIdentifiers{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("id.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Id = types.StringNull()
@@ -588,6 +674,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Communities = make([]CiscoSNMPCommunities, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPCommunities{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -650,6 +741,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Groups = make([]CiscoSNMPGroups, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPGroups{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -709,6 +805,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Users = make([]CiscoSNMPUsers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPUsers{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -828,6 +929,11 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.TrapTargets = make([]CiscoSNMPTrapTargets, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSNMPTrapTargets{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("vpn-id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()

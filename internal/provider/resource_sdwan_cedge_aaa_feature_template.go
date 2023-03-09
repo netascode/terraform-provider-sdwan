@@ -150,8 +150,16 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -269,8 +277,16 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -312,8 +328,16 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -454,8 +478,16 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 											stringvalidator.OneOf("6", "7"),
 										},
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -497,6 +529,10 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						"group": schema.ListAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Use Server-group").String,
 							ElementType:         types.StringType,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -551,6 +587,10 @@ func (r *CEdgeAAAFeatureTemplateResource) Schema(ctx context.Context, req resour
 						},
 						"authenticated": schema.BoolAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Succeed if user has authenticated").AddDefaultValueDescription("false").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},

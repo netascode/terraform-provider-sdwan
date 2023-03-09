@@ -113,6 +113,10 @@ func (d *CiscoNTPFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -167,6 +171,10 @@ func (d *CiscoNTPFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"prefer_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},

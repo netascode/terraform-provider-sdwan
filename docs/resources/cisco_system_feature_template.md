@@ -220,6 +220,7 @@ Optional:
 
 - `number` (String) Mobile number, ex: +1231234414
 - `number_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--object_trackers"></a>
@@ -241,6 +242,7 @@ Optional:
 - `object_number` (Number) Object tracker ID
   - Range: `1`-`1000`
 - `object_number_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `sig` (String) service sig
 - `sig_variable` (String) Variable name
 - `vpn_id` (Number) VPN
@@ -252,6 +254,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `track_id` (Number) Track id
   - Range: `1`-`1000`
 - `track_id_variable` (String) Variable name
@@ -285,6 +288,7 @@ Optional:
 - `multiplier_variable` (String) Variable name
 - `name` (String) Tracker name
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `threshold` (Number) Probe Timeout threshold <100..1000> milliseconds
   - Range: `100`-`1000`
   - Default value: `300`

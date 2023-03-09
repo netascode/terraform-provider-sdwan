@@ -54,6 +54,7 @@ Read-Only:
 - `hostname_ip_variable` (String) Variable name
 - `logging_level` (String) Set logging level for messages logged to server
 - `logging_level_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `profile` (String) Configure a TLS profile
 - `profile_variable` (String) Variable name
 - `source_interface` (String) Set interface to use to reach syslog server
@@ -75,6 +76,7 @@ Read-Only:
 - `hostname_ip_variable` (String) Variable name
 - `logging_level` (String) Set logging level for messages logged to server
 - `logging_level_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `profile` (String) Configure a TLS profile
 - `profile_variable` (String) Variable name
 - `source_interface` (String) Set interface to use to reach syslog server
@@ -93,6 +95,7 @@ Read-Only:
 - `ciphersuite_list_variable` (String) Variable name
 - `name` (String) Specify the name of the TLS profile
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `version` (String) TLS Version
 - `version_variable` (String) Variable name
 

@@ -563,6 +563,7 @@ Optional:
 - `acl_name_variable` (String) Variable name
 - `direction` (String) Direction
   - Choices: `in`, `out`
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_secondary_addresses"></a>
@@ -572,6 +573,7 @@ Optional:
 
 - `address` (String) IP Address
 - `address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_vrrps"></a>
@@ -585,6 +587,7 @@ Optional:
 - `ip_address` (String) Assign IP Address
 - `ip_address_variable` (String) Variable name
 - `ipv4_secondary_addresses` (Attributes List) VRRP Secondary IP address (see [below for nested schema](#nestedatt--ipv4_vrrps--ipv4_secondary_addresses))
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `priority` (Number) Set priority
   - Range: `1`-`254`
   - Default value: `100`
@@ -611,6 +614,7 @@ Optional:
 
 - `ip_address` (String) VRRP Secondary IP address
 - `ip_address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_vrrps--tracking_objects"></a>
@@ -621,6 +625,7 @@ Optional:
 - `decrement_value` (Number) Decrement Value for VRRP priority
   - Range: `1`-`255`
 - `decrement_value_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `track_action` (String) Track Action
   - Choices: `decrement`, `shutdown`
   - Default value: `decrement`
@@ -640,6 +645,7 @@ Optional:
 - `acl_name_variable` (String) Variable name
 - `direction` (String) Direction
   - Choices: `in`, `out`
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv6_dhcp_helpers"></a>
@@ -649,6 +655,7 @@ Optional:
 
 - `address` (String) DHCPv6 Helper address
 - `address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `vpn_id` (Number) DHCPv6 Helper VPN
   - Range: `1`-`65536`
 - `vpn_id_variable` (String) Variable name
@@ -661,6 +668,7 @@ Optional:
 
 - `address` (String) IPv6 Address
 - `address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv6_vrrps"></a>
@@ -672,6 +680,7 @@ Optional:
   - Range: `1`-`255`
 - `group_id_variable` (String) Variable name
 - `ipv6_adresses` (Attributes List) IPv6 VRRP (see [below for nested schema](#nestedatt--ipv6_vrrps--ipv6_adresses))
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `priority` (Number) Set priority
   - Range: `1`-`254`
   - Default value: `100`
@@ -693,6 +702,7 @@ Optional:
 
 - `ipv6_link_local` (String) Use link-local IPv6 Address
 - `ipv6_link_local_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Assign Global IPv6 Prefix
 - `prefix_variable` (String) Variable name
 
@@ -707,6 +717,7 @@ Optional:
 - `ip_address_variable` (String) Variable name
 - `mac` (String) MAC address
 - `mac_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--static_nat66_entries"></a>
@@ -714,6 +725,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `source_prefix` (String) Source Prefix
 - `source_prefix_variable` (String) Variable name
 - `source_vpn_id` (Number) Source VPN ID
@@ -729,6 +741,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `source_ip` (String) Source IP address to be translated
 - `source_ip_variable` (String) Variable name
 - `source_vpn_id` (Number) Configure VPN ID
@@ -748,6 +761,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Protocol
   - Choices: `tcp`, `udp`
 - `protocol_variable` (String) Variable name
@@ -780,6 +794,7 @@ Optional:
 
 - `encapsulation` (String) Encapsulation
   - Choices: `gre`, `ipsec`
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `preference` (Number) Set preference for TLOC
   - Range: `0`-`4294967295`
 - `preference_variable` (String) Variable name

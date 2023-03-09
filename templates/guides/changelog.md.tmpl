@@ -7,6 +7,11 @@ description: |-
 
 # Changelog
 
+## 0.1.5 (unreleased)
+
+- Fix empty tunnel-interface config of `sdwan_cisco_vpn_interface_feature_template`
+- Introduce `optional` attribute to designate list items as optional
+
 ## 0.1.4
 
 - Fix error when pushing feature template attributes without type `ignore`

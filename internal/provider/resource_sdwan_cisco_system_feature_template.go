@@ -171,6 +171,10 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -468,6 +472,10 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -545,6 +553,10 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
 						},
@@ -557,6 +569,10 @@ func (r *CiscoSystemFeatureTemplateResource) Schema(ctx context.Context, req res
 						},
 						"boolean_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},

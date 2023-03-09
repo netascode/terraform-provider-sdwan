@@ -147,6 +147,10 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 								int64validator.Between(0, 2147483647),
 							},
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -298,6 +302,10 @@ func (r *CiscoSecurityFeatureTemplateResource) Schema(ctx context.Context, req r
 						},
 						"accept_ao_mismatch_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},

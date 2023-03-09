@@ -132,8 +132,16 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Optional:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},
@@ -164,6 +172,10 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"authorization_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -197,6 +209,10 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"view_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -261,6 +277,10 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"group_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},
@@ -329,6 +349,10 @@ func (r *CiscoSNMPFeatureTemplateResource) Schema(ctx context.Context, req resou
 						},
 						"source_interface_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},

@@ -80,6 +80,7 @@ Optional:
 - `id` (Number) MD5 authentication key ID
   - Range: `1`-`65535`
 - `id_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `value` (String) Enter cleartext or AES-encrypted MD5 authentication key
 - `value_variable` (String) Variable name
 
@@ -94,6 +95,7 @@ Optional:
 - `authentication_key_id_variable` (String) Variable name
 - `hostname_ip` (String) Set hostname or IP address of server
 - `hostname_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefer` (Boolean) Prefer this NTP server
   - Default value: `false`
 - `prefer_variable` (String) Variable name

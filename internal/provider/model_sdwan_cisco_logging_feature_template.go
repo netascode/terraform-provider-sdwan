@@ -30,6 +30,7 @@ type CiscoLogging struct {
 }
 
 type CiscoLoggingTlsProfiles struct {
+	Optional                types.Bool   `tfsdk:"optional"`
 	Name                    types.String `tfsdk:"name"`
 	NameVariable            types.String `tfsdk:"name_variable"`
 	Version                 types.String `tfsdk:"version"`
@@ -40,6 +41,7 @@ type CiscoLoggingTlsProfiles struct {
 }
 
 type CiscoLoggingIpv4Servers struct {
+	Optional                types.Bool   `tfsdk:"optional"`
 	HostnameIp              types.String `tfsdk:"hostname_ip"`
 	HostnameIpVariable      types.String `tfsdk:"hostname_ip_variable"`
 	VpnId                   types.Int64  `tfsdk:"vpn_id"`
@@ -57,6 +59,7 @@ type CiscoLoggingIpv4Servers struct {
 }
 
 type CiscoLoggingIpv6Servers struct {
+	Optional                types.Bool   `tfsdk:"optional"`
 	HostnameIp              types.String `tfsdk:"hostname_ip"`
 	HostnameIpVariable      types.String `tfsdk:"hostname_ip_variable"`
 	VpnId                   types.Int64  `tfsdk:"vpn_id"`
@@ -129,16 +132,21 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"disk.file.rotate."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"disk.file.rotate."+"vipValue", data.LogRotations.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"tls-profile."+"vipObjectType", "tree")
 	if len(data.TlsProfiles) > 0 {
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"tls-profile."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipPrimaryKey", []string{"profile"})
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"tls-profile."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipPrimaryKey", []string{"profile"})
+		body, _ = sjson.Set(body, path+"tls-profile."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"tls-profile."+"vipPrimaryKey", []string{"profile"})
-	body, _ = sjson.Set(body, path+"tls-profile."+"vipValue", []interface{}{})
 	for _, item := range data.TlsProfiles {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "profile")
 
 		if !item.NameVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "profile."+"vipObjectType", "object")
@@ -150,6 +158,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "profile."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "profile."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "version")
 
 		if !item.VersionVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls-version.version."+"vipObjectType", "object")
@@ -163,6 +172,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls-version.version."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls-version.version."+"vipValue", item.Version.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "auth-type")
 		if item.AuthenticationType.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "auth-type."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "auth-type."+"vipType", "ignore")
@@ -171,6 +181,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "auth-type."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "auth-type."+"vipValue", item.AuthenticationType.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "ciphersuite-list")
 
 		if !item.CiphersuiteListVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "ciphersuite.ciphersuite-list."+"vipObjectType", "object")
@@ -184,18 +195,27 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ciphersuite.ciphersuite-list."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "ciphersuite.ciphersuite-list."+"vipValue", item.CiphersuiteList.ValueString())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"tls-profile."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"server."+"vipObjectType", "tree")
 	if len(data.Ipv4Servers) > 0 {
+		body, _ = sjson.Set(body, path+"server."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"server."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"server."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"server."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"server."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"server."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"server."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"server."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"server."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"server."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv4Servers {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 
 		if !item.HostnameIpVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
@@ -207,6 +227,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.HostnameIp.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "vpn")
 
 		if !item.VpnIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
@@ -220,6 +241,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "source-interface")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
@@ -233,6 +255,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "priority")
 
 		if !item.LoggingLevelVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipObjectType", "object")
@@ -246,6 +269,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipValue", item.LoggingLevel.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "enable-tls")
 
 		if !item.EnableTlsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipObjectType", "object")
@@ -259,6 +283,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipValue", strconv.FormatBool(item.EnableTls.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "custom-profile")
 
 		if !item.CustomProfileVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipObjectType", "object")
@@ -272,6 +297,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipValue", strconv.FormatBool(item.CustomProfile.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "profile")
 
 		if !item.ProfileVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipObjectType", "object")
@@ -284,19 +310,28 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipValue", item.Profile.ValueString())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"server."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"ipv6-server."+"vipObjectType", "tree")
 	if len(data.Ipv6Servers) > 0 {
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ipv6-server."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ipv6-server."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipPrimaryKey", []string{"name"})
+		body, _ = sjson.Set(body, path+"ipv6-server."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"ipv6-server."+"vipPrimaryKey", []string{"name"})
-	body, _ = sjson.Set(body, path+"ipv6-server."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv6Servers {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 
 		if !item.HostnameIpVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
@@ -308,6 +343,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.HostnameIp.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "vpn")
 
 		if !item.VpnIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipObjectType", "object")
@@ -321,6 +357,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn."+"vipValue", item.VpnId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "source-interface")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipObjectType", "object")
@@ -334,6 +371,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "source-interface."+"vipValue", item.SourceInterface.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "priority")
 
 		if !item.LoggingLevelVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipObjectType", "object")
@@ -347,6 +385,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "priority."+"vipValue", item.LoggingLevel.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "enable-tls")
 
 		if !item.EnableTlsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipObjectType", "object")
@@ -360,6 +399,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.enable-tls."+"vipValue", strconv.FormatBool(item.EnableTls.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "custom-profile")
 
 		if !item.CustomProfileVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipObjectType", "object")
@@ -373,6 +413,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.custom-profile."+"vipValue", strconv.FormatBool(item.CustomProfile.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "profile")
 
 		if !item.ProfileVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipObjectType", "object")
@@ -385,6 +426,10 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "tls.tls-properties.profile."+"vipValue", item.Profile.ValueString())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"ipv6-server."+"vipValue.-1", itemBody)
 	}
@@ -475,6 +520,11 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 		data.TlsProfiles = make([]CiscoLoggingTlsProfiles, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingTlsProfiles{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("profile.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -556,6 +606,11 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv4Servers = make([]CiscoLoggingIpv4Servers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingIpv4Servers{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.HostnameIp = types.StringNull()
@@ -697,6 +752,11 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv6Servers = make([]CiscoLoggingIpv6Servers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoLoggingIpv6Servers{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.HostnameIp = types.StringNull()

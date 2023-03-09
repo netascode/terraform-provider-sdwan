@@ -71,6 +71,7 @@ Read-Only:
 - `hostname_variable` (String) Variable name
 - `ip` (List of String) List of IP
 - `ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--dns_ipv4_servers"></a>
@@ -80,6 +81,7 @@ Read-Only:
 
 - `address` (String) DNS Address
 - `address_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `role` (String) Role
 - `role_variable` (String) Variable name
 
@@ -90,6 +92,7 @@ Read-Only:
 Read-Only:
 
 - `address` (String) DNS Address
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `role` (String) Role
 - `role_variable` (String) Variable name
 
@@ -101,6 +104,7 @@ Read-Only:
 
 - `interface` (List of String) List of GRE Interfaces
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN to resolve the prefix
@@ -113,6 +117,7 @@ Read-Only:
 
 - `interface` (List of String) List of IPSEC Interfaces (Separated by commas)
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN to resolve the prefix
@@ -130,6 +135,7 @@ Read-Only:
 - `next_hops` (Attributes List) IP gateway address (see [below for nested schema](#nestedatt--ipv4_static_routes--next_hops))
 - `null0` (Boolean) null0
 - `null0_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `track_next_hops` (Attributes List) IP gateway address (see [below for nested schema](#nestedatt--ipv4_static_routes--track_next_hops))
@@ -145,6 +151,7 @@ Read-Only:
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--ipv4_static_routes--track_next_hops"></a>
@@ -156,6 +163,7 @@ Read-Only:
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `tracker` (String) Static route tracker
 - `tracker_variable` (String) Variable name
 
@@ -166,6 +174,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `service` (String) Service
@@ -182,6 +191,7 @@ Read-Only:
 - `next_hops` (Attributes List) IP gateway address (see [below for nested schema](#nestedatt--ipv6_static_routes--next_hops))
 - `null0` (Boolean) null0
 - `null0_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix` (String) Prefix
 - `prefix_variable` (String) Variable name
 - `vpn_id` (Number) Destination VPN(!=0 or !=512) to resolve the prefix
@@ -196,6 +206,7 @@ Read-Only:
 - `address_variable` (String) Variable name
 - `distance` (Number) Administrative distance
 - `distance_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 
@@ -210,6 +221,7 @@ Read-Only:
 - `leak_from_global_protocol` (String) Select protocol for route leaking
 - `leak_to_global` (Boolean) Enable Route Leaking from this Service VPN to Global VPN
 - `name` (String) NAT64 Pool name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `overload` (Boolean) NAT 64 Overload Option
 - `overload_variable` (String) Variable name
 - `start_address` (String) Starting IP address of NAT pool range
@@ -225,6 +237,7 @@ Read-Only:
 - `direction_variable` (String) Variable name
 - `name` (Number) NAT Pool Name, natpool1..31
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `overload` (Boolean) Enable port translation(PAT)
 - `overload_variable` (String) Variable name
 - `prefix_length` (Number) Ending IP address of NAT Pool Prefix Length
@@ -242,6 +255,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefixes` (Attributes List) (see [below for nested schema](#nestedatt--omp_advertise_ipv4_routes--prefixes))
 - `protocol` (String) Advertised routes protocol
 - `protocol_sub_type` (List of String)
@@ -257,6 +271,7 @@ Read-Only:
 
 - `aggregate_only` (Boolean) Aggregate Only
 - `aggregate_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
@@ -267,6 +282,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefixes` (Attributes List) (see [below for nested schema](#nestedatt--omp_advertise_ipv6_routes--prefixes))
 - `protocol` (String) Advertised routes protocol
 - `protocol_sub_type` (List of String)
@@ -282,6 +298,7 @@ Read-Only:
 
 - `aggregate_only` (Boolean) Aggregate Only
 - `aggregate_only_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_entry` (String) Prefix
 - `prefix_entry_variable` (String) Variable name
 
@@ -292,6 +309,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
 - `protocol` (String) Protocol
@@ -311,6 +329,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking from this Service VPN to Global VPN
 - `protocol_sub_type` (List of String)
 - `protocol_sub_type_variable` (String) Variable name
@@ -323,6 +342,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
@@ -334,6 +354,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking from Global VPN to this Service VPN
 - `protocol_sub_type` (List of String)
 - `protocol_sub_type_variable` (String) Variable name
@@ -346,6 +367,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
@@ -357,6 +379,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable route leaking to current VPN
 - `protocol_sub_type` (List of String)
 - `protocol_sub_type_variable` (String) Variable name
@@ -372,6 +395,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Select a Route Protocol to enable redistribution
 - `protocol_variable` (String) Variable name
 - `route_policy` (String) Select a Route Policy to enable redistribution
@@ -388,6 +412,7 @@ Read-Only:
 - `address_variable` (String) Variable name
 - `interface` (String) Tracking Service
 - `interface_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `service_types` (String) Service Type
 - `track_enable` (Boolean) Tracking Service
 - `track_enable_variable` (String) Variable name
@@ -398,6 +423,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pool_name` (String) NAT Pool Name, natpool1..31
 - `pool_name_variable` (String) Variable name
 - `source_ip` (String) Source IP address to be translated
@@ -415,6 +441,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefix_length` (Number) Network Prefix Length
 - `prefix_length_variable` (String) Variable name
 - `source_ip_subnet` (String) Source IP Subnet to be translated

@@ -124,6 +124,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -142,6 +146,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"role_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -167,6 +175,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"ip_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -206,6 +218,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -228,6 +244,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"service": schema.StringAttribute{
 							MarkdownDescription: "Service",
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -299,6 +319,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
 						},
@@ -331,8 +355,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -395,8 +427,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -427,6 +467,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -454,6 +498,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"interface_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -510,8 +558,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -567,8 +623,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -616,6 +680,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"leak_to_global": schema.BoolAttribute{
 							MarkdownDescription: "Enable Route Leaking from this Service VPN to Global VPN",
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -682,6 +750,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -730,6 +802,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -776,6 +852,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"tracker_id_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -834,6 +914,10 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -880,8 +964,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: "Select a Route Policy to enable redistribution",
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -945,8 +1037,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -994,8 +1094,16 @@ func (d *CiscoVPNFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: "Select a Route Policy to enable redistribution",
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},

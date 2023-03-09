@@ -128,6 +128,10 @@ func (d *CiscoBFDFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},

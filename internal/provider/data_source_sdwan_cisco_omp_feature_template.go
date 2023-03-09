@@ -180,6 +180,10 @@ func (d *CiscoOMPFeatureTemplateDataSource) Schema(ctx context.Context, req data
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -190,6 +194,10 @@ func (d *CiscoOMPFeatureTemplateDataSource) Schema(ctx context.Context, req data
 					Attributes: map[string]schema.Attribute{
 						"protocol": schema.StringAttribute{
 							MarkdownDescription: "Set routes to advertise",
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},

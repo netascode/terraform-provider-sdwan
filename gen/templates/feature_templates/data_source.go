@@ -107,6 +107,10 @@ func (d *{{camelCase .Name}}FeatureTemplateDataSource) Schema(ctx context.Contex
 												},
 												{{- end}}
 												{{- end}}
+												"optional": schema.BoolAttribute{
+													MarkdownDescription: "Indicates if list item is considered optional.",
+													Computed:            true,
+												},
 											},
 										},
 										{{- end}}
@@ -118,6 +122,10 @@ func (d *{{camelCase .Name}}FeatureTemplateDataSource) Schema(ctx context.Contex
 									},
 									{{- end}}
 									{{- end}}
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
 							{{- end}}
@@ -129,6 +137,10 @@ func (d *{{camelCase .Name}}FeatureTemplateDataSource) Schema(ctx context.Contex
 						},
 						{{- end}}
 						{{- end}}
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 				{{- end}}

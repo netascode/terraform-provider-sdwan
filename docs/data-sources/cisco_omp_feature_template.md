@@ -67,6 +67,7 @@ Read-Only:
 
 - `advertise_external_ospf` (String) Advertise OSPF external routes
 - `advertise_external_ospf_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set routes to advertise
 
 
@@ -75,6 +76,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set routes to advertise
 
 

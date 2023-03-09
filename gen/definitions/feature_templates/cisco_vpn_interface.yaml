@@ -140,12 +140,16 @@ attributes:
         tf_name: source_vpn_id
         example: 1
   - model_name: enable-core-region
+    exclude_ignore: true
     example: false
   - model_name: core-region
+    exclude_ignore: true
     example: core
   - model_name: secondary-region
+    exclude_ignore: true
     example: off
   - model_name: encapsulation
+    exclude_ignore: true
     tf_name: tunnel_interface_encapsulations
     attributes:
       - model_name: encap
@@ -157,6 +161,7 @@ attributes:
         example: 100
   - model_name: border
     tf_name: tunnel_interface_border
+    exclude_ignore: true
     example: false
   - model_name: per-tunnel-qos
     example: false
@@ -167,105 +172,139 @@ attributes:
     example: spoke
   - model_name: tunnels-bandwidth
     tf_name: tunnel_bandwidth
+    exclude_ignore: true
     example: 50
   - model_name: group
     tf_name: tunnel_interface_groups
+    exclude_ignore: true
     example: "[5]"
   - model_name: value
     tf_name: tunnel_interface_color
+    exclude_ignore: true
     example: gold
   - model_name: max-control-connections
     tf_name: tunnel_interface_max_control_connections
+    exclude_ignore: true
     example: 10
   - model_name: control-connections
     tf_name: tunnel_interface_control_connections
+    exclude_ignore: true
     example: false
   - model_name: vbond-as-stun-server
     tf_name: tunnel_interface_vbond_as_stun_server
+    exclude_ignore: true
     example: false
   - model_name: exclude-controller-group-list
     tf_name: tunnel_interface_exclude_controller_group_list
+    exclude_ignore: true
     example: "[10]"
   - model_name: vmanage-connection-preference
     tf_name: tunnel_interface_vmanage_connection_preference
+    exclude_ignore: true
     example: 5
   - model_name: port-hop
     tf_name: tunnel_interface_port_hop
+    exclude_ignore: true
     example: false
   - model_name: restrict
     tf_name: tunnel_interface_color_restrict
+    exclude_ignore: true
     example: false
   - model_name: dst-ip
     tf_name: tunnel_interface_gre_tunnel_destination_ip
+    exclude_ignore: true
     example: 5.5.5.5
   - model_name: carrier
     tf_name: tunnel_interface_carrier
+    exclude_ignore: true
     example: carrier1
   - model_name: nat-refresh-interval
     tf_name: tunnel_interface_nat_refresh_interval
+    exclude_ignore: true
     example: 5
   - model_name: hello-interval
     tf_name: tunnel_interface_hello_interval
+    exclude_ignore: true
     example: 1000
   - model_name: hello-tolerance
     tf_name: tunnel_interface_hello_tolerance
+    exclude_ignore: true
     example: 12
   - model_name: bind
     tf_name: tunnel_interface_bind_loopback_tunnel
+    exclude_ignore: true
     example: 1
   - model_name: last-resort-circuit
     tf_name: tunnel_interface_last_resort_circuit
+    exclude_ignore: true
     example: false
   - model_name: low-bandwidth-link
     tf_name: tunnel_interface_low_bandwidth_link
+    exclude_ignore: true
     example: false
   - model_name: tunnel-tcp-mss-adjust
     tf_name: tunnel_interface_tunnel_tcp_mss
+    exclude_ignore: true
     example: 1460
   - model_name: clear-dont-fragment
     tf_name: tunnel_interface_clear_dont_fragment
+    exclude_ignore: true
     example: false
   - model_name: propagate-sgt
     tf_name: tunnel_interface_propagate_sgt
+    exclude_ignore: true
     example: false
   - model_name: network-broadcast
     tf_name: tunnel_interface_network_broadcast
+    exclude_ignore: true
     example: false
   - model_name: all
     tf_name: tunnel_interface_allow_all
+    exclude_ignore: true
     example: false
   - model_name: bgp
     tf_name: tunnel_interface_allow_bgp
+    exclude_ignore: true
     example: false
   - model_name: dhcp
     tf_name: tunnel_interface_allow_dhcp
+    exclude_ignore: true
     example: false
   - model_name: dns
     tf_name: tunnel_interface_allow_dns
+    exclude_ignore: true
     example: false
   - model_name: icmp
     tf_name: tunnel_interface_allow_icmp
+    exclude_ignore: true
     example: false
   - model_name: sshd
     tf_name: tunnel_interface_allow_ssh
+    exclude_ignore: true
     example: false
   - model_name: netconf
     tf_name: tunnel_interface_allow_netconf
+    exclude_ignore: true
     example: false
   - model_name: ntp
     tf_name: tunnel_interface_allow_ntp
+    exclude_ignore: true
     example: false
   - model_name: ospf
     tf_name: tunnel_interface_allow_ospf
+    exclude_ignore: true
     example: false
   - model_name: stun
     tf_name: tunnel_interface_allow_stun
+    exclude_ignore: true
     example: false
   - model_name: snmp
     tf_name: tunnel_interface_allow_snmp
+    exclude_ignore: true
     example: false
   - model_name: https
     tf_name: tunnel_interface_allow_https
+    exclude_ignore: true
     example: false
   - model_name: media-type
     example: auto-select

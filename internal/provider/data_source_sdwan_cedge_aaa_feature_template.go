@@ -125,8 +125,16 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -217,8 +225,16 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -257,8 +273,16 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -369,8 +393,16 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 										MarkdownDescription: "Type of encyption. To be used for type 6",
 										Computed:            true,
 									},
+									"optional": schema.BoolAttribute{
+										MarkdownDescription: "Indicates if list item is considered optional.",
+										Computed:            true,
+									},
 								},
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
 						},
 					},
 				},
@@ -403,6 +435,10 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						"group": schema.ListAttribute{
 							MarkdownDescription: "Use Server-group",
 							ElementType:         types.StringType,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},
@@ -448,6 +484,10 @@ func (d *CEdgeAAAFeatureTemplateDataSource) Schema(ctx context.Context, req data
 						},
 						"authenticated": schema.BoolAttribute{
 							MarkdownDescription: "Succeed if user has authenticated",
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},

@@ -35,11 +35,13 @@ type CiscoSecurity struct {
 }
 
 type CiscoSecurityKeychains struct {
-	Name  types.String `tfsdk:"name"`
-	KeyId types.Int64  `tfsdk:"key_id"`
+	Optional types.Bool   `tfsdk:"optional"`
+	Name     types.String `tfsdk:"name"`
+	KeyId    types.Int64  `tfsdk:"key_id"`
 }
 
 type CiscoSecurityKeys struct {
+	Optional                       types.Bool   `tfsdk:"optional"`
 	Id                             types.String `tfsdk:"id"`
 	ChainName                      types.String `tfsdk:"chain_name"`
 	SendId                         types.Int64  `tfsdk:"send_id"`
@@ -172,52 +174,69 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"ipsec.pairwise-keying."+"vipValue", strconv.FormatBool(data.PairwiseKeying.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipObjectType", "tree")
 	if len(data.Keychains) > 0 {
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipPrimaryKey", []string{"name", "keyid"})
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipPrimaryKey", []string{"name", "keyid"})
+		body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipPrimaryKey", []string{"name", "keyid"})
-	body, _ = sjson.Set(body, path+"trustsec.keychain."+"vipValue", []interface{}{})
 	for _, item := range data.Keychains {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "name")
 		if item.Name.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "name."+"vipValue", item.Name.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "keyid")
 		if item.KeyId.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "keyid."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "keyid."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "keyid."+"vipValue", item.KeyId.ValueInt64())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"trustsec.keychain."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"key."+"vipObjectType", "tree")
 	if len(data.Keys) > 0 {
+		body, _ = sjson.Set(body, path+"key."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"key."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"key."+"vipPrimaryKey", []string{"id", "chain-name"})
+		body, _ = sjson.Set(body, path+"key."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"key."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"key."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"key."+"vipPrimaryKey", []string{"id", "chain-name"})
+		body, _ = sjson.Set(body, path+"key."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"key."+"vipPrimaryKey", []string{"id", "chain-name"})
-	body, _ = sjson.Set(body, path+"key."+"vipValue", []interface{}{})
 	for _, item := range data.Keys {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "id")
 		if item.Id.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "id."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "id."+"vipValue", item.Id.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "chain-name")
 		if item.ChainName.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "chain-name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "chain-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "chain-name."+"vipValue", item.ChainName.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "send-id")
 
 		if !item.SendIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-id."+"vipObjectType", "object")
@@ -229,6 +248,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-id."+"vipValue", item.SendId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "recv-id")
 
 		if !item.ReceiveIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipObjectType", "object")
@@ -240,12 +260,14 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "recv-id."+"vipValue", item.ReceiveId.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "tcp")
 		if item.CryptoAlgorithm.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "cryptographic-algorithm-choice.tcp."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "cryptographic-algorithm-choice.tcp."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "cryptographic-algorithm-choice.tcp."+"vipValue", item.CryptoAlgorithm.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "key-string")
 
 		if !item.KeyStringVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "key-string."+"vipObjectType", "object")
@@ -257,6 +279,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "key-string."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "key-string."+"vipValue", item.KeyString.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "local")
 
 		if !item.SendLifetimeVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipObjectType", "node-only")
@@ -270,12 +293,14 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.local."+"vipValue", strconv.FormatBool(item.SendLifetime.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "start-epoch")
 		if item.SendLifetimeStartTime.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.start-epoch."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.start-epoch."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.start-epoch."+"vipValue", item.SendLifetimeStartTime.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "end-choice")
 		if item.SendLifetimeEndTimeFormat.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-choice."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-choice."+"vipType", "ignore")
@@ -284,6 +309,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-choice."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-choice."+"vipValue", item.SendLifetimeEndTimeFormat.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "duration")
 
 		if !item.SendLifetimeDurationVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipObjectType", "object")
@@ -295,12 +321,14 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.duration."+"vipValue", item.SendLifetimeDuration.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "end-epoch")
 		if item.SendLifetimeEndTime.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-epoch."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-epoch."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.end-epoch."+"vipValue", item.SendLifetimeEndTime.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "infinite")
 
 		if !item.SendLifetimeInfiniteVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipObjectType", "node-only")
@@ -314,6 +342,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-lifetime.lifetime-group-v1.infinite."+"vipValue", strconv.FormatBool(item.SendLifetimeInfinite.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "local")
 
 		if !item.AcceptLifetimeVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipObjectType", "node-only")
@@ -327,12 +356,14 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.local."+"vipValue", strconv.FormatBool(item.AcceptLifetime.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "start-epoch")
 		if item.AcceptLifetimeStartTime.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.start-epoch."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.start-epoch."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.start-epoch."+"vipValue", item.AcceptLifetimeStartTime.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "end-choice")
 		if item.AcceptLifetimeEndTimeFormat.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-choice."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-choice."+"vipType", "ignore")
@@ -341,6 +372,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-choice."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-choice."+"vipValue", item.AcceptLifetimeEndTimeFormat.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "duration")
 
 		if !item.AcceptLifetimeDurationVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipObjectType", "object")
@@ -352,12 +384,14 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.duration."+"vipValue", item.AcceptLifetimeDuration.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "end-epoch")
 		if item.AcceptLifetimeEndTime.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-epoch."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-epoch."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.end-epoch."+"vipValue", item.AcceptLifetimeEndTime.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "infinite")
 
 		if !item.AcceptLifetimeInfiniteVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipObjectType", "node-only")
@@ -371,6 +405,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-lifetime.lifetime-group-v1.infinite."+"vipValue", strconv.FormatBool(item.AcceptLifetimeInfinite.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "include-tcp-options")
 
 		if !item.IncludeTcpOptionsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipObjectType", "object")
@@ -384,6 +419,7 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "include-tcp-options."+"vipValue", strconv.FormatBool(item.IncludeTcpOptions.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "accept-ao-mismatch")
 
 		if !item.AcceptAoMismatchVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipObjectType", "object")
@@ -396,6 +432,10 @@ func (data CiscoSecurity) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "accept-ao-mismatch."+"vipValue", strconv.FormatBool(item.AcceptAoMismatch.ValueBool()))
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"key."+"vipValue.-1", itemBody)
 	}
@@ -543,6 +583,11 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.Keychains = make([]CiscoSecurityKeychains, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeychains{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Name = types.StringNull()
@@ -583,6 +628,11 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		data.Keys = make([]CiscoSecurityKeys, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoSecurityKeys{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Id = types.StringNull()

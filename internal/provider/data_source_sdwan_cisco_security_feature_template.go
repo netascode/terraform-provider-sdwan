@@ -122,6 +122,10 @@ func (d *CiscoSecurityFeatureTemplateDataSource) Schema(ctx context.Context, req
 							MarkdownDescription: "Specify the Key ID",
 							Computed:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Computed:            true,
+						},
 					},
 				},
 			},
@@ -252,6 +256,10 @@ func (d *CiscoSecurityFeatureTemplateDataSource) Schema(ctx context.Context, req
 						},
 						"accept_ao_mismatch_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Computed:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Computed:            true,
 						},
 					},

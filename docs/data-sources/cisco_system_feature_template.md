@@ -108,6 +108,7 @@ Read-Only:
 
 - `number` (String) Mobile number, ex: +1231234414
 - `number_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--object_trackers"></a>
@@ -126,6 +127,7 @@ Read-Only:
 - `mask_variable` (String) Variable name
 - `object_number` (Number) Object tracker ID
 - `object_number_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `sig` (String) service sig
 - `sig_variable` (String) Variable name
 - `vpn_id` (Number) VPN
@@ -135,6 +137,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `track_id` (Number) Track id
 - `track_id_variable` (String) Variable name
 
@@ -161,6 +164,7 @@ Read-Only:
 - `multiplier_variable` (String) Variable name
 - `name` (String) Tracker name
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `threshold` (Number) Probe Timeout threshold <100..1000> milliseconds
 - `threshold_variable` (String) Variable name
 - `transport_endpoint_ip` (String) IP address of endpoint

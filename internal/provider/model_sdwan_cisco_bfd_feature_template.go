@@ -28,6 +28,7 @@ type CiscoBFD struct {
 }
 
 type CiscoBFDColors struct {
+	Optional              types.Bool   `tfsdk:"optional"`
 	Color                 types.String `tfsdk:"color"`
 	ColorVariable         types.String `tfsdk:"color_variable"`
 	HelloInterval         types.Int64  `tfsdk:"hello_interval"`
@@ -96,16 +97,21 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"default-dscp."+"vipValue", data.DefaultDscp.ValueInt64())
 	}
-	body, _ = sjson.Set(body, path+"color."+"vipObjectType", "tree")
 	if len(data.Colors) > 0 {
+		body, _ = sjson.Set(body, path+"color."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"color."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"color."+"vipPrimaryKey", []string{"color"})
+		body, _ = sjson.Set(body, path+"color."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"color."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"color."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"color."+"vipPrimaryKey", []string{"color"})
+		body, _ = sjson.Set(body, path+"color."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"color."+"vipPrimaryKey", []string{"color"})
-	body, _ = sjson.Set(body, path+"color."+"vipValue", []interface{}{})
 	for _, item := range data.Colors {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "color")
 
 		if !item.ColorVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipObjectType", "object")
@@ -117,6 +123,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "color."+"vipValue", item.Color.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "hello-interval")
 
 		if !item.HelloIntervalVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipObjectType", "object")
@@ -130,6 +137,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "hello-interval."+"vipValue", item.HelloInterval.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "multiplier")
 
 		if !item.MultiplierVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipObjectType", "object")
@@ -143,6 +151,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "multiplier."+"vipValue", item.Multiplier.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "pmtu-discovery")
 
 		if !item.PmtuDiscoveryVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipObjectType", "object")
@@ -156,6 +165,7 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "pmtu-discovery."+"vipValue", strconv.FormatBool(item.PmtuDiscovery.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "dscp")
 
 		if !item.DscpVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
@@ -168,6 +178,10 @@ func (data CiscoBFD) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "dscp."+"vipValue", item.Dscp.ValueInt64())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"color."+"vipValue.-1", itemBody)
 	}
@@ -258,6 +272,11 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		data.Colors = make([]CiscoBFDColors, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBFDColors{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("color.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Color = types.StringNull()

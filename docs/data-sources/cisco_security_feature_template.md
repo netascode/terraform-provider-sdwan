@@ -53,6 +53,7 @@ Read-Only:
 
 - `key_id` (Number) Specify the Key ID
 - `name` (String) Specify the name of the Keychain
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 
 <a id="nestedatt--keys"></a>
@@ -78,6 +79,7 @@ Read-Only:
 - `include_tcp_options_variable` (String) Variable name
 - `key_string` (String) Specify the Key String
 - `key_string_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `receive_id` (Number) Specify the Receiver ID
 - `receive_id_variable` (String) Variable name
 - `send_id` (Number) Specify the Send ID

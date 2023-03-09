@@ -49,6 +49,7 @@ Read-Only:
 
 - `id` (Number) MD5 authentication key ID
 - `id_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `value` (String) Enter cleartext or AES-encrypted MD5 authentication key
 - `value_variable` (String) Variable name
 
@@ -62,6 +63,7 @@ Read-Only:
 - `authentication_key_id_variable` (String) Variable name
 - `hostname_ip` (String) Set hostname or IP address of server
 - `hostname_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `prefer` (Boolean) Prefer this NTP server
 - `prefer_variable` (String) Variable name
 - `source_interface` (String) Set interface to use to reach NTP server

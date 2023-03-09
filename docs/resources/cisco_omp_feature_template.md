@@ -118,6 +118,7 @@ Optional:
 - `advertise_external_ospf` (String) Advertise OSPF external routes
   - Choices: `external`
 - `advertise_external_ospf_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set routes to advertise
   - Choices: `bgp`, `ospf`, `ospfv3`, `connected`, `static`, `eigrp`, `lisp`, `isis`
 
@@ -127,6 +128,7 @@ Optional:
 
 Optional:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set routes to advertise
   - Choices: `bgp`, `ospf`, `connected`, `static`, `eigrp`, `lisp`, `isis`
 

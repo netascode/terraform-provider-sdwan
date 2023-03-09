@@ -141,6 +141,10 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -214,6 +218,10 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -285,6 +293,10 @@ func (r *CiscoLoggingFeatureTemplateResource) Schema(ctx context.Context, req re
 						},
 						"profile_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
+							Optional:            true,
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
 							Optional:            true,
 						},
 					},

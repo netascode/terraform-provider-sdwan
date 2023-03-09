@@ -49,12 +49,14 @@ type CiscoOMP struct {
 }
 
 type CiscoOMPAdvertiseIpv4Routes struct {
+	Optional                      types.Bool   `tfsdk:"optional"`
 	Protocol                      types.String `tfsdk:"protocol"`
 	AdvertiseExternalOspf         types.String `tfsdk:"advertise_external_ospf"`
 	AdvertiseExternalOspfVariable types.String `tfsdk:"advertise_external_ospf_variable"`
 }
 
 type CiscoOMPAdvertiseIpv6Routes struct {
+	Optional types.Bool   `tfsdk:"optional"`
 	Protocol types.String `tfsdk:"protocol"`
 }
 
@@ -244,22 +246,28 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"transport-gateway."+"vipValue", data.TransportGateway.ValueString())
 	}
-	body, _ = sjson.Set(body, path+"advertise."+"vipObjectType", "tree")
 	if len(data.AdvertiseIpv4Routes) > 0 {
+		body, _ = sjson.Set(body, path+"advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"advertise."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"advertise."+"vipPrimaryKey", []string{"protocol"})
+		body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"advertise."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"advertise."+"vipPrimaryKey", []string{"protocol"})
+		body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"advertise."+"vipPrimaryKey", []string{"protocol"})
-	body, _ = sjson.Set(body, path+"advertise."+"vipValue", []interface{}{})
 	for _, item := range data.AdvertiseIpv4Routes {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "protocol")
 		if item.Protocol.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "route")
 
 		if !item.AdvertiseExternalOspfVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipObjectType", "object")
@@ -273,23 +281,36 @@ func (data CiscoOMP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "route."+"vipValue", item.AdvertiseExternalOspf.ValueString())
 		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
+		}
 		body, _ = sjson.SetRaw(body, path+"advertise."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipObjectType", "tree")
 	if len(data.AdvertiseIpv6Routes) > 0 {
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
+		body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipPrimaryKey", []string{"protocol"})
-	body, _ = sjson.Set(body, path+"ipv6-advertise."+"vipValue", []interface{}{})
 	for _, item := range data.AdvertiseIpv6Routes {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "protocol")
 		if item.Protocol.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "protocol."+"vipValue", item.Protocol.ValueString())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"ipv6-advertise."+"vipValue.-1", itemBody)
 	}
@@ -570,6 +591,11 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.AdvertiseIpv4Routes = make([]CiscoOMPAdvertiseIpv4Routes, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv4Routes{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("protocol.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Protocol = types.StringNull()
@@ -613,6 +639,11 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		data.AdvertiseIpv6Routes = make([]CiscoOMPAdvertiseIpv6Routes, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoOMPAdvertiseIpv6Routes{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("protocol.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Protocol = types.StringNull()

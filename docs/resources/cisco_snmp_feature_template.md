@@ -109,6 +109,7 @@ Optional:
   - Choices: `read-only`
 - `authorization_variable` (String) Variable name
 - `name` (String) Set name of the SNMP community
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `view` (String) Set name of the SNMP view
 - `view_variable` (String) Variable name
 
@@ -119,6 +120,7 @@ Optional:
 Optional:
 
 - `name` (String) Name of the SNMP group
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `security_level` (String) Configure security level
   - Choices: `no-auth-no-priv`, `auth-no-priv`, `auth-priv`
 - `view` (String) Name of the SNMP view
@@ -134,6 +136,7 @@ Optional:
 - `community_name_variable` (String) Variable name
 - `ip` (String) Set IPv4/IPv6 address of SNMP server
 - `ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `source_interface` (String) Source interface for outgoing SNMP traps
 - `source_interface_variable` (String) Variable name
 - `udp_port` (Number) Set UDP port number to connect to SNMP server
@@ -159,6 +162,7 @@ Optional:
 - `group` (String) Name of the SNMP group
 - `group_variable` (String) Variable name
 - `name` (String) Name of the SNMP user
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `privacy_password` (String) Specify privacy protocol password
 - `privacy_password_variable` (String) Variable name
 - `privacy_protocol` (String) Configure privacy protocol
@@ -173,6 +177,7 @@ Optional:
 
 - `name` (String) Set the name of the SNMP view
 - `object_identifiers` (Attributes List) Configure SNMP object identifier (see [below for nested schema](#nestedatt--views--object_identifiers))
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 <a id="nestedatt--views--object_identifiers"></a>
 ### Nested Schema for `views.object_identifiers`
@@ -184,6 +189,7 @@ Optional:
 - `exclude_variable` (String) Variable name
 - `id` (String) Configure identifier of subtree of MIB objects
 - `id_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 ## Import
 

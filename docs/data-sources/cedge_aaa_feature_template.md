@@ -66,6 +66,7 @@ Read-Only:
 - `group` (List of String) Use Server-group
 - `method` (String) Configure Accounting Method
 - `name` (String) Configure Accounting Rule ID
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `privilege_level` (String) Privilege level when method is commands
 - `start_stop` (Boolean) Record start and stop without waiting
 - `start_stop_variable` (String) Variable name
@@ -80,6 +81,7 @@ Read-Only:
 - `group` (List of String) Use Server-group
 - `method` (String) Method
 - `name` (String) Configure Authorization Rule ID
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `privilege_level` (String) Privilege level when method is commands
 
 
@@ -90,6 +92,7 @@ Read-Only:
 
 - `client_ip` (String) Client IP
 - `client_ip_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `von_configurations` (Attributes List) VPN configuration (see [below for nested schema](#nestedatt--radius_clients--von_configurations))
 
 <a id="nestedatt--radius_clients--von_configurations"></a>
@@ -97,6 +100,7 @@ Read-Only:
 
 Read-Only:
 
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `server_key` (String) Specify a RADIUS client server-key
 - `server_key_variable` (String) Variable name
 - `vpn_id` (String) VPN ID
@@ -110,6 +114,7 @@ Read-Only:
 Read-Only:
 
 - `group_name` (String) Set Radius server Group Name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `servers` (Attributes List) Configure the Radius server (see [below for nested schema](#nestedatt--radius_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach Radius server
 - `source_interface_variable` (String) Variable name
@@ -129,6 +134,7 @@ Read-Only:
 - `key` (String) Set the Radius server shared key
 - `key_type` (String) key type
 - `key_type_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `retransmit` (Number) Configure how many times to contact this Radius server
 - `retransmit_variable` (String) Variable name
 - `secret_key` (String) Set the Radius server shared type 7 encrypted key
@@ -144,6 +150,7 @@ Read-Only:
 Read-Only:
 
 - `group_name` (String) Set TACACS server Group Name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `servers` (Attributes List) Configure the TACACS server (see [below for nested schema](#nestedatt--tacacs_server_groups--servers))
 - `source_interface` (String) Set interface to use to reach TACACS server
 - `source_interface_variable` (String) Variable name
@@ -157,6 +164,7 @@ Read-Only:
 - `address` (String) Set IP address of TACACS server
 - `encryption_type` (String) Type of encyption. To be used for type 6
 - `key` (String) Set the TACACS server shared key
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `port` (Number) TACACS Port
 - `port_variable` (String) Variable name
 - `secret_key` (String) Set the TACACS server shared type 7 encrypted key
@@ -173,6 +181,7 @@ Read-Only:
 
 - `name` (String) Set the username
 - `name_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `password` (String) Set the user password
 - `privilege_level` (String) Set Privilege Level for this user
 - `privilege_level_variable` (String) Variable name
@@ -187,5 +196,6 @@ Read-Only:
 - `key_string` (String) Set the RSA key string
 - `key_type` (String) Only RSA is supported
 - `key_type_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 
 

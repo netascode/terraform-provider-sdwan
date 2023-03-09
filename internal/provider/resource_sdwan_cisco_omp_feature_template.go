@@ -223,6 +223,10 @@ func (r *CiscoOMPFeatureTemplateResource) Schema(ctx context.Context, req resour
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
 						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
+						},
 					},
 				},
 			},
@@ -237,6 +241,10 @@ func (r *CiscoOMPFeatureTemplateResource) Schema(ctx context.Context, req resour
 							Validators: []validator.String{
 								stringvalidator.OneOf("bgp", "ospf", "connected", "static", "eigrp", "lisp", "isis"),
 							},
+						},
+						"optional": schema.BoolAttribute{
+							MarkdownDescription: "Indicates if list item is considered optional.",
+							Optional:            true,
 						},
 					},
 				},

@@ -85,6 +85,7 @@ Optional:
   - Range: `1`-`60`
   - Default value: `7`
 - `multiplier_variable` (String) Variable name
+- `optional` (Boolean) Indicates if list item is considered optional.
 - `pmtu_discovery` (Boolean) Control automatic path MTU discovery
   - Default value: `true`
 - `pmtu_discovery_variable` (String) Variable name

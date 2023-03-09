@@ -57,6 +57,7 @@ type CiscoBGP struct {
 }
 
 type CiscoBGPIpv4RouteTargets struct {
+	Optional      types.Bool                       `tfsdk:"optional"`
 	VpnId         types.Int64                      `tfsdk:"vpn_id"`
 	VpnIdVariable types.String                     `tfsdk:"vpn_id_variable"`
 	Export        []CiscoBGPIpv4RouteTargetsExport `tfsdk:"export"`
@@ -64,6 +65,7 @@ type CiscoBGPIpv4RouteTargets struct {
 }
 
 type CiscoBGPIpv6RouteTargets struct {
+	Optional      types.Bool                       `tfsdk:"optional"`
 	VpnId         types.Int64                      `tfsdk:"vpn_id"`
 	VpnIdVariable types.String                     `tfsdk:"vpn_id_variable"`
 	Export        []CiscoBGPIpv6RouteTargetsExport `tfsdk:"export"`
@@ -71,11 +73,13 @@ type CiscoBGPIpv6RouteTargets struct {
 }
 
 type CiscoBGPMplsInterfaces struct {
+	Optional              types.Bool   `tfsdk:"optional"`
 	InterfaceName         types.String `tfsdk:"interface_name"`
 	InterfaceNameVariable types.String `tfsdk:"interface_name_variable"`
 }
 
 type CiscoBGPAddressFamilies struct {
+	Optional                            types.Bool                                      `tfsdk:"optional"`
 	FamilyType                          types.String                                    `tfsdk:"family_type"`
 	Ipv4AggregateAddresses              []CiscoBGPAddressFamiliesIpv4AggregateAddresses `tfsdk:"ipv4_aggregate_addresses"`
 	Ipv6AggregateAddresses              []CiscoBGPAddressFamiliesIpv6AggregateAddresses `tfsdk:"ipv6_aggregate_addresses"`
@@ -93,6 +97,7 @@ type CiscoBGPAddressFamilies struct {
 }
 
 type CiscoBGPIpv4Neighbors struct {
+	Optional                  types.Bool                             `tfsdk:"optional"`
 	Address                   types.String                           `tfsdk:"address"`
 	AddressVariable           types.String                           `tfsdk:"address_variable"`
 	Description               types.String                           `tfsdk:"description"`
@@ -129,6 +134,7 @@ type CiscoBGPIpv4Neighbors struct {
 }
 
 type CiscoBGPIpv6Neighbors struct {
+	Optional                  types.Bool                             `tfsdk:"optional"`
 	Address                   types.String                           `tfsdk:"address"`
 	AddressVariable           types.String                           `tfsdk:"address_variable"`
 	Description               types.String                           `tfsdk:"description"`
@@ -165,24 +171,29 @@ type CiscoBGPIpv6Neighbors struct {
 }
 
 type CiscoBGPIpv4RouteTargetsExport struct {
+	Optional      types.Bool   `tfsdk:"optional"`
 	AsnIp         types.String `tfsdk:"asn_ip"`
 	AsnIpVariable types.String `tfsdk:"asn_ip_variable"`
 }
 type CiscoBGPIpv4RouteTargetsImport struct {
+	Optional      types.Bool   `tfsdk:"optional"`
 	AsnIp         types.String `tfsdk:"asn_ip"`
 	AsnIpVariable types.String `tfsdk:"asn_ip_variable"`
 }
 
 type CiscoBGPIpv6RouteTargetsExport struct {
+	Optional      types.Bool   `tfsdk:"optional"`
 	AsnIp         types.String `tfsdk:"asn_ip"`
 	AsnIpVariable types.String `tfsdk:"asn_ip_variable"`
 }
 type CiscoBGPIpv6RouteTargetsImport struct {
+	Optional      types.Bool   `tfsdk:"optional"`
 	AsnIp         types.String `tfsdk:"asn_ip"`
 	AsnIpVariable types.String `tfsdk:"asn_ip_variable"`
 }
 
 type CiscoBGPAddressFamiliesIpv4AggregateAddresses struct {
+	Optional            types.Bool   `tfsdk:"optional"`
 	Prefix              types.String `tfsdk:"prefix"`
 	PrefixVariable      types.String `tfsdk:"prefix_variable"`
 	AsSetPath           types.Bool   `tfsdk:"as_set_path"`
@@ -191,6 +202,7 @@ type CiscoBGPAddressFamiliesIpv4AggregateAddresses struct {
 	SummaryOnlyVariable types.String `tfsdk:"summary_only_variable"`
 }
 type CiscoBGPAddressFamiliesIpv6AggregateAddresses struct {
+	Optional            types.Bool   `tfsdk:"optional"`
 	Prefix              types.String `tfsdk:"prefix"`
 	PrefixVariable      types.String `tfsdk:"prefix_variable"`
 	AsSetPath           types.Bool   `tfsdk:"as_set_path"`
@@ -199,14 +211,17 @@ type CiscoBGPAddressFamiliesIpv6AggregateAddresses struct {
 	SummaryOnlyVariable types.String `tfsdk:"summary_only_variable"`
 }
 type CiscoBGPAddressFamiliesIpv4Networks struct {
+	Optional       types.Bool   `tfsdk:"optional"`
 	Prefix         types.String `tfsdk:"prefix"`
 	PrefixVariable types.String `tfsdk:"prefix_variable"`
 }
 type CiscoBGPAddressFamiliesIpv6Networks struct {
+	Optional       types.Bool   `tfsdk:"optional"`
 	Prefix         types.String `tfsdk:"prefix"`
 	PrefixVariable types.String `tfsdk:"prefix_variable"`
 }
 type CiscoBGPAddressFamiliesRedistributeRoutes struct {
+	Optional            types.Bool   `tfsdk:"optional"`
 	Protocol            types.String `tfsdk:"protocol"`
 	ProtocolVariable    types.String `tfsdk:"protocol_variable"`
 	RoutePolicy         types.String `tfsdk:"route_policy"`
@@ -214,6 +229,7 @@ type CiscoBGPAddressFamiliesRedistributeRoutes struct {
 }
 
 type CiscoBGPIpv4NeighborsAddressFamilies struct {
+	Optional                           types.Bool                                          `tfsdk:"optional"`
 	FamilyType                         types.String                                        `tfsdk:"family_type"`
 	MaximumPrefixes                    types.Int64                                         `tfsdk:"maximum_prefixes"`
 	MaximumPrefixesVariable            types.String                                        `tfsdk:"maximum_prefixes_variable"`
@@ -227,6 +243,7 @@ type CiscoBGPIpv4NeighborsAddressFamilies struct {
 }
 
 type CiscoBGPIpv6NeighborsAddressFamilies struct {
+	Optional                           types.Bool                                          `tfsdk:"optional"`
 	FamilyType                         types.String                                        `tfsdk:"family_type"`
 	MaximumPrefixes                    types.Int64                                         `tfsdk:"maximum_prefixes"`
 	MaximumPrefixesVariable            types.String                                        `tfsdk:"maximum_prefixes_variable"`
@@ -240,12 +257,14 @@ type CiscoBGPIpv6NeighborsAddressFamilies struct {
 }
 
 type CiscoBGPIpv4NeighborsAddressFamiliesRoutePolicies struct {
+	Optional           types.Bool   `tfsdk:"optional"`
 	Direction          types.String `tfsdk:"direction"`
 	PolicyName         types.String `tfsdk:"policy_name"`
 	PolicyNameVariable types.String `tfsdk:"policy_name_variable"`
 }
 
 type CiscoBGPIpv6NeighborsAddressFamiliesRoutePolicies struct {
+	Optional           types.Bool   `tfsdk:"optional"`
 	Direction          types.String `tfsdk:"direction"`
 	PolicyName         types.String `tfsdk:"policy_name"`
 	PolicyNameVariable types.String `tfsdk:"policy_name_variable"`
@@ -331,16 +350,21 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"bgp.propagate-community."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"bgp.propagate-community."+"vipValue", strconv.FormatBool(data.PropagateCommunity.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipObjectType", "tree")
 	if len(data.Ipv4RouteTargets) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipPrimaryKey", []string{"vpn-id"})
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipPrimaryKey", []string{"vpn-id"})
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipPrimaryKey", []string{"vpn-id"})
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv4."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv4RouteTargets {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "vpn-id")
 
 		if !item.VpnIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipObjectType", "object")
@@ -352,16 +376,22 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipValue", item.VpnId.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "export")
 		if len(item.Export) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "export."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "export."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		for _, childItem := range item.Export {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "asn-ip")
 
 			if !childItem.AsnIpVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
@@ -372,19 +402,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipValue", childItem.AsnIp.ValueString())
+			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
 			}
 			itemBody, _ = sjson.SetRaw(itemBody, "export."+"vipValue.-1", itemChildBody)
 		}
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "import")
 		if len(item.Import) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "import."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "import."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		for _, childItem := range item.Import {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "asn-ip")
 
 			if !childItem.AsnIpVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
@@ -396,20 +436,33 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipValue", childItem.AsnIp.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "import."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.target.route-target-ipv4."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipObjectType", "tree")
 	if len(data.Ipv6RouteTargets) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipPrimaryKey", []string{"vpn-id"})
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipPrimaryKey", []string{"vpn-id"})
+		body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipPrimaryKey", []string{"vpn-id"})
-	body, _ = sjson.Set(body, path+"bgp.target.route-target-ipv6."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv6RouteTargets {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "vpn-id")
 
 		if !item.VpnIdVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipObjectType", "object")
@@ -421,16 +474,22 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "vpn-id."+"vipValue", item.VpnId.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "export")
 		if len(item.Export) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "export."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "export."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipPrimaryKey", []string{"asn-ip"})
-		itemBody, _ = sjson.Set(itemBody, "export."+"vipValue", []interface{}{})
 		for _, childItem := range item.Export {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "asn-ip")
 
 			if !childItem.AsnIpVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
@@ -441,19 +500,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipValue", childItem.AsnIp.ValueString())
+			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
 			}
 			itemBody, _ = sjson.SetRaw(itemBody, "export."+"vipValue.-1", itemChildBody)
 		}
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "import")
 		if len(item.Import) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "import."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "import."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
+			itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipPrimaryKey", []string{"asn-ip"})
-		itemBody, _ = sjson.Set(itemBody, "import."+"vipValue", []interface{}{})
 		for _, childItem := range item.Import {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "asn-ip")
 
 			if !childItem.AsnIpVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipObjectType", "object")
@@ -465,20 +534,33 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "asn-ip."+"vipValue", childItem.AsnIp.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "import."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.target.route-target-ipv6."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipObjectType", "tree")
 	if len(data.MplsInterfaces) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipPrimaryKey", []string{"if-name"})
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipPrimaryKey", []string{"if-name"})
+		body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipPrimaryKey", []string{"if-name"})
-	body, _ = sjson.Set(body, path+"bgp.mpls-interface."+"vipValue", []interface{}{})
 	for _, item := range data.MplsInterfaces {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "if-name")
 
 		if !item.InterfaceNameVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "if-name."+"vipObjectType", "object")
@@ -491,6 +573,10 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "if-name."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "if-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "if-name."+"vipValue", item.InterfaceName.ValueString())
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.mpls-interface."+"vipValue.-1", itemBody)
 	}
@@ -624,32 +710,43 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"bgp.best-path.as-path.multipath-relax."+"vipType", "constant")
 		body, _ = sjson.Set(body, path+"bgp.best-path.as-path.multipath-relax."+"vipValue", strconv.FormatBool(data.MultipathRelax.ValueBool()))
 	}
-	body, _ = sjson.Set(body, path+"bgp.address-family."+"vipObjectType", "tree")
 	if len(data.AddressFamilies) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipPrimaryKey", []string{"family-type"})
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipPrimaryKey", []string{"family-type"})
+		body, _ = sjson.Set(body, path+"bgp.address-family."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.address-family."+"vipPrimaryKey", []string{"family-type"})
-	body, _ = sjson.Set(body, path+"bgp.address-family."+"vipValue", []interface{}{})
 	for _, item := range data.AddressFamilies {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "family-type")
 		if item.FamilyType.IsNull() {
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "family-type."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "family-type."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "family-type."+"vipValue", item.FamilyType.ValueString())
 		}
-		itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "aggregate-address")
 		if len(item.Ipv4AggregateAddresses) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipPrimaryKey", []string{"prefix"})
-		itemBody, _ = sjson.Set(itemBody, "aggregate-address."+"vipValue", []interface{}{})
 		for _, childItem := range item.Ipv4AggregateAddresses {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "prefix")
 
 			if !childItem.PrefixVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipObjectType", "object")
@@ -661,6 +758,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipValue", childItem.Prefix.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "as-set")
 
 			if !childItem.AsSetPathVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipObjectType", "node-only")
@@ -674,6 +772,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipValue", strconv.FormatBool(childItem.AsSetPath.ValueBool()))
 			}
+			itemChildAttributes = append(itemChildAttributes, "summary-only")
 
 			if !childItem.SummaryOnlyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipObjectType", "node-only")
@@ -686,19 +785,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipObjectType", "node-only")
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipValue", strconv.FormatBool(childItem.SummaryOnly.ValueBool()))
+			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
 			}
 			itemBody, _ = sjson.SetRaw(itemBody, "aggregate-address."+"vipValue.-1", itemChildBody)
 		}
-		itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "ipv6-aggregate-address")
 		if len(item.Ipv6AggregateAddresses) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipPrimaryKey", []string{"prefix"})
-		itemBody, _ = sjson.Set(itemBody, "ipv6-aggregate-address."+"vipValue", []interface{}{})
 		for _, childItem := range item.Ipv6AggregateAddresses {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "prefix")
 
 			if !childItem.PrefixVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipObjectType", "object")
@@ -710,6 +819,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipValue", childItem.Prefix.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "as-set")
 
 			if !childItem.AsSetPathVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipObjectType", "node-only")
@@ -723,6 +833,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "as-set."+"vipValue", strconv.FormatBool(childItem.AsSetPath.ValueBool()))
 			}
+			itemChildAttributes = append(itemChildAttributes, "summary-only")
 
 			if !childItem.SummaryOnlyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipObjectType", "node-only")
@@ -736,18 +847,28 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "summary-only."+"vipValue", strconv.FormatBool(childItem.SummaryOnly.ValueBool()))
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "ipv6-aggregate-address."+"vipValue.-1", itemChildBody)
 		}
-		itemBody, _ = sjson.Set(itemBody, "network."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "network")
 		if len(item.Ipv4Networks) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "network."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "network."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "network."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "network."+"vipPrimaryKey", []string{"prefix"})
-		itemBody, _ = sjson.Set(itemBody, "network."+"vipValue", []interface{}{})
 		for _, childItem := range item.Ipv4Networks {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "prefix")
 
 			if !childItem.PrefixVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipObjectType", "object")
@@ -758,19 +879,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipValue", childItem.Prefix.ValueString())
+			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
 			}
 			itemBody, _ = sjson.SetRaw(itemBody, "network."+"vipValue.-1", itemChildBody)
 		}
-		itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "ipv6-network")
 		if len(item.Ipv6Networks) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipPrimaryKey", []string{"prefix"})
+			itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipPrimaryKey", []string{"prefix"})
-		itemBody, _ = sjson.Set(itemBody, "ipv6-network."+"vipValue", []interface{}{})
 		for _, childItem := range item.Ipv6Networks {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "prefix")
 
 			if !childItem.PrefixVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipObjectType", "object")
@@ -782,8 +913,13 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "prefix."+"vipValue", childItem.Prefix.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "ipv6-network."+"vipValue.-1", itemChildBody)
 		}
+		itemAttributes = append(itemAttributes, "paths")
 
 		if !item.MaximumPathsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "maximum-paths.paths."+"vipObjectType", "object")
@@ -797,6 +933,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "maximum-paths.paths."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "maximum-paths.paths."+"vipValue", item.MaximumPaths.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "originate")
 
 		if !item.DefaultInformationOriginateVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "default-information.originate."+"vipObjectType", "node-only")
@@ -810,6 +947,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "default-information.originate."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "default-information.originate."+"vipValue", strconv.FormatBool(item.DefaultInformationOriginate.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "name")
 
 		if !item.TableMapPolicyVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "table-map.name."+"vipObjectType", "object")
@@ -823,6 +961,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "table-map.name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "table-map.name."+"vipValue", item.TableMapPolicy.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "filter")
 
 		if !item.TableMapFilterVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "table-map.filter."+"vipObjectType", "node-only")
@@ -836,16 +975,22 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "table-map.filter."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "table-map.filter."+"vipValue", strconv.FormatBool(item.TableMapFilter.ValueBool()))
 		}
-		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "redistribute")
 		if len(item.RedistributeRoutes) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
+			itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipPrimaryKey", []string{"protocol"})
-		itemBody, _ = sjson.Set(itemBody, "redistribute."+"vipValue", []interface{}{})
 		for _, childItem := range item.RedistributeRoutes {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "protocol")
 
 			if !childItem.ProtocolVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipObjectType", "object")
@@ -857,6 +1002,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "protocol."+"vipValue", childItem.Protocol.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "route-policy")
 
 			if !childItem.RoutePolicyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "object")
@@ -870,20 +1016,33 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", childItem.RoutePolicy.ValueString())
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "redistribute."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.address-family."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipObjectType", "tree")
 	if len(data.Ipv4Neighbors) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipPrimaryKey", []string{"address"})
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipPrimaryKey", []string{"address"})
+		body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipPrimaryKey", []string{"address"})
-	body, _ = sjson.Set(body, path+"bgp.neighbor."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv4Neighbors {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "address")
 
 		if !item.AddressVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipObjectType", "object")
@@ -895,6 +1054,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipValue", item.Address.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "description")
 
 		if !item.DescriptionVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipObjectType", "object")
@@ -908,6 +1068,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipValue", item.Description.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "shutdown")
 
 		if !item.ShutdownVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipObjectType", "object")
@@ -921,6 +1082,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipValue", strconv.FormatBool(item.Shutdown.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "remote-as")
 
 		if !item.RemoteAsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipObjectType", "object")
@@ -932,6 +1094,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipValue", item.RemoteAs.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "keepalive")
 
 		if !item.KeepaliveVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipObjectType", "object")
@@ -945,6 +1108,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipValue", item.Keepalive.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "holdtime")
 
 		if !item.HoldtimeVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipObjectType", "object")
@@ -958,6 +1122,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipValue", item.Holdtime.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "if-name")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipObjectType", "object")
@@ -971,6 +1136,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipValue", item.SourceInterface.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "next-hop-self")
 
 		if !item.NextHopSelfVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipObjectType", "object")
@@ -984,6 +1150,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipValue", strconv.FormatBool(item.NextHopSelf.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-community")
 
 		if !item.SendCommunityVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipObjectType", "object")
@@ -997,6 +1164,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipValue", strconv.FormatBool(item.SendCommunity.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-ext-community")
 
 		if !item.SendExtCommunityVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipObjectType", "object")
@@ -1010,6 +1178,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipValue", strconv.FormatBool(item.SendExtCommunity.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "ebgp-multihop")
 
 		if !item.EbgpMultihopVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipObjectType", "object")
@@ -1023,6 +1192,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipValue", item.EbgpMultihop.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "password")
 
 		if !item.PasswordVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipObjectType", "object")
@@ -1036,6 +1206,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipValue", item.Password.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "send-label")
 
 		if !item.SendLabelVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipObjectType", "object")
@@ -1049,6 +1220,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipValue", strconv.FormatBool(item.SendLabel.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-label-explicit")
 
 		if !item.SendLabelExplicitVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipObjectType", "object")
@@ -1062,6 +1234,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipValue", strconv.FormatBool(item.SendLabelExplicit.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "as-override")
 
 		if !item.AsOverrideVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipObjectType", "object")
@@ -1075,6 +1248,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipValue", strconv.FormatBool(item.AsOverride.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "as-number")
 
 		if !item.AllowAsInVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipObjectType", "object")
@@ -1088,22 +1262,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipValue", item.AllowAsIn.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "address-family")
 		if len(item.AddressFamilies) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		for _, childItem := range item.AddressFamilies {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "family-type")
 			if childItem.FamilyType.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipValue", childItem.FamilyType.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "prefix-num")
 
 			if !childItem.MaximumPrefixesVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipObjectType", "object")
@@ -1117,6 +1298,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipValue", childItem.MaximumPrefixes.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "threshold")
 
 			if !childItem.MaximumPrefixesThresholdVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipObjectType", "object")
@@ -1130,6 +1312,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipValue", childItem.MaximumPrefixesThreshold.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "restart")
 
 			if !childItem.MaximumPrefixesRestartVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipObjectType", "object")
@@ -1143,6 +1326,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipValue", childItem.MaximumPrefixesRestart.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "warning-only")
 
 			if !childItem.MaximumPrefixesWarningOnlyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipObjectType", "object")
@@ -1156,22 +1340,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipValue", strconv.FormatBool(childItem.MaximumPrefixesWarningOnly.ValueBool()))
 			}
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
+			itemChildAttributes = append(itemChildAttributes, "route-policy")
 			if len(childItem.RoutePolicies) > 0 {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			}
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			for _, childChildItem := range childItem.RoutePolicies {
 				itemChildChildBody := ""
+				itemChildChildAttributes := make([]string, 0)
+				itemChildChildAttributes = append(itemChildChildAttributes, "direction")
 				if childChildItem.Direction.IsNull() {
 				} else {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipObjectType", "object")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipType", "constant")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipValue", childChildItem.Direction.ValueString())
 				}
+				itemChildChildAttributes = append(itemChildChildAttributes, "pol-name")
 
 				if !childChildItem.PolicyNameVariable.IsNull() {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipObjectType", "object")
@@ -1183,22 +1374,39 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipType", "constant")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipValue", childChildItem.PolicyName.ValueString())
 				}
+				if !childChildItem.Optional.IsNull() {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "vipOptional", childChildItem.Optional.ValueBool())
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "priority-order", itemChildChildAttributes)
+				}
 				itemChildBody, _ = sjson.SetRaw(itemChildBody, "route-policy."+"vipValue.-1", itemChildChildBody)
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "address-family."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.neighbor."+"vipValue.-1", itemBody)
 	}
-	body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipObjectType", "tree")
 	if len(data.Ipv6Neighbors) > 0 {
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipType", "constant")
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipPrimaryKey", []string{"address"})
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipValue", []interface{}{})
 	} else {
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipObjectType", "tree")
 		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipType", "ignore")
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipPrimaryKey", []string{"address"})
+		body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipValue", []interface{}{})
 	}
-	body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipPrimaryKey", []string{"address"})
-	body, _ = sjson.Set(body, path+"bgp.ipv6-neighbor."+"vipValue", []interface{}{})
 	for _, item := range data.Ipv6Neighbors {
 		itemBody := ""
+		itemAttributes := make([]string, 0)
+		itemAttributes = append(itemAttributes, "address")
 
 		if !item.AddressVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipObjectType", "object")
@@ -1210,6 +1418,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "address."+"vipValue", item.Address.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "description")
 
 		if !item.DescriptionVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipObjectType", "object")
@@ -1223,6 +1432,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "description."+"vipValue", item.Description.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "shutdown")
 
 		if !item.ShutdownVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipObjectType", "object")
@@ -1236,6 +1446,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "shutdown."+"vipValue", strconv.FormatBool(item.Shutdown.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "remote-as")
 
 		if !item.RemoteAsVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipObjectType", "object")
@@ -1247,6 +1458,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "remote-as."+"vipValue", item.RemoteAs.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "keepalive")
 
 		if !item.KeepaliveVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipObjectType", "object")
@@ -1260,6 +1472,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "timers.keepalive."+"vipValue", item.Keepalive.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "holdtime")
 
 		if !item.HoldtimeVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipObjectType", "object")
@@ -1273,6 +1486,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "timers.holdtime."+"vipValue", item.Holdtime.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "if-name")
 
 		if !item.SourceInterfaceVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipObjectType", "object")
@@ -1286,6 +1500,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "update-source.if-name."+"vipValue", item.SourceInterface.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "next-hop-self")
 
 		if !item.NextHopSelfVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipObjectType", "object")
@@ -1299,6 +1514,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "next-hop-self."+"vipValue", strconv.FormatBool(item.NextHopSelf.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-community")
 
 		if !item.SendCommunityVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipObjectType", "object")
@@ -1312,6 +1528,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-community."+"vipValue", strconv.FormatBool(item.SendCommunity.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-ext-community")
 
 		if !item.SendExtCommunityVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipObjectType", "object")
@@ -1325,6 +1542,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-ext-community."+"vipValue", strconv.FormatBool(item.SendExtCommunity.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "ebgp-multihop")
 
 		if !item.EbgpMultihopVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipObjectType", "object")
@@ -1338,6 +1556,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "ebgp-multihop."+"vipValue", item.EbgpMultihop.ValueInt64())
 		}
+		itemAttributes = append(itemAttributes, "password")
 
 		if !item.PasswordVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipObjectType", "object")
@@ -1351,6 +1570,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "password."+"vipValue", item.Password.ValueString())
 		}
+		itemAttributes = append(itemAttributes, "send-label")
 
 		if !item.SendLabelVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipObjectType", "object")
@@ -1364,6 +1584,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-label."+"vipValue", strconv.FormatBool(item.SendLabel.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "send-label-explicit")
 
 		if !item.SendLabelExplicitVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipObjectType", "object")
@@ -1377,6 +1598,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "send-label-explicit."+"vipValue", strconv.FormatBool(item.SendLabelExplicit.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "as-override")
 
 		if !item.AsOverrideVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipObjectType", "object")
@@ -1390,6 +1612,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "as-override."+"vipValue", strconv.FormatBool(item.AsOverride.ValueBool()))
 		}
+		itemAttributes = append(itemAttributes, "as-number")
 
 		if !item.AllowAsInVariable.IsNull() {
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipObjectType", "object")
@@ -1403,22 +1626,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipType", "constant")
 			itemBody, _ = sjson.Set(itemBody, "allowas-in.as-number."+"vipValue", item.AllowAsIn.ValueInt64())
 		}
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
+		itemAttributes = append(itemAttributes, "address-family")
 		if len(item.AddressFamilies) > 0 {
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipType", "constant")
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		} else {
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipObjectType", "tree")
 			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipType", "ignore")
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
+			itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		}
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipPrimaryKey", []string{"family-type"})
-		itemBody, _ = sjson.Set(itemBody, "address-family."+"vipValue", []interface{}{})
 		for _, childItem := range item.AddressFamilies {
 			itemChildBody := ""
+			itemChildAttributes := make([]string, 0)
+			itemChildAttributes = append(itemChildAttributes, "family-type")
 			if childItem.FamilyType.IsNull() {
 			} else {
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipObjectType", "object")
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "family-type."+"vipValue", childItem.FamilyType.ValueString())
 			}
+			itemChildAttributes = append(itemChildAttributes, "prefix-num")
 
 			if !childItem.MaximumPrefixesVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipObjectType", "object")
@@ -1432,6 +1662,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.prefix-num."+"vipValue", childItem.MaximumPrefixes.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "threshold")
 
 			if !childItem.MaximumPrefixesThresholdVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipObjectType", "object")
@@ -1445,6 +1676,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.threshold."+"vipValue", childItem.MaximumPrefixesThreshold.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "restart")
 
 			if !childItem.MaximumPrefixesRestartVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipObjectType", "object")
@@ -1458,6 +1690,7 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.restart."+"vipValue", childItem.MaximumPrefixesRestart.ValueInt64())
 			}
+			itemChildAttributes = append(itemChildAttributes, "warning-only")
 
 			if !childItem.MaximumPrefixesWarningOnlyVariable.IsNull() {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipObjectType", "object")
@@ -1471,22 +1704,29 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipType", "constant")
 				itemChildBody, _ = sjson.Set(itemChildBody, "maximum-prefixes.warning-only."+"vipValue", strconv.FormatBool(childItem.MaximumPrefixesWarningOnly.ValueBool()))
 			}
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
+			itemChildAttributes = append(itemChildAttributes, "route-policy")
 			if len(childItem.RoutePolicies) > 0 {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "constant")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			} else {
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipObjectType", "tree")
 				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipType", "ignore")
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
+				itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			}
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipPrimaryKey", []string{"direction"})
-			itemChildBody, _ = sjson.Set(itemChildBody, "route-policy."+"vipValue", []interface{}{})
 			for _, childChildItem := range childItem.RoutePolicies {
 				itemChildChildBody := ""
+				itemChildChildAttributes := make([]string, 0)
+				itemChildChildAttributes = append(itemChildChildAttributes, "direction")
 				if childChildItem.Direction.IsNull() {
 				} else {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipObjectType", "object")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipType", "constant")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "direction."+"vipValue", childChildItem.Direction.ValueString())
 				}
+				itemChildChildAttributes = append(itemChildChildAttributes, "pol-name")
 
 				if !childChildItem.PolicyNameVariable.IsNull() {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipObjectType", "object")
@@ -1498,9 +1738,21 @@ func (data CiscoBGP) toBody(ctx context.Context) string {
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipType", "constant")
 					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "pol-name."+"vipValue", childChildItem.PolicyName.ValueString())
 				}
+				if !childChildItem.Optional.IsNull() {
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "vipOptional", childChildItem.Optional.ValueBool())
+					itemChildChildBody, _ = sjson.Set(itemChildChildBody, "priority-order", itemChildChildAttributes)
+				}
 				itemChildBody, _ = sjson.SetRaw(itemChildBody, "route-policy."+"vipValue.-1", itemChildChildBody)
 			}
+			if !childItem.Optional.IsNull() {
+				itemChildBody, _ = sjson.Set(itemChildBody, "vipOptional", childItem.Optional.ValueBool())
+				itemChildBody, _ = sjson.Set(itemChildBody, "priority-order", itemChildAttributes)
+			}
 			itemBody, _ = sjson.SetRaw(itemBody, "address-family."+"vipValue.-1", itemChildBody)
+		}
+		if !item.Optional.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "vipOptional", item.Optional.ValueBool())
+			itemBody, _ = sjson.Set(itemBody, "priority-order", itemAttributes)
 		}
 		body, _ = sjson.SetRaw(body, path+"bgp.ipv6-neighbor."+"vipValue.-1", itemBody)
 	}
@@ -1629,6 +1881,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv4RouteTargets = make([]CiscoBGPIpv4RouteTargets, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPIpv4RouteTargets{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("vpn-id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()
@@ -1652,6 +1909,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Export = make([]CiscoBGPIpv4RouteTargetsExport, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv4RouteTargetsExport{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("asn-ip.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.AsnIp = types.StringNull()
@@ -1679,6 +1941,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Import = make([]CiscoBGPIpv4RouteTargetsImport, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv4RouteTargetsImport{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("asn-ip.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.AsnIp = types.StringNull()
@@ -1710,6 +1977,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv6RouteTargets = make([]CiscoBGPIpv6RouteTargets, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPIpv6RouteTargets{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("vpn-id.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.VpnId = types.Int64Null()
@@ -1733,6 +2005,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Export = make([]CiscoBGPIpv6RouteTargetsExport, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv6RouteTargetsExport{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("asn-ip.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.AsnIp = types.StringNull()
@@ -1760,6 +2037,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Import = make([]CiscoBGPIpv6RouteTargetsImport, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv6RouteTargetsImport{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("asn-ip.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.AsnIp = types.StringNull()
@@ -1791,6 +2073,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.MplsInterfaces = make([]CiscoBGPMplsInterfaces, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPMplsInterfaces{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("if-name.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.InterfaceName = types.StringNull()
@@ -2008,6 +2295,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.AddressFamilies = make([]CiscoBGPAddressFamilies, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPAddressFamilies{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("family-type.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.FamilyType = types.StringNull()
@@ -2028,6 +2320,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Ipv4AggregateAddresses = make([]CiscoBGPAddressFamiliesIpv4AggregateAddresses, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPAddressFamiliesIpv4AggregateAddresses{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("prefix.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Prefix = types.StringNull()
@@ -2093,6 +2390,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Ipv6AggregateAddresses = make([]CiscoBGPAddressFamiliesIpv6AggregateAddresses, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPAddressFamiliesIpv6AggregateAddresses{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("prefix.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Prefix = types.StringNull()
@@ -2158,6 +2460,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Ipv4Networks = make([]CiscoBGPAddressFamiliesIpv4Networks, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPAddressFamiliesIpv4Networks{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("prefix.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Prefix = types.StringNull()
@@ -2185,6 +2492,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.Ipv6Networks = make([]CiscoBGPAddressFamiliesIpv6Networks, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPAddressFamiliesIpv6Networks{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("prefix.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Prefix = types.StringNull()
@@ -2288,6 +2600,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.RedistributeRoutes = make([]CiscoBGPAddressFamiliesRedistributeRoutes, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPAddressFamiliesRedistributeRoutes{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("protocol.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.Protocol = types.StringNull()
@@ -2338,6 +2655,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv4Neighbors = make([]CiscoBGPIpv4Neighbors, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPIpv4Neighbors{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("address.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Address = types.StringNull()
@@ -2646,6 +2968,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.AddressFamilies = make([]CiscoBGPIpv4NeighborsAddressFamilies, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv4NeighborsAddressFamilies{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("family-type.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.FamilyType = types.StringNull()
@@ -2742,6 +3069,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.RoutePolicies = make([]CiscoBGPIpv4NeighborsAddressFamiliesRoutePolicies, 0)
 						ccValue.ForEach(func(cck, ccv gjson.Result) bool {
 							ccItem := CiscoBGPIpv4NeighborsAddressFamiliesRoutePolicies{}
+							if cccValue := ccv.Get("vipOptional"); cccValue.Exists() {
+								ccItem.Optional = types.BoolValue(cccValue.Bool())
+							} else {
+								ccItem.Optional = types.BoolNull()
+							}
 							if cccValue := ccv.Get("direction.vipType"); cccValue.Exists() {
 								if cccValue.String() == "variableName" {
 									ccItem.Direction = types.StringNull()
@@ -2793,6 +3125,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 		data.Ipv6Neighbors = make([]CiscoBGPIpv6Neighbors, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := CiscoBGPIpv6Neighbors{}
+			if cValue := v.Get("vipOptional"); cValue.Exists() {
+				item.Optional = types.BoolValue(cValue.Bool())
+			} else {
+				item.Optional = types.BoolNull()
+			}
 			if cValue := v.Get("address.vipType"); cValue.Exists() {
 				if cValue.String() == "variableName" {
 					item.Address = types.StringNull()
@@ -3101,6 +3438,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 				item.AddressFamilies = make([]CiscoBGPIpv6NeighborsAddressFamilies, 0)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := CiscoBGPIpv6NeighborsAddressFamilies{}
+					if ccValue := cv.Get("vipOptional"); ccValue.Exists() {
+						cItem.Optional = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.Optional = types.BoolNull()
+					}
 					if ccValue := cv.Get("family-type.vipType"); ccValue.Exists() {
 						if ccValue.String() == "variableName" {
 							cItem.FamilyType = types.StringNull()
@@ -3197,6 +3539,11 @@ func (data *CiscoBGP) fromBody(ctx context.Context, res gjson.Result) {
 						cItem.RoutePolicies = make([]CiscoBGPIpv6NeighborsAddressFamiliesRoutePolicies, 0)
 						ccValue.ForEach(func(cck, ccv gjson.Result) bool {
 							ccItem := CiscoBGPIpv6NeighborsAddressFamiliesRoutePolicies{}
+							if cccValue := ccv.Get("vipOptional"); cccValue.Exists() {
+								ccItem.Optional = types.BoolValue(cccValue.Bool())
+							} else {
+								ccItem.Optional = types.BoolNull()
+							}
 							if cccValue := ccv.Get("direction.vipType"); cccValue.Exists() {
 								if cccValue.String() == "variableName" {
 									ccItem.Direction = types.StringNull()
