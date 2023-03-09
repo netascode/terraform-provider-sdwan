@@ -1,4 +1,4 @@
-## 0.1.5 (unreleased)
+## 0.1.5
 
 - Fix empty tunnel-interface config of `sdwan_cisco_vpn_interface_feature_template`
 - Introduce `optional` attribute to designate list items as optional
