@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -13,7 +14,7 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-const MaxAttempts int = 100 // equates to 500 seconds
+const MaxAttempts int = 120 // equates to 600 seconds
 
 func Contains(s []string, str string) bool {
 	for _, v := range s {
@@ -40,6 +41,16 @@ func WaitForActionToComplete(ctx context.Context, client *sdwan.Client, id strin
 			return err
 		}
 		if res.Get("summary.status").String() == "done" {
+			var failures []string
+			res.Get("data").ForEach(func(k, v gjson.Result) bool {
+				if strings.Contains(v.Get("statusId").String(), "failure") {
+					failures = append(failures, fmt.Sprintf("Action %s for device %s failed. Activity log: %+v", id, v.Get("deviceID").String(), v.Get("activity").String()))
+				}
+				return true
+			})
+			if len(failures) > 0 {
+				return errors.New(strings.Join(failures, "\n"))
+			}
 			break
 		} else {
 			tflog.Debug(ctx, fmt.Sprintf("[DEBUG] Waiting for action '%s' to complete.", id))

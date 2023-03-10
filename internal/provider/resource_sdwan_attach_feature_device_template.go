@@ -95,7 +95,11 @@ func (r *AttachFeatureDeviceTemplateResource) Create(ctx context.Context, req re
 		return
 	}
 	actionId := res.Get("id").String()
-	helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	err = helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to attach device template, got error: %s", err))
+		return
+	}
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Create finished successfully", plan.Id.ValueString()))
 
@@ -150,7 +154,11 @@ func (r *AttachFeatureDeviceTemplateResource) Update(ctx context.Context, req re
 		return
 	}
 	actionId := res.Get("id").String()
-	helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	err = helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to attach device template, got error: %s", err))
+		return
+	}
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Update finished successfully", plan.Id.ValueString()))
 
@@ -176,7 +184,11 @@ func (r *AttachFeatureDeviceTemplateResource) Delete(ctx context.Context, req re
 		return
 	}
 	actionId := res.Get("id").String()
-	helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	err = helpers.WaitForActionToComplete(ctx, r.client, actionId)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to detach device template, got error: %s", err))
+		return
+	}
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Delete finished successfully", state.Id.ValueString()))
 
