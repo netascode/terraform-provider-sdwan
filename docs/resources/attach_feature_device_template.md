@@ -3,12 +3,12 @@
 page_title: "sdwan_attach_feature_device_template Resource - terraform-provider-sdwan"
 subcategory: "Device Templates"
 description: |-
-  This resource can attach a feature device template.
+  This resource can attach a feature device template. Due to limitations of the API, once a device template is attached to a device, only one change can be applied per terraform apply operation. More information is available here https://registry.terraform.io/providers/netascode/sdwan/latest/docs/guides/updating_templates.
 ---
 
 # sdwan_attach_feature_device_template (Resource)
 
-This resource can attach a feature device template.
+This resource can attach a feature device template. Due to limitations of the API, once a device template is attached to a device, only one change can be applied per `terraform apply` operation. More information is available [here](https://registry.terraform.io/providers/netascode/sdwan/latest/docs/guides/updating_templates).
 
 ## Example Usage
 

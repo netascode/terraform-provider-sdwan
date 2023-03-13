@@ -32,7 +32,7 @@ func (r *AttachFeatureDeviceTemplateResource) Metadata(ctx context.Context, req 
 func (r *AttachFeatureDeviceTemplateResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can attach a feature device template.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can attach a feature device template. Due to limitations of the API, once a device template is attached to a device, only one change can be applied per `terraform apply` operation. More information is available [here](https://registry.terraform.io/providers/netascode/sdwan/latest/docs/guides/updating_templates).").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
