@@ -67,6 +67,7 @@ data "sdwan_cisco_bgp_feature_template" "example" {
 - `shutdown` (Boolean) Enable or disable BGP
 - `shutdown_variable` (String) Variable name
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--address_families"></a>
 ### Nested Schema for `address_families`

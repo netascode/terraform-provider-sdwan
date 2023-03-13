@@ -282,6 +282,7 @@ resource "sdwan_cisco_vpn_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--dns_hosts"></a>
 ### Nested Schema for `dns_hosts`

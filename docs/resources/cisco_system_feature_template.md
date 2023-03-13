@@ -212,6 +212,7 @@ resource "sdwan_cisco_system_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--geo_fencing_sms_phone_numbers"></a>
 ### Nested Schema for `geo_fencing_sms_phone_numbers`

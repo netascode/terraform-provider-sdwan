@@ -46,6 +46,10 @@ func (r *CLITemplateFeatureTemplateResource) Schema(ctx context.Context, req res
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
+			"version": schema.Int64Attribute{
+				MarkdownDescription: "The version of the feature template",
+				Computed:            true,
+			},
 			"template_type": schema.StringAttribute{
 				MarkdownDescription: "The template type",
 				Computed:            true,
@@ -104,6 +108,7 @@ func (r *CLITemplateFeatureTemplateResource) Create(ctx context.Context, req res
 	}
 
 	plan.Id = types.StringValue(res.Get("templateId").String())
+	plan.Version = types.Int64Value(0)
 	plan.TemplateType = types.StringValue(plan.getModel())
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Create finished successfully", plan.Name.ValueString()))
@@ -142,10 +147,16 @@ func (r *CLITemplateFeatureTemplateResource) Read(ctx context.Context, req resou
 }
 
 func (r *CLITemplateFeatureTemplateResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan CLITemplate
+	var plan, state CLITemplate
 
 	// Read plan
 	diags := req.Plan.Get(ctx, &plan)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	// Read state
+	diags = req.State.Get(ctx, &state)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -156,9 +167,15 @@ func (r *CLITemplateFeatureTemplateResource) Update(ctx context.Context, req res
 	body := plan.toBody(ctx)
 	res, err := r.client.Put("/template/feature/"+plan.Id.ValueString(), body)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
-		return
+		if res.Get("error.message").String() == "Template locked in edit mode." {
+			resp.Diagnostics.AddWarning("Client Warning", fmt.Sprintf("Failed to modify template due to template being locked by another change. Template changes will not be applied. Re-run 'terraform apply' to try again."))
+		} else {
+			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
+			return
+		}
 	}
+
+	plan.Version = types.Int64Value(state.Version.ValueInt64() + 1)
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Update finished successfully", plan.Name.ValueString()))
 

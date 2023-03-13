@@ -40,6 +40,7 @@ data "sdwan_cisco_logging_feature_template" "example" {
 - `name` (String) The name of the feature template
 - `template_type` (String) The template type
 - `tls_profiles` (Attributes List) Configure a TLS profile (see [below for nested schema](#nestedatt--tls_profiles))
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--ipv4_servers"></a>
 ### Nested Schema for `ipv4_servers`

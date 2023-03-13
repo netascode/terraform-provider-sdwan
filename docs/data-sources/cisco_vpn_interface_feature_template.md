@@ -240,6 +240,7 @@ data "sdwan_cisco_vpn_interface_feature_template" "example" {
 - `tunnel_qos_mode_variable` (String) Variable name
 - `udp_timeout` (Number) Set NAT UDP session timeout, in minutes
 - `udp_timeout_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--access_lists"></a>
 ### Nested Schema for `access_lists`

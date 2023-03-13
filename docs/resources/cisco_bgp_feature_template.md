@@ -252,6 +252,7 @@ resource "sdwan_cisco_bgp_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--address_families"></a>
 ### Nested Schema for `address_families`

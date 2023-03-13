@@ -75,6 +75,7 @@ data "sdwan_cedge_global_feature_template" "example" {
 - `template_type` (String) The template type
 - `udp_small_servers` (Boolean) Configure udp-small-servers
 - `udp_small_servers_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 - `vty_logging` (Boolean) Configure VTY Line Logging
 - `vty_logging_variable` (String) Variable name
 

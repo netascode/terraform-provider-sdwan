@@ -37,6 +37,7 @@ data "sdwan_cisco_sig_credentials_feature_template" "example" {
 - `umbrella_api_secret_variable` (String) Variable name
 - `umbrella_organization_id` (String) Ord ID
 - `umbrella_organization_id_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 - `zscaler_cloud_name` (Number) Third Party Cloud Name
 - `zscaler_cloud_name_variable` (String) Variable name
 - `zscaler_organization` (String) Organization Name

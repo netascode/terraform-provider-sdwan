@@ -64,6 +64,7 @@ resource "sdwan_cisco_bfd_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--colors"></a>
 ### Nested Schema for `colors`

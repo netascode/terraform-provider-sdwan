@@ -86,6 +86,7 @@ resource "sdwan_cisco_logging_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--ipv4_servers"></a>
 ### Nested Schema for `ipv4_servers`

@@ -553,6 +553,7 @@ resource "sdwan_cisco_vpn_interface_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--access_lists"></a>
 ### Nested Schema for `access_lists`

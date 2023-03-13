@@ -23,7 +23,7 @@ data "sdwan_feature_device_template" "example" {
 
 ### Required
 
-- `id` (String) The id of the deivce template
+- `id` (String) The id of the device template
 
 ### Read-Only
 
@@ -34,6 +34,7 @@ data "sdwan_feature_device_template" "example" {
 - `name` (String) The name of the device template
 - `policy_id` (String) The policy ID
 - `security_policy_id` (String) The security policy ID
+- `version` (Number) The version of the device template
 
 <a id="nestedatt--general_templates"></a>
 ### Nested Schema for `general_templates`
@@ -43,6 +44,7 @@ Read-Only:
 - `id` (String) Feature template ID
 - `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
 - `type` (String) Feature template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--general_templates--sub_templates"></a>
 ### Nested Schema for `general_templates.sub_templates`
@@ -52,6 +54,7 @@ Read-Only:
 - `id` (String) Feature template ID
 - `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
 - `type` (String) Feature template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--general_templates--sub_templates--sub_templates"></a>
 ### Nested Schema for `general_templates.sub_templates.sub_templates`
@@ -60,5 +63,6 @@ Read-Only:
 
 - `id` (String) Feature template ID
 - `type` (String) Feature template type
+- `version` (Number) The version of the feature template
 
 

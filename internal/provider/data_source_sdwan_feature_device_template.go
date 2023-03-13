@@ -35,8 +35,12 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				MarkdownDescription: "The id of the deivce template",
+				MarkdownDescription: "The id of the device template",
 				Required:            true,
+			},
+			"version": schema.Int64Attribute{
+				MarkdownDescription: "The version of the device template",
+				Computed:            true,
 			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the device template",
@@ -71,6 +75,10 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 							MarkdownDescription: "Feature template ID",
 							Computed:            true,
 						},
+						"version": schema.Int64Attribute{
+							MarkdownDescription: "The version of the feature template",
+							Computed:            true,
+						},
 						"type": schema.StringAttribute{
 							MarkdownDescription: "Feature template type",
 							Computed:            true,
@@ -84,6 +92,10 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 										MarkdownDescription: "Feature template ID",
 										Computed:            true,
 									},
+									"version": schema.Int64Attribute{
+										MarkdownDescription: "The version of the feature template",
+										Computed:            true,
+									},
 									"type": schema.StringAttribute{
 										MarkdownDescription: "Feature template type",
 										Computed:            true,
@@ -95,6 +107,10 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
 													MarkdownDescription: "Feature template ID",
+													Computed:            true,
+												},
+												"version": schema.Int64Attribute{
+													MarkdownDescription: "The version of the feature template",
 													Computed:            true,
 												},
 												"type": schema.StringAttribute{

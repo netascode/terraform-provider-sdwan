@@ -44,6 +44,7 @@ resource "sdwan_feature_device_template" "test" {
 ### Read-Only
 
 - `id` (String) The id of the device template
+- `version` (Number) The version of the device template
 
 <a id="nestedatt--general_templates"></a>
 ### Nested Schema for `general_templates`
@@ -56,6 +57,7 @@ Required:
 Optional:
 
 - `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
+- `version` (Number) Feature template version
 
 <a id="nestedatt--general_templates--sub_templates"></a>
 ### Nested Schema for `general_templates.sub_templates`
@@ -68,6 +70,7 @@ Required:
 Optional:
 
 - `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
+- `version` (Number) Feature template version
 
 <a id="nestedatt--general_templates--sub_templates--sub_templates"></a>
 ### Nested Schema for `general_templates.sub_templates.sub_templates`
@@ -76,6 +79,10 @@ Required:
 
 - `id` (String) Feature template ID
 - `type` (String) Feature template type
+
+Optional:
+
+- `version` (Number) Feature template version
 
 ## Import
 

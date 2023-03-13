@@ -14,6 +14,7 @@ import (
 
 type CiscoOMP struct {
 	Id                             types.String                  `tfsdk:"id"`
+	Version                        types.Int64                   `tfsdk:"version"`
 	TemplateType                   types.String                  `tfsdk:"template_type"`
 	Name                           types.String                  `tfsdk:"name"`
 	Description                    types.String                  `tfsdk:"description"`

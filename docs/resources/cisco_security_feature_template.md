@@ -96,6 +96,7 @@ resource "sdwan_cisco_security_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--keychains"></a>
 ### Nested Schema for `keychains`

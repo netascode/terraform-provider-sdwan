@@ -59,6 +59,7 @@ data "sdwan_cisco_omp_feature_template" "example" {
 - `template_type` (String) The template type
 - `transport_gateway` (String) Transport gateway path computation
 - `transport_gateway_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--advertise_ipv4_routes"></a>
 ### Nested Schema for `advertise_ipv4_routes`

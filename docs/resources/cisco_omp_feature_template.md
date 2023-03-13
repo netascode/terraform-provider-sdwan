@@ -109,6 +109,7 @@ resource "sdwan_cisco_omp_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--advertise_ipv4_routes"></a>
 ### Nested Schema for `advertise_ipv4_routes`

@@ -45,6 +45,7 @@ data "sdwan_cisco_security_feature_template" "example" {
 - `replay_window` (String) Set the sliding replay window size
 - `replay_window_variable` (String) Variable name
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--keychains"></a>
 ### Nested Schema for `keychains`

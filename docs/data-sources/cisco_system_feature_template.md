@@ -100,6 +100,7 @@ data "sdwan_cisco_system_feature_template" "example" {
 - `trackers` (Attributes List) Tracker configuration (see [below for nested schema](#nestedatt--trackers))
 - `transport_gateway` (Boolean) Enable transport gateway
 - `transport_gateway_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--geo_fencing_sms_phone_numbers"></a>
 ### Nested Schema for `geo_fencing_sms_phone_numbers`

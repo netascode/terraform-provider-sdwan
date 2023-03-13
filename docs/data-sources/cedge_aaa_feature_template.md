@@ -57,6 +57,7 @@ data "sdwan_cedge_aaa_feature_template" "example" {
 - `tacacs_server_groups` (Attributes List) Configure the TACACS serverGroup (see [below for nested schema](#nestedatt--tacacs_server_groups))
 - `template_type` (String) The template type
 - `users` (Attributes List) Create local login account (see [below for nested schema](#nestedatt--users))
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--accounting_rules"></a>
 ### Nested Schema for `accounting_rules`

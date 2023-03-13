@@ -42,6 +42,10 @@ func (d *CiscoLoggingFeatureTemplateDataSource) Schema(ctx context.Context, req 
 				MarkdownDescription: "The id of the feature template",
 				Required:            true,
 			},
+			"version": schema.Int64Attribute{
+				MarkdownDescription: "The version of the feature template",
+				Computed:            true,
+			},
 			"template_type": schema.StringAttribute{
 				MarkdownDescription: "The template type",
 				Computed:            true,

@@ -41,6 +41,7 @@ data "sdwan_cisco_snmp_feature_template" "example" {
 - `template_type` (String) The template type
 - `trap_targets` (Attributes List) Configure SNMP server to receive SNMP traps (see [below for nested schema](#nestedatt--trap_targets))
 - `users` (Attributes List) Configure an SNMP user (see [below for nested schema](#nestedatt--users))
+- `version` (Number) The version of the feature template
 - `views` (Attributes List) Configure a view record (see [below for nested schema](#nestedatt--views))
 
 <a id="nestedatt--communities"></a>

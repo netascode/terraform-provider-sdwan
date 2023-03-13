@@ -42,6 +42,10 @@ func (r *AttachFeatureDeviceTemplateResource) Schema(ctx context.Context, req re
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
+			"version": schema.Int64Attribute{
+				MarkdownDescription: "The version of the device template",
+				Optional:            true,
+			},
 			"devices": schema.ListNestedAttribute{
 				MarkdownDescription: "Devices",
 				Required:            true,
@@ -84,7 +88,7 @@ func (r *AttachFeatureDeviceTemplateResource) Create(ctx context.Context, req re
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Create", plan.Id.ValueString()))
 
 	// Create object
-	body, err := plan.toBody(ctx, r.client)
+	body, err := plan.toBody(ctx, r.client, false)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to render body, got error: %s", err))
 		return
@@ -143,7 +147,7 @@ func (r *AttachFeatureDeviceTemplateResource) Update(ctx context.Context, req re
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Id.ValueString()))
 
-	body, err := plan.toBody(ctx, r.client)
+	body, err := plan.toBody(ctx, r.client, true)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to render body, got error: %s", err))
 		return

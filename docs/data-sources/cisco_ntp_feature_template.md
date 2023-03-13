@@ -41,6 +41,7 @@ data "sdwan_cisco_ntp_feature_template" "example" {
 - `template_type` (String) The template type
 - `trusted_keys` (List of String) Designate authentication key as trustworthy
 - `trusted_keys_variable` (String) Variable name
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--authentication_keys"></a>
 ### Nested Schema for `authentication_keys`

@@ -58,6 +58,7 @@ data "sdwan_cisco_vpn_feature_template" "example" {
 - `static_nat_subnet_rules` (Attributes List) Configure static NAT Subnet entries (see [below for nested schema](#nestedatt--static_nat_subnet_rules))
 - `template_type` (String) The template type
 - `tenant_vpn_id` (Number) Tenant VPN
+- `version` (Number) The version of the feature template
 - `vpn_id` (Number) List of VPN instances
 - `vpn_name` (String) Name
 - `vpn_name_variable` (String) Variable name

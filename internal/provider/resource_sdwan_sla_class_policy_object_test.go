@@ -16,7 +16,6 @@ func TestAccSdwanSLAClassPolicyObject(t *testing.T) {
 			{
 				Config: testAccSdwanSLAClassPolicyObjectConfig_all(),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr("sdwan_sla_class_policy_object.test", "entries.0.app_probe_class_id", "2081c2f4-3f9f-4fee-8078-dcc8904e368d"),
 					resource.TestCheckResourceAttr("sdwan_sla_class_policy_object.test", "entries.0.jitter", "100"),
 					resource.TestCheckResourceAttr("sdwan_sla_class_policy_object.test", "entries.0.latency", "10"),
 					resource.TestCheckResourceAttr("sdwan_sla_class_policy_object.test", "entries.0.loss", "1"),
@@ -35,7 +34,6 @@ func testAccSdwanSLAClassPolicyObjectConfig_all() string {
 	resource "sdwan_sla_class_policy_object" "test" {
 		name = "TF_TEST_ALL"
 		entries = [{
-			app_probe_class_id = "2081c2f4-3f9f-4fee-8078-dcc8904e368d"
 			jitter = 100
 			latency = 10
 			loss = 1

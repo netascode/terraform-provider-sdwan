@@ -132,6 +132,7 @@ resource "sdwan_cedge_global_feature_template" "example" {
 
 - `id` (String) The id of the feature template
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 ## Import
 

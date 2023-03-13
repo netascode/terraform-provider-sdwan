@@ -10,6 +10,10 @@ description: |-
 ## 0.1.6 (unreleased)
 
 - Return error if attach/detach action fails
+- Add `version` attribute to feature templates
+- Add `version` attribute to feature device template
+- Add `version` attribute to feature templates references of device templates
+- Add `version` attribute to device template reference of `sdwan_attach_feature_device_template` resource
 
 ## 0.1.5
 

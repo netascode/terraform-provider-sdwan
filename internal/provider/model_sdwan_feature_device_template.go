@@ -10,6 +10,7 @@ import (
 
 type FeatureDeviceTemplate struct {
 	Id               types.String                           `tfsdk:"id"`
+	Version          types.Int64                            `tfsdk:"version"`
 	Name             types.String                           `tfsdk:"name"`
 	Description      types.String                           `tfsdk:"description"`
 	DeviceType       types.String                           `tfsdk:"device_type"`
@@ -21,19 +22,22 @@ type FeatureDeviceTemplate struct {
 
 type FeatureDeviceTemplateGeneralTemplate struct {
 	Id           types.String                       `tfsdk:"id"`
+	Version      types.Int64                        `tfsdk:"version"`
 	Type         types.String                       `tfsdk:"type"`
 	SubTemplates []FeatureDeviceTemplateSubTemplate `tfsdk:"sub_templates"`
 }
 
 type FeatureDeviceTemplateSubTemplate struct {
 	Id           types.String                          `tfsdk:"id"`
+	Version      types.Int64                           `tfsdk:"version"`
 	Type         types.String                          `tfsdk:"type"`
 	SubTemplates []FeatureDeviceTemplateSubSubTemplate `tfsdk:"sub_templates"`
 }
 
 type FeatureDeviceTemplateSubSubTemplate struct {
-	Id   types.String `tfsdk:"id"`
-	Type types.String `tfsdk:"type"`
+	Id      types.String `tfsdk:"id"`
+	Version types.Int64  `tfsdk:"version"`
+	Type    types.String `tfsdk:"type"`
 }
 
 func (data FeatureDeviceTemplate) toBody(ctx context.Context) string {
@@ -153,5 +157,59 @@ func (data *FeatureDeviceTemplate) fromBody(ctx context.Context, res gjson.Resul
 			data.GeneralTemplates = append(data.GeneralTemplates, item)
 			return true
 		})
+	}
+}
+
+func (data *FeatureDeviceTemplate) getGeneralTemplateVersion(ctx context.Context, id string) types.Int64 {
+	for _, item := range data.GeneralTemplates {
+		if item.Id.ValueString() == id {
+			return item.Version
+		}
+	}
+	return types.Int64Null()
+}
+
+func (data *FeatureDeviceTemplate) getSubTemplateVersion(ctx context.Context, id, subId string) types.Int64 {
+	for _, item := range data.GeneralTemplates {
+		if item.Id.ValueString() == id {
+			for _, subItem := range item.SubTemplates {
+				if subItem.Id.ValueString() == subId {
+					return subItem.Version
+				}
+			}
+		}
+	}
+	return types.Int64Null()
+}
+
+func (data *FeatureDeviceTemplate) getSubSubTemplateVersion(ctx context.Context, id, subId, subSubId string) types.Int64 {
+	for _, item := range data.GeneralTemplates {
+		if item.Id.ValueString() == id {
+			for _, subItem := range item.SubTemplates {
+				if subItem.Id.ValueString() == subId {
+					for _, subSubItem := range subItem.SubTemplates {
+						if subSubItem.Id.ValueString() == subSubId {
+							return subSubItem.Version
+						}
+					}
+				}
+			}
+		}
+	}
+	return types.Int64Null()
+}
+
+func (data *FeatureDeviceTemplate) updateTemplateVersions(ctx context.Context, state FeatureDeviceTemplate) {
+	for gt := range data.GeneralTemplates {
+		id := data.GeneralTemplates[gt].Id.ValueString()
+		data.GeneralTemplates[gt].Version = state.getGeneralTemplateVersion(ctx, id)
+		for st := range data.GeneralTemplates[gt].SubTemplates {
+			subId := data.GeneralTemplates[gt].SubTemplates[st].Id.ValueString()
+			data.GeneralTemplates[gt].SubTemplates[st].Version = state.getSubTemplateVersion(ctx, id, subId)
+			for sst := range data.GeneralTemplates[gt].SubTemplates[st].SubTemplates {
+				subSubId := data.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Id.ValueString()
+				data.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Version = state.getSubSubTemplateVersion(ctx, id, subId, subSubId)
+			}
+		}
 	}
 }

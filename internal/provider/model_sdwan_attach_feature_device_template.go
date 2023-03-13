@@ -15,6 +15,7 @@ import (
 
 type AttachFeatureDeviceTemplate struct {
 	Id      types.String                        `tfsdk:"id"`
+	Version types.Int64                         `tfsdk:"version"`
 	Devices []AttachFeatureDeviceTemplateDevice `tfsdk:"devices"`
 }
 
@@ -23,13 +24,13 @@ type AttachFeatureDeviceTemplateDevice struct {
 	Variables types.Map    `tfsdk:"variables"`
 }
 
-func (data AttachFeatureDeviceTemplate) getVariables(ctx context.Context, client *sdwan.Client) (map[string]map[string]string, error) {
+func (data AttachFeatureDeviceTemplate) getVariables(ctx context.Context, client *sdwan.Client, edited bool) (map[string]map[string]string, error) {
 	deviceVariables := make(map[string]map[string]string)
 	for _, item := range data.Devices {
 		// Retrieve device variables
 		body, _ := sjson.Set("", "templateId", data.Id.ValueString())
 		body, _ = sjson.Set(body, "deviceIds", []string{item.Id.ValueString()})
-		body, _ = sjson.Set(body, "isEdited", false)
+		body, _ = sjson.Set(body, "isEdited", edited)
 		body, _ = sjson.Set(body, "isMasterEdited", false)
 		res, err := client.Post("/template/device/config/input", body)
 		if err != nil {
@@ -112,13 +113,13 @@ func (data AttachFeatureDeviceTemplate) detachDevices(ctx context.Context, clien
 	return res, nil
 }
 
-func (data AttachFeatureDeviceTemplate) toBody(ctx context.Context, client *sdwan.Client) (string, error) {
-	deviceVariables, err := data.getVariables(ctx, client)
+func (data AttachFeatureDeviceTemplate) toBody(ctx context.Context, client *sdwan.Client, edited bool) (string, error) {
+	deviceVariables, err := data.getVariables(ctx, client, edited)
 	if err != nil {
 		return "", err
 	}
 	body, _ := sjson.Set("", "deviceTemplateList.0.templateId", data.Id.ValueString())
-	body, _ = sjson.Set(body, "deviceTemplateList.0.isEdited", false)
+	body, _ = sjson.Set(body, "deviceTemplateList.0.isEdited", edited)
 	body, _ = sjson.Set(body, "deviceTemplateList.0.isMasterEdited", false)
 	body, _ = sjson.Set(body, "deviceTemplateList.0.isDraftDisabled", false)
 

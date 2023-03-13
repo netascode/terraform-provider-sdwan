@@ -38,6 +38,7 @@ data "sdwan_cisco_bfd_feature_template" "example" {
 - `poll_interval` (Number) Set how often BFD polls tunnels to collect packet latency, loss, and statistics
 - `poll_interval_variable` (String) Variable name
 - `template_type` (String) The template type
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--colors"></a>
 ### Nested Schema for `colors`
