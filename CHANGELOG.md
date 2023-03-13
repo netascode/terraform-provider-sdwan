@@ -1,4 +1,4 @@
-## 0.1.6 (unreleased)
+## 0.1.6
 
 - Return error if attach/detach action fails
 - Add `version` attribute to feature templates
