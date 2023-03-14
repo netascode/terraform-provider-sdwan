@@ -223,6 +223,9 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		{{- range .PolicyObjects}}
 		New{{camelCase .}}PolicyObjectResource,
 		{{- end}}
+		{{- range .PolicyDefinitions}}
+		New{{camelCase .}}PolicyDefinitionResource,
+		{{- end}}
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
 		NewAttachFeatureDeviceTemplateResource,
@@ -236,6 +239,9 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		{{- end}}
 		{{- range .PolicyObjects}}
 		New{{camelCase .}}PolicyObjectDataSource,
+		{{- end}}
+		{{- range .PolicyDefinitions}}
+		New{{camelCase .}}PolicyDefinitionDataSource,
 		{{- end}}
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,

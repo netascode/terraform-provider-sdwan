@@ -1,3 +1,7 @@
+## 0.1.7 (unreleased)
+
+- Add `sdwan_qos_map_policy_definition` resource and data source
+
 ## 0.1.6
 
 - Return error if attach/detach action fails

@@ -19,14 +19,15 @@ import (
 )
 
 const (
-	featureTemplateDefinitionsPath = "./gen/definitions/feature_templates/"
-	featureTemplateModelsPath      = "./gen/models/feature_templates/"
-	policyObjectDefinitionsPath    = "./gen/definitions/policy_objects/"
-	providerTemplate               = "./gen/templates/provider.go"
-	providerLocation               = "./internal/provider/provider.go"
-	changelogTemplate              = "./gen/templates/changelog.md.tmpl"
-	changelogLocation              = "./templates/guides/changelog.md.tmpl"
-	changelogOriginal              = "./CHANGELOG.md"
+	featureTemplateDefinitionsPath  = "./gen/definitions/feature_templates/"
+	featureTemplateModelsPath       = "./gen/models/feature_templates/"
+	policyObjectDefinitionsPath     = "./gen/definitions/policy_objects/"
+	policyDefinitionDefinitionsPath = "./gen/definitions/policy_definitions/"
+	providerTemplate                = "./gen/templates/provider.go"
+	providerLocation                = "./internal/provider/provider.go"
+	changelogTemplate               = "./gen/templates/changelog.md.tmpl"
+	changelogLocation               = "./templates/guides/changelog.md.tmpl"
+	changelogOriginal               = "./CHANGELOG.md"
 )
 
 type t struct {
@@ -121,6 +122,49 @@ var policyObjectTemplates = []t{
 	},
 }
 
+var policyDefinitionTemplates = []t{
+	{
+		path:   "./gen/templates/policy_definitions/model.go",
+		prefix: "./internal/provider/model_sdwan_",
+		suffix: "_policy_definition.go",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/data_source.go",
+		prefix: "./internal/provider/data_source_sdwan_",
+		suffix: "_policy_definition.go",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/data_source_test.go",
+		prefix: "./internal/provider/data_source_sdwan_",
+		suffix: "_policy_definition_test.go",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/resource.go",
+		prefix: "./internal/provider/resource_sdwan_",
+		suffix: "_policy_definition.go",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/resource_test.go",
+		prefix: "./internal/provider/resource_sdwan_",
+		suffix: "_policy_definition_test.go",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/data-source.tf",
+		prefix: "./examples/data-sources/sdwan_",
+		suffix: "_policy_definition/data-source.tf",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/resource.tf",
+		prefix: "./examples/resources/sdwan_",
+		suffix: "_policy_definition/resource.tf",
+	},
+	{
+		path:   "./gen/templates/policy_definitions/import.sh",
+		prefix: "./examples/resources/sdwan_",
+		suffix: "_policy_definition/import.sh",
+	},
+}
+
 type YamlConfig struct {
 	Name           string                `yaml:"name"`
 	Model          string                `yaml:"model"`
@@ -130,6 +174,8 @@ type YamlConfig struct {
 	ResDescription string                `yaml:"res_description"`
 	DocCategory    string                `yaml:"doc_category"`
 	ExcludeTest    bool                  `yaml:"exclude_test"`
+	RootElement    string                `yaml:"root_element"`
+	SkipTemplates  []string              `yaml:"skip_templates"`
 	Attributes     []YamlConfigAttribute `yaml:"attributes"`
 }
 
@@ -378,30 +424,37 @@ func augmentFeatureTemplateConfig(config *YamlConfig) {
 	}
 }
 
-func augmentPolicyObjectAttribute(attr *YamlConfigAttribute) {
+func augmentGenericAttribute(attr *YamlConfigAttribute) {
 	if attr.TfName == "" {
 		attr.TfName = SnakeCase(attr.ModelName)
 	}
 	if attr.Type == "List" {
 		for a := range attr.Attributes {
-			augmentPolicyObjectAttribute(&attr.Attributes[a])
+			augmentGenericAttribute(&attr.Attributes[a])
 		}
 	}
 }
 
-func augmentPolicyObjectConfig(config *YamlConfig) {
+func augmentGenericConfig(config *YamlConfig, type_ string) {
 	for ia := range config.Attributes {
-		augmentPolicyObjectAttribute(&config.Attributes[ia])
+		augmentGenericAttribute(&config.Attributes[ia])
 	}
 	if config.DsDescription == "" {
-		config.DsDescription = fmt.Sprintf("This data source can read the %s policy object.", config.Name)
+		config.DsDescription = fmt.Sprintf("This data source can read the %s %s.", config.Name, type_)
 	}
 	if config.ResDescription == "" {
-		config.ResDescription = fmt.Sprintf("This resource can manage a %s policy object.", config.Name)
+		config.ResDescription = fmt.Sprintf("This resource can manage a %s %s.", config.Name, type_)
 	}
 }
 
 func renderTemplate(templatePath, outputPath string, config interface{}) {
+	if c, ok := config.(YamlConfig); ok {
+		for _, s := range c.SkipTemplates {
+			if strings.Contains(templatePath, s) {
+				return
+			}
+		}
+	}
 	file, err := os.Open(templatePath)
 	if err != nil {
 		log.Fatalf("Error opening template: %v", err)
@@ -446,6 +499,7 @@ func main() {
 	providerConfig := make(map[string][]string)
 	providerConfig["FeatureTemplates"] = make([]string, 0)
 	providerConfig["PolicyObjects"] = make([]string, 0)
+	providerConfig["PolicyDefinitions"] = make([]string, 0)
 
 	// Load feature template configs
 	for i, filename := range featureTemplateFiles {
@@ -493,13 +547,42 @@ func main() {
 
 	for i := range policyObjectConfigs {
 		// Augment policy object config
-		augmentPolicyObjectConfig(&policyObjectConfigs[i])
+		augmentGenericConfig(&policyObjectConfigs[i], "policy object")
 
 		// Iterate over templates and render files
 		for _, t := range policyObjectTemplates {
 			renderTemplate(t.path, t.prefix+SnakeCase(policyObjectConfigs[i].Name)+t.suffix, policyObjectConfigs[i])
 		}
 		providerConfig["PolicyObjects"] = append(providerConfig["PolicyObjects"], policyObjectConfigs[i].Name)
+	}
+
+	policyDefinitionFiles, _ := ioutil.ReadDir(policyDefinitionDefinitionsPath)
+	policyDefinitionConfigs := make([]YamlConfig, len(policyDefinitionFiles))
+
+	// Load policy definition configs
+	for i, filename := range policyDefinitionFiles {
+		yamlFile, err := os.ReadFile(filepath.Join(policyDefinitionDefinitionsPath, filename.Name()))
+		if err != nil {
+			log.Fatalf("Error reading file: %v", err)
+		}
+
+		config := YamlConfig{}
+		err = yaml.Unmarshal(yamlFile, &config)
+		if err != nil {
+			log.Fatalf("Error parsing yaml: %v", err)
+		}
+		policyDefinitionConfigs[i] = config
+	}
+
+	for i := range policyDefinitionConfigs {
+		// Augment policy definition config
+		augmentGenericConfig(&policyDefinitionConfigs[i], "policy object")
+
+		// Iterate over templates and render files
+		for _, t := range policyDefinitionTemplates {
+			renderTemplate(t.path, t.prefix+SnakeCase(policyDefinitionConfigs[i].Name)+t.suffix, policyDefinitionConfigs[i])
+		}
+		providerConfig["PolicyDefinitions"] = append(providerConfig["PolicyDefinitions"], policyDefinitionConfigs[i].Name)
 	}
 
 	// render provider.go
