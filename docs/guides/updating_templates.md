@@ -47,7 +47,7 @@ resource "sdwan_attach_feature_device_template" "test" {
 }
 ```
 
-This provider supports updates to a single feature template and/or device template per `terraform apply` operation. This is due to vManage locking the template(s) once a change has been made. If for example two feature templates are being updated a `terraform apply` operation will show the following warning:
+This provider supports updates to a single feature template and/or device template per device within a single `terraform apply` operation. This is due to vManage locking the template(s) once a change has been made. If for example two feature templates used in the same device template are being updated, a `terraform apply` operation will show the following warning:
 
 ```
 │ Warning: Client Warning
