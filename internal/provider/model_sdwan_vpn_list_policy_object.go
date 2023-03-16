@@ -12,6 +12,7 @@ import (
 
 type VPNList struct {
 	Id      types.String     `tfsdk:"id"`
+	Version types.Int64      `tfsdk:"version"`
 	Name    types.String     `tfsdk:"name"`
 	Entries []VPNListEntries `tfsdk:"entries"`
 }

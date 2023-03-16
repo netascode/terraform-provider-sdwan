@@ -29,6 +29,7 @@ data "sdwan_expanded_community_list_policy_object" "example" {
 
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
 - `name` (String) The name of the policy object
+- `version` (Number) The version of the policy object
 
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`

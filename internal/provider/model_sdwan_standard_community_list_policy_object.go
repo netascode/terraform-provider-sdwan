@@ -12,6 +12,7 @@ import (
 
 type StandardCommunityList struct {
 	Id      types.String                   `tfsdk:"id"`
+	Version types.Int64                    `tfsdk:"version"`
 	Name    types.String                   `tfsdk:"name"`
 	Entries []StandardCommunityListEntries `tfsdk:"entries"`
 }

@@ -12,6 +12,7 @@ import (
 
 type DataIPv4PrefixList struct {
 	Id      types.String                `tfsdk:"id"`
+	Version types.Int64                 `tfsdk:"version"`
 	Name    types.String                `tfsdk:"name"`
 	Entries []DataIPv4PrefixListEntries `tfsdk:"entries"`
 }

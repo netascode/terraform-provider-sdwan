@@ -13,6 +13,7 @@ import (
 
 type QoSMap struct {
 	Id            types.String          `tfsdk:"id"`
+	Version       types.Int64           `tfsdk:"version"`
 	Name          types.String          `tfsdk:"name"`
 	Description   types.String          `tfsdk:"description"`
 	QosSchedulers []QoSMapQosSchedulers `tfsdk:"qos_schedulers"`

@@ -40,6 +40,10 @@ func (d *ClassMapPolicyObjectDataSource) Schema(ctx context.Context, req datasou
 				MarkdownDescription: "The id of the policy object",
 				Required:            true,
 			},
+			"version": schema.Int64Attribute{
+				MarkdownDescription: "The version of the policy object",
+				Computed:            true,
+			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the policy object",
 				Computed:            true,

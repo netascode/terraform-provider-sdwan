@@ -13,6 +13,7 @@ import (
 
 type SLAClass struct {
 	Id      types.String      `tfsdk:"id"`
+	Version types.Int64       `tfsdk:"version"`
 	Name    types.String      `tfsdk:"name"`
 	Entries []SLAClassEntries `tfsdk:"entries"`
 }

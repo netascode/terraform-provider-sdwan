@@ -37,6 +37,7 @@ resource "sdwan_as_path_list_policy_object" "example" {
 ### Read-Only
 
 - `id` (String) The id of the policy object
+- `version` (Number) The version of the feature template
 
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
