@@ -67,10 +67,10 @@ func (r *RewriteRulePolicyDefinitionResource) Schema(ctx context.Context, req re
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Class map IP").String,
+							MarkdownDescription: helpers.NewAttributeDescription("Class map ID").String,
 							Required:            true,
 						},
-						"class_map_version": schema.StringAttribute{
+						"class_map_version": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Class map version").String,
 							Optional:            true,
 						},
@@ -141,10 +141,15 @@ func (r *RewriteRulePolicyDefinitionResource) Create(ctx context.Context, req re
 }
 
 func (r *RewriteRulePolicyDefinitionResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state RewriteRule
+	var state, oldState RewriteRule
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	diags = req.State.Get(ctx, &oldState)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -162,6 +167,7 @@ func (r *RewriteRulePolicyDefinitionResource) Read(ctx context.Context, req reso
 	}
 
 	state.fromBody(ctx, res)
+	state.updateVersions(ctx, oldState)
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Read finished successfully", state.Name.ValueString()))
 

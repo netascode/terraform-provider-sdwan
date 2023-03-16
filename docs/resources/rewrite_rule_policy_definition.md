@@ -46,7 +46,7 @@ resource "sdwan_rewrite_rule_policy_definition" "example" {
 
 Required:
 
-- `class_map_id` (String) Class map IP
+- `class_map_id` (String) Class map ID
 - `dscp` (Number) DSCP
   - Range: `0`-`63`
 - `priority` (String) Priority
@@ -54,7 +54,7 @@ Required:
 
 Optional:
 
-- `class_map_version` (String) Class map version
+- `class_map_version` (Number) Class map version
 - `layer2cos` (Number) Layer2 CoS
   - Range: `0`-`7`
 

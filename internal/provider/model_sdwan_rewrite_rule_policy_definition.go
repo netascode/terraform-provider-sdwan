@@ -21,7 +21,7 @@ type RewriteRule struct {
 
 type RewriteRuleRules struct {
 	ClassMapId      types.String `tfsdk:"class_map_id"`
-	ClassMapVersion types.String `tfsdk:"class_map_version"`
+	ClassMapVersion types.Int64  `tfsdk:"class_map_version"`
 	Priority        types.String `tfsdk:"priority"`
 	Dscp            types.Int64  `tfsdk:"dscp"`
 	Layer2cos       types.Int64  `tfsdk:"layer2cos"`
@@ -97,5 +97,21 @@ func (data *RewriteRule) fromBody(ctx context.Context, res gjson.Result) {
 			data.Rules = append(data.Rules, item)
 			return true
 		})
+	}
+}
+
+func (data *RewriteRule) getClassMapVersion(ctx context.Context, id string) types.Int64 {
+	for _, item := range data.Rules {
+		if item.ClassMapId.ValueString() == id {
+			return item.ClassMapVersion
+		}
+	}
+	return types.Int64Null()
+}
+
+func (data *RewriteRule) updateVersions(ctx context.Context, state RewriteRule) {
+	for r := range data.Rules {
+		id := data.Rules[r].ClassMapId.ValueString()
+		data.Rules[r].ClassMapVersion = state.getClassMapVersion(ctx, id)
 	}
 }

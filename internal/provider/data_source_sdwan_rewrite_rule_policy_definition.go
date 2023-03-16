@@ -58,10 +58,10 @@ func (d *RewriteRulePolicyDefinitionDataSource) Schema(ctx context.Context, req 
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: "Class map IP",
+							MarkdownDescription: "Class map ID",
 							Computed:            true,
 						},
-						"class_map_version": schema.StringAttribute{
+						"class_map_version": schema.Int64Attribute{
 							MarkdownDescription: "Class map version",
 							Computed:            true,
 						},

@@ -40,8 +40,8 @@ Read-Only:
 - `bandwidth_percent` (Number) Bandwidth percent
 - `buffer_percent` (Number) Buffer percent
 - `burst` (Number) Burst size
-- `class_map_id` (String) Class map IP
-- `class_map_version` (String) Class map version
+- `class_map_id` (String) Class map ID
+- `class_map_version` (Number) Class map version
 - `drop_type` (String) Drop type
 - `queue` (Number) Queue number
 - `scheduling_type` (String) Scheduling type

@@ -74,10 +74,10 @@ func (r *QoSMapPolicyDefinitionResource) Schema(ctx context.Context, req resourc
 							},
 						},
 						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Class map IP").String,
+							MarkdownDescription: helpers.NewAttributeDescription("Class map ID").String,
 							Required:            true,
 						},
-						"class_map_version": schema.StringAttribute{
+						"class_map_version": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Class map version").String,
 							Optional:            true,
 						},
@@ -162,10 +162,15 @@ func (r *QoSMapPolicyDefinitionResource) Create(ctx context.Context, req resourc
 }
 
 func (r *QoSMapPolicyDefinitionResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var state QoSMap
+	var state, oldState QoSMap
 
 	// Read state
 	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	diags = req.State.Get(ctx, &oldState)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -183,6 +188,7 @@ func (r *QoSMapPolicyDefinitionResource) Read(ctx context.Context, req resource.
 	}
 
 	state.fromBody(ctx, res)
+	state.updateVersions(ctx, oldState)
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Read finished successfully", state.Name.ValueString()))
 

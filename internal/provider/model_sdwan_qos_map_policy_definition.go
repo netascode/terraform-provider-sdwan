@@ -22,7 +22,7 @@ type QoSMap struct {
 type QoSMapQosSchedulers struct {
 	Queue            types.Int64  `tfsdk:"queue"`
 	ClassMapId       types.String `tfsdk:"class_map_id"`
-	ClassMapVersion  types.String `tfsdk:"class_map_version"`
+	ClassMapVersion  types.Int64  `tfsdk:"class_map_version"`
 	BandwidthPercent types.Int64  `tfsdk:"bandwidth_percent"`
 	BufferPercent    types.Int64  `tfsdk:"buffer_percent"`
 	Burst            types.Int64  `tfsdk:"burst"`
@@ -124,5 +124,21 @@ func (data *QoSMap) fromBody(ctx context.Context, res gjson.Result) {
 			data.QosSchedulers = append(data.QosSchedulers, item)
 			return true
 		})
+	}
+}
+
+func (data *QoSMap) getClassMapVersion(ctx context.Context, queue int64) types.Int64 {
+	for _, item := range data.QosSchedulers {
+		if item.Queue.ValueInt64() == queue {
+			return item.ClassMapVersion
+		}
+	}
+	return types.Int64Null()
+}
+
+func (data *QoSMap) updateVersions(ctx context.Context, state QoSMap) {
+	for qs := range data.QosSchedulers {
+		queue := data.QosSchedulers[qs].Queue.ValueInt64()
+		data.QosSchedulers[qs].ClassMapVersion = state.getClassMapVersion(ctx, queue)
 	}
 }

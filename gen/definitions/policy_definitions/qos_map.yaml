@@ -2,7 +2,7 @@
 name: QoS Map
 type: qosMap
 root_element: definition
-skip_templates: [data_source_test.go, resource_test.go]
+skip_templates: [data_source_test.go, resource_test.go, model.go, resource.go]
 attributes:
   - model_name: qosSchedulers
     tf_name: qos_schedulers
@@ -22,11 +22,11 @@ attributes:
         tf_name: class_map_id
         type: String
         mandatory: true
-        description: Class map IP
+        description: Class map ID
         example: 2081c2f4-3f9f-4fee-8078-dcc8904e368d
       - tf_name: class_map_version
         tf_only: true
-        type: String
+        type: Int64
         description: Class map version
       - model_name: bandwidthPercent
         tf_name: bandwidth_percent
