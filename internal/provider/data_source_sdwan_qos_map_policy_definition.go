@@ -62,7 +62,11 @@ func (d *QoSMapPolicyDefinitionDataSource) Schema(ctx context.Context, req datas
 							Computed:            true,
 						},
 						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: "Class map",
+							MarkdownDescription: "Class map IP",
+							Computed:            true,
+						},
+						"class_map_version": schema.StringAttribute{
+							MarkdownDescription: "Class map version",
 							Computed:            true,
 						},
 						"bandwidth_percent": schema.Int64Attribute{

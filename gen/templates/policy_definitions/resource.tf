@@ -2,17 +2,17 @@ resource "sdwan_{{snakeCase .Name}}_policy_definition" "example" {
 	name = "Example"
   description = "My description"
 {{- range  .Attributes}}
-{{- if and (ne .ExcludeTest true) (ne .ExcludeExample true)}}
+{{- if and (not .ExcludeTest) (not .ExcludeExample) (not .TfOnly)}}
 {{- if eq .Type "List"}}
   {{.TfName}} = [
     {
       {{- range  .Attributes}}
-      {{- if and (ne .ExcludeTest true) (ne .ExcludeExample true)}}
+      {{- if and (not .ExcludeTest) (not .ExcludeExample) (not .TfOnly)}}
       {{- if eq .Type "List"}}
         {{.TfName}} = [
           {
             {{- range  .Attributes}}
-            {{- if and (ne .ExcludeTest true) (ne .ExcludeExample true)}}
+            {{- if and (not .ExcludeTest) (not .ExcludeExample) (not .TfOnly)}}
             {{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
             {{- end}}
             {{- end}}

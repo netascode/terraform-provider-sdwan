@@ -53,7 +53,7 @@ Required:
   - Range: `0`-`100`
 - `buffer_percent` (Number) Buffer percent
   - Range: `0`-`100`
-- `class_map_id` (String) Class map
+- `class_map_id` (String) Class map IP
 - `drop_type` (String) Drop type
   - Choices: `tail-drop`, `red-drop`
 - `queue` (Number) Queue number
@@ -65,6 +65,7 @@ Optional:
 
 - `burst` (Number) Burst size
   - Range: `5000`-`10000000`
+- `class_map_version` (String) Class map version
 
 ## Import
 

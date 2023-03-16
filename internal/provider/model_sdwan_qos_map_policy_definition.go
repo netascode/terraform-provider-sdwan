@@ -22,6 +22,7 @@ type QoSMap struct {
 type QoSMapQosSchedulers struct {
 	Queue            types.Int64  `tfsdk:"queue"`
 	ClassMapId       types.String `tfsdk:"class_map_id"`
+	ClassMapVersion  types.String `tfsdk:"class_map_version"`
 	BandwidthPercent types.Int64  `tfsdk:"bandwidth_percent"`
 	BufferPercent    types.Int64  `tfsdk:"buffer_percent"`
 	Burst            types.Int64  `tfsdk:"burst"`

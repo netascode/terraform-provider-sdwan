@@ -74,8 +74,12 @@ func (r *QoSMapPolicyDefinitionResource) Schema(ctx context.Context, req resourc
 							},
 						},
 						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Class map").String,
+							MarkdownDescription: helpers.NewAttributeDescription("Class map IP").String,
 							Required:            true,
+						},
+						"class_map_version": schema.StringAttribute{
+							MarkdownDescription: helpers.NewAttributeDescription("Class map version").String,
+							Optional:            true,
 						},
 						"bandwidth_percent": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Bandwidth percent").AddIntegerRangeDescription(0, 100).String,

@@ -22,8 +22,12 @@ attributes:
         tf_name: class_map_id
         type: String
         mandatory: true
-        description: Class map
+        description: Class map IP
         example: 2081c2f4-3f9f-4fee-8078-dcc8904e368d
+      - tf_name: class_map_version
+        tf_only: true
+        type: String
+        description: Class map version
       - model_name: bandwidthPercent
         tf_name: bandwidth_percent
         type: Int64
