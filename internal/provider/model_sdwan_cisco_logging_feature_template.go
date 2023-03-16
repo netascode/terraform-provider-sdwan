@@ -92,6 +92,7 @@ func (data CiscoLogging) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "templateMinVersion", "15.0.0")
 	body, _ = sjson.Set(body, "templateName", data.Name.ValueString())
 	body, _ = sjson.Set(body, "templateType", "cisco_logging")
+	body, _ = sjson.Set(body, "templateDefinition", map[string]interface{}{})
 
 	path := "templateDefinition."
 
