@@ -33,11 +33,8 @@ resource "sdwan_preferred_color_group_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries, only 1 entry supported (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -47,9 +44,12 @@ resource "sdwan_preferred_color_group_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `primary_color_preference` (String) Color or space separated list of colors
+
+Optional:
+
 - `primary_path_preference` (String) Path preference
   - Choices: `direct-path`, `multi-hop-path`, `all-paths`
 - `secondary_color_preference` (String) Color or space separated list of colors

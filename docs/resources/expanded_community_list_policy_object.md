@@ -28,11 +28,8 @@ resource "sdwan_expanded_community_list_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -42,7 +39,7 @@ resource "sdwan_expanded_community_list_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `community` (String) Expanded community value, e.g. `100:1000`
 

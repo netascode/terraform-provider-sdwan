@@ -28,11 +28,8 @@ resource "sdwan_vpn_list_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -42,7 +39,7 @@ resource "sdwan_vpn_list_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `vpn_id` (String) VPN ID or range of VPN IDs e.g., `100` or `200-300`
 

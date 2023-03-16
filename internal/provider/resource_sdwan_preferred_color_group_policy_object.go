@@ -59,12 +59,12 @@ func (r *PreferredColorGroupPolicyObjectResource) Schema(ctx context.Context, re
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries, only 1 entry supported").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"primary_color_preference": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Color or space separated list of colors").String,
-							Optional:            true,
+							Required:            true,
 						},
 						"primary_path_preference": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Path preference").AddStringEnumDescription("direct-path", "multi-hop-path", "all-paths").String,

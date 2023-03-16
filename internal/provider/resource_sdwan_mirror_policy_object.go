@@ -58,16 +58,16 @@ func (r *MirrorPolicyObjectResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries, only 1 entry supported").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"remote_destination_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Remote destination IP").String,
-							Optional:            true,
+							Required:            true,
 						},
 						"source_ip": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Source IP").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

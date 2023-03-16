@@ -29,11 +29,8 @@ resource "sdwan_mirror_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries, only 1 entry supported (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -43,7 +40,7 @@ resource "sdwan_mirror_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `remote_destination_ip` (String) Remote destination IP
 - `source_ip` (String) Source IP

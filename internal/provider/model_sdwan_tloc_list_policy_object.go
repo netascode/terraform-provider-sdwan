@@ -19,10 +19,10 @@ type TLOCList struct {
 }
 
 type TLOCListEntries struct {
+	TlocIp        types.String `tfsdk:"tloc_ip"`
 	Color         types.String `tfsdk:"color"`
 	Encapsulation types.String `tfsdk:"encapsulation"`
 	Preference    types.Int64  `tfsdk:"preference"`
-	TlocIp        types.String `tfsdk:"tloc_ip"`
 }
 
 func (data TLOCList) getType() string {
@@ -37,6 +37,9 @@ func (data TLOCList) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, "entries", []interface{}{})
 		for _, item := range data.Entries {
 			itemBody := ""
+			if !item.TlocIp.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "tloc", item.TlocIp.ValueString())
+			}
 			if !item.Color.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "color", item.Color.ValueString())
 			}
@@ -45,9 +48,6 @@ func (data TLOCList) toBody(ctx context.Context) string {
 			}
 			if !item.Preference.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "preference", fmt.Sprint(item.Preference.ValueInt64()))
-			}
-			if !item.TlocIp.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "tloc", item.TlocIp.ValueString())
 			}
 			body, _ = sjson.SetRaw(body, "entries.-1", itemBody)
 		}
@@ -65,6 +65,11 @@ func (data *TLOCList) fromBody(ctx context.Context, res gjson.Result) {
 		data.Entries = make([]TLOCListEntries, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := TLOCListEntries{}
+			if cValue := v.Get("tloc"); cValue.Exists() {
+				item.TlocIp = types.StringValue(cValue.String())
+			} else {
+				item.TlocIp = types.StringNull()
+			}
 			if cValue := v.Get("color"); cValue.Exists() {
 				item.Color = types.StringValue(cValue.String())
 			} else {
@@ -79,11 +84,6 @@ func (data *TLOCList) fromBody(ctx context.Context, res gjson.Result) {
 				item.Preference = types.Int64Value(cValue.Int())
 			} else {
 				item.Preference = types.Int64Null()
-			}
-			if cValue := v.Get("tloc"); cValue.Exists() {
-				item.TlocIp = types.StringValue(cValue.String())
-			} else {
-				item.TlocIp = types.StringNull()
 			}
 			data.Entries = append(data.Entries, item)
 			return true

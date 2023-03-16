@@ -28,11 +28,8 @@ resource "sdwan_color_list_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -42,7 +39,7 @@ resource "sdwan_color_list_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `color` (String) Color
   - Choices: `default`, `3g`, `biz-internet`, `blue`, `bronze`, `custom1`, `custom2`, `custom3`, `gold`, `green`, `lte`, `metro-ethernet`, `mpls`, `private1`, `private2`, `private3`, `private4`, `private5`, `private6`, `public-internet`, `red`, `silver`

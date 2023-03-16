@@ -58,12 +58,12 @@ func (r *DataIPv6PrefixListPolicyObjectResource) Schema(ctx context.Context, req
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"prefix": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("IP prefix list entry, e.g. `2001:0:0:1::/64`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

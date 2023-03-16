@@ -4,11 +4,19 @@ type: tloc
 attributes:
   - model_name: entries
     type: List
+    mandatory: true
     min_list: 1
     description: List of entries
     attributes:
+      - model_name: tloc
+        tf_name: tloc_ip
+        type: String
+        mandatory: true
+        description: TLOC IP
+        example: 1.1.1.2
       - model_name: color
         type: String
+        mandatory: true
         enum_values:
           [
             default,
@@ -39,6 +47,7 @@ attributes:
       - model_name: encap
         tf_name: encapsulation
         type: String
+        mandatory: true
         enum_values: [ipsec, gre]
         description: Encapsulation
         example: gre
@@ -49,8 +58,3 @@ attributes:
         max_int: 4294967295
         description: Preference
         example: 10
-      - model_name: tloc
-        tf_name: tloc_ip
-        type: String
-        description: TLOC IP
-        example: 1.1.1.2

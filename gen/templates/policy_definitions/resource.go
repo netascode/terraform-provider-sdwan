@@ -78,7 +78,11 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 					.AddDefaultValueDescription("{{.DefaultValue}}")
 					{{- end -}}
 					.String,
+				{{- if .Mandatory}}
+				Required:            true,
+				{{- else}}
 				Optional:            true,
+				{{- end}}
 				{{- if len .EnumValues}}
 				Validators: []validator.String{
 					stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),
@@ -120,7 +124,11 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 								.AddDefaultValueDescription("{{.DefaultValue}}")
 								{{- end -}}
 								.String,
+							{{- if .Mandatory}}
+							Required:            true,
+							{{- else}}
 							Optional:            true,
+							{{- end}}
 							{{- if len .EnumValues}}
 							Validators: []validator.String{
 								stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),
@@ -162,7 +170,11 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 											.AddDefaultValueDescription("{{.DefaultValue}}")
 											{{- end -}}
 											.String,
+										{{- if .Mandatory}}
+										Required:            true,
+										{{- else}}
 										Optional:            true,
+										{{- end}}
 										{{- if len .EnumValues}}
 										Validators: []validator.String{
 											stringvalidator.OneOf({{range .EnumValues}}"{{.}}", {{end}}),

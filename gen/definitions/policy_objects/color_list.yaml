@@ -4,11 +4,13 @@ type: color
 attributes:
   - model_name: entries
     type: List
+    mandatory: true
     min_list: 1
     description: List of entries
     attributes:
       - model_name: color
         type: String
+        mandatory: true
         enum_values:
           [
             default,

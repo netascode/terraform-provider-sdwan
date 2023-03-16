@@ -60,19 +60,23 @@ func (r *TLOCListPolicyObjectResource) Schema(ctx context.Context, req resource.
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
+						"tloc_ip": schema.StringAttribute{
+							MarkdownDescription: helpers.NewAttributeDescription("TLOC IP").String,
+							Required:            true,
+						},
 						"color": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Color").AddStringEnumDescription("default", "3g", "biz-internet", "blue", "bronze", "custom1", "custom2", "custom3", "gold", "green", "lte", "metro-ethernet", "mpls", "private1", "private2", "private3", "private4", "private5", "private6", "public-internet", "red", "silver").String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("default", "3g", "biz-internet", "blue", "bronze", "custom1", "custom2", "custom3", "gold", "green", "lte", "metro-ethernet", "mpls", "private1", "private2", "private3", "private4", "private5", "private6", "public-internet", "red", "silver"),
 							},
 						},
 						"encapsulation": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Encapsulation").AddStringEnumDescription("ipsec", "gre").String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("ipsec", "gre"),
 							},
@@ -83,10 +87,6 @@ func (r *TLOCListPolicyObjectResource) Schema(ctx context.Context, req resource.
 							Validators: []validator.Int64{
 								int64validator.Between(0, 4294967295),
 							},
-						},
-						"tloc_ip": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("TLOC IP").String,
-							Optional:            true,
 						},
 					},
 				},

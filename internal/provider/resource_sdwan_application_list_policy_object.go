@@ -58,7 +58,7 @@ func (r *ApplicationListPolicyObjectResource) Schema(ctx context.Context, req re
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"application": schema.StringAttribute{

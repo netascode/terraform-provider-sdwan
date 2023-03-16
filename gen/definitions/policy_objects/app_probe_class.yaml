@@ -4,6 +4,7 @@ type: appProbe
 attributes:
   - model_name: entries
     type: List
+    mandatory: true
     min_list: 1
     max_list: 1
     description: List of entries, only 1 entry supported
@@ -11,15 +12,18 @@ attributes:
       - model_name: forwardingClass
         tf_name: forwarding_class
         type: String
+        mandatory: true
         description: Forwarding class name
         example: FC1
       - model_name: map
         tf_name: mappings
         type: List
+        mandatory: true
         description: Color mappings
         attributes:
           - model_name: color
             type: String
+            mandatory: true
             enum_values:
               [
                 default,

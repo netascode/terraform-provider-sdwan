@@ -34,11 +34,8 @@ resource "sdwan_app_probe_class_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries, only 1 entry supported (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -48,7 +45,7 @@ resource "sdwan_app_probe_class_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `forwarding_class` (String) Forwarding class name
 - `mappings` (Attributes List) Color mappings (see [below for nested schema](#nestedatt--entries--mappings))
@@ -56,10 +53,13 @@ Optional:
 <a id="nestedatt--entries--mappings"></a>
 ### Nested Schema for `entries.mappings`
 
-Optional:
+Required:
 
 - `color` (String) Color
   - Choices: `default`, `3g`, `biz-internet`, `blue`, `bronze`, `custom1`, `custom2`, `custom3`, `gold`, `green`, `lte`, `metro-ethernet`, `mpls`, `private1`, `private2`, `private3`, `private4`, `private5`, `private6`, `public-internet`, `red`, `silver`
+
+Optional:
+
 - `dscp` (Number) DSCP
   - Range: `0`-`63`
 

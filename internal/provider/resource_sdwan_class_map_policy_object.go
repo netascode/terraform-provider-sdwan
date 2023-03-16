@@ -59,12 +59,12 @@ func (r *ClassMapPolicyObjectResource) Schema(ctx context.Context, req resource.
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries, only 1 entry supported").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"queue": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Queue").AddIntegerRangeDescription(0, 7).String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 7),
 							},

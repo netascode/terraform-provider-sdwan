@@ -58,12 +58,12 @@ func (r *VPNListPolicyObjectResource) Schema(ctx context.Context, req resource.S
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"vpn_id": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("VPN ID or range of VPN IDs e.g., `100` or `200-300`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

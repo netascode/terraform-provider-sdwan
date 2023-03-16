@@ -58,12 +58,12 @@ func (r *ExpandedCommunityListPolicyObjectResource) Schema(ctx context.Context, 
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"community": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Expanded community value, e.g. `100:1000`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

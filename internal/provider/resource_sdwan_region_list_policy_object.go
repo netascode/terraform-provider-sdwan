@@ -58,12 +58,12 @@ func (r *RegionListPolicyObjectResource) Schema(ctx context.Context, req resourc
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"region_id": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Region ID or range of Region IDs e.g., `2` or `3-6`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

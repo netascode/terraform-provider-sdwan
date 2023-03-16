@@ -58,12 +58,12 @@ func (r *SiteListPolicyObjectResource) Schema(ctx context.Context, req resource.
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"site_id": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Site ID or range of Site IDs e.g., `100` or `200-300`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

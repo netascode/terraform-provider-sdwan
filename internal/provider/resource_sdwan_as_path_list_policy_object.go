@@ -58,12 +58,12 @@ func (r *ASPathListPolicyObjectResource) Schema(ctx context.Context, req resourc
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"as_path": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Regular expression to match the BGP AS paths e.g., `^1239_[0-9]*$`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

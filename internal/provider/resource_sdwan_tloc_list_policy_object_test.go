@@ -16,10 +16,10 @@ func TestAccSdwanTLOCListPolicyObject(t *testing.T) {
 			{
 				Config: testAccSdwanTLOCListPolicyObjectConfig_all(),
 				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("sdwan_tloc_list_policy_object.test", "entries.0.tloc_ip", "1.1.1.2"),
 					resource.TestCheckResourceAttr("sdwan_tloc_list_policy_object.test", "entries.0.color", "blue"),
 					resource.TestCheckResourceAttr("sdwan_tloc_list_policy_object.test", "entries.0.encapsulation", "gre"),
 					resource.TestCheckResourceAttr("sdwan_tloc_list_policy_object.test", "entries.0.preference", "10"),
-					resource.TestCheckResourceAttr("sdwan_tloc_list_policy_object.test", "entries.0.tloc_ip", "1.1.1.2"),
 				),
 			},
 		},
@@ -31,10 +31,10 @@ func testAccSdwanTLOCListPolicyObjectConfig_all() string {
 	resource "sdwan_tloc_list_policy_object" "test" {
 		name = "TF_TEST_ALL"
 		entries = [{
+			tloc_ip = "1.1.1.2"
 			color = "blue"
 			encapsulation = "gre"
 			preference = 10
-			tloc_ip = "1.1.1.2"
 		}]
 	}
 	`

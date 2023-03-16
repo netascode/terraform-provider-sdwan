@@ -4,6 +4,7 @@ type: app
 attributes:
   - model_name: entries
     type: List
+    mandatory: true
     min_list: 1
     description: List of entries
     attributes:

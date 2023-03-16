@@ -58,12 +58,12 @@ func (r *StandardCommunityListPolicyObjectResource) Schema(ctx context.Context, 
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"community": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Standard community value, e.g. `100:1000`, `internet`, `local-AS`, `no-advertise` or `no-export`").String,
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},

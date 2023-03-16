@@ -30,11 +30,8 @@ resource "sdwan_ipv4_prefix_list_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -44,11 +41,14 @@ resource "sdwan_ipv4_prefix_list_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
+Required:
+
+- `prefix` (String) IP prefix list entry e.g., `10.0.0.0/12`
+
 Optional:
 
 - `ge` (Number) Greater equal
 - `le` (Number) Lesser equal
-- `prefix` (String) IP prefix list entry e.g., `10.0.0.0/12`
 
 ## Import
 

@@ -28,11 +28,8 @@ resource "sdwan_region_list_policy_object" "example" {
 
 ### Required
 
-- `name` (String) The name of the policy object
-
-### Optional
-
 - `entries` (Attributes List) List of entries (see [below for nested schema](#nestedatt--entries))
+- `name` (String) The name of the policy object
 
 ### Read-Only
 
@@ -42,7 +39,7 @@ resource "sdwan_region_list_policy_object" "example" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Optional:
+Required:
 
 - `region_id` (String) Region ID or range of Region IDs e.g., `2` or `3-6`
 

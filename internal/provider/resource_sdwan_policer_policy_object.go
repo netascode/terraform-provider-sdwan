@@ -60,26 +60,26 @@ func (r *PolicerPolicyObjectResource) Schema(ctx context.Context, req resource.S
 			},
 			"entries": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of entries, only 1 entry supported").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"burst": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Burst in bytes").AddIntegerRangeDescription(15000, 10000000).String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(15000, 10000000),
 							},
 						},
 						"exceed_action": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Exceed action").AddStringEnumDescription("drop", "remark").String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("drop", "remark"),
 							},
 						},
 						"rate": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Rate in bps").AddIntegerRangeDescription(8, 100000000000).String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(8, 100000000000),
 							},

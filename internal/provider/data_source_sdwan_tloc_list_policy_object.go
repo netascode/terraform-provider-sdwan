@@ -53,6 +53,10 @@ func (d *TLOCListPolicyObjectDataSource) Schema(ctx context.Context, req datasou
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
+						"tloc_ip": schema.StringAttribute{
+							MarkdownDescription: "TLOC IP",
+							Computed:            true,
+						},
 						"color": schema.StringAttribute{
 							MarkdownDescription: "Color",
 							Computed:            true,
@@ -63,10 +67,6 @@ func (d *TLOCListPolicyObjectDataSource) Schema(ctx context.Context, req datasou
 						},
 						"preference": schema.Int64Attribute{
 							MarkdownDescription: "Preference",
-							Computed:            true,
-						},
-						"tloc_ip": schema.StringAttribute{
-							MarkdownDescription: "TLOC IP",
 							Computed:            true,
 						},
 					},

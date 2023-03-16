@@ -4,6 +4,7 @@ type: preferredColorGroup
 attributes:
   - model_name: entries
     type: List
+    mandatory: true
     min_list: 1
     max_list: 1
     description: List of entries, only 1 entry supported
@@ -12,6 +13,7 @@ attributes:
         data_path: [primaryPreference]
         tf_name: primary_color_preference
         type: String
+        mandatory: true
         description: Color or space separated list of colors
         example: blue bronze
       - model_name: pathPreference
