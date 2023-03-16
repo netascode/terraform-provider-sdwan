@@ -20,12 +20,12 @@ type QoSMap struct {
 }
 
 type QoSMapQosSchedulers struct {
+	Queue            types.Int64  `tfsdk:"queue"`
+	ClassMapId       types.String `tfsdk:"class_map_id"`
 	BandwidthPercent types.Int64  `tfsdk:"bandwidth_percent"`
 	BufferPercent    types.Int64  `tfsdk:"buffer_percent"`
 	Burst            types.Int64  `tfsdk:"burst"`
-	ClassMapId       types.String `tfsdk:"class_map_id"`
 	DropType         types.String `tfsdk:"drop_type"`
-	Queue            types.Int64  `tfsdk:"queue"`
 	SchedulingType   types.String `tfsdk:"scheduling_type"`
 }
 
@@ -42,6 +42,12 @@ func (data QoSMap) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qosSchedulers", []interface{}{})
 		for _, item := range data.QosSchedulers {
 			itemBody := ""
+			if !item.Queue.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "queue", fmt.Sprint(item.Queue.ValueInt64()))
+			}
+			if !item.ClassMapId.IsNull() {
+				itemBody, _ = sjson.Set(itemBody, "classMapRef", item.ClassMapId.ValueString())
+			}
 			if !item.BandwidthPercent.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "bandwidthPercent", fmt.Sprint(item.BandwidthPercent.ValueInt64()))
 			}
@@ -51,14 +57,8 @@ func (data QoSMap) toBody(ctx context.Context) string {
 			if !item.Burst.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "burst", fmt.Sprint(item.Burst.ValueInt64()))
 			}
-			if !item.ClassMapId.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "classMapRef", item.ClassMapId.ValueString())
-			}
 			if !item.DropType.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "drops", item.DropType.ValueString())
-			}
-			if !item.Queue.IsNull() {
-				itemBody, _ = sjson.Set(itemBody, "queue", fmt.Sprint(item.Queue.ValueInt64()))
 			}
 			if !item.SchedulingType.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "scheduling", item.SchedulingType.ValueString())
@@ -85,6 +85,16 @@ func (data *QoSMap) fromBody(ctx context.Context, res gjson.Result) {
 		data.QosSchedulers = make([]QoSMapQosSchedulers, 0)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := QoSMapQosSchedulers{}
+			if cValue := v.Get("queue"); cValue.Exists() {
+				item.Queue = types.Int64Value(cValue.Int())
+			} else {
+				item.Queue = types.Int64Null()
+			}
+			if cValue := v.Get("classMapRef"); cValue.Exists() {
+				item.ClassMapId = types.StringValue(cValue.String())
+			} else {
+				item.ClassMapId = types.StringNull()
+			}
 			if cValue := v.Get("bandwidthPercent"); cValue.Exists() {
 				item.BandwidthPercent = types.Int64Value(cValue.Int())
 			} else {
@@ -100,20 +110,10 @@ func (data *QoSMap) fromBody(ctx context.Context, res gjson.Result) {
 			} else {
 				item.Burst = types.Int64Null()
 			}
-			if cValue := v.Get("classMapRef"); cValue.Exists() {
-				item.ClassMapId = types.StringValue(cValue.String())
-			} else {
-				item.ClassMapId = types.StringNull()
-			}
 			if cValue := v.Get("drops"); cValue.Exists() {
 				item.DropType = types.StringValue(cValue.String())
 			} else {
 				item.DropType = types.StringNull()
-			}
-			if cValue := v.Get("queue"); cValue.Exists() {
-				item.Queue = types.Int64Value(cValue.Int())
-			} else {
-				item.Queue = types.Int64Null()
 			}
 			if cValue := v.Get("scheduling"); cValue.Exists() {
 				item.SchedulingType = types.StringValue(cValue.String())

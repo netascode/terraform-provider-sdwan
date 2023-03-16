@@ -18,12 +18,12 @@ resource "sdwan_qos_map_policy_definition" "example" {
   description = "My description"
   qos_schedulers = [
     {
+      queue             = 6
+      class_map_id      = "2081c2f4-3f9f-4fee-8078-dcc8904e368d"
       bandwidth_percent = 10
       buffer_percent    = 10
       burst             = 100000
-      class_map_id      = "2081c2f4-3f9f-4fee-8078-dcc8904e368d"
       drop_type         = "red-drop"
-      queue             = 6
       scheduling_type   = "wrr"
     }
   ]
@@ -37,9 +37,6 @@ resource "sdwan_qos_map_policy_definition" "example" {
 
 - `description` (String) The description of the policy definition
 - `name` (String) The name of the policy definition
-
-### Optional
-
 - `qos_schedulers` (Attributes List) List of QoS schedulers (see [below for nested schema](#nestedatt--qos_schedulers))
 
 ### Read-Only
@@ -50,14 +47,12 @@ resource "sdwan_qos_map_policy_definition" "example" {
 <a id="nestedatt--qos_schedulers"></a>
 ### Nested Schema for `qos_schedulers`
 
-Optional:
+Required:
 
 - `bandwidth_percent` (Number) Bandwidth percent
   - Range: `0`-`100`
 - `buffer_percent` (Number) Buffer percent
   - Range: `0`-`100`
-- `burst` (Number) Burst size
-  - Range: `5000`-`10000000`
 - `class_map_id` (String) Class map
 - `drop_type` (String) Drop type
   - Choices: `tail-drop`, `red-drop`
@@ -65,6 +60,11 @@ Optional:
   - Range: `0`-`7`
 - `scheduling_type` (String) Scheduling type
   - Choices: `llq`, `wrr`
+
+Optional:
+
+- `burst` (Number) Burst size
+  - Range: `5000`-`10000000`
 
 ## Import
 

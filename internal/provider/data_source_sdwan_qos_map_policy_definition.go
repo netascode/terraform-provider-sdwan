@@ -57,6 +57,14 @@ func (d *QoSMapPolicyDefinitionDataSource) Schema(ctx context.Context, req datas
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
+						"queue": schema.Int64Attribute{
+							MarkdownDescription: "Queue number",
+							Computed:            true,
+						},
+						"class_map_id": schema.StringAttribute{
+							MarkdownDescription: "Class map",
+							Computed:            true,
+						},
 						"bandwidth_percent": schema.Int64Attribute{
 							MarkdownDescription: "Bandwidth percent",
 							Computed:            true,
@@ -69,16 +77,8 @@ func (d *QoSMapPolicyDefinitionDataSource) Schema(ctx context.Context, req datas
 							MarkdownDescription: "Burst size",
 							Computed:            true,
 						},
-						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: "Class map",
-							Computed:            true,
-						},
 						"drop_type": schema.StringAttribute{
 							MarkdownDescription: "Drop type",
-							Computed:            true,
-						},
-						"queue": schema.Int64Attribute{
-							MarkdownDescription: "Queue number",
 							Computed:            true,
 						},
 						"scheduling_type": schema.StringAttribute{

@@ -63,19 +63,30 @@ func (r *QoSMapPolicyDefinitionResource) Schema(ctx context.Context, req resourc
 			},
 			"qos_schedulers": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of QoS schedulers").String,
-				Optional:            true,
+				Required:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
+						"queue": schema.Int64Attribute{
+							MarkdownDescription: helpers.NewAttributeDescription("Queue number").AddIntegerRangeDescription(0, 7).String,
+							Required:            true,
+							Validators: []validator.Int64{
+								int64validator.Between(0, 7),
+							},
+						},
+						"class_map_id": schema.StringAttribute{
+							MarkdownDescription: helpers.NewAttributeDescription("Class map").String,
+							Required:            true,
+						},
 						"bandwidth_percent": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Bandwidth percent").AddIntegerRangeDescription(0, 100).String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 100),
 							},
 						},
 						"buffer_percent": schema.Int64Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Buffer percent").AddIntegerRangeDescription(0, 100).String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.Int64{
 								int64validator.Between(0, 100),
 							},
@@ -87,27 +98,16 @@ func (r *QoSMapPolicyDefinitionResource) Schema(ctx context.Context, req resourc
 								int64validator.Between(5000, 10000000),
 							},
 						},
-						"class_map_id": schema.StringAttribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Class map").String,
-							Optional:            true,
-						},
 						"drop_type": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Drop type").AddStringEnumDescription("tail-drop", "red-drop").String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("tail-drop", "red-drop"),
 							},
 						},
-						"queue": schema.Int64Attribute{
-							MarkdownDescription: helpers.NewAttributeDescription("Queue number").AddIntegerRangeDescription(0, 7).String,
-							Optional:            true,
-							Validators: []validator.Int64{
-								int64validator.Between(0, 7),
-							},
-						},
 						"scheduling_type": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Scheduling type").AddStringEnumDescription("llq", "wrr").String,
-							Optional:            true,
+							Required:            true,
 							Validators: []validator.String{
 								stringvalidator.OneOf("llq", "wrr"),
 							},
