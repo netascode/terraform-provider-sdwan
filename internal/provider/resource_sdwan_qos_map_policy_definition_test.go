@@ -44,7 +44,7 @@ func testAccSdwanQoSMapPolicyDefinitionConfig_all() string {
 			bandwidth_percent = 10
 			buffer_percent = 10
 			burst = 100000
-			class_map = sdwan_class_map_policy_object.test.id
+			class_map_id = sdwan_class_map_policy_object.test.id
 			drop_type = "red-drop"
 			queue = 6
 			scheduling_type = "wrr"
