@@ -30,7 +30,7 @@ data "sdwan_feature_device_template" "example" {
 - `description` (String) The description of the feature template
 - `device_role` (String) The device role
 - `device_type` (String) The device type (e.g., `vedge-ISR-4331`)
-- `general_templates` (Attributes List) General templates (see [below for nested schema](#nestedatt--general_templates))
+- `general_templates` (Attributes Set) General templates (see [below for nested schema](#nestedatt--general_templates))
 - `name` (String) The name of the device template
 - `policy_id` (String) The policy ID
 - `security_policy_id` (String) The security policy ID
@@ -42,7 +42,7 @@ data "sdwan_feature_device_template" "example" {
 Read-Only:
 
 - `id` (String) Feature template ID
-- `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
+- `sub_templates` (Attributes Set) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
 - `type` (String) Feature template type
 - `version` (Number) The version of the feature template
 
@@ -52,7 +52,7 @@ Read-Only:
 Read-Only:
 
 - `id` (String) Feature template ID
-- `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
+- `sub_templates` (Attributes Set) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
 - `type` (String) Feature template type
 - `version` (Number) The version of the feature template
 

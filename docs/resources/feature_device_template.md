@@ -37,7 +37,7 @@ resource "sdwan_feature_device_template" "test" {
 
 - `device_role` (String) The device role
   - Choices: `sdwan-edge`, `service-node`
-- `general_templates` (Attributes List) General templates (see [below for nested schema](#nestedatt--general_templates))
+- `general_templates` (Attributes Set) General templates (see [below for nested schema](#nestedatt--general_templates))
 - `policy_id` (String) The policy ID
 - `security_policy_id` (String) The security policy ID
 
@@ -56,7 +56,7 @@ Required:
 
 Optional:
 
-- `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
+- `sub_templates` (Attributes Set) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates))
 - `version` (Number) Feature template version
 
 <a id="nestedatt--general_templates--sub_templates"></a>
@@ -69,7 +69,7 @@ Required:
 
 Optional:
 
-- `sub_templates` (Attributes List) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
+- `sub_templates` (Attributes Set) Sub templates (see [below for nested schema](#nestedatt--general_templates--sub_templates--sub_templates))
 - `version` (Number) Feature template version
 
 <a id="nestedatt--general_templates--sub_templates--sub_templates"></a>

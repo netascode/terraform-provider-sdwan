@@ -66,7 +66,7 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 				MarkdownDescription: "The security policy ID",
 				Computed:            true,
 			},
-			"general_templates": schema.ListNestedAttribute{
+			"general_templates": schema.SetNestedAttribute{
 				MarkdownDescription: "General templates",
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
@@ -83,7 +83,7 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 							MarkdownDescription: "Feature template type",
 							Computed:            true,
 						},
-						"sub_templates": schema.ListNestedAttribute{
+						"sub_templates": schema.SetNestedAttribute{
 							MarkdownDescription: "Sub templates",
 							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
@@ -100,7 +100,7 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 										MarkdownDescription: "Feature template type",
 										Computed:            true,
 									},
-									"sub_templates": schema.ListNestedAttribute{
+									"sub_templates": schema.SetNestedAttribute{
 										MarkdownDescription: "Sub templates",
 										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
