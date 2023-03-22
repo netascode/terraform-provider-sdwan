@@ -33,7 +33,7 @@ func (d *QoSMapPolicyDefinitionDataSource) Metadata(_ context.Context, req datas
 func (d *QoSMapPolicyDefinitionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the QoS Map policy object.",
+		MarkdownDescription: "This data source can read the QoS Map policy definition.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{

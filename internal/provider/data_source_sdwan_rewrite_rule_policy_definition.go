@@ -33,7 +33,7 @@ func (d *RewriteRulePolicyDefinitionDataSource) Metadata(_ context.Context, req 
 func (d *RewriteRulePolicyDefinitionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read the Rewrite Rule policy object.",
+		MarkdownDescription: "This data source can read the Rewrite Rule policy definition.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{

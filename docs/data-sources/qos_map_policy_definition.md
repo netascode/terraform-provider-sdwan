@@ -3,12 +3,12 @@
 page_title: "sdwan_qos_map_policy_definition Data Source - terraform-provider-sdwan"
 subcategory: "Localized Policies"
 description: |-
-  This data source can read the QoS Map policy object.
+  This data source can read the QoS Map policy definition.
 ---
 
 # sdwan_qos_map_policy_definition (Data Source)
 
-This data source can read the QoS Map policy object.
+This data source can read the QoS Map policy definition.
 
 ## Example Usage
 

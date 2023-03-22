@@ -63,6 +63,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 				Required:            true,
 			},
 			{{- range  .Attributes}}
+			{{- if not .Value}}
 			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 					{{- if len .EnumValues -}}
@@ -109,6 +110,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						{{- range  .Attributes}}
+						{{- if not .Value}}
 						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 								{{- if len .EnumValues -}}
@@ -155,6 +157,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									{{- range  .Attributes}}
+									{{- if not .Value}}
 									"{{.TfName}}": schema.{{.Type}}Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 											{{- if len .EnumValues -}}
@@ -199,6 +202,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 										{{- end}}
 									},
 									{{- end}}
+									{{- end}}
 								},
 							},
 							{{- if or (ne .MinList 0) (ne .MaxList 0)}}
@@ -214,6 +218,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 							{{- end}}
 						},
 						{{- end}}
+						{{- end}}
 					},
 				},
 				{{- if or (ne .MinList 0) (ne .MaxList 0)}}
@@ -228,6 +233,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 				{{- end}}
 				{{- end}}
 			},
+			{{- end}}
 			{{- end}}
 		},
 	}

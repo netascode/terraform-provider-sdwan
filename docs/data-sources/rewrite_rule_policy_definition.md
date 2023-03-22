@@ -3,12 +3,12 @@
 page_title: "sdwan_rewrite_rule_policy_definition Data Source - terraform-provider-sdwan"
 subcategory: "Localized Policies"
 description: |-
-  This data source can read the Rewrite Rule policy object.
+  This data source can read the Rewrite Rule policy definition.
 ---
 
 # sdwan_rewrite_rule_policy_definition (Data Source)
 
-This data source can read the Rewrite Rule policy object.
+This data source can read the Rewrite Rule policy definition.
 
 ## Example Usage
 

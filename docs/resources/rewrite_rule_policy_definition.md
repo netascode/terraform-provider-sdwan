@@ -3,12 +3,12 @@
 page_title: "sdwan_rewrite_rule_policy_definition Resource - terraform-provider-sdwan"
 subcategory: "Localized Policies"
 description: |-
-  This resource can manage a Rewrite Rule policy object.
+  This resource can manage a Rewrite Rule policy definition.
 ---
 
 # sdwan_rewrite_rule_policy_definition (Resource)
 
-This resource can manage a Rewrite Rule policy object.
+This resource can manage a Rewrite Rule policy definition.
 
 ## Example Usage
 

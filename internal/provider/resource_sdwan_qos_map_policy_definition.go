@@ -39,7 +39,7 @@ func (r *QoSMapPolicyDefinitionResource) Metadata(ctx context.Context, req resou
 func (r *QoSMapPolicyDefinitionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a QoS Map policy object.").String,
+		MarkdownDescription: helpers.NewAttributeDescription("This resource can manage a QoS Map policy definition.").String,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{

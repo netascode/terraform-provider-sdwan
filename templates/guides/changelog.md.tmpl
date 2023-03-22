@@ -11,6 +11,8 @@ description: |-
 
 - Add `sdwan_qos_map_policy_definition` resource and data source
 - Add `version` attribute to policy objects
+- Add `sdwan_rewrite_rule_policy_definition` resource and data source
+- Add `sdwan_acl_policy_definition` resource and data source
 
 ## 0.1.6
 

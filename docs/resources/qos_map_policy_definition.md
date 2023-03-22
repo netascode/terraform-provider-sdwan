@@ -3,12 +3,12 @@
 page_title: "sdwan_qos_map_policy_definition Resource - terraform-provider-sdwan"
 subcategory: "Localized Policies"
 description: |-
-  This resource can manage a QoS Map policy object.
+  This resource can manage a QoS Map policy definition.
 ---
 
 # sdwan_qos_map_policy_definition (Resource)
 
-This resource can manage a QoS Map policy object.
+This resource can manage a QoS Map policy definition.
 
 ## Example Usage
 

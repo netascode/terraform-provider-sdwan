@@ -20,15 +20,15 @@ func TestAccDataSourceSdwan{{camelCase .Name}}PolicyDefinition(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					{{- $name := .Name }}
 					{{- range  .Attributes}}
-					{{- if and (not .WriteOnly) (not .ExcludeTest) (not .TfOnly)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 					{{- if eq .Type "List"}}
 					{{- $list := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (not .WriteOnly ) (not .ExcludeTest) (not .TfOnly)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (not .WriteOnly) (not .ExcludeTest) (not .TfOnly)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_policy_definition.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
 					{{- end}}
 					{{- end}}
@@ -54,15 +54,15 @@ resource "sdwan_{{snakeCase $name}}_policy_definition" "test" {
   name = "TF_TEST_MIN"
   description = "Terraform integration test"
 {{- range  .Attributes}}
-{{- if and (not .ExcludeTest) (not .TfOnly)}}
+{{- if and (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 {{- if eq .Type "List"}}
   {{.TfName}} = [{
     {{- range  .Attributes}}
-    {{- if and (not .ExcludeTest) (not .TfOnly)}}
+    {{- if and (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 	{{- if eq .Type "List"}}
 	{{.TfName}} = [{
 		{{- range  .Attributes}}
-		{{- if and (not .ExcludeTest) (not .TfOnly)}}
+		{{- if and (not .ExcludeTest) (not .TfOnly) (not .Value)}}
 		{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
 		{{- end}}
 		{{- end}}

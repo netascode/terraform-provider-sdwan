@@ -208,6 +208,7 @@ type YamlConfigAttribute struct {
 	StringMinLength int64                 `yaml:"string_min_length"`
 	StringMaxLength int64                 `yaml:"string_max_length"`
 	DefaultValue    string                `yaml:"default_value"`
+	Value           string                `yaml:"value"`
 	Attributes      []YamlConfigAttribute `yaml:"attributes"`
 }
 
@@ -577,7 +578,7 @@ func main() {
 
 	for i := range policyDefinitionConfigs {
 		// Augment policy definition config
-		augmentGenericConfig(&policyDefinitionConfigs[i], "policy object")
+		augmentGenericConfig(&policyDefinitionConfigs[i], "policy definition")
 
 		// Iterate over templates and render files
 		for _, t := range policyDefinitionTemplates {

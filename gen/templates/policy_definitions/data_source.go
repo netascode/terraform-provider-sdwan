@@ -58,6 +58,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 				Computed:            true,
 			},
 			{{- range  .Attributes}}
+			{{- if not .Value}}
 			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 				MarkdownDescription: "{{.Description}}",
 				{{- if eq .Type "ListString"}}
@@ -68,6 +69,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						{{- range  .Attributes}}
+						{{- if not .Value}}
 						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 							MarkdownDescription: "{{.Description}}",
 							{{- if eq .Type "ListString"}}
@@ -78,6 +80,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									{{- range  .Attributes}}
+									{{- if not .Value}}
 									"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
 										MarkdownDescription: "{{.Description}}",
 										{{- if eq .Type "ListString"}}
@@ -86,15 +89,18 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 										Computed:            true,
 									},
 									{{- end}}
+									{{- end}}
 								},
 							},
 							{{- end}}
 						},
 						{{- end}}
+						{{- end}}
 					},
 				},
 				{{- end}}
 			},
+			{{- end}}
 			{{- end}}
 		},
 	}

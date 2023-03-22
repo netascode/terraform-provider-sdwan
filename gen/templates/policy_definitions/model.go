@@ -22,39 +22,51 @@ type {{camelCase .Name}} struct {
 	Name types.String `tfsdk:"name"`
 	Description types.String `tfsdk:"description"`
 {{- range .Attributes}}
+{{- if not .Value}}
 {{- if eq .Type "List"}}
 	{{toGoName .TfName}} []{{$name}}{{toGoName .TfName}} `tfsdk:"{{.TfName}}"`
 {{- else}}
 	{{toGoName .TfName}} types.{{.Type}} `tfsdk:"{{.TfName}}"`
 {{- end}}
 {{- end}}
+{{- end}}
 }
 
 {{ range .Attributes}}
+{{- if not .Value}}
 {{- $childName := toGoName .TfName}}
 {{- if eq .Type "List"}}
 type {{$name}}{{toGoName .TfName}} struct {
 {{- range .Attributes}}
+{{- if not .Value}}
 {{- if eq .Type "List"}}
 	{{toGoName .TfName}} []{{$name}}{{$childName}}{{toGoName .TfName}} `tfsdk:"{{.TfName}}"`
 {{- else}}
 	{{toGoName .TfName}} types.{{.Type}} `tfsdk:"{{.TfName}}"`
 {{- end}}
 {{- end}}
+{{- end}}
 }
+{{- end}}
 {{- end}}
 {{ end}}
 
 {{ range .Attributes}}
+{{- if not .Value}}
 {{- $childName := toGoName .TfName}}
 {{- if eq .Type "List"}}
 {{ range .Attributes}}
+{{- if not .Value}}
 {{- if eq .Type "List"}}
 type {{$name}}{{$childName}}{{toGoName .TfName}} struct {
 {{- range .Attributes}}
+{{- if not .Value}}
 	{{toGoName .TfName}} types.{{.Type}} `tfsdk:"{{.TfName}}"`
 {{- end}}
+{{- end}}
 }
+{{- end}}
+{{- end}}
 {{- end}}
 {{- end}}
 {{- end}}
@@ -70,7 +82,9 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, "type", "{{.Type}}")
 	path := "{{ if .RootElement}}{{.RootElement}}.{{end}}"
 	{{- range .Attributes}}
-	{{- if not .TfOnly}}
+	{{- if .Value}}
+	body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", "{{.Value}}")
+	{{- else if not .TfOnly}}
 	{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
 	if !data.{{toGoName .TfName}}.IsNull() {
 		body, _ = sjson.Set(body, path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}data.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
@@ -81,7 +95,9 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 		for _, item := range data.{{toGoName .TfName}} {
 			itemBody := ""
 			{{- range .Attributes}}
-			{{- if not .TfOnly}}
+			{{- if .Value}}
+			itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", "{{.Value}}")
+			{{- else if not .TfOnly}}
 			{{- if or (eq .Type "String") (eq .Type "Int64") (eq .Type "Float64")}}
 			if !item.{{toGoName .TfName}}.IsNull() {
 				itemBody, _ = sjson.Set(itemBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}item.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
@@ -92,7 +108,9 @@ func (data {{camelCase .Name}}) toBody(ctx context.Context) string {
 				for _, childItem := range item.{{toGoName .TfName}} {
 					itemChildBody := ""
 					{{- range .Attributes}}
-					{{- if not .TfOnly}}
+					{{- if .Value}}
+					itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", "{{.Value}}")
+					{{- else if not .TfOnly}}
 					if !childItem.{{toGoName .TfName}}.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}", {{if .ModelTypeString}}fmt.Sprint({{end}}childItem.{{toGoName .TfName}}.Value{{.Type}}(){{if .ModelTypeString}}){{end}})
 					}
@@ -126,7 +144,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	}
 	path := "{{ if .RootElement}}{{.RootElement}}.{{end}}"
 	{{- range .Attributes}}
-	{{- if not .TfOnly}}
+	{{- if and (not .TfOnly) (not .Value)}}
 	{{- $cname := toGoName .TfName}}
 	{{- if eq .Type "String"}}
 	if value := res.Get(path+"{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); value.Exists() {
@@ -152,7 +170,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 		value.ForEach(func(k, v gjson.Result) bool {
 			item := {{$name}}{{toGoName .TfName}}{}
 			{{- range .Attributes}}
-			{{- if not .TfOnly}}
+			{{- if and (not .TfOnly) (not .Value)}}
 			{{- if eq .Type "String"}}
 			if cValue := v.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); cValue.Exists() {
 				item.{{toGoName .TfName}} = types.StringValue(cValue.String())
@@ -177,7 +195,7 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 				cValue.ForEach(func(ck, cv gjson.Result) bool {
 					cItem := {{$name}}{{$cname}}{{toGoName .TfName}}{}
 					{{- range .Attributes}}
-					{{- if not .TfOnly}}
+					{{- if and (not .TfOnly) (not .Value)}}
 					{{- if eq .Type "String"}}
 					if ccValue := cv.Get("{{range .DataPath}}{{.}}.{{end}}{{.ModelName}}"); ccValue.Exists() {
 						cItem.{{toGoName .TfName}} = types.StringValue(ccValue.String())
