@@ -4,6 +4,7 @@
 - Add `version` attribute to policy objects
 - Add `sdwan_rewrite_rule_policy_definition` resource and data source
 - Add `sdwan_acl_policy_definition` resource and data source
+- Add `sdwan_device_acl_policy_definition` resource and data source
 
 ## 0.1.6
 
