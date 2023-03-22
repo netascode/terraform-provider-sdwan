@@ -172,13 +172,13 @@ func (data Route) toBody(ctx context.Context) string {
 						itemChildBody, _ = sjson.Set(itemChildBody, "value.exclude", childItem.AsPathExclude.ValueString())
 					}
 					if !childItem.AtomicAggregate.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "value", childItem.AtomicAggregate.ValueBool())
+						itemChildBody, _ = sjson.Set(itemChildBody, "value", fmt.Sprint(childItem.AtomicAggregate.ValueBool()))
 					}
 					if !childItem.Community.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "value", childItem.Community.ValueString())
 					}
 					if !childItem.CommunityAdditive.IsNull() {
-						itemChildBody, _ = sjson.Set(itemChildBody, "value", childItem.CommunityAdditive.ValueBool())
+						itemChildBody, _ = sjson.Set(itemChildBody, "value", fmt.Sprint(childItem.CommunityAdditive.ValueBool()))
 					}
 					if !childItem.LocalPreference.IsNull() {
 						itemChildBody, _ = sjson.Set(itemChildBody, "value", fmt.Sprint(childItem.LocalPreference.ValueInt64()))
@@ -276,7 +276,7 @@ func (data *Route) fromBody(ctx context.Context, res gjson.Result) {
 					} else {
 						cItem.AsPathListId = types.StringNull()
 					}
-					if ccValue := res.Get("refs"); cItem.Type.ValueString() == "advancedCommunity" && ccValue.Exists() {
+					if ccValue := cv.Get("refs"); cItem.Type.ValueString() == "advancedCommunity" && ccValue.Exists() {
 						cItem.CommunityListIds = helpers.GetStringList(ccValue.Array())
 					} else {
 						cItem.CommunityListIds = types.ListNull(types.StringType)
@@ -369,6 +369,11 @@ func (data *Route) fromBody(ctx context.Context, res gjson.Result) {
 					} else {
 						cItem.Community = types.StringNull()
 					}
+					if ccValue := cv.Get("value"); cItem.Type.ValueString() == "communityAdditive" && ccValue.Exists() {
+						cItem.CommunityAdditive = types.BoolValue(ccValue.Bool())
+					} else {
+						cItem.CommunityAdditive = types.BoolNull()
+					}
 					if ccValue := cv.Get("value"); cItem.Type.ValueString() == "localPreference" && ccValue.Exists() {
 						cItem.LocalPreference = types.Int64Value(ccValue.Int())
 					} else {
@@ -454,7 +459,7 @@ func (data *Route) getMatchCommunityListVersions(ctx context.Context, name strin
 	for _, item := range data.Sequences {
 		if item.Name.ValueString() == name && item.Id.ValueInt64() == id {
 			for _, cItem := range item.MatchEntries {
-				if cItem.Type.ValueString() == "expandedCommunity" {
+				if cItem.Type.ValueString() == "advancedCommunity" {
 					return cItem.CommunityListVersions
 				}
 			}
