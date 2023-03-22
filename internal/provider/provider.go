@@ -255,6 +255,7 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		NewDeviceACLPolicyDefinitionResource,
 		NewQoSMapPolicyDefinitionResource,
 		NewRewriteRulePolicyDefinitionResource,
+		NewRoutePolicyDefinitionResource,
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
 		NewAttachFeatureDeviceTemplateResource,
@@ -302,6 +303,7 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		NewDeviceACLPolicyDefinitionDataSource,
 		NewQoSMapPolicyDefinitionDataSource,
 		NewRewriteRulePolicyDefinitionDataSource,
+		NewRoutePolicyDefinitionDataSource,
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,
 	}

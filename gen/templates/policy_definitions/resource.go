@@ -64,7 +64,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 			},
 			{{- range  .Attributes}}
 			{{- if not .Value}}
-			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 					{{- if len .EnumValues -}}
 					.AddStringEnumDescription({{range .EnumValues}}"{{.}}", {{end}})
@@ -111,7 +111,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 					Attributes: map[string]schema.Attribute{
 						{{- range  .Attributes}}
 						{{- if not .Value}}
-						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 							MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 								{{- if len .EnumValues -}}
 								.AddStringEnumDescription({{range .EnumValues}}"{{.}}", {{end}})
@@ -126,6 +126,9 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 								.AddDefaultValueDescription("{{.DefaultValue}}")
 								{{- end -}}
 								.String,
+							{{- if eq .Type "ListString"}}
+							ElementType:         types.StringType,
+							{{- end}}
 							{{- if .Mandatory}}
 							Required:            true,
 							{{- else}}
@@ -158,7 +161,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 								Attributes: map[string]schema.Attribute{
 									{{- range  .Attributes}}
 									{{- if not .Value}}
-									"{{.TfName}}": schema.{{.Type}}Attribute{
+									"{{.TfName}}": schema.{{if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 										MarkdownDescription: helpers.NewAttributeDescription("{{.Description}}")
 											{{- if len .EnumValues -}}
 											.AddStringEnumDescription({{range .EnumValues}}"{{.}}", {{end}})
@@ -173,6 +176,9 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 											.AddDefaultValueDescription("{{.DefaultValue}}")
 											{{- end -}}
 											.String,
+										{{- if eq .Type "ListString"}}
+										ElementType:         types.StringType,
+										{{- end}}
 										{{- if .Mandatory}}
 										Required:            true,
 										{{- else}}

@@ -59,7 +59,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 			},
 			{{- range  .Attributes}}
 			{{- if not .Value}}
-			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+			"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 				MarkdownDescription: "{{.Description}}",
 				{{- if eq .Type "ListString"}}
 				ElementType:         types.StringType,
@@ -70,7 +70,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 					Attributes: map[string]schema.Attribute{
 						{{- range  .Attributes}}
 						{{- if not .Value}}
-						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+						"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 							MarkdownDescription: "{{.Description}}",
 							{{- if eq .Type "ListString"}}
 							ElementType:         types.StringType,
@@ -81,7 +81,7 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 								Attributes: map[string]schema.Attribute{
 									{{- range  .Attributes}}
 									{{- if not .Value}}
-									"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else}}{{.Type}}{{end}}Attribute{
+									"{{.TfName}}": schema.{{if eq .Type "List"}}ListNested{{else if eq .Type "ListString"}}List{{else}}{{.Type}}{{end}}Attribute{
 										MarkdownDescription: "{{.Description}}",
 										{{- if eq .Type "ListString"}}
 										ElementType:         types.StringType,
