@@ -6,6 +6,7 @@
 - Add `sdwan_acl_policy_definition` resource and data source
 - Add `sdwan_device_acl_policy_definition` resource and data source
 - Add `sdwan_route_policy_definition` resource and data source
+- Add `sdwan_localized_policy` resource and data source
 
 ## 0.1.6
 

@@ -3,12 +3,12 @@
 page_title: "sdwan_feature_device_template Data Source - terraform-provider-sdwan"
 subcategory: "Device Templates"
 description: |-
-  This data source can read a CLI device template.
+  This data source can read a feature device template.
 ---
 
 # sdwan_feature_device_template (Data Source)
 
-This data source can read a CLI device template.
+This data source can read a feature device template.
 
 ## Example Usage
 

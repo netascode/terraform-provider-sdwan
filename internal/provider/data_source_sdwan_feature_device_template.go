@@ -31,7 +31,7 @@ func (d *FeatureDeviceTemplateDataSource) Metadata(_ context.Context, req dataso
 func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		// This description is used by the documentation generator and the language server.
-		MarkdownDescription: "This data source can read a CLI device template.",
+		MarkdownDescription: "This data source can read a feature device template.",
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{

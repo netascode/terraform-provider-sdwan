@@ -229,6 +229,7 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		NewCLIDeviceTemplateResource,
 		NewFeatureDeviceTemplateResource,
 		NewAttachFeatureDeviceTemplateResource,
+		NewLocalizedPolicyResource,
 	}
 }
 
@@ -245,6 +246,7 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		{{- end}}
 		NewCLIDeviceTemplateDataSource,
 		NewFeatureDeviceTemplateDataSource,
+		NewLocalizedPolicyDataSource,
 	}
 }
 
