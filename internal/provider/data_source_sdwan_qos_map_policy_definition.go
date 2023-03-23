@@ -44,6 +44,10 @@ func (d *QoSMapPolicyDefinitionDataSource) Schema(ctx context.Context, req datas
 				MarkdownDescription: "The version of the policy definition",
 				Computed:            true,
 			},
+			"type": schema.StringAttribute{
+				MarkdownDescription: "The policy definition type",
+				Computed:            true,
+			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the policy definition",
 				Computed:            true,

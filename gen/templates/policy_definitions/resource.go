@@ -54,6 +54,13 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Schema(ctx context.Context
 				MarkdownDescription: "The version of the policy definition",
 				Computed:            true,
 			},
+			"type": schema.StringAttribute{
+				MarkdownDescription: "The policy defintion type",
+				Computed:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the policy definition",
 				Required:            true,
@@ -276,6 +283,7 @@ func (r *{{camelCase .Name}}PolicyDefinitionResource) Create(ctx context.Context
 
 	plan.Id = types.StringValue(res.Get("definitionId").String())
 	plan.Version = types.Int64Value(0)
+	plan.Type = types.StringValue(plan.getType())
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Create finished successfully", plan.Name.ValueString()))
 

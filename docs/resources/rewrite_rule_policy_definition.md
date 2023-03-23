@@ -39,6 +39,7 @@ resource "sdwan_rewrite_rule_policy_definition" "example" {
 ### Read-Only
 
 - `id` (String) The id of the policy definition
+- `type` (String) The policy defintion type
 - `version` (Number) The version of the policy definition
 
 <a id="nestedatt--rules"></a>

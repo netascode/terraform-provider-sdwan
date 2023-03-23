@@ -31,6 +31,7 @@ data "sdwan_device_acl_policy_definition" "example" {
 - `description` (String) The description of the policy definition
 - `name` (String) The name of the policy definition
 - `sequences` (Attributes List) List of ACL sequences (see [below for nested schema](#nestedatt--sequences))
+- `type` (String) The policy definition type
 - `version` (Number) The version of the policy definition
 
 <a id="nestedatt--sequences"></a>

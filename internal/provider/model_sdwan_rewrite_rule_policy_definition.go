@@ -14,6 +14,7 @@ import (
 type RewriteRule struct {
 	Id          types.String       `tfsdk:"id"`
 	Version     types.Int64        `tfsdk:"version"`
+	Type        types.String       `tfsdk:"type"`
 	Name        types.String       `tfsdk:"name"`
 	Description types.String       `tfsdk:"description"`
 	Rules       []RewriteRuleRules `tfsdk:"rules"`
@@ -68,6 +69,11 @@ func (data *RewriteRule) fromBody(ctx context.Context, res gjson.Result) {
 		data.Description = types.StringValue(value.String())
 	} else {
 		data.Description = types.StringNull()
+	}
+	if value := res.Get("type"); value.Exists() {
+		data.Type = types.StringValue(value.String())
+	} else {
+		data.Type = types.StringNull()
 	}
 	path := "definition."
 	if value := res.Get(path + "rules"); value.Exists() {

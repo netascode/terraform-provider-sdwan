@@ -44,6 +44,10 @@ func (d *DeviceACLPolicyDefinitionDataSource) Schema(ctx context.Context, req da
 				MarkdownDescription: "The version of the policy definition",
 				Computed:            true,
 			},
+			"type": schema.StringAttribute{
+				MarkdownDescription: "The policy definition type",
+				Computed:            true,
+			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the policy definition",
 				Computed:            true,

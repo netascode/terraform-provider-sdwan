@@ -14,6 +14,7 @@ import (
 type QoSMap struct {
 	Id            types.String          `tfsdk:"id"`
 	Version       types.Int64           `tfsdk:"version"`
+	Type          types.String          `tfsdk:"type"`
 	Name          types.String          `tfsdk:"name"`
 	Description   types.String          `tfsdk:"description"`
 	QosSchedulers []QoSMapQosSchedulers `tfsdk:"qos_schedulers"`
@@ -80,6 +81,11 @@ func (data *QoSMap) fromBody(ctx context.Context, res gjson.Result) {
 		data.Description = types.StringValue(value.String())
 	} else {
 		data.Description = types.StringNull()
+	}
+	if value := res.Get("type"); value.Exists() {
+		data.Type = types.StringValue(value.String())
+	} else {
+		data.Type = types.StringNull()
 	}
 	path := "definition."
 	if value := res.Get(path + "qosSchedulers"); value.Exists() {

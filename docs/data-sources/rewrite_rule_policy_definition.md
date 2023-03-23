@@ -30,6 +30,7 @@ data "sdwan_rewrite_rule_policy_definition" "example" {
 - `description` (String) The description of the policy definition
 - `name` (String) The name of the policy definition
 - `rules` (Attributes List) List of rules (see [below for nested schema](#nestedatt--rules))
+- `type` (String) The policy definition type
 - `version` (Number) The version of the policy definition
 
 <a id="nestedatt--rules"></a>

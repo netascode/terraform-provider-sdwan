@@ -49,6 +49,10 @@ func (d *{{camelCase .Name}}PolicyDefinitionDataSource) Schema(ctx context.Conte
 				MarkdownDescription: "The version of the policy definition",
 				Computed:            true,
 			},
+			"type": schema.StringAttribute{
+				MarkdownDescription: "The policy definition type",
+				Computed:            true,
+			},
 			"name": schema.StringAttribute{
 				MarkdownDescription: "The name of the policy definition",
 				Computed:            true,
