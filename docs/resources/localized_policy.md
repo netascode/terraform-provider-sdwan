@@ -52,11 +52,11 @@ resource "sdwan_localized_policy" "test" {
 - `flow_visibility_ipv6` (Boolean) IPv6 flow visibilty
 - `implicit_acl_logging` (Boolean) Implicit ACL logging
 - `ipv4_visibility_cache_entries` (Number) IPv4 visibility cache entries
-  - Range: `0`-`2000000`
+  - Range: `16`-`2000000`
 - `ipv6_visibility_cache_entries` (Number) IPv6 visibility cache entries
-  - Range: `0`-`2000000`
+  - Range: `16`-`2000000`
 - `log_frequency` (Number) Log frequency
-  - Range: `0`-`2147483647`
+  - Range: `1`-`2147483647`
 
 ### Read-Only
 

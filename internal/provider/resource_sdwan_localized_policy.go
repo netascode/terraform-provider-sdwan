@@ -115,36 +115,24 @@ func (r *LocalizedPolicyResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"log_frequency": schema.Int64Attribute{
-				MarkdownDescription: helpers.NewAttributeDescription("Log frequency").AddIntegerRangeDescription(0, 2147483647).String,
+				MarkdownDescription: helpers.NewAttributeDescription("Log frequency").AddIntegerRangeDescription(1, 2147483647).String,
 				Optional:            true,
-				Computed:            true,
 				Validators: []validator.Int64{
-					int64validator.Between(0, 2147483647),
-				},
-				PlanModifiers: []planmodifier.Int64{
-					helpers.IntegerDefaultModifier(0),
+					int64validator.Between(1, 2147483647),
 				},
 			},
 			"ipv4_visibility_cache_entries": schema.Int64Attribute{
-				MarkdownDescription: helpers.NewAttributeDescription("IPv4 visibility cache entries").AddIntegerRangeDescription(0, 2000000).String,
+				MarkdownDescription: helpers.NewAttributeDescription("IPv4 visibility cache entries").AddIntegerRangeDescription(16, 2000000).String,
 				Optional:            true,
-				Computed:            true,
 				Validators: []validator.Int64{
-					int64validator.Between(0, 2000000),
-				},
-				PlanModifiers: []planmodifier.Int64{
-					helpers.IntegerDefaultModifier(0),
+					int64validator.Between(16, 2000000),
 				},
 			},
 			"ipv6_visibility_cache_entries": schema.Int64Attribute{
-				MarkdownDescription: helpers.NewAttributeDescription("IPv6 visibility cache entries").AddIntegerRangeDescription(0, 2000000).String,
+				MarkdownDescription: helpers.NewAttributeDescription("IPv6 visibility cache entries").AddIntegerRangeDescription(16, 2000000).String,
 				Optional:            true,
-				Computed:            true,
 				Validators: []validator.Int64{
-					int64validator.Between(0, 2000000),
-				},
-				PlanModifiers: []planmodifier.Int64{
-					helpers.IntegerDefaultModifier(0),
+					int64validator.Between(16, 2000000),
 				},
 			},
 			"definitions": schema.SetNestedAttribute{
@@ -264,7 +252,7 @@ func (r *LocalizedPolicyResource) Update(ctx context.Context, req resource.Updat
 
 	body := plan.toBody(ctx)
 	res, err := r.client.Put("/template/policy/vedge/"+plan.Id.ValueString(), body)
-	if err != nil && res.Get("error.message").String() != "Policy locked in edit mode." {
+	if err != nil && res.Get("error.message").String() != "Failed to update variables" {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return
 	}

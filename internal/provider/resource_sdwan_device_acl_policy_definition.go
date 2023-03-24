@@ -5,6 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -278,7 +279,7 @@ func (r *DeviceACLPolicyDefinitionResource) Update(ctx context.Context, req reso
 
 	body := plan.toBody(ctx)
 	res, err := r.client.Put("/template/policy/definition/deviceaccesspolicy/"+plan.Id.ValueString(), body)
-	if err != nil {
+	if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return
 	}

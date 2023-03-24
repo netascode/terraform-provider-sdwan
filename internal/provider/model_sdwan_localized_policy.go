@@ -45,9 +45,15 @@ func (data *LocalizedPolicy) toBody(ctx context.Context) string {
 	body, _ = sjson.Set(body, path+"settings.cloudQos", data.CloudQos.ValueBool())
 	body, _ = sjson.Set(body, path+"settings.cloudQosServiceSide", data.CloudQosServerSide.ValueBool())
 	body, _ = sjson.Set(body, path+"settings.implicitAclLogging", data.ImplicitAclLogging.ValueBool())
-	body, _ = sjson.Set(body, path+"settings.logFrequency", data.LogFrequency.ValueInt64())
-	body, _ = sjson.Set(body, path+"settings.ipVisibilityCacheEntries", data.Ipv4VisibilityCacheEntries.ValueInt64())
-	body, _ = sjson.Set(body, path+"settings.ipV6VisibilityCacheEntries", data.Ipv6VisibilityCacheEntries.ValueInt64())
+	if !data.LogFrequency.IsNull() {
+		body, _ = sjson.Set(body, path+"settings.logFrequency", data.LogFrequency.ValueInt64())
+	}
+	if !data.Ipv4VisibilityCacheEntries.IsNull() {
+		body, _ = sjson.Set(body, path+"settings.ipVisibilityCacheEntries", data.Ipv4VisibilityCacheEntries.ValueInt64())
+	}
+	if !data.Ipv6VisibilityCacheEntries.IsNull() {
+		body, _ = sjson.Set(body, path+"settings.ipV6VisibilityCacheEntries", data.Ipv6VisibilityCacheEntries.ValueInt64())
+	}
 	for _, item := range data.Definitions {
 		itemBody := ""
 		itemBody, _ = sjson.Set(itemBody, "definitionId", item.Id.ValueString())
