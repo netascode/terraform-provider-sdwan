@@ -1,3 +1,5 @@
+//go:build testAll
+
 package provider
 
 import (
