@@ -33,6 +33,7 @@ data "sdwan_feature_device_template" "example" {
 - `general_templates` (Attributes Set) General templates (see [below for nested schema](#nestedatt--general_templates))
 - `name` (String) The name of the device template
 - `policy_id` (String) The policy ID
+- `policy_version` (Number) The policy version
 - `security_policy_id` (String) The security policy ID
 - `version` (Number) The version of the device template
 

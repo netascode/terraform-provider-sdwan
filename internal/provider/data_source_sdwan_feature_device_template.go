@@ -62,6 +62,10 @@ func (d *FeatureDeviceTemplateDataSource) Schema(ctx context.Context, req dataso
 				MarkdownDescription: "The policy ID",
 				Computed:            true,
 			},
+			"policy_version": schema.Int64Attribute{
+				MarkdownDescription: "The policy version",
+				Computed:            true,
+			},
 			"security_policy_id": schema.StringAttribute{
 				MarkdownDescription: "The security policy ID",
 				Computed:            true,

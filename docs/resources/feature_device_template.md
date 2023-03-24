@@ -39,6 +39,7 @@ resource "sdwan_feature_device_template" "test" {
   - Choices: `sdwan-edge`, `service-node`
 - `general_templates` (Attributes Set) General templates (see [below for nested schema](#nestedatt--general_templates))
 - `policy_id` (String) The policy ID
+- `policy_version` (Number) The policy version
 - `security_policy_id` (String) The security policy ID
 
 ### Read-Only

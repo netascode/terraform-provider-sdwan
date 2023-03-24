@@ -16,6 +16,7 @@ type FeatureDeviceTemplate struct {
 	DeviceType       types.String                           `tfsdk:"device_type"`
 	DeviceRole       types.String                           `tfsdk:"device_role"`
 	PolicyId         types.String                           `tfsdk:"policy_id"`
+	PolicyVersion    types.Int64                            `tfsdk:"policy_version"`
 	SecurityPolicyId types.String                           `tfsdk:"security_policy_id"`
 	GeneralTemplates []FeatureDeviceTemplateGeneralTemplate `tfsdk:"general_templates"`
 }
@@ -200,6 +201,7 @@ func (data *FeatureDeviceTemplate) getSubSubTemplateVersion(ctx context.Context,
 }
 
 func (data *FeatureDeviceTemplate) updateTemplateVersions(ctx context.Context, state FeatureDeviceTemplate) {
+	data.PolicyVersion = state.PolicyVersion
 	for gt := range data.GeneralTemplates {
 		id := data.GeneralTemplates[gt].Id.ValueString()
 		data.GeneralTemplates[gt].Version = state.getGeneralTemplateVersion(ctx, id)

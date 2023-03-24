@@ -73,6 +73,10 @@ func (r *FeatureDeviceTemplateResource) Schema(ctx context.Context, req resource
 				MarkdownDescription: "The policy ID",
 				Optional:            true,
 			},
+			"policy_version": schema.Int64Attribute{
+				MarkdownDescription: "The policy version",
+				Optional:            true,
+			},
 			"security_policy_id": schema.StringAttribute{
 				MarkdownDescription: "The security policy ID",
 				Optional:            true,
