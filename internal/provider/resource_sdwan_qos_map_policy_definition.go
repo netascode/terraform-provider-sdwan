@@ -223,11 +223,15 @@ func (r *QoSMapPolicyDefinitionResource) Update(ctx context.Context, req resourc
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
-	body := plan.toBody(ctx)
-	res, err := r.client.Put("/template/policy/definition/qosmap/"+plan.Id.ValueString(), body)
-	if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
-		return
+	if plan.hasChanges(ctx, &state) {
+		body := plan.toBody(ctx)
+		res, err := r.client.Put("/template/policy/definition/qosmap/"+plan.Id.ValueString(), body)
+		if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
+			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
+			return
+		}
+	} else {
+		tflog.Debug(ctx, fmt.Sprintf("%s: No changes detected", plan.Name.ValueString()))
 	}
 
 	plan.Version = types.Int64Value(state.Version.ValueInt64() + 1)

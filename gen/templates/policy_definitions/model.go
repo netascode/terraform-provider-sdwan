@@ -284,3 +284,55 @@ func (data *{{camelCase .Name}}) fromBody(ctx context.Context, res gjson.Result)
 	{{- end}}
 	{{- end}}
 }
+
+func (data *{{camelCase .Name}}) hasChanges(ctx context.Context, state *{{camelCase .Name}}) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	{{- range .Attributes}}
+	{{- $name := toGoName .TfName}}
+	{{- if and (not .Value) (not .TfOnly)}}
+	{{- if ne .Type "List"}}
+	if !data.{{toGoName .TfName}}.Equal(state.{{toGoName .TfName}}) {
+		hasChanges = true
+	}
+	{{- else}}
+	if len(data.{{toGoName .TfName}}) != len(state.{{toGoName .TfName}}) {
+		hasChanges = true
+	} else {
+		for i := range data.{{toGoName .TfName}} {
+			{{- range .Attributes}}
+			{{- $cname := toGoName .TfName}}
+			{{- if and (not .Value) (not .TfOnly)}}
+			{{- if ne .Type "List"}}
+			if !data.{{$name}}[i].{{toGoName .TfName}}.Equal(state.{{$name}}[i].{{toGoName .TfName}}) {
+				hasChanges = true
+			}
+			{{- else}}
+			if len(data.{{$name}}[i].{{toGoName .TfName}}) != len(state.{{$name}}[i].{{toGoName .TfName}}) {
+				hasChanges = true
+			} else {
+				for ii := range data.{{$name}}[i].{{toGoName .TfName}} {
+					{{- range .Attributes}}
+					{{- if and (not .Value) (not .TfOnly)}}
+					if !data.{{$name}}[i].{{$cname}}[ii].{{toGoName .TfName}}.Equal(state.{{$name}}[i].{{$cname}}[ii].{{toGoName .TfName}}) {
+						hasChanges = true
+					}
+					{{- end}}
+					{{- end}}
+				}
+			}
+			{{- end}}
+			{{- end}}
+			{{- end}}
+		}
+	}
+	{{- end}}
+	{{- end}}
+	{{- end}}
+	return hasChanges
+}

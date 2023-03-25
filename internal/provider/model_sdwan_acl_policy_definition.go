@@ -340,6 +340,110 @@ func (data *ACL) fromBody(ctx context.Context, res gjson.Result) {
 	}
 }
 
+func (data *ACL) hasChanges(ctx context.Context, state *ACL) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if !data.DefaultAction.Equal(state.DefaultAction) {
+		hasChanges = true
+	}
+	if len(data.Sequences) != len(state.Sequences) {
+		hasChanges = true
+	} else {
+		for i := range data.Sequences {
+			if !data.Sequences[i].Id.Equal(state.Sequences[i].Id) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].IpType.Equal(state.Sequences[i].IpType) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].Name.Equal(state.Sequences[i].Name) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].BaseAction.Equal(state.Sequences[i].BaseAction) {
+				hasChanges = true
+			}
+			if len(data.Sequences[i].MatchEntries) != len(state.Sequences[i].MatchEntries) {
+				hasChanges = true
+			} else {
+				for ii := range data.Sequences[i].MatchEntries {
+					if !data.Sequences[i].MatchEntries[ii].Type.Equal(state.Sequences[i].MatchEntries[ii].Type) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Dscp.Equal(state.Sequences[i].MatchEntries[ii].Dscp) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].SourceIp.Equal(state.Sequences[i].MatchEntries[ii].SourceIp) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].DestinationIp.Equal(state.Sequences[i].MatchEntries[ii].DestinationIp) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].ClassMapId.Equal(state.Sequences[i].MatchEntries[ii].ClassMapId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].PacketLength.Equal(state.Sequences[i].MatchEntries[ii].PacketLength) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Priority.Equal(state.Sequences[i].MatchEntries[ii].Priority) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].SourcePort.Equal(state.Sequences[i].MatchEntries[ii].SourcePort) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].DestinationPort.Equal(state.Sequences[i].MatchEntries[ii].DestinationPort) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].SourceDataPrefixListId.Equal(state.Sequences[i].MatchEntries[ii].SourceDataPrefixListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].DestinationDataPrefixListId.Equal(state.Sequences[i].MatchEntries[ii].DestinationDataPrefixListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Protocol.Equal(state.Sequences[i].MatchEntries[ii].Protocol) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Tcp.Equal(state.Sequences[i].MatchEntries[ii].Tcp) {
+						hasChanges = true
+					}
+				}
+			}
+			if len(data.Sequences[i].ActionEntries) != len(state.Sequences[i].ActionEntries) {
+				hasChanges = true
+			} else {
+				for ii := range data.Sequences[i].ActionEntries {
+					if !data.Sequences[i].ActionEntries[ii].Type.Equal(state.Sequences[i].ActionEntries[ii].Type) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].ClassMapId.Equal(state.Sequences[i].ActionEntries[ii].ClassMapId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].CounterName.Equal(state.Sequences[i].ActionEntries[ii].CounterName) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Dscp.Equal(state.Sequences[i].ActionEntries[ii].Dscp) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].MirrorId.Equal(state.Sequences[i].ActionEntries[ii].MirrorId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].NextHop.Equal(state.Sequences[i].ActionEntries[ii].NextHop) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].PolicerId.Equal(state.Sequences[i].ActionEntries[ii].PolicerId) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *ACL) getMatchClassMapVersion(ctx context.Context, name string, id int64) types.Int64 {
 	for _, item := range data.Sequences {
 		if item.Name.ValueString() == name && item.Id.ValueInt64() == id {

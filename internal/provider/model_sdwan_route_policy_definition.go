@@ -435,6 +435,143 @@ func (data *Route) fromBody(ctx context.Context, res gjson.Result) {
 	}
 }
 
+func (data *Route) hasChanges(ctx context.Context, state *Route) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if !data.DefaultAction.Equal(state.DefaultAction) {
+		hasChanges = true
+	}
+	if len(data.Sequences) != len(state.Sequences) {
+		hasChanges = true
+	} else {
+		for i := range data.Sequences {
+			if !data.Sequences[i].Id.Equal(state.Sequences[i].Id) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].IpType.Equal(state.Sequences[i].IpType) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].Name.Equal(state.Sequences[i].Name) {
+				hasChanges = true
+			}
+			if !data.Sequences[i].BaseAction.Equal(state.Sequences[i].BaseAction) {
+				hasChanges = true
+			}
+			if len(data.Sequences[i].MatchEntries) != len(state.Sequences[i].MatchEntries) {
+				hasChanges = true
+			} else {
+				for ii := range data.Sequences[i].MatchEntries {
+					if !data.Sequences[i].MatchEntries[ii].Type.Equal(state.Sequences[i].MatchEntries[ii].Type) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].PrefixListId.Equal(state.Sequences[i].MatchEntries[ii].PrefixListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].AsPathListId.Equal(state.Sequences[i].MatchEntries[ii].AsPathListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].CommunityListIds.Equal(state.Sequences[i].MatchEntries[ii].CommunityListIds) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].CommunityListMatchFlag.Equal(state.Sequences[i].MatchEntries[ii].CommunityListMatchFlag) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].ExpandedCommunityListId.Equal(state.Sequences[i].MatchEntries[ii].ExpandedCommunityListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].ExtendedCommunityListId.Equal(state.Sequences[i].MatchEntries[ii].ExtendedCommunityListId) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].LocalPreference.Equal(state.Sequences[i].MatchEntries[ii].LocalPreference) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Metric.Equal(state.Sequences[i].MatchEntries[ii].Metric) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].NextHop.Equal(state.Sequences[i].MatchEntries[ii].NextHop) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Origin.Equal(state.Sequences[i].MatchEntries[ii].Origin) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].Peer.Equal(state.Sequences[i].MatchEntries[ii].Peer) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].OmpTag.Equal(state.Sequences[i].MatchEntries[ii].OmpTag) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].MatchEntries[ii].OspfTag.Equal(state.Sequences[i].MatchEntries[ii].OspfTag) {
+						hasChanges = true
+					}
+				}
+			}
+			if len(data.Sequences[i].ActionEntries) != len(state.Sequences[i].ActionEntries) {
+				hasChanges = true
+			} else {
+				for ii := range data.Sequences[i].ActionEntries {
+					if !data.Sequences[i].ActionEntries[ii].Type.Equal(state.Sequences[i].ActionEntries[ii].Type) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Aggregator.Equal(state.Sequences[i].ActionEntries[ii].Aggregator) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].AggregatorIpAddress.Equal(state.Sequences[i].ActionEntries[ii].AggregatorIpAddress) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].AsPathPrepend.Equal(state.Sequences[i].ActionEntries[ii].AsPathPrepend) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].AsPathExclude.Equal(state.Sequences[i].ActionEntries[ii].AsPathExclude) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].AtomicAggregate.Equal(state.Sequences[i].ActionEntries[ii].AtomicAggregate) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Community.Equal(state.Sequences[i].ActionEntries[ii].Community) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].CommunityAdditive.Equal(state.Sequences[i].ActionEntries[ii].CommunityAdditive) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].LocalPreference.Equal(state.Sequences[i].ActionEntries[ii].LocalPreference) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Metric.Equal(state.Sequences[i].ActionEntries[ii].Metric) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Weight.Equal(state.Sequences[i].ActionEntries[ii].Weight) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].MetricType.Equal(state.Sequences[i].ActionEntries[ii].MetricType) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].NextHop.Equal(state.Sequences[i].ActionEntries[ii].NextHop) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].OmpTag.Equal(state.Sequences[i].ActionEntries[ii].OmpTag) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].OspfTag.Equal(state.Sequences[i].ActionEntries[ii].OspfTag) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Origin.Equal(state.Sequences[i].ActionEntries[ii].Origin) {
+						hasChanges = true
+					}
+					if !data.Sequences[i].ActionEntries[ii].Originator.Equal(state.Sequences[i].ActionEntries[ii].Originator) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *Route) getMatchPrefixListVersion(ctx context.Context, name string, id int64) types.Int64 {
 	for _, item := range data.Sequences {
 		if item.Name.ValueString() == name && item.Id.ValueInt64() == id {

@@ -106,6 +106,35 @@ func (data *RewriteRule) fromBody(ctx context.Context, res gjson.Result) {
 	}
 }
 
+func (data *RewriteRule) hasChanges(ctx context.Context, state *RewriteRule) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if len(data.Rules) != len(state.Rules) {
+		hasChanges = true
+	} else {
+		for i := range data.Rules {
+			if !data.Rules[i].ClassMapId.Equal(state.Rules[i].ClassMapId) {
+				hasChanges = true
+			}
+			if !data.Rules[i].Priority.Equal(state.Rules[i].Priority) {
+				hasChanges = true
+			}
+			if !data.Rules[i].Dscp.Equal(state.Rules[i].Dscp) {
+				hasChanges = true
+			}
+			if !data.Rules[i].Layer2cos.Equal(state.Rules[i].Layer2cos) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *RewriteRule) getClassMapVersion(ctx context.Context, id string) types.Int64 {
 	for _, item := range data.Rules {
 		if item.ClassMapId.ValueString() == id {

@@ -133,6 +133,44 @@ func (data *QoSMap) fromBody(ctx context.Context, res gjson.Result) {
 	}
 }
 
+func (data *QoSMap) hasChanges(ctx context.Context, state *QoSMap) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if len(data.QosSchedulers) != len(state.QosSchedulers) {
+		hasChanges = true
+	} else {
+		for i := range data.QosSchedulers {
+			if !data.QosSchedulers[i].Queue.Equal(state.QosSchedulers[i].Queue) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].ClassMapId.Equal(state.QosSchedulers[i].ClassMapId) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].BandwidthPercent.Equal(state.QosSchedulers[i].BandwidthPercent) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].BufferPercent.Equal(state.QosSchedulers[i].BufferPercent) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].Burst.Equal(state.QosSchedulers[i].Burst) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].DropType.Equal(state.QosSchedulers[i].DropType) {
+				hasChanges = true
+			}
+			if !data.QosSchedulers[i].SchedulingType.Equal(state.QosSchedulers[i].SchedulingType) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *QoSMap) getClassMapVersion(ctx context.Context, queue int64) types.Int64 {
 	for _, item := range data.QosSchedulers {
 		if item.Queue.ValueInt64() == queue {
