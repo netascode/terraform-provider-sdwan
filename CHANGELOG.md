@@ -1,4 +1,4 @@
-## 0.1.7 (unreleased)
+## 0.1.7
 
 - Add `sdwan_qos_map_policy_definition` resource and data source
 - Add `version` attribute to policy objects
