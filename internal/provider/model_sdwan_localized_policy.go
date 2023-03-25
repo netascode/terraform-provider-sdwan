@@ -145,6 +145,59 @@ func (data *LocalizedPolicy) fromBody(ctx context.Context, res gjson.Result) {
 	}
 }
 
+func (data *LocalizedPolicy) hasChanges(ctx context.Context, state *LocalizedPolicy) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if !data.FlowVisibilityIpv4.Equal(state.FlowVisibilityIpv4) {
+		hasChanges = true
+	}
+	if !data.FlowVisibilityIpv6.Equal(state.FlowVisibilityIpv6) {
+		hasChanges = true
+	}
+	if !data.ApplicationVisibilityIpv4.Equal(state.ApplicationVisibilityIpv4) {
+		hasChanges = true
+	}
+	if !data.ApplicationVisibilityIpv6.Equal(state.ApplicationVisibilityIpv6) {
+		hasChanges = true
+	}
+	if !data.CloudQos.Equal(state.CloudQos) {
+		hasChanges = true
+	}
+	if !data.CloudQosServerSide.Equal(state.CloudQosServerSide) {
+		hasChanges = true
+	}
+	if !data.ImplicitAclLogging.Equal(state.ImplicitAclLogging) {
+		hasChanges = true
+	}
+	if !data.LogFrequency.Equal(state.LogFrequency) {
+		hasChanges = true
+	}
+	if !data.Ipv4VisibilityCacheEntries.Equal(state.Ipv4VisibilityCacheEntries) {
+		hasChanges = true
+	}
+	if !data.Ipv6VisibilityCacheEntries.Equal(state.Ipv6VisibilityCacheEntries) {
+		hasChanges = true
+	}
+	if len(data.Definitions) != len(state.Definitions) {
+		hasChanges = true
+	} else {
+		for d := range data.Definitions {
+			if !data.Definitions[d].Id.Equal(state.Definitions[d].Id) {
+				hasChanges = true
+			}
+			if !data.Definitions[d].Type.Equal(state.Definitions[d].Type) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *LocalizedPolicy) getDefinitionVersion(ctx context.Context, id string) types.Int64 {
 	for _, item := range data.Definitions {
 		if item.Id.ValueString() == id {

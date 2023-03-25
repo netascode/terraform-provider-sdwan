@@ -161,6 +161,65 @@ func (data *FeatureDeviceTemplate) fromBody(ctx context.Context, res gjson.Resul
 	}
 }
 
+func (data *FeatureDeviceTemplate) hasChanges(ctx context.Context, state *FeatureDeviceTemplate) bool {
+	hasChanges := false
+	if !data.Name.Equal(state.Name) {
+		hasChanges = true
+	}
+	if !data.Description.Equal(state.Description) {
+		hasChanges = true
+	}
+	if !data.DeviceType.Equal(state.DeviceType) {
+		hasChanges = true
+	}
+	if !data.DeviceRole.Equal(state.DeviceRole) {
+		hasChanges = true
+	}
+	if !data.PolicyId.Equal(state.PolicyId) {
+		hasChanges = true
+	}
+	if !data.SecurityPolicyId.Equal(state.SecurityPolicyId) {
+		hasChanges = true
+	}
+	if len(data.GeneralTemplates) != len(state.GeneralTemplates) {
+		hasChanges = true
+	} else {
+		for gt := range data.GeneralTemplates {
+			if !data.GeneralTemplates[gt].Id.Equal(state.GeneralTemplates[gt].Id) {
+				hasChanges = true
+			}
+			if !data.GeneralTemplates[gt].Type.Equal(state.GeneralTemplates[gt].Type) {
+				hasChanges = true
+			}
+			if len(data.GeneralTemplates[gt].SubTemplates) != len(state.GeneralTemplates[gt].SubTemplates) {
+				hasChanges = true
+			} else {
+				for st := range data.GeneralTemplates[gt].SubTemplates {
+					if !data.GeneralTemplates[gt].SubTemplates[st].Id.Equal(state.GeneralTemplates[gt].SubTemplates[st].Id) {
+						hasChanges = true
+					}
+					if !data.GeneralTemplates[gt].SubTemplates[st].Type.Equal(state.GeneralTemplates[gt].SubTemplates[st].Type) {
+						hasChanges = true
+					}
+					if len(data.GeneralTemplates[gt].SubTemplates[st].SubTemplates) != len(state.GeneralTemplates[gt].SubTemplates[st].SubTemplates) {
+						hasChanges = true
+					} else {
+						for sst := range data.GeneralTemplates[gt].SubTemplates[st].SubTemplates {
+							if !data.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Id.Equal(state.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Id) {
+								hasChanges = true
+							}
+							if !data.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Type.Equal(state.GeneralTemplates[gt].SubTemplates[st].SubTemplates[sst].Type) {
+								hasChanges = true
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return hasChanges
+}
+
 func (data *FeatureDeviceTemplate) getGeneralTemplateVersion(ctx context.Context, id string) types.Int64 {
 	for _, item := range data.GeneralTemplates {
 		if item.Id.ValueString() == id {
