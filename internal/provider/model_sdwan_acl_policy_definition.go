@@ -310,7 +310,7 @@ func (data *ACL) fromBody(ctx context.Context, res gjson.Result) {
 					} else {
 						cItem.CounterName = types.StringNull()
 					}
-					if ccValue := cv.Get("parameter.1.value"); cItem.Type.ValueString() == "set" && cv.Get("parameter.0.field").String() == "dscp" && ccValue.Exists() {
+					if ccValue := cv.Get("parameter.0.value"); cItem.Type.ValueString() == "set" && cv.Get("parameter.0.field").String() == "dscp" && ccValue.Exists() {
 						cItem.Dscp = types.Int64Value(ccValue.Int())
 					} else {
 						cItem.Dscp = types.Int64Null()
