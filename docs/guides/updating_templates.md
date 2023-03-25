@@ -1,15 +1,15 @@
 ---
 subcategory: "Guides"
-page_title: "Updating Templates"
+page_title: "Updating Templates and Policies"
 description: |-
-    Updating Templates
+    Updating Templates and Policies
 ---
 
-# Updating Templates
+# Updating Templates and Policies
 
-Similary to the UI workflow, once feature or device templates are attached to a device, updates to such templates require the device template to be re-attached to the device.
+Similary to the UI workflow, once device templates are attached to a device, updates to templates or policies require the device template to be re-attached to the device.
 
-Each feature and device template resource in Terraform exposes a version attribute which can be used to link resources and trigger a re-attachment of the device template if required. Due to brevity the following configuration is not complete and only shows a single feature template being used:
+Each template and policy resource in Terraform exposes a version attribute which can be used to link resources and trigger a re-attachment of the device template if required. Due to brevity the following configuration is not complete and only shows a single feature template being used:
 
 ```terraform
 resource "sdwan_cisco_system_feature_template" "system" {
@@ -47,7 +47,7 @@ resource "sdwan_attach_feature_device_template" "test" {
 }
 ```
 
-This provider supports updates to a single feature template and/or device template per device within a single `terraform apply` operation. This is due to vManage locking the template(s) once a change has been made. If for example two feature templates used in the same device template are being updated, a `terraform apply` operation will show the following warning:
+This provider supports updates to a single feature template, device template and policy per device within a single `terraform apply` operation. This is due to vManage locking the templates and policies once a change has been made. If for example two feature templates used in the same device template are being updated, a `terraform apply` operation will show the following warning:
 
 ```
 │ Warning: Client Warning
