@@ -7,6 +7,10 @@ description: |-
 
 # Changelog
 
+## 0.1.8 (unreleased)
+
+- Add `sdwan_cisco_thousandeyes_feature_template` resource and data source
+
 ## 0.1.7
 
 - Add `sdwan_qos_map_policy_definition` resource and data source
