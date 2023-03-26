@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -30,7 +31,8 @@ func NewDeviceACLPolicyDefinitionResource() resource.Resource {
 }
 
 type DeviceACLPolicyDefinitionResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *DeviceACLPolicyDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -190,7 +192,8 @@ func (r *DeviceACLPolicyDefinitionResource) Configure(_ context.Context, req res
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *DeviceACLPolicyDefinitionResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -279,7 +282,9 @@ func (r *DeviceACLPolicyDefinitionResource) Update(ctx context.Context, req reso
 
 	if plan.hasChanges(ctx, &state) {
 		body := plan.toBody(ctx)
+		r.updateMutex.Lock()
 		res, err := r.client.Put("/template/policy/definition/deviceaccesspolicy/"+plan.Id.ValueString(), body)
+		r.updateMutex.Unlock()
 		if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
 			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 			return

@@ -5,6 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -29,7 +30,8 @@ func NewCiscoSNMPFeatureTemplateResource() resource.Resource {
 }
 
 type CiscoSNMPFeatureTemplateResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *CiscoSNMPFeatureTemplateResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -371,7 +373,8 @@ func (r *CiscoSNMPFeatureTemplateResource) Configure(_ context.Context, req reso
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *CiscoSNMPFeatureTemplateResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -453,7 +456,9 @@ func (r *CiscoSNMPFeatureTemplateResource) Update(ctx context.Context, req resou
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
+	r.updateMutex.Lock()
 	res, err := r.client.Put("/template/feature/"+plan.Id.ValueString(), body)
+	r.updateMutex.Unlock()
 	if err != nil {
 		if res.Get("error.message").String() == "Template locked in edit mode." {
 			resp.Diagnostics.AddWarning("Client Warning", fmt.Sprintf("Failed to modify template due to template being locked by another change. Template changes will not be applied. Re-run 'terraform apply' to try again."))

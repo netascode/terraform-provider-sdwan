@@ -69,7 +69,7 @@ func (d *SiteListPolicyObjectDataSource) Configure(_ context.Context, req dataso
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *SiteListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

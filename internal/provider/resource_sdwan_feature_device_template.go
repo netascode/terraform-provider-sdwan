@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -26,7 +27,8 @@ func NewFeatureDeviceTemplateResource() resource.Resource {
 }
 
 type FeatureDeviceTemplateResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *FeatureDeviceTemplateResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -150,7 +152,8 @@ func (r *FeatureDeviceTemplateResource) Configure(_ context.Context, req resourc
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *FeatureDeviceTemplateResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -238,7 +241,9 @@ func (r *FeatureDeviceTemplateResource) Update(ctx context.Context, req resource
 
 	if plan.hasChanges(ctx, &state) {
 		body := plan.toBody(ctx)
+		r.updateMutex.Lock()
 		res, err := r.client.Put("/template/device/"+plan.Id.ValueString(), body)
+		r.updateMutex.Unlock()
 		if err != nil && res.Get("error.message").String() != "Template locked in edit mode." {
 			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 			return

@@ -69,7 +69,7 @@ func (d *VPNListPolicyObjectDataSource) Configure(_ context.Context, req datasou
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *VPNListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

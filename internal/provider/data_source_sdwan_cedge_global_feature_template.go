@@ -256,7 +256,7 @@ func (d *CEdgeGlobalFeatureTemplateDataSource) Configure(_ context.Context, req 
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *CEdgeGlobalFeatureTemplateDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

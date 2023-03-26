@@ -316,7 +316,7 @@ func (d *CiscoSNMPFeatureTemplateDataSource) Configure(_ context.Context, req da
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *CiscoSNMPFeatureTemplateDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

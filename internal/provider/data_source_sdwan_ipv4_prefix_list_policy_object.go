@@ -77,7 +77,7 @@ func (d *IPv4PrefixListPolicyObjectDataSource) Configure(_ context.Context, req 
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *IPv4PrefixListPolicyObjectDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

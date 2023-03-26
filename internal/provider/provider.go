@@ -6,6 +6,7 @@ import (
 	"context"
 	"os"
 	"strconv"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -32,6 +33,12 @@ type SdwanProviderModel struct {
 	URL      types.String `tfsdk:"url"`
 	Insecure types.Bool   `tfsdk:"insecure"`
 	Retries  types.Int64  `tfsdk:"retries"`
+}
+
+// SdwanProviderData describes the data maintained by the provider.
+type SdwanProviderData struct {
+	Client      *sdwan.Client
+	UpdateMutex *sync.Mutex
 }
 
 // Metadata returns the provider type name.
@@ -210,8 +217,9 @@ func (p *SdwanProvider) Configure(ctx context.Context, req provider.ConfigureReq
 		return
 	}
 
-	resp.DataSourceData = &c
-	resp.ResourceData = &c
+	data := SdwanProviderData{Client: &c, UpdateMutex: &sync.Mutex{}}
+	resp.DataSourceData = &data
+	resp.ResourceData = &data
 }
 
 func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resource {
@@ -228,6 +236,7 @@ func (p *SdwanProvider) Resources(ctx context.Context) []func() resource.Resourc
 		NewCiscoSIGCredentialsFeatureTemplateResource,
 		NewCiscoSNMPFeatureTemplateResource,
 		NewCiscoSystemFeatureTemplateResource,
+		NewCiscoThousandEyesFeatureTemplateResource,
 		NewCiscoVPNFeatureTemplateResource,
 		NewCiscoVPNInterfaceFeatureTemplateResource,
 		NewCLITemplateFeatureTemplateResource,
@@ -277,6 +286,7 @@ func (p *SdwanProvider) DataSources(ctx context.Context) []func() datasource.Dat
 		NewCiscoSIGCredentialsFeatureTemplateDataSource,
 		NewCiscoSNMPFeatureTemplateDataSource,
 		NewCiscoSystemFeatureTemplateDataSource,
+		NewCiscoThousandEyesFeatureTemplateDataSource,
 		NewCiscoVPNFeatureTemplateDataSource,
 		NewCiscoVPNInterfaceFeatureTemplateDataSource,
 		NewCLITemplateFeatureTemplateDataSource,

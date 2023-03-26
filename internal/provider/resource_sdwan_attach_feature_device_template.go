@@ -72,7 +72,7 @@ func (r *AttachFeatureDeviceTemplateResource) Configure(_ context.Context, req r
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (r *AttachFeatureDeviceTemplateResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {

@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -30,7 +31,8 @@ func NewQoSMapPolicyDefinitionResource() resource.Resource {
 }
 
 type QoSMapPolicyDefinitionResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *QoSMapPolicyDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -136,7 +138,8 @@ func (r *QoSMapPolicyDefinitionResource) Configure(_ context.Context, req resour
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *QoSMapPolicyDefinitionResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -225,7 +228,9 @@ func (r *QoSMapPolicyDefinitionResource) Update(ctx context.Context, req resourc
 
 	if plan.hasChanges(ctx, &state) {
 		body := plan.toBody(ctx)
+		r.updateMutex.Lock()
 		res, err := r.client.Put("/template/policy/definition/qosmap/"+plan.Id.ValueString(), body)
+		r.updateMutex.Unlock()
 		if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
 			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 			return

@@ -5,6 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -30,7 +31,8 @@ func NewAppProbeClassPolicyObjectResource() resource.Resource {
 }
 
 type AppProbeClassPolicyObjectResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *AppProbeClassPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -105,7 +107,8 @@ func (r *AppProbeClassPolicyObjectResource) Configure(_ context.Context, req res
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *AppProbeClassPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -186,7 +189,9 @@ func (r *AppProbeClassPolicyObjectResource) Update(ctx context.Context, req reso
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
+	r.updateMutex.Lock()
 	res, err := r.client.Put("/template/policy/list/appprobe/"+plan.Id.ValueString(), body)
+	r.updateMutex.Unlock()
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return

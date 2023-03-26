@@ -139,7 +139,7 @@ func (d *FeatureDeviceTemplateDataSource) Configure(_ context.Context, req datas
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *FeatureDeviceTemplateDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

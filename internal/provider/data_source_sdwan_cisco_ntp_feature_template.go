@@ -193,7 +193,7 @@ func (d *CiscoNTPFeatureTemplateDataSource) Configure(_ context.Context, req dat
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *CiscoNTPFeatureTemplateDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {

@@ -78,7 +78,7 @@ func (r *CLIDeviceTemplateResource) Configure(_ context.Context, req resource.Co
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (r *CLIDeviceTemplateResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {

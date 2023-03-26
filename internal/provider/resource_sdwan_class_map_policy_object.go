@@ -5,6 +5,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -29,7 +30,8 @@ func NewClassMapPolicyObjectResource() resource.Resource {
 }
 
 type ClassMapPolicyObjectResource struct {
-	client *sdwan.Client
+	client      *sdwan.Client
+	updateMutex *sync.Mutex
 }
 
 func (r *ClassMapPolicyObjectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -85,7 +87,8 @@ func (r *ClassMapPolicyObjectResource) Configure(_ context.Context, req resource
 		return
 	}
 
-	r.client = req.ProviderData.(*sdwan.Client)
+	r.client = req.ProviderData.(*SdwanProviderData).Client
+	r.updateMutex = req.ProviderData.(*SdwanProviderData).UpdateMutex
 }
 
 func (r *ClassMapPolicyObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -166,7 +169,9 @@ func (r *ClassMapPolicyObjectResource) Update(ctx context.Context, req resource.
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Update", plan.Name.ValueString()))
 
 	body := plan.toBody(ctx)
+	r.updateMutex.Lock()
 	res, err := r.client.Put("/template/policy/list/class/"+plan.Id.ValueString(), body)
+	r.updateMutex.Unlock()
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
 		return

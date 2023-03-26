@@ -165,7 +165,7 @@ func (d *{{camelCase .Name}}FeatureTemplateDataSource) Configure(_ context.Conte
 		return
 	}
 
-	d.client = req.ProviderData.(*sdwan.Client)
+	d.client = req.ProviderData.(*SdwanProviderData).Client
 }
 
 func (d *{{camelCase .Name}}FeatureTemplateDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
