@@ -10,6 +10,7 @@ description: |-
 ## 0.1.8 (unreleased)
 
 - Add `sdwan_cisco_thousandeyes_feature_template` resource and data source
+- Add `sdwan_cisco_dhcp_server_feature_template` resource and data source
 
 ## 0.1.7
 
