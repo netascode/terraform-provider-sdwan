@@ -218,7 +218,7 @@ func (r *LocalizedPolicyResource) Read(ctx context.Context, req resource.ReadReq
 	tflog.Debug(ctx, fmt.Sprintf("%s: Beginning Read", state.Name.String()))
 
 	res, err := r.client.Get("/template/policy/vedge/definition/" + state.Id.ValueString())
-	if res.Get("error.message").String() == "Policy definition not found" {
+	if res.Get("error.message").String() == "Invalid template type" {
 		resp.State.RemoveResource(ctx)
 		return
 	} else if err != nil {
