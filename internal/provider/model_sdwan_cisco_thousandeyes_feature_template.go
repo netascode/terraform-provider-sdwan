@@ -99,6 +99,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.token."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.token."+"vipVariableName", item.TeAccountGroupTokenVariable.ValueString())
 		} else if item.TeAccountGroupToken.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.token."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.token."+"vipType", "constant")
@@ -125,6 +126,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.te-mgmt-ip."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.te-mgmt-ip."+"vipVariableName", item.TeAgentIpVariable.ValueString())
 		} else if item.TeAgentIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.te-mgmt-ip."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.te-mgmt-ip."+"vipType", "constant")
@@ -137,6 +139,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.te-vpg-ip."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.te-vpg-ip."+"vipVariableName", item.TeDefaultGatewayVariable.ValueString())
 		} else if item.TeDefaultGateway.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.te-vpg-ip."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.te-vpg-ip."+"vipType", "constant")
@@ -172,6 +175,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 		}
 		itemAttributes = append(itemAttributes, "proxy_type")
 		if item.TeWebProxyType.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_type."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_type."+"vipType", "constant")
@@ -184,6 +188,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_host."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_host."+"vipVariableName", item.TeProxyHostVariable.ValueString())
 		} else if item.TeProxyHost.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te.proxy_static", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_host."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_host."+"vipType", "constant")
@@ -196,6 +201,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_port."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_port."+"vipVariableName", item.TeProxyPortVariable.ValueString())
 		} else if item.TeProxyPort.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te.proxy_static", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_port."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_static.proxy_port."+"vipType", "constant")
@@ -208,6 +214,7 @@ func (data CiscoThousandEyes) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_pac.pac_url."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_pac.pac_url."+"vipVariableName", item.TePacUrlVariable.ValueString())
 		} else if item.TePacUrl.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "te.proxy_pac", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_pac.pac_url."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "te.proxy_pac.pac_url."+"vipType", "constant")

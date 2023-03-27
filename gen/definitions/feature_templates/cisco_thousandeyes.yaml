@@ -32,14 +32,11 @@ attributes:
         example: static
       - model_name: proxy_host
         tf_name: te_proxy_host
-        exclude_ignore: true
         example: 3.3.3.3
       - model_name: proxy_port
         tf_name: te_proxy_port
-        exclude_ignore: true
         example: 80
       - model_name: pac_url
         tf_name: te_pac_url
-        exclude_ignore: true
         exclude_test: true
         example: https://5.5.5.5

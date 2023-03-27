@@ -66,6 +66,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipVariableName", data.ZscalerOrganizationVariable.ValueString())
 	} else if data.ZscalerOrganization.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.organization."+"vipType", "constant")
@@ -77,6 +78,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipVariableName", data.ZscalerPartnerBaseUriVariable.ValueString())
 	} else if data.ZscalerPartnerBaseUri.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-base-uri."+"vipType", "constant")
@@ -88,6 +90,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipVariableName", data.ZscalerUsernameVariable.ValueString())
 	} else if data.ZscalerUsername.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.username."+"vipType", "constant")
@@ -99,6 +102,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipVariableName", data.ZscalerPasswordVariable.ValueString())
 	} else if data.ZscalerPassword.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.password."+"vipType", "constant")
@@ -110,6 +114,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipVariableName", data.ZscalerCloudNameVariable.ValueString())
 	} else if data.ZscalerCloudName.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.cloud-gateway."+"vipType", "constant")
@@ -121,6 +126,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipVariableName", data.ZscalerPartnerUsernameVariable.ValueString())
 	} else if data.ZscalerPartnerUsername.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-id."+"vipType", "constant")
@@ -132,6 +138,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipVariableName", data.ZscalerPartnerPasswordVariable.ValueString())
 	} else if data.ZscalerPartnerPassword.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-secret."+"vipType", "constant")
@@ -143,6 +150,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipVariableName", data.ZscalerPartnerApiKeyVariable.ValueString())
 	} else if data.ZscalerPartnerApiKey.IsNull() {
+		body, _ = sjson.Set(body, path+"zscaler", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"zscaler.partner-key."+"vipType", "constant")
@@ -154,6 +162,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipVariableName", data.UmbrellaApiKeyVariable.ValueString())
 	} else if data.UmbrellaApiKey.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-key."+"vipType", "constant")
@@ -165,6 +174,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipVariableName", data.UmbrellaApiSecretVariable.ValueString())
 	} else if data.UmbrellaApiSecret.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.api-secret."+"vipType", "constant")
@@ -176,6 +186,7 @@ func (data CiscoSIGCredentials) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipVariableName", data.UmbrellaOrganizationIdVariable.ValueString())
 	} else if data.UmbrellaOrganizationId.IsNull() {
+		body, _ = sjson.Set(body, path+"umbrella", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"umbrella.org-id."+"vipType", "constant")

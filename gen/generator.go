@@ -251,6 +251,11 @@ func SnakeCase(s string) string {
 	return strings.Join(g, "_")
 }
 
+// Templating helper function to build a SJSON path
+func BuildPath(s []string) string {
+	return strings.Join(s, ".")
+}
+
 func contains(s []string, str string) bool {
 	for _, v := range s {
 		if v == str {
@@ -267,6 +272,7 @@ var functions = template.FuncMap{
 	"snakeCase": SnakeCase,
 	"sprintf":   fmt.Sprintf,
 	"toLower":   strings.ToLower,
+	"path":      BuildPath,
 }
 
 func parseFeatureTemplateAttribute(attr *YamlConfigAttribute, model gjson.Result) {

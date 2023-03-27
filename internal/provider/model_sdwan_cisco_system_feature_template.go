@@ -554,6 +554,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipVariableName", item.TransportEndpointIpVariable.ValueString())
 		} else if item.TransportEndpointIp.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.endpoint-ip."+"vipType", "constant")
@@ -566,6 +567,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipVariableName", item.TransportEndpointProtocolVariable.ValueString())
 		} else if item.TransportEndpointProtocol.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.protocol."+"vipType", "constant")
@@ -578,6 +580,7 @@ func (data CiscoSystem) toBody(ctx context.Context) string {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipType", "variableName")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipVariableName", item.TransportEndpointPortVariable.ValueString())
 		} else if item.TransportEndpointPort.IsNull() {
+			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port", map[string]interface{}{})
 		} else {
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipObjectType", "object")
 			itemBody, _ = sjson.Set(itemBody, "endpoint-ip-transport-port.port."+"vipType", "constant")

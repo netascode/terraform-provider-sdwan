@@ -725,6 +725,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"nat.nat-choice."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat.nat-choice."+"vipVariableName", data.NatTypeVariable.ValueString())
 	} else if data.NatType.IsNull() {
+		body, _ = sjson.Set(body, path+"nat", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"nat.nat-choice."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat.nat-choice."+"vipType", "constant")
@@ -762,6 +763,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"nat.natpool.range-start."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat.natpool.range-start."+"vipVariableName", data.NatPoolRangeStartVariable.ValueString())
 	} else if data.NatPoolRangeStart.IsNull() {
+		body, _ = sjson.Set(body, path+"nat.natpool", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"nat.natpool.range-start."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat.natpool.range-start."+"vipType", "constant")
@@ -773,6 +775,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"nat.natpool.range-end."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat.natpool.range-end."+"vipVariableName", data.NatPoolRangeEndVariable.ValueString())
 	} else if data.NatPoolRangeEnd.IsNull() {
+		body, _ = sjson.Set(body, path+"nat.natpool", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"nat.natpool.range-end."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat.natpool.range-end."+"vipType", "constant")
@@ -810,6 +813,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"nat.natpool.prefix-length."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"nat.natpool.prefix-length."+"vipVariableName", data.NatPoolPrefixLengthVariable.ValueString())
 	} else if data.NatPoolPrefixLength.IsNull() {
+		body, _ = sjson.Set(body, path+"nat.natpool", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"nat.natpool.prefix-length."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"nat.natpool.prefix-length."+"vipType", "constant")
@@ -1205,6 +1209,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"tunnel-interface.tunnel-qos.mode."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"tunnel-interface.tunnel-qos.mode."+"vipVariableName", data.TunnelQosModeVariable.ValueString())
 	} else if data.TunnelQosMode.IsNull() {
+		body, _ = sjson.Set(body, path+"tunnel-interface.tunnel-qos", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"tunnel-interface.tunnel-qos.mode."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"tunnel-interface.tunnel-qos.mode."+"vipType", "constant")
@@ -1823,6 +1828,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.bandwidth-down."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.bandwidth-down."+"vipVariableName", data.QosAdaptiveBandwidthDownstreamVariable.ValueString())
 	} else if data.QosAdaptiveBandwidthDownstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.downstream", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.bandwidth-down."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.bandwidth-down."+"vipType", "constant")
@@ -1834,6 +1840,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmin."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmin."+"vipVariableName", data.QosAdaptiveMinDownstreamVariable.ValueString())
 	} else if data.QosAdaptiveMinDownstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmin."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmin."+"vipType", "constant")
@@ -1845,6 +1852,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmax."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmax."+"vipVariableName", data.QosAdaptiveMaxDownstreamVariable.ValueString())
 	} else if data.QosAdaptiveMaxDownstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmax."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.downstream.range.dmax."+"vipType", "constant")
@@ -1856,6 +1864,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.bandwidth-up."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.bandwidth-up."+"vipVariableName", data.QosAdaptiveBandwidthUpstreamVariable.ValueString())
 	} else if data.QosAdaptiveBandwidthUpstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.upstream", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.bandwidth-up."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.bandwidth-up."+"vipType", "constant")
@@ -1867,6 +1876,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umin."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umin."+"vipVariableName", data.QosAdaptiveMinUpstreamVariable.ValueString())
 	} else if data.QosAdaptiveMinUpstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umin."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umin."+"vipType", "constant")
@@ -1878,6 +1888,7 @@ func (data CiscoVPNInterface) toBody(ctx context.Context) string {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umax."+"vipType", "variableName")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umax."+"vipVariableName", data.QosAdaptiveMaxUpstreamVariable.ValueString())
 	} else if data.QosAdaptiveMaxUpstream.IsNull() {
+		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range", map[string]interface{}{})
 	} else {
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umax."+"vipObjectType", "object")
 		body, _ = sjson.Set(body, path+"qos-adaptive.upstream.range.umax."+"vipType", "constant")

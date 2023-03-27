@@ -7,6 +7,10 @@ description: |-
 
 # Changelog
 
+## 0.1.9 (unreleased)
+
+- Fix payload issue with `sdwan_cisco_thousandeyes_feature_template` resource
+
 ## 0.1.8
 
 - Add `sdwan_cisco_thousandeyes_feature_template` resource and data source
