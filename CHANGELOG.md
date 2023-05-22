@@ -1,6 +1,8 @@
 ## 0.1.9 (unreleased)
 
 - Fix payload issue with `sdwan_cisco_thousandeyes_feature_template` resource
+- Make `sequences` attribute of `sdwan_route_policy_definition` resource optional
+- Do not bump the version number of feature templates if only the description changes
 
 ## 0.1.8
 
