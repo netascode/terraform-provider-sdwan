@@ -667,3 +667,68 @@ func (data *CiscoOMP) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoOMP) hasChanges(ctx context.Context, state *CiscoOMP) bool {
+	hasChanges := false
+	if !data.GracefulRestart.Equal(state.GracefulRestart) {
+		hasChanges = true
+	}
+	if !data.OverlayAs.Equal(state.OverlayAs) {
+		hasChanges = true
+	}
+	if !data.SendPathLimit.Equal(state.SendPathLimit) {
+		hasChanges = true
+	}
+	if !data.EcmpLimit.Equal(state.EcmpLimit) {
+		hasChanges = true
+	}
+	if !data.Shutdown.Equal(state.Shutdown) {
+		hasChanges = true
+	}
+	if !data.OmpAdminDistanceIpv4.Equal(state.OmpAdminDistanceIpv4) {
+		hasChanges = true
+	}
+	if !data.OmpAdminDistanceIpv6.Equal(state.OmpAdminDistanceIpv6) {
+		hasChanges = true
+	}
+	if !data.AdvertisementInterval.Equal(state.AdvertisementInterval) {
+		hasChanges = true
+	}
+	if !data.GracefulRestartTimer.Equal(state.GracefulRestartTimer) {
+		hasChanges = true
+	}
+	if !data.EorTimer.Equal(state.EorTimer) {
+		hasChanges = true
+	}
+	if !data.Holdtime.Equal(state.Holdtime) {
+		hasChanges = true
+	}
+	if !data.IgnoreRegionPathLength.Equal(state.IgnoreRegionPathLength) {
+		hasChanges = true
+	}
+	if !data.TransportGateway.Equal(state.TransportGateway) {
+		hasChanges = true
+	}
+	if len(data.AdvertiseIpv4Routes) != len(state.AdvertiseIpv4Routes) {
+		hasChanges = true
+	} else {
+		for i := range data.AdvertiseIpv4Routes {
+			if !data.AdvertiseIpv4Routes[i].Protocol.Equal(state.AdvertiseIpv4Routes[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.AdvertiseIpv4Routes[i].AdvertiseExternalOspf.Equal(state.AdvertiseIpv4Routes[i].AdvertiseExternalOspf) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.AdvertiseIpv6Routes) != len(state.AdvertiseIpv6Routes) {
+		hasChanges = true
+	} else {
+		for i := range data.AdvertiseIpv6Routes {
+			if !data.AdvertiseIpv6Routes[i].Protocol.Equal(state.AdvertiseIpv6Routes[i].Protocol) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

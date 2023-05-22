@@ -428,3 +428,41 @@ func (data *CiscoSIGCredentials) fromBody(ctx context.Context, res gjson.Result)
 		data.UmbrellaOrganizationIdVariable = types.StringNull()
 	}
 }
+
+func (data *CiscoSIGCredentials) hasChanges(ctx context.Context, state *CiscoSIGCredentials) bool {
+	hasChanges := false
+	if !data.ZscalerOrganization.Equal(state.ZscalerOrganization) {
+		hasChanges = true
+	}
+	if !data.ZscalerPartnerBaseUri.Equal(state.ZscalerPartnerBaseUri) {
+		hasChanges = true
+	}
+	if !data.ZscalerUsername.Equal(state.ZscalerUsername) {
+		hasChanges = true
+	}
+	if !data.ZscalerPassword.Equal(state.ZscalerPassword) {
+		hasChanges = true
+	}
+	if !data.ZscalerCloudName.Equal(state.ZscalerCloudName) {
+		hasChanges = true
+	}
+	if !data.ZscalerPartnerUsername.Equal(state.ZscalerPartnerUsername) {
+		hasChanges = true
+	}
+	if !data.ZscalerPartnerPassword.Equal(state.ZscalerPartnerPassword) {
+		hasChanges = true
+	}
+	if !data.ZscalerPartnerApiKey.Equal(state.ZscalerPartnerApiKey) {
+		hasChanges = true
+	}
+	if !data.UmbrellaApiKey.Equal(state.UmbrellaApiKey) {
+		hasChanges = true
+	}
+	if !data.UmbrellaApiSecret.Equal(state.UmbrellaApiSecret) {
+		hasChanges = true
+	}
+	if !data.UmbrellaOrganizationId.Equal(state.UmbrellaOrganizationId) {
+		hasChanges = true
+	}
+	return hasChanges
+}

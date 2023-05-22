@@ -554,3 +554,56 @@ func (data *CiscoNTP) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoNTP) hasChanges(ctx context.Context, state *CiscoNTP) bool {
+	hasChanges := false
+	if !data.Master.Equal(state.Master) {
+		hasChanges = true
+	}
+	if !data.MasterStratum.Equal(state.MasterStratum) {
+		hasChanges = true
+	}
+	if !data.MasterSourceInterface.Equal(state.MasterSourceInterface) {
+		hasChanges = true
+	}
+	if !data.TrustedKeys.Equal(state.TrustedKeys) {
+		hasChanges = true
+	}
+	if len(data.AuthenticationKeys) != len(state.AuthenticationKeys) {
+		hasChanges = true
+	} else {
+		for i := range data.AuthenticationKeys {
+			if !data.AuthenticationKeys[i].Id.Equal(state.AuthenticationKeys[i].Id) {
+				hasChanges = true
+			}
+			if !data.AuthenticationKeys[i].Value.Equal(state.AuthenticationKeys[i].Value) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Servers) != len(state.Servers) {
+		hasChanges = true
+	} else {
+		for i := range data.Servers {
+			if !data.Servers[i].HostnameIp.Equal(state.Servers[i].HostnameIp) {
+				hasChanges = true
+			}
+			if !data.Servers[i].AuthenticationKeyId.Equal(state.Servers[i].AuthenticationKeyId) {
+				hasChanges = true
+			}
+			if !data.Servers[i].VpnId.Equal(state.Servers[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Servers[i].Version.Equal(state.Servers[i].Version) {
+				hasChanges = true
+			}
+			if !data.Servers[i].SourceInterface.Equal(state.Servers[i].SourceInterface) {
+				hasChanges = true
+			}
+			if !data.Servers[i].Prefer.Equal(state.Servers[i].Prefer) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

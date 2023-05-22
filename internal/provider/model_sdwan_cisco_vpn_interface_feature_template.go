@@ -5467,3 +5467,542 @@ func (data *CiscoVPNInterface) fromBody(ctx context.Context, res gjson.Result) {
 		data.SgtEnforcementSgtVariable = types.StringNull()
 	}
 }
+
+func (data *CiscoVPNInterface) hasChanges(ctx context.Context, state *CiscoVPNInterface) bool {
+	hasChanges := false
+	if !data.InterfaceName.Equal(state.InterfaceName) {
+		hasChanges = true
+	}
+	if !data.InterfaceDescription.Equal(state.InterfaceDescription) {
+		hasChanges = true
+	}
+	if !data.Poe.Equal(state.Poe) {
+		hasChanges = true
+	}
+	if !data.Address.Equal(state.Address) {
+		hasChanges = true
+	}
+	if len(data.Ipv4SecondaryAddresses) != len(state.Ipv4SecondaryAddresses) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4SecondaryAddresses {
+			if !data.Ipv4SecondaryAddresses[i].Address.Equal(state.Ipv4SecondaryAddresses[i].Address) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.Dhcp.Equal(state.Dhcp) {
+		hasChanges = true
+	}
+	if !data.DhcpDistance.Equal(state.DhcpDistance) {
+		hasChanges = true
+	}
+	if !data.Ipv6Address.Equal(state.Ipv6Address) {
+		hasChanges = true
+	}
+	if !data.Dhcpv6.Equal(state.Dhcpv6) {
+		hasChanges = true
+	}
+	if len(data.Ipv6SecondaryAddresses) != len(state.Ipv6SecondaryAddresses) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6SecondaryAddresses {
+			if !data.Ipv6SecondaryAddresses[i].Address.Equal(state.Ipv6SecondaryAddresses[i].Address) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv6AccessLists) != len(state.Ipv6AccessLists) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6AccessLists {
+			if !data.Ipv6AccessLists[i].Direction.Equal(state.Ipv6AccessLists[i].Direction) {
+				hasChanges = true
+			}
+			if !data.Ipv6AccessLists[i].AclName.Equal(state.Ipv6AccessLists[i].AclName) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.Ipv4DhcpHelper.Equal(state.Ipv4DhcpHelper) {
+		hasChanges = true
+	}
+	if len(data.Ipv6DhcpHelpers) != len(state.Ipv6DhcpHelpers) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6DhcpHelpers {
+			if !data.Ipv6DhcpHelpers[i].Address.Equal(state.Ipv6DhcpHelpers[i].Address) {
+				hasChanges = true
+			}
+			if !data.Ipv6DhcpHelpers[i].VpnId.Equal(state.Ipv6DhcpHelpers[i].VpnId) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.Tracker.Equal(state.Tracker) {
+		hasChanges = true
+	}
+	if !data.AutoBandwidthDetect.Equal(state.AutoBandwidthDetect) {
+		hasChanges = true
+	}
+	if !data.IperfServer.Equal(state.IperfServer) {
+		hasChanges = true
+	}
+	if !data.Nat.Equal(state.Nat) {
+		hasChanges = true
+	}
+	if !data.NatType.Equal(state.NatType) {
+		hasChanges = true
+	}
+	if !data.UdpTimeout.Equal(state.UdpTimeout) {
+		hasChanges = true
+	}
+	if !data.TcpTimeout.Equal(state.TcpTimeout) {
+		hasChanges = true
+	}
+	if !data.NatPoolRangeStart.Equal(state.NatPoolRangeStart) {
+		hasChanges = true
+	}
+	if !data.NatPoolRangeEnd.Equal(state.NatPoolRangeEnd) {
+		hasChanges = true
+	}
+	if !data.NatOverload.Equal(state.NatOverload) {
+		hasChanges = true
+	}
+	if !data.NatInsideSourceLoopbackInterface.Equal(state.NatInsideSourceLoopbackInterface) {
+		hasChanges = true
+	}
+	if !data.NatPoolPrefixLength.Equal(state.NatPoolPrefixLength) {
+		hasChanges = true
+	}
+	if !data.Ipv6Nat.Equal(state.Ipv6Nat) {
+		hasChanges = true
+	}
+	if !data.Nat64Interface.Equal(state.Nat64Interface) {
+		hasChanges = true
+	}
+	if !data.Nat66Interface.Equal(state.Nat66Interface) {
+		hasChanges = true
+	}
+	if len(data.StaticNat66Entries) != len(state.StaticNat66Entries) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticNat66Entries {
+			if !data.StaticNat66Entries[i].SourcePrefix.Equal(state.StaticNat66Entries[i].SourcePrefix) {
+				hasChanges = true
+			}
+			if !data.StaticNat66Entries[i].TranslatedSourcePrefix.Equal(state.StaticNat66Entries[i].TranslatedSourcePrefix) {
+				hasChanges = true
+			}
+			if !data.StaticNat66Entries[i].SourceVpnId.Equal(state.StaticNat66Entries[i].SourceVpnId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.StaticNatEntries) != len(state.StaticNatEntries) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticNatEntries {
+			if !data.StaticNatEntries[i].SourceIp.Equal(state.StaticNatEntries[i].SourceIp) {
+				hasChanges = true
+			}
+			if !data.StaticNatEntries[i].TranslateIp.Equal(state.StaticNatEntries[i].TranslateIp) {
+				hasChanges = true
+			}
+			if !data.StaticNatEntries[i].StaticNatDirection.Equal(state.StaticNatEntries[i].StaticNatDirection) {
+				hasChanges = true
+			}
+			if !data.StaticNatEntries[i].SourceVpnId.Equal(state.StaticNatEntries[i].SourceVpnId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.StaticPortForwardEntries) != len(state.StaticPortForwardEntries) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticPortForwardEntries {
+			if !data.StaticPortForwardEntries[i].SourceIp.Equal(state.StaticPortForwardEntries[i].SourceIp) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].TranslateIp.Equal(state.StaticPortForwardEntries[i].TranslateIp) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].StaticNatDirection.Equal(state.StaticPortForwardEntries[i].StaticNatDirection) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].SourcePort.Equal(state.StaticPortForwardEntries[i].SourcePort) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].TranslatePort.Equal(state.StaticPortForwardEntries[i].TranslatePort) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].Protocol.Equal(state.StaticPortForwardEntries[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.StaticPortForwardEntries[i].SourceVpnId.Equal(state.StaticPortForwardEntries[i].SourceVpnId) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.EnableCoreRegion.Equal(state.EnableCoreRegion) {
+		hasChanges = true
+	}
+	if !data.CoreRegion.Equal(state.CoreRegion) {
+		hasChanges = true
+	}
+	if !data.SecondaryRegion.Equal(state.SecondaryRegion) {
+		hasChanges = true
+	}
+	if len(data.TunnelInterfaceEncapsulations) != len(state.TunnelInterfaceEncapsulations) {
+		hasChanges = true
+	} else {
+		for i := range data.TunnelInterfaceEncapsulations {
+			if !data.TunnelInterfaceEncapsulations[i].Encapsulation.Equal(state.TunnelInterfaceEncapsulations[i].Encapsulation) {
+				hasChanges = true
+			}
+			if !data.TunnelInterfaceEncapsulations[i].Preference.Equal(state.TunnelInterfaceEncapsulations[i].Preference) {
+				hasChanges = true
+			}
+			if !data.TunnelInterfaceEncapsulations[i].Weight.Equal(state.TunnelInterfaceEncapsulations[i].Weight) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.TunnelInterfaceBorder.Equal(state.TunnelInterfaceBorder) {
+		hasChanges = true
+	}
+	if !data.PerTunnelQos.Equal(state.PerTunnelQos) {
+		hasChanges = true
+	}
+	if !data.PerTunnelQosAggregator.Equal(state.PerTunnelQosAggregator) {
+		hasChanges = true
+	}
+	if !data.TunnelQosMode.Equal(state.TunnelQosMode) {
+		hasChanges = true
+	}
+	if !data.TunnelBandwidth.Equal(state.TunnelBandwidth) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceGroups.Equal(state.TunnelInterfaceGroups) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceColor.Equal(state.TunnelInterfaceColor) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceMaxControlConnections.Equal(state.TunnelInterfaceMaxControlConnections) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceControlConnections.Equal(state.TunnelInterfaceControlConnections) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceVbondAsStunServer.Equal(state.TunnelInterfaceVbondAsStunServer) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceExcludeControllerGroupList.Equal(state.TunnelInterfaceExcludeControllerGroupList) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceVmanageConnectionPreference.Equal(state.TunnelInterfaceVmanageConnectionPreference) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfacePortHop.Equal(state.TunnelInterfacePortHop) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceColorRestrict.Equal(state.TunnelInterfaceColorRestrict) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceGreTunnelDestinationIp.Equal(state.TunnelInterfaceGreTunnelDestinationIp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceCarrier.Equal(state.TunnelInterfaceCarrier) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceNatRefreshInterval.Equal(state.TunnelInterfaceNatRefreshInterval) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceHelloInterval.Equal(state.TunnelInterfaceHelloInterval) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceHelloTolerance.Equal(state.TunnelInterfaceHelloTolerance) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceBindLoopbackTunnel.Equal(state.TunnelInterfaceBindLoopbackTunnel) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceLastResortCircuit.Equal(state.TunnelInterfaceLastResortCircuit) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceLowBandwidthLink.Equal(state.TunnelInterfaceLowBandwidthLink) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceTunnelTcpMss.Equal(state.TunnelInterfaceTunnelTcpMss) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceClearDontFragment.Equal(state.TunnelInterfaceClearDontFragment) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfacePropagateSgt.Equal(state.TunnelInterfacePropagateSgt) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceNetworkBroadcast.Equal(state.TunnelInterfaceNetworkBroadcast) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowAll.Equal(state.TunnelInterfaceAllowAll) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowBgp.Equal(state.TunnelInterfaceAllowBgp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowDhcp.Equal(state.TunnelInterfaceAllowDhcp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowDns.Equal(state.TunnelInterfaceAllowDns) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowIcmp.Equal(state.TunnelInterfaceAllowIcmp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowSsh.Equal(state.TunnelInterfaceAllowSsh) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowNetconf.Equal(state.TunnelInterfaceAllowNetconf) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowNtp.Equal(state.TunnelInterfaceAllowNtp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowOspf.Equal(state.TunnelInterfaceAllowOspf) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowStun.Equal(state.TunnelInterfaceAllowStun) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowSnmp.Equal(state.TunnelInterfaceAllowSnmp) {
+		hasChanges = true
+	}
+	if !data.TunnelInterfaceAllowHttps.Equal(state.TunnelInterfaceAllowHttps) {
+		hasChanges = true
+	}
+	if !data.MediaType.Equal(state.MediaType) {
+		hasChanges = true
+	}
+	if !data.InterfaceMtu.Equal(state.InterfaceMtu) {
+		hasChanges = true
+	}
+	if !data.IpMtu.Equal(state.IpMtu) {
+		hasChanges = true
+	}
+	if !data.TcpMssAdjust.Equal(state.TcpMssAdjust) {
+		hasChanges = true
+	}
+	if !data.TlocExtension.Equal(state.TlocExtension) {
+		hasChanges = true
+	}
+	if !data.LoadInterval.Equal(state.LoadInterval) {
+		hasChanges = true
+	}
+	if !data.GreTunnelSourceIp.Equal(state.GreTunnelSourceIp) {
+		hasChanges = true
+	}
+	if !data.GreTunnelXconnect.Equal(state.GreTunnelXconnect) {
+		hasChanges = true
+	}
+	if !data.MacAddress.Equal(state.MacAddress) {
+		hasChanges = true
+	}
+	if !data.Speed.Equal(state.Speed) {
+		hasChanges = true
+	}
+	if !data.Duplex.Equal(state.Duplex) {
+		hasChanges = true
+	}
+	if !data.Shutdown.Equal(state.Shutdown) {
+		hasChanges = true
+	}
+	if !data.ArpTimeout.Equal(state.ArpTimeout) {
+		hasChanges = true
+	}
+	if !data.Autonegotiate.Equal(state.Autonegotiate) {
+		hasChanges = true
+	}
+	if !data.IpDirectedBroadcast.Equal(state.IpDirectedBroadcast) {
+		hasChanges = true
+	}
+	if !data.IcmpRedirectDisable.Equal(state.IcmpRedirectDisable) {
+		hasChanges = true
+	}
+	if !data.QosAdaptive.Equal(state.QosAdaptive) {
+		hasChanges = true
+	}
+	if !data.QosAdaptivePeriod.Equal(state.QosAdaptivePeriod) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveBandwidthDownstream.Equal(state.QosAdaptiveBandwidthDownstream) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveMinDownstream.Equal(state.QosAdaptiveMinDownstream) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveMaxDownstream.Equal(state.QosAdaptiveMaxDownstream) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveBandwidthUpstream.Equal(state.QosAdaptiveBandwidthUpstream) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveMinUpstream.Equal(state.QosAdaptiveMinUpstream) {
+		hasChanges = true
+	}
+	if !data.QosAdaptiveMaxUpstream.Equal(state.QosAdaptiveMaxUpstream) {
+		hasChanges = true
+	}
+	if !data.ShapingRate.Equal(state.ShapingRate) {
+		hasChanges = true
+	}
+	if !data.QosMap.Equal(state.QosMap) {
+		hasChanges = true
+	}
+	if !data.QosMapVpn.Equal(state.QosMapVpn) {
+		hasChanges = true
+	}
+	if !data.BandwidthUpstream.Equal(state.BandwidthUpstream) {
+		hasChanges = true
+	}
+	if !data.BandwidthDownstream.Equal(state.BandwidthDownstream) {
+		hasChanges = true
+	}
+	if !data.BlockNonSourceIp.Equal(state.BlockNonSourceIp) {
+		hasChanges = true
+	}
+	if !data.RewriteRuleName.Equal(state.RewriteRuleName) {
+		hasChanges = true
+	}
+	if len(data.AccessLists) != len(state.AccessLists) {
+		hasChanges = true
+	} else {
+		for i := range data.AccessLists {
+			if !data.AccessLists[i].Direction.Equal(state.AccessLists[i].Direction) {
+				hasChanges = true
+			}
+			if !data.AccessLists[i].AclName.Equal(state.AccessLists[i].AclName) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.StaticArps) != len(state.StaticArps) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticArps {
+			if !data.StaticArps[i].IpAddress.Equal(state.StaticArps[i].IpAddress) {
+				hasChanges = true
+			}
+			if !data.StaticArps[i].Mac.Equal(state.StaticArps[i].Mac) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv4Vrrps) != len(state.Ipv4Vrrps) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4Vrrps {
+			if !data.Ipv4Vrrps[i].GroupId.Equal(state.Ipv4Vrrps[i].GroupId) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].Priority.Equal(state.Ipv4Vrrps[i].Priority) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].Timer.Equal(state.Ipv4Vrrps[i].Timer) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].TrackOmp.Equal(state.Ipv4Vrrps[i].TrackOmp) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].TrackPrefixList.Equal(state.Ipv4Vrrps[i].TrackPrefixList) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].IpAddress.Equal(state.Ipv4Vrrps[i].IpAddress) {
+				hasChanges = true
+			}
+			if len(data.Ipv4Vrrps[i].Ipv4SecondaryAddresses) != len(state.Ipv4Vrrps[i].Ipv4SecondaryAddresses) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv4Vrrps[i].Ipv4SecondaryAddresses {
+					if !data.Ipv4Vrrps[i].Ipv4SecondaryAddresses[ii].IpAddress.Equal(state.Ipv4Vrrps[i].Ipv4SecondaryAddresses[ii].IpAddress) {
+						hasChanges = true
+					}
+				}
+			}
+			if !data.Ipv4Vrrps[i].TlocPreferenceChange.Equal(state.Ipv4Vrrps[i].TlocPreferenceChange) {
+				hasChanges = true
+			}
+			if !data.Ipv4Vrrps[i].TlocPreferenceChangeValue.Equal(state.Ipv4Vrrps[i].TlocPreferenceChangeValue) {
+				hasChanges = true
+			}
+			if len(data.Ipv4Vrrps[i].TrackingObjects) != len(state.Ipv4Vrrps[i].TrackingObjects) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv4Vrrps[i].TrackingObjects {
+					if !data.Ipv4Vrrps[i].TrackingObjects[ii].TrackerId.Equal(state.Ipv4Vrrps[i].TrackingObjects[ii].TrackerId) {
+						hasChanges = true
+					}
+					if !data.Ipv4Vrrps[i].TrackingObjects[ii].TrackAction.Equal(state.Ipv4Vrrps[i].TrackingObjects[ii].TrackAction) {
+						hasChanges = true
+					}
+					if !data.Ipv4Vrrps[i].TrackingObjects[ii].DecrementValue.Equal(state.Ipv4Vrrps[i].TrackingObjects[ii].DecrementValue) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.Ipv6Vrrps) != len(state.Ipv6Vrrps) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6Vrrps {
+			if !data.Ipv6Vrrps[i].GroupId.Equal(state.Ipv6Vrrps[i].GroupId) {
+				hasChanges = true
+			}
+			if !data.Ipv6Vrrps[i].Priority.Equal(state.Ipv6Vrrps[i].Priority) {
+				hasChanges = true
+			}
+			if !data.Ipv6Vrrps[i].Timer.Equal(state.Ipv6Vrrps[i].Timer) {
+				hasChanges = true
+			}
+			if !data.Ipv6Vrrps[i].TrackOmp.Equal(state.Ipv6Vrrps[i].TrackOmp) {
+				hasChanges = true
+			}
+			if !data.Ipv6Vrrps[i].TrackPrefixList.Equal(state.Ipv6Vrrps[i].TrackPrefixList) {
+				hasChanges = true
+			}
+			if len(data.Ipv6Vrrps[i].Ipv6Adresses) != len(state.Ipv6Vrrps[i].Ipv6Adresses) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv6Vrrps[i].Ipv6Adresses {
+					if !data.Ipv6Vrrps[i].Ipv6Adresses[ii].Ipv6LinkLocal.Equal(state.Ipv6Vrrps[i].Ipv6Adresses[ii].Ipv6LinkLocal) {
+						hasChanges = true
+					}
+					if !data.Ipv6Vrrps[i].Ipv6Adresses[ii].Prefix.Equal(state.Ipv6Vrrps[i].Ipv6Adresses[ii].Prefix) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if !data.PropagateSgt.Equal(state.PropagateSgt) {
+		hasChanges = true
+	}
+	if !data.StaticSgt.Equal(state.StaticSgt) {
+		hasChanges = true
+	}
+	if !data.StaticSgtTrusted.Equal(state.StaticSgtTrusted) {
+		hasChanges = true
+	}
+	if !data.EnableSgt.Equal(state.EnableSgt) {
+		hasChanges = true
+	}
+	if !data.SgtEnforcement.Equal(state.SgtEnforcement) {
+		hasChanges = true
+	}
+	if !data.SgtEnforcementSgt.Equal(state.SgtEnforcementSgt) {
+		hasChanges = true
+	}
+	return hasChanges
+}

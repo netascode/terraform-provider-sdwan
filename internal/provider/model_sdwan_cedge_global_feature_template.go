@@ -848,3 +848,77 @@ func (data *CEdgeGlobal) fromBody(ctx context.Context, res gjson.Result) {
 		data.LineVtyVariable = types.StringNull()
 	}
 }
+
+func (data *CEdgeGlobal) hasChanges(ctx context.Context, state *CEdgeGlobal) bool {
+	hasChanges := false
+	if !data.Nat64UdpTimeout.Equal(state.Nat64UdpTimeout) {
+		hasChanges = true
+	}
+	if !data.Nat64TcpTimeout.Equal(state.Nat64TcpTimeout) {
+		hasChanges = true
+	}
+	if !data.HttpAuthentication.Equal(state.HttpAuthentication) {
+		hasChanges = true
+	}
+	if !data.SshVersion.Equal(state.SshVersion) {
+		hasChanges = true
+	}
+	if !data.HttpServer.Equal(state.HttpServer) {
+		hasChanges = true
+	}
+	if !data.HttpsServer.Equal(state.HttpsServer) {
+		hasChanges = true
+	}
+	if !data.SourceInterface.Equal(state.SourceInterface) {
+		hasChanges = true
+	}
+	if !data.IpSourceRouting.Equal(state.IpSourceRouting) {
+		hasChanges = true
+	}
+	if !data.ArpProxy.Equal(state.ArpProxy) {
+		hasChanges = true
+	}
+	if !data.FtpPassive.Equal(state.FtpPassive) {
+		hasChanges = true
+	}
+	if !data.RshRcp.Equal(state.RshRcp) {
+		hasChanges = true
+	}
+	if !data.Bootp.Equal(state.Bootp) {
+		hasChanges = true
+	}
+	if !data.DomainLookup.Equal(state.DomainLookup) {
+		hasChanges = true
+	}
+	if !data.TcpKeepalivesOut.Equal(state.TcpKeepalivesOut) {
+		hasChanges = true
+	}
+	if !data.TcpKeepalivesIn.Equal(state.TcpKeepalivesIn) {
+		hasChanges = true
+	}
+	if !data.TcpSmallServers.Equal(state.TcpSmallServers) {
+		hasChanges = true
+	}
+	if !data.UdpSmallServers.Equal(state.UdpSmallServers) {
+		hasChanges = true
+	}
+	if !data.Lldp.Equal(state.Lldp) {
+		hasChanges = true
+	}
+	if !data.Cdp.Equal(state.Cdp) {
+		hasChanges = true
+	}
+	if !data.SnmpIfindexPersist.Equal(state.SnmpIfindexPersist) {
+		hasChanges = true
+	}
+	if !data.ConsoleLogging.Equal(state.ConsoleLogging) {
+		hasChanges = true
+	}
+	if !data.VtyLogging.Equal(state.VtyLogging) {
+		hasChanges = true
+	}
+	if !data.LineVty.Equal(state.LineVty) {
+		hasChanges = true
+	}
+	return hasChanges
+}

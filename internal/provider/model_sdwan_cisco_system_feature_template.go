@@ -2103,3 +2103,203 @@ func (data *CiscoSystem) fromBody(ctx context.Context, res gjson.Result) {
 
 	}
 }
+
+func (data *CiscoSystem) hasChanges(ctx context.Context, state *CiscoSystem) bool {
+	hasChanges := false
+	if !data.Timezone.Equal(state.Timezone) {
+		hasChanges = true
+	}
+	if !data.Hostname.Equal(state.Hostname) {
+		hasChanges = true
+	}
+	if !data.SystemDescription.Equal(state.SystemDescription) {
+		hasChanges = true
+	}
+	if !data.Location.Equal(state.Location) {
+		hasChanges = true
+	}
+	if !data.Latitude.Equal(state.Latitude) {
+		hasChanges = true
+	}
+	if !data.Longitude.Equal(state.Longitude) {
+		hasChanges = true
+	}
+	if !data.GeoFencing.Equal(state.GeoFencing) {
+		hasChanges = true
+	}
+	if !data.GeoFencingRange.Equal(state.GeoFencingRange) {
+		hasChanges = true
+	}
+	if !data.GeoFencingSms.Equal(state.GeoFencingSms) {
+		hasChanges = true
+	}
+	if len(data.GeoFencingSmsPhoneNumbers) != len(state.GeoFencingSmsPhoneNumbers) {
+		hasChanges = true
+	} else {
+		for i := range data.GeoFencingSmsPhoneNumbers {
+			if !data.GeoFencingSmsPhoneNumbers[i].Number.Equal(state.GeoFencingSmsPhoneNumbers[i].Number) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.DeviceGroups.Equal(state.DeviceGroups) {
+		hasChanges = true
+	}
+	if !data.ControllerGroupList.Equal(state.ControllerGroupList) {
+		hasChanges = true
+	}
+	if !data.SystemIp.Equal(state.SystemIp) {
+		hasChanges = true
+	}
+	if !data.OverlayId.Equal(state.OverlayId) {
+		hasChanges = true
+	}
+	if !data.SiteId.Equal(state.SiteId) {
+		hasChanges = true
+	}
+	if !data.PortOffset.Equal(state.PortOffset) {
+		hasChanges = true
+	}
+	if !data.PortHopping.Equal(state.PortHopping) {
+		hasChanges = true
+	}
+	if !data.ControlSessionPps.Equal(state.ControlSessionPps) {
+		hasChanges = true
+	}
+	if !data.TrackTransport.Equal(state.TrackTransport) {
+		hasChanges = true
+	}
+	if !data.TrackInterfaceTag.Equal(state.TrackInterfaceTag) {
+		hasChanges = true
+	}
+	if !data.ConsoleBaudRate.Equal(state.ConsoleBaudRate) {
+		hasChanges = true
+	}
+	if !data.MaxOmpSessions.Equal(state.MaxOmpSessions) {
+		hasChanges = true
+	}
+	if !data.MultiTenant.Equal(state.MultiTenant) {
+		hasChanges = true
+	}
+	if !data.TrackDefaultGateway.Equal(state.TrackDefaultGateway) {
+		hasChanges = true
+	}
+	if !data.AdminTechOnFailure.Equal(state.AdminTechOnFailure) {
+		hasChanges = true
+	}
+	if !data.IdleTimeout.Equal(state.IdleTimeout) {
+		hasChanges = true
+	}
+	if len(data.Trackers) != len(state.Trackers) {
+		hasChanges = true
+	} else {
+		for i := range data.Trackers {
+			if !data.Trackers[i].Name.Equal(state.Trackers[i].Name) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].EndpointIp.Equal(state.Trackers[i].EndpointIp) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].TransportEndpointIp.Equal(state.Trackers[i].TransportEndpointIp) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].TransportEndpointProtocol.Equal(state.Trackers[i].TransportEndpointProtocol) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].TransportEndpointPort.Equal(state.Trackers[i].TransportEndpointPort) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].EndpointDnsName.Equal(state.Trackers[i].EndpointDnsName) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].EndpointApiUrl.Equal(state.Trackers[i].EndpointApiUrl) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Elements.Equal(state.Trackers[i].Elements) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Boolean.Equal(state.Trackers[i].Boolean) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Threshold.Equal(state.Trackers[i].Threshold) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Interval.Equal(state.Trackers[i].Interval) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Multiplier.Equal(state.Trackers[i].Multiplier) {
+				hasChanges = true
+			}
+			if !data.Trackers[i].Type.Equal(state.Trackers[i].Type) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.ObjectTrackers) != len(state.ObjectTrackers) {
+		hasChanges = true
+	} else {
+		for i := range data.ObjectTrackers {
+			if !data.ObjectTrackers[i].ObjectNumber.Equal(state.ObjectTrackers[i].ObjectNumber) {
+				hasChanges = true
+			}
+			if !data.ObjectTrackers[i].Interface.Equal(state.ObjectTrackers[i].Interface) {
+				hasChanges = true
+			}
+			if !data.ObjectTrackers[i].Sig.Equal(state.ObjectTrackers[i].Sig) {
+				hasChanges = true
+			}
+			if !data.ObjectTrackers[i].Ip.Equal(state.ObjectTrackers[i].Ip) {
+				hasChanges = true
+			}
+			if !data.ObjectTrackers[i].Mask.Equal(state.ObjectTrackers[i].Mask) {
+				hasChanges = true
+			}
+			if !data.ObjectTrackers[i].VpnId.Equal(state.ObjectTrackers[i].VpnId) {
+				hasChanges = true
+			}
+			if len(data.ObjectTrackers[i].GroupTracksIds) != len(state.ObjectTrackers[i].GroupTracksIds) {
+				hasChanges = true
+			} else {
+				for ii := range data.ObjectTrackers[i].GroupTracksIds {
+					if !data.ObjectTrackers[i].GroupTracksIds[ii].TrackId.Equal(state.ObjectTrackers[i].GroupTracksIds[ii].TrackId) {
+						hasChanges = true
+					}
+				}
+			}
+			if !data.ObjectTrackers[i].Boolean.Equal(state.ObjectTrackers[i].Boolean) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.OnDemandTunnel.Equal(state.OnDemandTunnel) {
+		hasChanges = true
+	}
+	if !data.OnDemandTunnelIdleTimeout.Equal(state.OnDemandTunnelIdleTimeout) {
+		hasChanges = true
+	}
+	if !data.RegionId.Equal(state.RegionId) {
+		hasChanges = true
+	}
+	if !data.SecondaryRegionId.Equal(state.SecondaryRegionId) {
+		hasChanges = true
+	}
+	if !data.Role.Equal(state.Role) {
+		hasChanges = true
+	}
+	if !data.AffinityGroupNumber.Equal(state.AffinityGroupNumber) {
+		hasChanges = true
+	}
+	if !data.AffinityGroupPreference.Equal(state.AffinityGroupPreference) {
+		hasChanges = true
+	}
+	if !data.TransportGateway.Equal(state.TransportGateway) {
+		hasChanges = true
+	}
+	if !data.EnableMrfMigration.Equal(state.EnableMrfMigration) {
+		hasChanges = true
+	}
+	if !data.MigrationBgpCommunity.Equal(state.MigrationBgpCommunity) {
+		hasChanges = true
+	}
+	return hasChanges
+}

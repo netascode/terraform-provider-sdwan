@@ -1000,3 +1000,104 @@ func (data *CiscoSecurity) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoSecurity) hasChanges(ctx context.Context, state *CiscoSecurity) bool {
+	hasChanges := false
+	if !data.RekeyInterval.Equal(state.RekeyInterval) {
+		hasChanges = true
+	}
+	if !data.ReplayWindow.Equal(state.ReplayWindow) {
+		hasChanges = true
+	}
+	if !data.ExtendedArWindow.Equal(state.ExtendedArWindow) {
+		hasChanges = true
+	}
+	if !data.AuthenticationType.Equal(state.AuthenticationType) {
+		hasChanges = true
+	}
+	if !data.IntegrityType.Equal(state.IntegrityType) {
+		hasChanges = true
+	}
+	if !data.PairwiseKeying.Equal(state.PairwiseKeying) {
+		hasChanges = true
+	}
+	if len(data.Keychains) != len(state.Keychains) {
+		hasChanges = true
+	} else {
+		for i := range data.Keychains {
+			if !data.Keychains[i].Name.Equal(state.Keychains[i].Name) {
+				hasChanges = true
+			}
+			if !data.Keychains[i].KeyId.Equal(state.Keychains[i].KeyId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Keys) != len(state.Keys) {
+		hasChanges = true
+	} else {
+		for i := range data.Keys {
+			if !data.Keys[i].Id.Equal(state.Keys[i].Id) {
+				hasChanges = true
+			}
+			if !data.Keys[i].ChainName.Equal(state.Keys[i].ChainName) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendId.Equal(state.Keys[i].SendId) {
+				hasChanges = true
+			}
+			if !data.Keys[i].ReceiveId.Equal(state.Keys[i].ReceiveId) {
+				hasChanges = true
+			}
+			if !data.Keys[i].CryptoAlgorithm.Equal(state.Keys[i].CryptoAlgorithm) {
+				hasChanges = true
+			}
+			if !data.Keys[i].KeyString.Equal(state.Keys[i].KeyString) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetime.Equal(state.Keys[i].SendLifetime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetimeStartTime.Equal(state.Keys[i].SendLifetimeStartTime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetimeEndTimeFormat.Equal(state.Keys[i].SendLifetimeEndTimeFormat) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetimeDuration.Equal(state.Keys[i].SendLifetimeDuration) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetimeEndTime.Equal(state.Keys[i].SendLifetimeEndTime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].SendLifetimeInfinite.Equal(state.Keys[i].SendLifetimeInfinite) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetime.Equal(state.Keys[i].AcceptLifetime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetimeStartTime.Equal(state.Keys[i].AcceptLifetimeStartTime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetimeEndTimeFormat.Equal(state.Keys[i].AcceptLifetimeEndTimeFormat) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetimeDuration.Equal(state.Keys[i].AcceptLifetimeDuration) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetimeEndTime.Equal(state.Keys[i].AcceptLifetimeEndTime) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptLifetimeInfinite.Equal(state.Keys[i].AcceptLifetimeInfinite) {
+				hasChanges = true
+			}
+			if !data.Keys[i].IncludeTcpOptions.Equal(state.Keys[i].IncludeTcpOptions) {
+				hasChanges = true
+			}
+			if !data.Keys[i].AcceptAoMismatch.Equal(state.Keys[i].AcceptAoMismatch) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

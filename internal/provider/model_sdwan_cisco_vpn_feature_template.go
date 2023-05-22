@@ -4271,3 +4271,464 @@ func (data *CiscoVPN) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoVPN) hasChanges(ctx context.Context, state *CiscoVPN) bool {
+	hasChanges := false
+	if !data.VpnId.Equal(state.VpnId) {
+		hasChanges = true
+	}
+	if !data.VpnName.Equal(state.VpnName) {
+		hasChanges = true
+	}
+	if !data.TenantVpnId.Equal(state.TenantVpnId) {
+		hasChanges = true
+	}
+	if !data.OrganizationName.Equal(state.OrganizationName) {
+		hasChanges = true
+	}
+	if !data.OmpAdminDistanceIpv4.Equal(state.OmpAdminDistanceIpv4) {
+		hasChanges = true
+	}
+	if !data.OmpAdminDistanceIpv6.Equal(state.OmpAdminDistanceIpv6) {
+		hasChanges = true
+	}
+	if !data.EnhanceEcmpKeying.Equal(state.EnhanceEcmpKeying) {
+		hasChanges = true
+	}
+	if len(data.DnsIpv4Servers) != len(state.DnsIpv4Servers) {
+		hasChanges = true
+	} else {
+		for i := range data.DnsIpv4Servers {
+			if !data.DnsIpv4Servers[i].Address.Equal(state.DnsIpv4Servers[i].Address) {
+				hasChanges = true
+			}
+			if !data.DnsIpv4Servers[i].Role.Equal(state.DnsIpv4Servers[i].Role) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.DnsIpv6Servers) != len(state.DnsIpv6Servers) {
+		hasChanges = true
+	} else {
+		for i := range data.DnsIpv6Servers {
+			if !data.DnsIpv6Servers[i].Address.Equal(state.DnsIpv6Servers[i].Address) {
+				hasChanges = true
+			}
+			if !data.DnsIpv6Servers[i].Role.Equal(state.DnsIpv6Servers[i].Role) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.DnsHosts) != len(state.DnsHosts) {
+		hasChanges = true
+	} else {
+		for i := range data.DnsHosts {
+			if !data.DnsHosts[i].Hostname.Equal(state.DnsHosts[i].Hostname) {
+				hasChanges = true
+			}
+			if !data.DnsHosts[i].Ip.Equal(state.DnsHosts[i].Ip) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Services) != len(state.Services) {
+		hasChanges = true
+	} else {
+		for i := range data.Services {
+			if !data.Services[i].ServiceTypes.Equal(state.Services[i].ServiceTypes) {
+				hasChanges = true
+			}
+			if !data.Services[i].Address.Equal(state.Services[i].Address) {
+				hasChanges = true
+			}
+			if !data.Services[i].Interface.Equal(state.Services[i].Interface) {
+				hasChanges = true
+			}
+			if !data.Services[i].TrackEnable.Equal(state.Services[i].TrackEnable) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv4StaticServiceRoutes) != len(state.Ipv4StaticServiceRoutes) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4StaticServiceRoutes {
+			if !data.Ipv4StaticServiceRoutes[i].Prefix.Equal(state.Ipv4StaticServiceRoutes[i].Prefix) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticServiceRoutes[i].VpnId.Equal(state.Ipv4StaticServiceRoutes[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticServiceRoutes[i].Service.Equal(state.Ipv4StaticServiceRoutes[i].Service) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv4StaticRoutes) != len(state.Ipv4StaticRoutes) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4StaticRoutes {
+			if !data.Ipv4StaticRoutes[i].Prefix.Equal(state.Ipv4StaticRoutes[i].Prefix) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticRoutes[i].Null0.Equal(state.Ipv4StaticRoutes[i].Null0) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticRoutes[i].Distance.Equal(state.Ipv4StaticRoutes[i].Distance) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticRoutes[i].VpnId.Equal(state.Ipv4StaticRoutes[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticRoutes[i].Dhcp.Equal(state.Ipv4StaticRoutes[i].Dhcp) {
+				hasChanges = true
+			}
+			if len(data.Ipv4StaticRoutes[i].NextHops) != len(state.Ipv4StaticRoutes[i].NextHops) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv4StaticRoutes[i].NextHops {
+					if !data.Ipv4StaticRoutes[i].NextHops[ii].Address.Equal(state.Ipv4StaticRoutes[i].NextHops[ii].Address) {
+						hasChanges = true
+					}
+					if !data.Ipv4StaticRoutes[i].NextHops[ii].Distance.Equal(state.Ipv4StaticRoutes[i].NextHops[ii].Distance) {
+						hasChanges = true
+					}
+				}
+			}
+			if len(data.Ipv4StaticRoutes[i].TrackNextHops) != len(state.Ipv4StaticRoutes[i].TrackNextHops) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv4StaticRoutes[i].TrackNextHops {
+					if !data.Ipv4StaticRoutes[i].TrackNextHops[ii].Address.Equal(state.Ipv4StaticRoutes[i].TrackNextHops[ii].Address) {
+						hasChanges = true
+					}
+					if !data.Ipv4StaticRoutes[i].TrackNextHops[ii].Distance.Equal(state.Ipv4StaticRoutes[i].TrackNextHops[ii].Distance) {
+						hasChanges = true
+					}
+					if !data.Ipv4StaticRoutes[i].TrackNextHops[ii].Tracker.Equal(state.Ipv4StaticRoutes[i].TrackNextHops[ii].Tracker) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.Ipv6StaticRoutes) != len(state.Ipv6StaticRoutes) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6StaticRoutes {
+			if !data.Ipv6StaticRoutes[i].Prefix.Equal(state.Ipv6StaticRoutes[i].Prefix) {
+				hasChanges = true
+			}
+			if !data.Ipv6StaticRoutes[i].Null0.Equal(state.Ipv6StaticRoutes[i].Null0) {
+				hasChanges = true
+			}
+			if !data.Ipv6StaticRoutes[i].VpnId.Equal(state.Ipv6StaticRoutes[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv6StaticRoutes[i].Nat.Equal(state.Ipv6StaticRoutes[i].Nat) {
+				hasChanges = true
+			}
+			if len(data.Ipv6StaticRoutes[i].NextHops) != len(state.Ipv6StaticRoutes[i].NextHops) {
+				hasChanges = true
+			} else {
+				for ii := range data.Ipv6StaticRoutes[i].NextHops {
+					if !data.Ipv6StaticRoutes[i].NextHops[ii].Address.Equal(state.Ipv6StaticRoutes[i].NextHops[ii].Address) {
+						hasChanges = true
+					}
+					if !data.Ipv6StaticRoutes[i].NextHops[ii].Distance.Equal(state.Ipv6StaticRoutes[i].NextHops[ii].Distance) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.Ipv4StaticGreRoutes) != len(state.Ipv4StaticGreRoutes) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4StaticGreRoutes {
+			if !data.Ipv4StaticGreRoutes[i].Prefix.Equal(state.Ipv4StaticGreRoutes[i].Prefix) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticGreRoutes[i].VpnId.Equal(state.Ipv4StaticGreRoutes[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticGreRoutes[i].Interface.Equal(state.Ipv4StaticGreRoutes[i].Interface) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv4StaticIpsecRoutes) != len(state.Ipv4StaticIpsecRoutes) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4StaticIpsecRoutes {
+			if !data.Ipv4StaticIpsecRoutes[i].Prefix.Equal(state.Ipv4StaticIpsecRoutes[i].Prefix) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticIpsecRoutes[i].VpnId.Equal(state.Ipv4StaticIpsecRoutes[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv4StaticIpsecRoutes[i].Interface.Equal(state.Ipv4StaticIpsecRoutes[i].Interface) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.OmpAdvertiseIpv4Routes) != len(state.OmpAdvertiseIpv4Routes) {
+		hasChanges = true
+	} else {
+		for i := range data.OmpAdvertiseIpv4Routes {
+			if !data.OmpAdvertiseIpv4Routes[i].Protocol.Equal(state.OmpAdvertiseIpv4Routes[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.OmpAdvertiseIpv4Routes[i].RoutePolicy.Equal(state.OmpAdvertiseIpv4Routes[i].RoutePolicy) {
+				hasChanges = true
+			}
+			if !data.OmpAdvertiseIpv4Routes[i].ProtocolSubType.Equal(state.OmpAdvertiseIpv4Routes[i].ProtocolSubType) {
+				hasChanges = true
+			}
+			if len(data.OmpAdvertiseIpv4Routes[i].Prefixes) != len(state.OmpAdvertiseIpv4Routes[i].Prefixes) {
+				hasChanges = true
+			} else {
+				for ii := range data.OmpAdvertiseIpv4Routes[i].Prefixes {
+					if !data.OmpAdvertiseIpv4Routes[i].Prefixes[ii].PrefixEntry.Equal(state.OmpAdvertiseIpv4Routes[i].Prefixes[ii].PrefixEntry) {
+						hasChanges = true
+					}
+					if !data.OmpAdvertiseIpv4Routes[i].Prefixes[ii].AggregateOnly.Equal(state.OmpAdvertiseIpv4Routes[i].Prefixes[ii].AggregateOnly) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.OmpAdvertiseIpv6Routes) != len(state.OmpAdvertiseIpv6Routes) {
+		hasChanges = true
+	} else {
+		for i := range data.OmpAdvertiseIpv6Routes {
+			if !data.OmpAdvertiseIpv6Routes[i].Protocol.Equal(state.OmpAdvertiseIpv6Routes[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.OmpAdvertiseIpv6Routes[i].RoutePolicy.Equal(state.OmpAdvertiseIpv6Routes[i].RoutePolicy) {
+				hasChanges = true
+			}
+			if !data.OmpAdvertiseIpv6Routes[i].ProtocolSubType.Equal(state.OmpAdvertiseIpv6Routes[i].ProtocolSubType) {
+				hasChanges = true
+			}
+			if len(data.OmpAdvertiseIpv6Routes[i].Prefixes) != len(state.OmpAdvertiseIpv6Routes[i].Prefixes) {
+				hasChanges = true
+			} else {
+				for ii := range data.OmpAdvertiseIpv6Routes[i].Prefixes {
+					if !data.OmpAdvertiseIpv6Routes[i].Prefixes[ii].PrefixEntry.Equal(state.OmpAdvertiseIpv6Routes[i].Prefixes[ii].PrefixEntry) {
+						hasChanges = true
+					}
+					if !data.OmpAdvertiseIpv6Routes[i].Prefixes[ii].AggregateOnly.Equal(state.OmpAdvertiseIpv6Routes[i].Prefixes[ii].AggregateOnly) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.Nat64Pools) != len(state.Nat64Pools) {
+		hasChanges = true
+	} else {
+		for i := range data.Nat64Pools {
+			if !data.Nat64Pools[i].Name.Equal(state.Nat64Pools[i].Name) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].StartAddress.Equal(state.Nat64Pools[i].StartAddress) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].EndAddress.Equal(state.Nat64Pools[i].EndAddress) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].Overload.Equal(state.Nat64Pools[i].Overload) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].LeakFromGlobal.Equal(state.Nat64Pools[i].LeakFromGlobal) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].LeakFromGlobalProtocol.Equal(state.Nat64Pools[i].LeakFromGlobalProtocol) {
+				hasChanges = true
+			}
+			if !data.Nat64Pools[i].LeakToGlobal.Equal(state.Nat64Pools[i].LeakToGlobal) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.NatPools) != len(state.NatPools) {
+		hasChanges = true
+	} else {
+		for i := range data.NatPools {
+			if !data.NatPools[i].Name.Equal(state.NatPools[i].Name) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].PrefixLength.Equal(state.NatPools[i].PrefixLength) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].RangeStart.Equal(state.NatPools[i].RangeStart) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].RangeEnd.Equal(state.NatPools[i].RangeEnd) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].Overload.Equal(state.NatPools[i].Overload) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].Direction.Equal(state.NatPools[i].Direction) {
+				hasChanges = true
+			}
+			if !data.NatPools[i].TrackerId.Equal(state.NatPools[i].TrackerId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.StaticNatRules) != len(state.StaticNatRules) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticNatRules {
+			if !data.StaticNatRules[i].PoolName.Equal(state.StaticNatRules[i].PoolName) {
+				hasChanges = true
+			}
+			if !data.StaticNatRules[i].SourceIp.Equal(state.StaticNatRules[i].SourceIp) {
+				hasChanges = true
+			}
+			if !data.StaticNatRules[i].TranslateIp.Equal(state.StaticNatRules[i].TranslateIp) {
+				hasChanges = true
+			}
+			if !data.StaticNatRules[i].StaticNatDirection.Equal(state.StaticNatRules[i].StaticNatDirection) {
+				hasChanges = true
+			}
+			if !data.StaticNatRules[i].TrackerId.Equal(state.StaticNatRules[i].TrackerId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.StaticNatSubnetRules) != len(state.StaticNatSubnetRules) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticNatSubnetRules {
+			if !data.StaticNatSubnetRules[i].SourceIpSubnet.Equal(state.StaticNatSubnetRules[i].SourceIpSubnet) {
+				hasChanges = true
+			}
+			if !data.StaticNatSubnetRules[i].TranslateIpSubnet.Equal(state.StaticNatSubnetRules[i].TranslateIpSubnet) {
+				hasChanges = true
+			}
+			if !data.StaticNatSubnetRules[i].PrefixLength.Equal(state.StaticNatSubnetRules[i].PrefixLength) {
+				hasChanges = true
+			}
+			if !data.StaticNatSubnetRules[i].StaticNatDirection.Equal(state.StaticNatSubnetRules[i].StaticNatDirection) {
+				hasChanges = true
+			}
+			if !data.StaticNatSubnetRules[i].TrackerId.Equal(state.StaticNatSubnetRules[i].TrackerId) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.PortForwardRules) != len(state.PortForwardRules) {
+		hasChanges = true
+	} else {
+		for i := range data.PortForwardRules {
+			if !data.PortForwardRules[i].PoolName.Equal(state.PortForwardRules[i].PoolName) {
+				hasChanges = true
+			}
+			if !data.PortForwardRules[i].SourcePort.Equal(state.PortForwardRules[i].SourcePort) {
+				hasChanges = true
+			}
+			if !data.PortForwardRules[i].TranslatePort.Equal(state.PortForwardRules[i].TranslatePort) {
+				hasChanges = true
+			}
+			if !data.PortForwardRules[i].SourceIp.Equal(state.PortForwardRules[i].SourceIp) {
+				hasChanges = true
+			}
+			if !data.PortForwardRules[i].TranslateIp.Equal(state.PortForwardRules[i].TranslateIp) {
+				hasChanges = true
+			}
+			if !data.PortForwardRules[i].Protocol.Equal(state.PortForwardRules[i].Protocol) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.RouteGlobalImports) != len(state.RouteGlobalImports) {
+		hasChanges = true
+	} else {
+		for i := range data.RouteGlobalImports {
+			if !data.RouteGlobalImports[i].Protocol.Equal(state.RouteGlobalImports[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.RouteGlobalImports[i].ProtocolSubType.Equal(state.RouteGlobalImports[i].ProtocolSubType) {
+				hasChanges = true
+			}
+			if !data.RouteGlobalImports[i].RoutePolicy.Equal(state.RouteGlobalImports[i].RoutePolicy) {
+				hasChanges = true
+			}
+			if len(data.RouteGlobalImports[i].Redistributes) != len(state.RouteGlobalImports[i].Redistributes) {
+				hasChanges = true
+			} else {
+				for ii := range data.RouteGlobalImports[i].Redistributes {
+					if !data.RouteGlobalImports[i].Redistributes[ii].Protocol.Equal(state.RouteGlobalImports[i].Redistributes[ii].Protocol) {
+						hasChanges = true
+					}
+					if !data.RouteGlobalImports[i].Redistributes[ii].RoutePolicy.Equal(state.RouteGlobalImports[i].Redistributes[ii].RoutePolicy) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.RouteVpnImports) != len(state.RouteVpnImports) {
+		hasChanges = true
+	} else {
+		for i := range data.RouteVpnImports {
+			if !data.RouteVpnImports[i].SourceVpnId.Equal(state.RouteVpnImports[i].SourceVpnId) {
+				hasChanges = true
+			}
+			if !data.RouteVpnImports[i].Protocol.Equal(state.RouteVpnImports[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.RouteVpnImports[i].ProtocolSubType.Equal(state.RouteVpnImports[i].ProtocolSubType) {
+				hasChanges = true
+			}
+			if !data.RouteVpnImports[i].RoutePolicy.Equal(state.RouteVpnImports[i].RoutePolicy) {
+				hasChanges = true
+			}
+			if len(data.RouteVpnImports[i].Redistributes) != len(state.RouteVpnImports[i].Redistributes) {
+				hasChanges = true
+			} else {
+				for ii := range data.RouteVpnImports[i].Redistributes {
+					if !data.RouteVpnImports[i].Redistributes[ii].Protocol.Equal(state.RouteVpnImports[i].Redistributes[ii].Protocol) {
+						hasChanges = true
+					}
+					if !data.RouteVpnImports[i].Redistributes[ii].RoutePolicy.Equal(state.RouteVpnImports[i].Redistributes[ii].RoutePolicy) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.RouteGlobalExports) != len(state.RouteGlobalExports) {
+		hasChanges = true
+	} else {
+		for i := range data.RouteGlobalExports {
+			if !data.RouteGlobalExports[i].Protocol.Equal(state.RouteGlobalExports[i].Protocol) {
+				hasChanges = true
+			}
+			if !data.RouteGlobalExports[i].ProtocolSubType.Equal(state.RouteGlobalExports[i].ProtocolSubType) {
+				hasChanges = true
+			}
+			if !data.RouteGlobalExports[i].RoutePolicy.Equal(state.RouteGlobalExports[i].RoutePolicy) {
+				hasChanges = true
+			}
+			if len(data.RouteGlobalExports[i].Redistributes) != len(state.RouteGlobalExports[i].Redistributes) {
+				hasChanges = true
+			} else {
+				for ii := range data.RouteGlobalExports[i].Redistributes {
+					if !data.RouteGlobalExports[i].Redistributes[ii].Protocol.Equal(state.RouteGlobalExports[i].Redistributes[ii].Protocol) {
+						hasChanges = true
+					}
+					if !data.RouteGlobalExports[i].Redistributes[ii].RoutePolicy.Equal(state.RouteGlobalExports[i].Redistributes[ii].RoutePolicy) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	return hasChanges
+}

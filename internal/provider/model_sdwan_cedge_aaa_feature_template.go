@@ -1966,3 +1966,221 @@ func (data *CEdgeAAA) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CEdgeAAA) hasChanges(ctx context.Context, state *CEdgeAAA) bool {
+	hasChanges := false
+	if !data.Dot1xAuthentication.Equal(state.Dot1xAuthentication) {
+		hasChanges = true
+	}
+	if !data.Dot1xAccounting.Equal(state.Dot1xAccounting) {
+		hasChanges = true
+	}
+	if !data.ServerGroupsPriorityOrder.Equal(state.ServerGroupsPriorityOrder) {
+		hasChanges = true
+	}
+	if len(data.Users) != len(state.Users) {
+		hasChanges = true
+	} else {
+		for i := range data.Users {
+			if !data.Users[i].Name.Equal(state.Users[i].Name) {
+				hasChanges = true
+			}
+			if !data.Users[i].Password.Equal(state.Users[i].Password) {
+				hasChanges = true
+			}
+			if !data.Users[i].Secret.Equal(state.Users[i].Secret) {
+				hasChanges = true
+			}
+			if !data.Users[i].PrivilegeLevel.Equal(state.Users[i].PrivilegeLevel) {
+				hasChanges = true
+			}
+			if len(data.Users[i].SshPubkeys) != len(state.Users[i].SshPubkeys) {
+				hasChanges = true
+			} else {
+				for ii := range data.Users[i].SshPubkeys {
+					if !data.Users[i].SshPubkeys[ii].KeyString.Equal(state.Users[i].SshPubkeys[ii].KeyString) {
+						hasChanges = true
+					}
+					if !data.Users[i].SshPubkeys[ii].KeyType.Equal(state.Users[i].SshPubkeys[ii].KeyType) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.RadiusServerGroups) != len(state.RadiusServerGroups) {
+		hasChanges = true
+	} else {
+		for i := range data.RadiusServerGroups {
+			if !data.RadiusServerGroups[i].GroupName.Equal(state.RadiusServerGroups[i].GroupName) {
+				hasChanges = true
+			}
+			if !data.RadiusServerGroups[i].VpnId.Equal(state.RadiusServerGroups[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.RadiusServerGroups[i].SourceInterface.Equal(state.RadiusServerGroups[i].SourceInterface) {
+				hasChanges = true
+			}
+			if len(data.RadiusServerGroups[i].Servers) != len(state.RadiusServerGroups[i].Servers) {
+				hasChanges = true
+			} else {
+				for ii := range data.RadiusServerGroups[i].Servers {
+					if !data.RadiusServerGroups[i].Servers[ii].Address.Equal(state.RadiusServerGroups[i].Servers[ii].Address) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].AuthenticationPort.Equal(state.RadiusServerGroups[i].Servers[ii].AuthenticationPort) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].AccountingPort.Equal(state.RadiusServerGroups[i].Servers[ii].AccountingPort) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].Timeout.Equal(state.RadiusServerGroups[i].Servers[ii].Timeout) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].Retransmit.Equal(state.RadiusServerGroups[i].Servers[ii].Retransmit) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].Key.Equal(state.RadiusServerGroups[i].Servers[ii].Key) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].SecretKey.Equal(state.RadiusServerGroups[i].Servers[ii].SecretKey) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].EncryptionType.Equal(state.RadiusServerGroups[i].Servers[ii].EncryptionType) {
+						hasChanges = true
+					}
+					if !data.RadiusServerGroups[i].Servers[ii].KeyType.Equal(state.RadiusServerGroups[i].Servers[ii].KeyType) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.RadiusClients) != len(state.RadiusClients) {
+		hasChanges = true
+	} else {
+		for i := range data.RadiusClients {
+			if !data.RadiusClients[i].ClientIp.Equal(state.RadiusClients[i].ClientIp) {
+				hasChanges = true
+			}
+			if len(data.RadiusClients[i].VonConfigurations) != len(state.RadiusClients[i].VonConfigurations) {
+				hasChanges = true
+			} else {
+				for ii := range data.RadiusClients[i].VonConfigurations {
+					if !data.RadiusClients[i].VonConfigurations[ii].VpnId.Equal(state.RadiusClients[i].VonConfigurations[ii].VpnId) {
+						hasChanges = true
+					}
+					if !data.RadiusClients[i].VonConfigurations[ii].ServerKey.Equal(state.RadiusClients[i].VonConfigurations[ii].ServerKey) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if !data.RadiusDynamicAuthorServerKey.Equal(state.RadiusDynamicAuthorServerKey) {
+		hasChanges = true
+	}
+	if !data.RadiusDynamicAuthorDomainStripping.Equal(state.RadiusDynamicAuthorDomainStripping) {
+		hasChanges = true
+	}
+	if !data.RadiusDynamicAuthorAuthenticationType.Equal(state.RadiusDynamicAuthorAuthenticationType) {
+		hasChanges = true
+	}
+	if !data.RadiusDynamicAuthorPort.Equal(state.RadiusDynamicAuthorPort) {
+		hasChanges = true
+	}
+	if !data.RadiusDynamicAuthorCtsAuthorizationList.Equal(state.RadiusDynamicAuthorCtsAuthorizationList) {
+		hasChanges = true
+	}
+	if !data.RadiusTrustsecGroup.Equal(state.RadiusTrustsecGroup) {
+		hasChanges = true
+	}
+	if len(data.TacacsServerGroups) != len(state.TacacsServerGroups) {
+		hasChanges = true
+	} else {
+		for i := range data.TacacsServerGroups {
+			if !data.TacacsServerGroups[i].GroupName.Equal(state.TacacsServerGroups[i].GroupName) {
+				hasChanges = true
+			}
+			if !data.TacacsServerGroups[i].VpnId.Equal(state.TacacsServerGroups[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.TacacsServerGroups[i].SourceInterface.Equal(state.TacacsServerGroups[i].SourceInterface) {
+				hasChanges = true
+			}
+			if len(data.TacacsServerGroups[i].Servers) != len(state.TacacsServerGroups[i].Servers) {
+				hasChanges = true
+			} else {
+				for ii := range data.TacacsServerGroups[i].Servers {
+					if !data.TacacsServerGroups[i].Servers[ii].Address.Equal(state.TacacsServerGroups[i].Servers[ii].Address) {
+						hasChanges = true
+					}
+					if !data.TacacsServerGroups[i].Servers[ii].Port.Equal(state.TacacsServerGroups[i].Servers[ii].Port) {
+						hasChanges = true
+					}
+					if !data.TacacsServerGroups[i].Servers[ii].Timeout.Equal(state.TacacsServerGroups[i].Servers[ii].Timeout) {
+						hasChanges = true
+					}
+					if !data.TacacsServerGroups[i].Servers[ii].Key.Equal(state.TacacsServerGroups[i].Servers[ii].Key) {
+						hasChanges = true
+					}
+					if !data.TacacsServerGroups[i].Servers[ii].SecretKey.Equal(state.TacacsServerGroups[i].Servers[ii].SecretKey) {
+						hasChanges = true
+					}
+					if !data.TacacsServerGroups[i].Servers[ii].EncryptionType.Equal(state.TacacsServerGroups[i].Servers[ii].EncryptionType) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.AccountingRules) != len(state.AccountingRules) {
+		hasChanges = true
+	} else {
+		for i := range data.AccountingRules {
+			if !data.AccountingRules[i].Name.Equal(state.AccountingRules[i].Name) {
+				hasChanges = true
+			}
+			if !data.AccountingRules[i].Method.Equal(state.AccountingRules[i].Method) {
+				hasChanges = true
+			}
+			if !data.AccountingRules[i].PrivilegeLevel.Equal(state.AccountingRules[i].PrivilegeLevel) {
+				hasChanges = true
+			}
+			if !data.AccountingRules[i].StartStop.Equal(state.AccountingRules[i].StartStop) {
+				hasChanges = true
+			}
+			if !data.AccountingRules[i].Group.Equal(state.AccountingRules[i].Group) {
+				hasChanges = true
+			}
+		}
+	}
+	if !data.AuthorizationConsole.Equal(state.AuthorizationConsole) {
+		hasChanges = true
+	}
+	if !data.AuthorizationConfigCommands.Equal(state.AuthorizationConfigCommands) {
+		hasChanges = true
+	}
+	if len(data.AuthorizationRules) != len(state.AuthorizationRules) {
+		hasChanges = true
+	} else {
+		for i := range data.AuthorizationRules {
+			if !data.AuthorizationRules[i].Name.Equal(state.AuthorizationRules[i].Name) {
+				hasChanges = true
+			}
+			if !data.AuthorizationRules[i].Method.Equal(state.AuthorizationRules[i].Method) {
+				hasChanges = true
+			}
+			if !data.AuthorizationRules[i].PrivilegeLevel.Equal(state.AuthorizationRules[i].PrivilegeLevel) {
+				hasChanges = true
+			}
+			if !data.AuthorizationRules[i].Group.Equal(state.AuthorizationRules[i].Group) {
+				hasChanges = true
+			}
+			if !data.AuthorizationRules[i].Authenticated.Equal(state.AuthorizationRules[i].Authenticated) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

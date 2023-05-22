@@ -379,3 +379,38 @@ func (data *CiscoBFD) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoBFD) hasChanges(ctx context.Context, state *CiscoBFD) bool {
+	hasChanges := false
+	if !data.Multiplier.Equal(state.Multiplier) {
+		hasChanges = true
+	}
+	if !data.PollInterval.Equal(state.PollInterval) {
+		hasChanges = true
+	}
+	if !data.DefaultDscp.Equal(state.DefaultDscp) {
+		hasChanges = true
+	}
+	if len(data.Colors) != len(state.Colors) {
+		hasChanges = true
+	} else {
+		for i := range data.Colors {
+			if !data.Colors[i].Color.Equal(state.Colors[i].Color) {
+				hasChanges = true
+			}
+			if !data.Colors[i].HelloInterval.Equal(state.Colors[i].HelloInterval) {
+				hasChanges = true
+			}
+			if !data.Colors[i].Multiplier.Equal(state.Colors[i].Multiplier) {
+				hasChanges = true
+			}
+			if !data.Colors[i].PmtuDiscovery.Equal(state.Colors[i].PmtuDiscovery) {
+				hasChanges = true
+			}
+			if !data.Colors[i].Dscp.Equal(state.Colors[i].Dscp) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

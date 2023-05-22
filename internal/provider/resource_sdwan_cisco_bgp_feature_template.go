@@ -1168,7 +1168,11 @@ func (r *CiscoBGPFeatureTemplateResource) Update(ctx context.Context, req resour
 		}
 	}
 
-	plan.Version = types.Int64Value(state.Version.ValueInt64() + 1)
+	if plan.hasChanges(ctx, &state) {
+		plan.Version = types.Int64Value(state.Version.ValueInt64() + 1)
+	} else {
+		plan.Version = state.Version
+	}
 
 	tflog.Debug(ctx, fmt.Sprintf("%s: Update finished successfully", plan.Name.ValueString()))
 

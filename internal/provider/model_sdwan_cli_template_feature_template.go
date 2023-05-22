@@ -88,3 +88,11 @@ func (data *CLITemplate) fromBody(ctx context.Context, res gjson.Result) {
 
 	}
 }
+
+func (data *CLITemplate) hasChanges(ctx context.Context, state *CLITemplate) bool {
+	hasChanges := false
+	if !data.CliConfig.Equal(state.CliConfig) {
+		hasChanges = true
+	}
+	return hasChanges
+}

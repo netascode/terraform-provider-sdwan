@@ -1055,3 +1055,116 @@ func (data *CiscoSNMP) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoSNMP) hasChanges(ctx context.Context, state *CiscoSNMP) bool {
+	hasChanges := false
+	if !data.Shutdown.Equal(state.Shutdown) {
+		hasChanges = true
+	}
+	if !data.Contact.Equal(state.Contact) {
+		hasChanges = true
+	}
+	if !data.Location.Equal(state.Location) {
+		hasChanges = true
+	}
+	if len(data.Views) != len(state.Views) {
+		hasChanges = true
+	} else {
+		for i := range data.Views {
+			if !data.Views[i].Name.Equal(state.Views[i].Name) {
+				hasChanges = true
+			}
+			if len(data.Views[i].ObjectIdentifiers) != len(state.Views[i].ObjectIdentifiers) {
+				hasChanges = true
+			} else {
+				for ii := range data.Views[i].ObjectIdentifiers {
+					if !data.Views[i].ObjectIdentifiers[ii].Id.Equal(state.Views[i].ObjectIdentifiers[ii].Id) {
+						hasChanges = true
+					}
+					if !data.Views[i].ObjectIdentifiers[ii].Exclude.Equal(state.Views[i].ObjectIdentifiers[ii].Exclude) {
+						hasChanges = true
+					}
+				}
+			}
+		}
+	}
+	if len(data.Communities) != len(state.Communities) {
+		hasChanges = true
+	} else {
+		for i := range data.Communities {
+			if !data.Communities[i].Name.Equal(state.Communities[i].Name) {
+				hasChanges = true
+			}
+			if !data.Communities[i].View.Equal(state.Communities[i].View) {
+				hasChanges = true
+			}
+			if !data.Communities[i].Authorization.Equal(state.Communities[i].Authorization) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Groups) != len(state.Groups) {
+		hasChanges = true
+	} else {
+		for i := range data.Groups {
+			if !data.Groups[i].Name.Equal(state.Groups[i].Name) {
+				hasChanges = true
+			}
+			if !data.Groups[i].SecurityLevel.Equal(state.Groups[i].SecurityLevel) {
+				hasChanges = true
+			}
+			if !data.Groups[i].View.Equal(state.Groups[i].View) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Users) != len(state.Users) {
+		hasChanges = true
+	} else {
+		for i := range data.Users {
+			if !data.Users[i].Name.Equal(state.Users[i].Name) {
+				hasChanges = true
+			}
+			if !data.Users[i].AuthenticationProtocol.Equal(state.Users[i].AuthenticationProtocol) {
+				hasChanges = true
+			}
+			if !data.Users[i].AuthenticationPassword.Equal(state.Users[i].AuthenticationPassword) {
+				hasChanges = true
+			}
+			if !data.Users[i].PrivacyProtocol.Equal(state.Users[i].PrivacyProtocol) {
+				hasChanges = true
+			}
+			if !data.Users[i].PrivacyPassword.Equal(state.Users[i].PrivacyPassword) {
+				hasChanges = true
+			}
+			if !data.Users[i].Group.Equal(state.Users[i].Group) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.TrapTargets) != len(state.TrapTargets) {
+		hasChanges = true
+	} else {
+		for i := range data.TrapTargets {
+			if !data.TrapTargets[i].VpnId.Equal(state.TrapTargets[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.TrapTargets[i].Ip.Equal(state.TrapTargets[i].Ip) {
+				hasChanges = true
+			}
+			if !data.TrapTargets[i].UdpPort.Equal(state.TrapTargets[i].UdpPort) {
+				hasChanges = true
+			}
+			if !data.TrapTargets[i].CommunityName.Equal(state.TrapTargets[i].CommunityName) {
+				hasChanges = true
+			}
+			if !data.TrapTargets[i].User.Equal(state.TrapTargets[i].User) {
+				hasChanges = true
+			}
+			if !data.TrapTargets[i].SourceInterface.Equal(state.TrapTargets[i].SourceInterface) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

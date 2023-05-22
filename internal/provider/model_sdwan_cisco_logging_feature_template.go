@@ -897,3 +897,89 @@ func (data *CiscoLogging) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoLogging) hasChanges(ctx context.Context, state *CiscoLogging) bool {
+	hasChanges := false
+	if !data.DiskLogging.Equal(state.DiskLogging) {
+		hasChanges = true
+	}
+	if !data.MaxSize.Equal(state.MaxSize) {
+		hasChanges = true
+	}
+	if !data.LogRotations.Equal(state.LogRotations) {
+		hasChanges = true
+	}
+	if len(data.TlsProfiles) != len(state.TlsProfiles) {
+		hasChanges = true
+	} else {
+		for i := range data.TlsProfiles {
+			if !data.TlsProfiles[i].Name.Equal(state.TlsProfiles[i].Name) {
+				hasChanges = true
+			}
+			if !data.TlsProfiles[i].Version.Equal(state.TlsProfiles[i].Version) {
+				hasChanges = true
+			}
+			if !data.TlsProfiles[i].AuthenticationType.Equal(state.TlsProfiles[i].AuthenticationType) {
+				hasChanges = true
+			}
+			if !data.TlsProfiles[i].CiphersuiteList.Equal(state.TlsProfiles[i].CiphersuiteList) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv4Servers) != len(state.Ipv4Servers) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv4Servers {
+			if !data.Ipv4Servers[i].HostnameIp.Equal(state.Ipv4Servers[i].HostnameIp) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].VpnId.Equal(state.Ipv4Servers[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].SourceInterface.Equal(state.Ipv4Servers[i].SourceInterface) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].LoggingLevel.Equal(state.Ipv4Servers[i].LoggingLevel) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].EnableTls.Equal(state.Ipv4Servers[i].EnableTls) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].CustomProfile.Equal(state.Ipv4Servers[i].CustomProfile) {
+				hasChanges = true
+			}
+			if !data.Ipv4Servers[i].Profile.Equal(state.Ipv4Servers[i].Profile) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Ipv6Servers) != len(state.Ipv6Servers) {
+		hasChanges = true
+	} else {
+		for i := range data.Ipv6Servers {
+			if !data.Ipv6Servers[i].HostnameIp.Equal(state.Ipv6Servers[i].HostnameIp) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].VpnId.Equal(state.Ipv6Servers[i].VpnId) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].SourceInterface.Equal(state.Ipv6Servers[i].SourceInterface) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].LoggingLevel.Equal(state.Ipv6Servers[i].LoggingLevel) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].EnableTls.Equal(state.Ipv6Servers[i].EnableTls) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].CustomProfile.Equal(state.Ipv6Servers[i].CustomProfile) {
+				hasChanges = true
+			}
+			if !data.Ipv6Servers[i].Profile.Equal(state.Ipv6Servers[i].Profile) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

@@ -652,3 +652,65 @@ func (data *CiscoDHCPServer) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoDHCPServer) hasChanges(ctx context.Context, state *CiscoDHCPServer) bool {
+	hasChanges := false
+	if !data.AddressPool.Equal(state.AddressPool) {
+		hasChanges = true
+	}
+	if !data.ExcludeAddresses.Equal(state.ExcludeAddresses) {
+		hasChanges = true
+	}
+	if !data.LeaseTime.Equal(state.LeaseTime) {
+		hasChanges = true
+	}
+	if !data.InterfaceMtu.Equal(state.InterfaceMtu) {
+		hasChanges = true
+	}
+	if !data.DomainName.Equal(state.DomainName) {
+		hasChanges = true
+	}
+	if !data.DefaultGateway.Equal(state.DefaultGateway) {
+		hasChanges = true
+	}
+	if !data.DnsServers.Equal(state.DnsServers) {
+		hasChanges = true
+	}
+	if !data.TftpServers.Equal(state.TftpServers) {
+		hasChanges = true
+	}
+	if len(data.StaticLeases) != len(state.StaticLeases) {
+		hasChanges = true
+	} else {
+		for i := range data.StaticLeases {
+			if !data.StaticLeases[i].MacAddress.Equal(state.StaticLeases[i].MacAddress) {
+				hasChanges = true
+			}
+			if !data.StaticLeases[i].IpAddress.Equal(state.StaticLeases[i].IpAddress) {
+				hasChanges = true
+			}
+			if !data.StaticLeases[i].Hostname.Equal(state.StaticLeases[i].Hostname) {
+				hasChanges = true
+			}
+		}
+	}
+	if len(data.Options) != len(state.Options) {
+		hasChanges = true
+	} else {
+		for i := range data.Options {
+			if !data.Options[i].OptionCode.Equal(state.Options[i].OptionCode) {
+				hasChanges = true
+			}
+			if !data.Options[i].Ascii.Equal(state.Options[i].Ascii) {
+				hasChanges = true
+			}
+			if !data.Options[i].Hex.Equal(state.Options[i].Hex) {
+				hasChanges = true
+			}
+			if !data.Options[i].IpAddress.Equal(state.Options[i].IpAddress) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

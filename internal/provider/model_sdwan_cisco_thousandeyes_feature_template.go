@@ -485,3 +485,50 @@ func (data *CiscoThousandEyes) fromBody(ctx context.Context, res gjson.Result) {
 		})
 	}
 }
+
+func (data *CiscoThousandEyes) hasChanges(ctx context.Context, state *CiscoThousandEyes) bool {
+	hasChanges := false
+	if len(data.VirtualApplications) != len(state.VirtualApplications) {
+		hasChanges = true
+	} else {
+		for i := range data.VirtualApplications {
+			if !data.VirtualApplications[i].InstanceId.Equal(state.VirtualApplications[i].InstanceId) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].ApplicationType.Equal(state.VirtualApplications[i].ApplicationType) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeAccountGroupToken.Equal(state.VirtualApplications[i].TeAccountGroupToken) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeVpn.Equal(state.VirtualApplications[i].TeVpn) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeAgentIp.Equal(state.VirtualApplications[i].TeAgentIp) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeDefaultGateway.Equal(state.VirtualApplications[i].TeDefaultGateway) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeNameServer.Equal(state.VirtualApplications[i].TeNameServer) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeHostname.Equal(state.VirtualApplications[i].TeHostname) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeWebProxyType.Equal(state.VirtualApplications[i].TeWebProxyType) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeProxyHost.Equal(state.VirtualApplications[i].TeProxyHost) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TeProxyPort.Equal(state.VirtualApplications[i].TeProxyPort) {
+				hasChanges = true
+			}
+			if !data.VirtualApplications[i].TePacUrl.Equal(state.VirtualApplications[i].TePacUrl) {
+				hasChanges = true
+			}
+		}
+	}
+	return hasChanges
+}

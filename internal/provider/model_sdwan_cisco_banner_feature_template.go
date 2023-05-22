@@ -133,3 +133,14 @@ func (data *CiscoBanner) fromBody(ctx context.Context, res gjson.Result) {
 		data.MotdVariable = types.StringNull()
 	}
 }
+
+func (data *CiscoBanner) hasChanges(ctx context.Context, state *CiscoBanner) bool {
+	hasChanges := false
+	if !data.Login.Equal(state.Login) {
+		hasChanges = true
+	}
+	if !data.Motd.Equal(state.Motd) {
+		hasChanges = true
+	}
+	return hasChanges
+}
