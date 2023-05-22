@@ -48,12 +48,12 @@ resource "sdwan_route_policy_definition" "example" {
 
 - `description` (String) The description of the policy definition
 - `name` (String) The name of the policy definition
-- `sequences` (Attributes List) List of ACL sequences (see [below for nested schema](#nestedatt--sequences))
 
 ### Optional
 
 - `default_action` (String) Default action, either `accept` or `reject`
   - Choices: `accept`, `reject`
+- `sequences` (Attributes List) List of ACL sequences (see [below for nested schema](#nestedatt--sequences))
 
 ### Read-Only
 

@@ -80,7 +80,7 @@ func (r *RoutePolicyDefinitionResource) Schema(ctx context.Context, req resource
 			},
 			"sequences": schema.ListNestedAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("List of ACL sequences").String,
-				Required:            true,
+				Optional:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.Int64Attribute{

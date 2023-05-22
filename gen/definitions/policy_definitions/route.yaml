@@ -12,7 +12,6 @@ attributes:
     example: reject
   - model_name: sequences
     type: List
-    mandatory: true
     description: List of ACL sequences
     attributes:
       - model_name: sequenceId
