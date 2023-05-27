@@ -10,6 +10,8 @@ description: |-
 ## 0.1.10 (unreleased)
 
 - Display warning if trying to update a device template that is locked
+- Display warning if trying to update a policy object that is locked
+- Display warning if trying to update a localized policy definition that is locked
 
 ## 0.1.9
 

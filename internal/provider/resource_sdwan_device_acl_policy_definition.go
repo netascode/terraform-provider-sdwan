@@ -285,9 +285,13 @@ func (r *DeviceACLPolicyDefinitionResource) Update(ctx context.Context, req reso
 		r.updateMutex.Lock()
 		res, err := r.client.Put("/template/policy/definition/deviceaccesspolicy/"+plan.Id.ValueString(), body)
 		r.updateMutex.Unlock()
-		if err != nil && !strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
-			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
-			return
+		if err != nil {
+			if strings.Contains(res.Get("error.message").String(), "Failed to acquire lock") {
+				resp.Diagnostics.AddWarning("Client Warning", "Failed to modify policy due to policy being locked by another change. Policy changes will not be applied. Re-run 'terraform apply' to try again.")
+			} else {
+				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
+				return
+			}
 		}
 	} else {
 		tflog.Debug(ctx, fmt.Sprintf("%s: No changes detected", plan.Name.ValueString()))

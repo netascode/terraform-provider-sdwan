@@ -173,8 +173,12 @@ func (r *MirrorPolicyObjectResource) Update(ctx context.Context, req resource.Up
 	res, err := r.client.Put("/template/policy/list/mirror/"+plan.Id.ValueString(), body)
 	r.updateMutex.Unlock()
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
-		return
+		if res.Get("error.message").String() == "Failed to acquire lock, template or policy locked in edit mode." {
+			resp.Diagnostics.AddWarning("Client Warning", "Failed to modify policy due to policy being locked by another change. Policy changes will not be applied. Re-run 'terraform apply' to try again.")
+		} else {
+			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Failed to configure object (PUT), got error: %s, %s", err, res.String()))
+			return
+		}
 	}
 
 	plan.Version = types.Int64Value(state.Version.ValueInt64() + 1)
