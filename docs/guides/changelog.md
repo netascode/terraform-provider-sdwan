@@ -7,7 +7,7 @@ description: |-
 
 # Changelog
 
-## 0.1.10 (unreleased)
+## 0.1.10
 
 - Display warning if trying to update a device template that is locked
 - Display warning if trying to update a policy object that is locked
