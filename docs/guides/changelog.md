@@ -7,6 +7,10 @@ description: |-
 
 # Changelog
 
+## 0.1.10 (unreleased)
+
+- Display warning if trying to update a device template that is locked
+
 ## 0.1.9
 
 - Fix payload issue with `sdwan_cisco_thousandeyes_feature_template` resource
