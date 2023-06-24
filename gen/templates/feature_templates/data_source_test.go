@@ -20,19 +20,19 @@ func TestAccDataSourceSdwan{{camelCase .Name}}FeatureTemplate(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					{{- $name := .Name }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $list := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $cclist := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true) (ne .Type "ListString")}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest) (ne .Type "ListString")}}
 					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_feature_template.test", "{{$list}}.0.{{$clist}}.0.{{$cclist}}.0.{{.TfName}}", "{{.Example}}"),
 					{{- end}}
 					{{- end}}

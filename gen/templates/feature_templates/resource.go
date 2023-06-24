@@ -253,7 +253,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 													},
 													{{- end}}
 												},
-												{{- if eq .Variable true}}
+												{{- if .Variable}}
 												"{{.TfName}}_variable": schema.StringAttribute{
 													MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 													Optional:            true,
@@ -268,7 +268,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 										},
 										{{- end}}
 									},
-									{{- if eq .Variable true}}
+									{{- if .Variable}}
 									"{{.TfName}}_variable": schema.StringAttribute{
 										MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 										Optional:            true,
@@ -283,7 +283,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 							},
 							{{- end}}
 						},
-						{{- if eq .Variable true}}
+						{{- if .Variable}}
 						"{{.TfName}}_variable": schema.StringAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 							Optional:            true,
@@ -298,7 +298,7 @@ func (r *{{camelCase .Name}}FeatureTemplateResource) Schema(ctx context.Context,
 				},
 				{{- end}}
 			},
-			{{- if eq .Variable true}}
+			{{- if .Variable}}
 			"{{.TfName}}_variable": schema.StringAttribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Variable name").String,
 				Optional:            true,

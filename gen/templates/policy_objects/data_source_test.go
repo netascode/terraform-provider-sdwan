@@ -20,15 +20,15 @@ func TestAccDataSourceSdwan{{camelCase .Name}}PolicyObject(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					{{- $name := .Name }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $list := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					resource.TestCheckResourceAttr("data.sdwan_{{snakeCase $name}}_policy_object.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
 					{{- end}}
 					{{- end}}
@@ -53,15 +53,15 @@ const testAccDataSourceSdwan{{camelCase .Name}}PolicyObjectConfig = `
 resource "sdwan_{{snakeCase $name}}_policy_object" "test" {
   name = "TF_TEST_MIN"
 {{- range  .Attributes}}
-{{- if ne .ExcludeTest true}}
+{{- if not .ExcludeTest}}
 {{- if eq .Type "List"}}
   {{.TfName}} = [{
     {{- range  .Attributes}}
-    {{- if ne .ExcludeTest true}}
+    {{- if not .ExcludeTest}}
 	{{- if eq .Type "List"}}
 	{{.TfName}} = [{
 		{{- range  .Attributes}}
-		{{- if ne .ExcludeTest true}}
+		{{- if not .ExcludeTest}}
 		{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
 		{{- end}}
 		{{- end}}

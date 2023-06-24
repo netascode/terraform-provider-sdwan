@@ -20,15 +20,15 @@ func TestAccSdwan{{camelCase .Name}}PolicyObject(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					{{- $name := .Name }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $list := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					{{- if eq .Type "List"}}
 					{{- $clist := .TfName }}
 					{{- range  .Attributes}}
-					{{- if and (ne .WriteOnly true) (ne .ExcludeTest true)}}
+					{{- if and (not .WriteOnly) (not .ExcludeTest)}}
 					resource.TestCheckResourceAttr("sdwan_{{snakeCase $name}}_policy_object.test", "{{$list}}.0.{{$clist}}.0.{{.TfName}}", "{{.Example}}"),
 					{{- end}}
 					{{- end}}
@@ -57,11 +57,11 @@ func testAccSdwan{{camelCase .Name}}PolicyObjectConfig_all() string {
 		{{- if eq .Type "List"}}
 		{{.TfName}} = [{
 			{{- range  .Attributes}}
-			{{- if ne .ExcludeTest true}}
+			{{- if not .ExcludeTest}}
 			{{- if eq .Type "List"}}
 			{{.TfName}} = [{
 				{{- range  .Attributes}}
-				{{- if ne .ExcludeTest true}}
+				{{- if not .ExcludeTest}}
 				{{.TfName}} = {{if eq .Type "String"}}"{{end}}{{.Example}}{{if eq .Type "String"}}"{{end}}
 				{{- end}}
 				{{- end}}
