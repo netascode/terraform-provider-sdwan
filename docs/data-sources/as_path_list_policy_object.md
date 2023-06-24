@@ -37,5 +37,3 @@ data "sdwan_as_path_list_policy_object" "example" {
 Read-Only:
 
 - `as_path` (String) Regular expression to match the BGP AS paths e.g., `^1239_[0-9]*$`
-
-

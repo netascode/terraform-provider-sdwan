@@ -94,5 +94,3 @@ Read-Only:
 - `prefix_list_id` (String) Prefix list ID
 - `prefix_list_version` (Number) Prefix list version
 - `type` (String) Type of match entry
-
-

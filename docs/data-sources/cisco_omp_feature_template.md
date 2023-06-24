@@ -79,5 +79,3 @@ Read-Only:
 
 - `optional` (Boolean) Indicates if list item is considered optional.
 - `protocol` (String) Set routes to advertise
-
-

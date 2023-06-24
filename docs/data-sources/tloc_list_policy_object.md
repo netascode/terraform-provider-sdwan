@@ -40,5 +40,3 @@ Read-Only:
 - `encapsulation` (String) Encapsulation
 - `preference` (Number) Preference
 - `tloc_ip` (String) TLOC IP
-
-

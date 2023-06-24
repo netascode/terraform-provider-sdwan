@@ -39,5 +39,3 @@ Read-Only:
 - `ge` (Number) Greater equal
 - `le` (Number) Lesser equal
 - `prefix` (String) IP prefix list entry, e.g. `2001:1:1:2::/64`
-
-

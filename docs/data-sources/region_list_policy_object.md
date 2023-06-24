@@ -37,5 +37,3 @@ data "sdwan_region_list_policy_object" "example" {
 Read-Only:
 
 - `region_id` (String) Region ID or range of Region IDs e.g., `2` or `3-6`
-
-

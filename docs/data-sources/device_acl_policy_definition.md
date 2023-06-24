@@ -69,5 +69,3 @@ Read-Only:
 - `source_ip` (String) Source IP prefix
 - `source_port` (Number) Source port
 - `type` (String) Type of match entry
-
-

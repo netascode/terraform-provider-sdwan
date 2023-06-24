@@ -46,5 +46,3 @@ Read-Only:
 - `drop_type` (String) Drop type
 - `queue` (Number) Queue number
 - `scheduling_type` (String) Scheduling type
-
-

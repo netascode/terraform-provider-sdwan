@@ -56,5 +56,3 @@ Read-Only:
 - `optional` (Boolean) Indicates if list item is considered optional.
 - `pmtu_discovery` (Boolean) Control automatic path MTU discovery
 - `pmtu_discovery_variable` (String) Variable name
-
-

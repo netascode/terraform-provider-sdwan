@@ -33,5 +33,3 @@ data "sdwan_cli_template_feature_template" "example" {
 - `name` (String) The name of the feature template
 - `template_type` (String) The template type
 - `version` (Number) The version of the feature template
-
-

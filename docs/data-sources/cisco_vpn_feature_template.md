@@ -453,5 +453,3 @@ Read-Only:
 - `tracker_id_variable` (String) Variable name
 - `translate_ip_subnet` (String) Statically translated source IP Subnet
 - `translate_ip_subnet_variable` (String) Variable name
-
-

@@ -37,5 +37,3 @@ data "sdwan_data_ipv6_prefix_list_policy_object" "example" {
 Read-Only:
 
 - `prefix` (String) IP prefix list entry, e.g. `2001:0:0:1::/64`
-
-

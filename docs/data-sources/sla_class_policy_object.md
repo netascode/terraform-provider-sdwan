@@ -44,5 +44,3 @@ Read-Only:
 - `jitter` (Number) Jitter in ms
 - `latency` (Number) Latency in ms
 - `loss` (Number) Loss in percent
-
-

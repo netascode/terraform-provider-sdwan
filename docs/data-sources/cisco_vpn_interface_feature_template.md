@@ -450,5 +450,3 @@ Read-Only:
 - `preference_variable` (String) Variable name
 - `weight` (Number) Set weight for TLOC
 - `weight_variable` (String) Variable name
-
-

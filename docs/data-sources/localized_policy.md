@@ -50,5 +50,3 @@ Read-Only:
 - `id` (String) Policy definition ID
 - `type` (String) Policy definiton type
 - `version` (Number) Policy definition version
-
-

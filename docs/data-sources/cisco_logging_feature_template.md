@@ -99,5 +99,3 @@ Read-Only:
 - `optional` (Boolean) Indicates if list item is considered optional.
 - `version` (String) TLS Version
 - `version_variable` (String) Variable name
-
-

@@ -61,5 +61,3 @@ Read-Only:
 - `te_vpn` (Number) VPN number
 - `te_vpn_variable` (String) Variable name
 - `te_web_proxy_type` (String) Web Proxy Type
-
-

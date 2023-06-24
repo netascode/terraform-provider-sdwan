@@ -39,5 +39,3 @@ Read-Only:
 - `burst` (Number) Burst in bytes
 - `exceed_action` (String) Exceed action
 - `rate` (Number) Rate in bps
-
-

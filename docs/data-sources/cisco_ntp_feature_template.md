@@ -73,5 +73,3 @@ Read-Only:
 - `version_variable` (String) Variable name
 - `vpn_id` (Number) Set VPN in which NTP server is located
 - `vpn_id_variable` (String) Variable name
-
-

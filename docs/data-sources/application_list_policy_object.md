@@ -38,5 +38,3 @@ Read-Only:
 
 - `application` (String) Application name
 - `application_family` (String) Application family name
-
-

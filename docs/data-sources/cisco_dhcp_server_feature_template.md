@@ -79,5 +79,3 @@ Read-Only:
 - `mac_address` (String) Set MAC address of client
 - `mac_address_variable` (String) Variable name
 - `optional` (Boolean) Indicates if list item is considered optional.
-
-

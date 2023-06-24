@@ -37,5 +37,3 @@ data "sdwan_vpn_list_policy_object" "example" {
 Read-Only:
 
 - `vpn_id` (String) VPN ID or range of VPN IDs e.g., `100` or `200-300`
-
-

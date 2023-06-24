@@ -65,5 +65,3 @@ Read-Only:
 - `id` (String) Feature template ID
 - `type` (String) Feature template type
 - `version` (Number) The version of the feature template
-
-

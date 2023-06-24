@@ -37,5 +37,3 @@ data "sdwan_class_map_policy_object" "example" {
 Read-Only:
 
 - `queue` (Number) Queue
-
-

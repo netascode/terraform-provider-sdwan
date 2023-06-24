@@ -127,5 +127,3 @@ Read-Only:
 - `id` (String) Configure identifier of subtree of MIB objects
 - `id_variable` (String) Variable name
 - `optional` (Boolean) Indicates if list item is considered optional.
-
-

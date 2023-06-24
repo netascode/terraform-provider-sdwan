@@ -37,5 +37,3 @@ data "sdwan_expanded_community_list_policy_object" "example" {
 Read-Only:
 
 - `community` (String) Expanded community value, e.g. `100:1000`
-
-

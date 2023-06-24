@@ -176,5 +176,3 @@ Read-Only:
 - `transport_endpoint_protocol_variable` (String) Variable name
 - `type` (String) Default(Interface)
 - `type_variable` (String) Variable name
-
-

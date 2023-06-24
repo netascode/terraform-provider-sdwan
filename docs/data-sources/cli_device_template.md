@@ -32,5 +32,3 @@ data "sdwan_cli_device_template" "example" {
 - `description` (String) The description of the feature template
 - `device_type` (String) The device type (e.g., `vedge-ISR-4331`)
 - `name` (String) The name of the device template
-
-

@@ -37,5 +37,3 @@ data "sdwan_color_list_policy_object" "example" {
 Read-Only:
 
 - `color` (String) Color
-
-

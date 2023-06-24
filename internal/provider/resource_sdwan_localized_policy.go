@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -64,57 +65,43 @@ func (r *LocalizedPolicyResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "IPv4 flow visibilty",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"flow_visibility_ipv6": schema.BoolAttribute{
 				MarkdownDescription: "IPv6 flow visibilty",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"application_visibility_ipv4": schema.BoolAttribute{
 				MarkdownDescription: "IPv4 application visibilty",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"application_visibility_ipv6": schema.BoolAttribute{
 				MarkdownDescription: "IPv6 application visibilty",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"cloud_qos": schema.BoolAttribute{
 				MarkdownDescription: "Cloud QoS",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"cloud_qos_service_side": schema.BoolAttribute{
 				MarkdownDescription: "Cloud QoS service side",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"implicit_acl_logging": schema.BoolAttribute{
 				MarkdownDescription: "Implicit ACL logging",
 				Optional:            true,
 				Computed:            true,
-				PlanModifiers: []planmodifier.Bool{
-					helpers.BooleanDefaultModifier(false),
-				},
+				Default:             booldefault.StaticBool(true),
 			},
 			"log_frequency": schema.Int64Attribute{
 				MarkdownDescription: helpers.NewAttributeDescription("Log frequency").AddIntegerRangeDescription(1, 2147483647).String,

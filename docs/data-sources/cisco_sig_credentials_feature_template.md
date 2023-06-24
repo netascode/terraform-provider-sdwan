@@ -54,5 +54,3 @@ data "sdwan_cisco_sig_credentials_feature_template" "example" {
 - `zscaler_password_variable` (String) Variable name
 - `zscaler_username` (String) Username of Zscaler partner account
 - `zscaler_username_variable` (String) Variable name
-
-

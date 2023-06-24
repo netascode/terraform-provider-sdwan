@@ -363,5 +363,3 @@ Read-Only:
 - `interface_name` (String) Interface Name
 - `interface_name_variable` (String) Variable name
 - `optional` (Boolean) Indicates if list item is considered optional.
-
-

@@ -42,5 +42,3 @@ Read-Only:
 - `secondary_path_preference` (String) Path preference
 - `tertiary_color_preference` (String) Color or space separated list of colors
 - `tertiary_path_preference` (String) Path preference
-
-

@@ -46,5 +46,3 @@ Read-Only:
 
 - `color` (String) Color
 - `dscp` (Number) DSCP
-
-

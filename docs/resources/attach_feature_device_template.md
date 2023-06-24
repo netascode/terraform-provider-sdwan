@@ -48,5 +48,3 @@ Required:
 
 - `id` (String) Device ID
 - `variables` (Map of String) Device variables
-
-

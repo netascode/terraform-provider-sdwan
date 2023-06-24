@@ -198,5 +198,3 @@ Read-Only:
 - `key_type` (String) Only RSA is supported
 - `key_type_variable` (String) Variable name
 - `optional` (Boolean) Indicates if list item is considered optional.
-
-

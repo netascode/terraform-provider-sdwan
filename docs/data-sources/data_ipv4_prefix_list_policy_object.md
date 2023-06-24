@@ -37,5 +37,3 @@ data "sdwan_data_ipv4_prefix_list_policy_object" "example" {
 Read-Only:
 
 - `prefix` (String) IP prefix list entry, e.g. `10.0.0.0/12`
-
-

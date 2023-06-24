@@ -78,5 +78,3 @@ data "sdwan_cedge_global_feature_template" "example" {
 - `version` (Number) The version of the feature template
 - `vty_logging` (Boolean) Configure VTY Line Logging
 - `vty_logging_variable` (String) Variable name
-
-

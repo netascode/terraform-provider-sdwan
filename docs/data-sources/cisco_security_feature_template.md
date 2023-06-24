@@ -94,5 +94,3 @@ Read-Only:
 - `send_lifetime_infinite_variable` (String) Variable name
 - `send_lifetime_start_time` (String) Configure Key lifetime start time
 - `send_lifetime_variable` (String) Variable name
-
-

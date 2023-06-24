@@ -38,5 +38,3 @@ Read-Only:
 
 - `remote_destination_ip` (String) Remote destination IP
 - `source_ip` (String) Source IP
-
-

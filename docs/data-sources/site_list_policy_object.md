@@ -37,5 +37,3 @@ data "sdwan_site_list_policy_object" "example" {
 Read-Only:
 
 - `site_id` (String) Site ID or range of Site IDs e.g., `100` or `200-300`
-
-

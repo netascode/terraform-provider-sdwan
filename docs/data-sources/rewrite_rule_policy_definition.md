@@ -43,5 +43,3 @@ Read-Only:
 - `dscp` (Number) DSCP
 - `layer2cos` (Number) Layer2 CoS
 - `priority` (String) Priority
-
-

@@ -84,5 +84,3 @@ Read-Only:
 - `source_port` (Number) Source port
 - `tcp` (String) TCP parameters
 - `type` (String) Type of match entry
-
-

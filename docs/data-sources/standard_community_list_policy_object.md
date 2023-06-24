@@ -37,5 +37,3 @@ data "sdwan_standard_community_list_policy_object" "example" {
 Read-Only:
 
 - `community` (String) Standard community value, e.g. `100:1000`, `internet`, `local-AS`, `no-advertise` or `no-export`
-
-
